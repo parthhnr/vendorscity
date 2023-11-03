@@ -4,40 +4,49 @@
 
 
 
-	<div class="content container-fluid">
+       <div class="content container-fluid">
 
-		<div class="success">
+           <div class="success">
 
-		@if ($message = Session::get('login_success'))
+               @if ($message = Session::get('login_success'))
+                   <div class="alert alert-success alert-dismissible fade show" style="text-align: center;">
 
-				<div class="alert alert-success alert-dismissible fade show" style="text-align: center;">
+                       {{ $message }}
 
-			  	{{ $message }}
+                       <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
 
-				<button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                   </div>
+               @endif
 
-			</div>
+           </div>
 
-		@endif
+           <!-- Page Header -->
 
-		</div>
+           <div class="page-header">
 
-		<!-- Page Header -->
+               <div class="row align-items-center">
 
-		<div class="page-header">
+                   <div class="col">
 
-			<div class="row align-items-center">
+                       <h2 class="page-title">Dashboard</h2>
 
-				<div class="col">
+                   </div>
 
-					<h2 class="page-title">Dashboard</h2>
+               </div>
 
-			  </div>
+           </div>
+           <!--  @php
 
-		   </div>
+               // Now you can access user data
 
-		</div><h4>Welcome To VendorsCity</h4>
+               echo '<pre>';
+               print_r(Auth::user()->vendor);
+               echo '</pre>';
 
-	</div>
+           @endphp -->
+           <h4>Welcome To VendorsCity</h4>
+           <!-- <h4>Welcome To {{Auth::user()->name}}</h4> -->
+
+       </div>
 
    @stop

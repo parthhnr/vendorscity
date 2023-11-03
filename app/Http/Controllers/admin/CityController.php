@@ -30,8 +30,8 @@ class CityController extends Controller
     public function create()
     {
 
-        $data['country_data'] = DB::table('countries')->select('*')->get();
-        $data['state_data'] = DB::table('states')->select('*')->get();
+        $data['country_data'] = DB::table('countries')->select('*')->orderBy('id','DESC')->get();
+        $data['state_data'] = DB::table('states')->select('*')->orderBy('id','DESC')->get();
 
         return view('admin.add_city',$data);
     }
@@ -74,9 +74,9 @@ class CityController extends Controller
     public function edit(City $city)
     {
 
-        $data['country_data'] = DB::table('countries')->select('*')->get();
-        $data['state_data'] = DB::table('states')->select('*')->get();
-
+        $data['country_data'] = DB::table('countries')->select('*')->orderBy('id','DESC')->get();       
+        $data['state_data'] = DB::table('states')->select('*')->orderBy('id','DESC')->get();
+        
         return view('admin.edit_city',compact('city'),$data);
     }
 
