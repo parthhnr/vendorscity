@@ -89,6 +89,15 @@ class Helper{
 			return '-'; 
 		}
     }
+    public static function cityname(string $city){
+        $query = DB::table('cities')->where('id',$city)->first();		
+		if ($query) {
+			return $query->name;
+		} else {
+			
+			return '-'; 
+		}
+    }
 
     public static function state_name(string $state_id){
         $query = DB::table('states')->where('id',$state_id)->first();      
@@ -102,9 +111,7 @@ class Helper{
 
     public static function user_role_name(int $id){
 
-		$result = DB::table('user_permissions')->where('id',$id)->first();
-                                                            
-		
+		$result = DB::table('user_permissions')->where('id',$id)->first();	
         if($result !='' && isset($result)){
             return $result->cname;
         }else{
@@ -124,5 +131,15 @@ class Helper{
         }
        
     }
+    public static function servicename(int $id){
+
+		$result = DB::table('services')->where('id',$id)->first();                                                     
+		
+        if($result !='' && isset($result)){
+            return $result->servicename;
+        }else{
+            echo "-";
+        }
+	}
 	
 } 
