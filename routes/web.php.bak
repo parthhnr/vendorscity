@@ -50,6 +50,9 @@ Route::get('/view-clear', function() {
 
 /*------Front routes start ------*/
 
+
+
+
 /*------End Front routes  ------*/
 
 /*------vendors routes start ------*/
