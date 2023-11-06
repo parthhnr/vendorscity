@@ -21,6 +21,69 @@
     @endphp
 
 
+<style type="text/css">
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.toggle {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.toggle input[type="checkbox"] {
+  display: none;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #8B0000;
+  transition: 0.4s;
+  border-radius: 17px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+input[type="checkbox"]:checked + .slider {
+  background-color: #008000;
+}
+
+input[type="checkbox"]:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+</style>
+
 
     <div class="content container-fluid">
 
@@ -235,31 +298,27 @@
                                                             {{ $vendors_data[$i]->mobile }}
                                                         @endif
                                                 </td>
+                                                <!-- <td>
+                                                    <div class="form-group">
+                                                        <select class="form-select" name="is_active" id="is_active"
+                                                            onchange="fun_status('{{ $vendors_data[$i]->id }}',this.value);return false;">
+                                                            <option value="0"
+                                                                {{ $vendors_data[$i]->is_active == 0 ? 'selecetd' : '' }}>Active
+                                                            </option>
+                                                            <option value="1"
+                                                                {{ $vendors_data[$i]->is_active == 1 ? 'selected' : '' }}>Inactive
+                                                            </option>
+                                                        </select>
+                                                    </div>
+                                                </td> -->
 
                                                 <td>
-
                                                     <div class="form-group">
-
-                                                        <select class="form-select" name="is_active" id="is_active"
-
-                                                            onchange="fun_status('{{ $vendors_data[$i]->id }}',this.value);return false;">
-
-                                                            <option value="0"
-
-                                                                {{ $vendors_data[$i]->is_active == 0 ? 'selecetd' : '' }}>Active
-
-                                                            </option>
-
-                                                            <option value="1"
-
-                                                                {{ $vendors_data[$i]->is_active == 1 ? 'selected' : '' }}>Inactive
-
-                                                            </option>
-
-                                                        </select>
-
+                                                        <label class="toggle">
+                                                            <input type="checkbox" id="is_active_toggle" {{$vendors_data[$i]->is_active == 0 ? 'checked' : ''}} onchange="fun_status('{{$vendors_data[$i]->id}}', this.checked ? 0 : 1); return false;">
+                                                            <span class="slider"></span>
+                                                        </label>
                                                     </div>
-
                                                 </td>
 
                                                 @if (in_array('8', $edit_perm))
