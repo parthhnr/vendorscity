@@ -23,6 +23,7 @@ use App\Http\Controllers\admin\CityController;
 use App\Http\Controllers\admin\ServiceController;
 use App\Http\Controllers\admin\SubserviceController;
 use App\Http\Controllers\admin\VendorsController;
+use App\Http\Controllers\admin\Pricecontroller;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -137,6 +138,10 @@ Route::get('/admin', function () {
     Route::get('delete_vendors',[VendorsController::class,'destroy'])->name('delete_vendors');
     Route::get('remove_vendors_att/{pid}/{id}', [VendorsController::class, 'remove_vendors_att'])->name('remove_vendors_att'); 
     Route::post('change_status_vendors','App\Http\Controllers\admin\VendorsController@change_status_vendors');
+
+
+    Route::resource('admin/price','App\Http\Controllers\admin\Pricecontroller');  
+    Route::get('delete_price',[Pricecontroller::class,'destroy'])->name('delete_price');
 
     
     

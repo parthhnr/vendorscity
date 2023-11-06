@@ -65,6 +65,8 @@
 
                             <div class="row">
 
+                                <div class="col-lg-6">
+
                                 <div class="form-group">
 
                                     <label for="name">Service</label>
@@ -85,6 +87,10 @@
 
                                 </div>
 
+                                </div>  
+                                
+                                <div class="col-lg-6">
+
                                 <div class="form-group">
 
                                     <label for="name">Sub Service</label>
@@ -93,9 +99,10 @@
                                         placeholder="Enter Sub Service" value="{{ $subservice->subservicename }}" />
                                      <p class="form-error-text" id="subservice_error" style="color: red; margin-top: 10px;"></p>
                                 </div>
+                                </div>
 
                                 
-
+                                <div class="col-lg-6">
                                 <div class="form-group">
 
                                     <label for="name">Image (1920px x 1100px)</label>
@@ -107,9 +114,10 @@
                                     @endif
 
                                 </div>
+                                </div>
 
 
-
+                                <div class="col-lg-6">
                                 <div class="form-group">
 
                                     <label style="width: 100%;">Is Bookable</label>
@@ -126,6 +134,8 @@
                                    <p class="form-error-text" id="book_error" style="color: red; margin-top: 10px;"></p>
 
                                 </div>
+                                </div>
+                                <div class="col-lg-6">
                                 <div class="form-group">
 
                                     <label for="name">Charge</label>
@@ -135,6 +145,9 @@
                                     <p class="form-error-text" id="charge_error" style="color: red; margin-top: 10px;"></p>
 
                                 </div>
+                                </div>
+
+                                <div class="col-lg-6">
                                 <div class="form-group">
 
                                     <label for="name">No Of Inquiry</label>
@@ -145,6 +158,10 @@
                                          <p class="form-error-text" id="inquiry_error" style="color: red; margin-top: 10px;"></p>
 
                                 </div>
+                                </div>
+
+                                
+                                <div class="col-lg-12">
                                 <div class="form-group">
 
                                     <label for="description" style="margin:15px 0 5px 0px; width:100%;">
@@ -153,6 +170,7 @@
 
                                     <textarea id="description" name="description" class="form-control" placeholder="Enter Description">{{ $subservice->description }}</textarea>
 
+                                </div>
                                 </div>
 
                             </div>
