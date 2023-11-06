@@ -63,17 +63,18 @@
 
                             <div class="row">
 
-                                <div class="form-group">
+                                <div class="form-group" style="display: none;">
                                     <label for="vendors">User Category</label>
-                                    <select class="form-control" id="role_id" name="role_id" disabled>
+                                    <select class="form-control" id="role_id" name="role_id">
                                         @foreach ($permission_data as $permission)
                                             <option value="{{ $permission->id }}" <?php if ($permission->id == $vendors->name) {
                                                 echo 'selected';
-                                            } ?> selected>
+                                            } ?>>
                                                 {{ $permission->cname }}</option>
                                         @endforeach
                                     </select>
                                     <input type="hidden" name="hidden_role_id" id="hidden_role_id" value="">
+
                                 </div>
 
                                 <div class="form-group">
@@ -303,6 +304,8 @@
                                     <input id="mobile" name="mobile" type="text" class="form-control"
                                         placeholder="Enter Mobile No." onkeypress="return validateNumber(event)"
                                         value="{{ $vendors->mobile }}" />
+                                    <p class="form-error-text" id="mobile_error" style="color: red; margin-top: 10px;">
+                                    </p>
 
                                 </div>
 
@@ -352,6 +355,12 @@
 
 
     <script>
+        $(document).ready(function() {
+            var role_id = jQuery("#role_id").val();
+
+            $("#hidden_role_id").val(role_id);
+        });
+
         function category_validation() {
 
             $(document).ready(function() {
@@ -532,43 +541,17 @@
 
             }
 
-
-
             var mobile = jQuery("#mobile").val();
+            var filter = /^\d{10}$/;
 
-            if (mobile == '') {
+            if (mobile != '' && !filter.test(mobile)) {
 
-                jQuery('#validate').html("Please Enter Mobile");
-
-                jQuery('#validate').show().delay(0).fadeIn('show');
-
-                jQuery('#validate').show().delay(2000).fadeOut('show');
-
+                jQuery('#mobile_error').html("Please Enter Valid Mobile");
+                jQuery('#mobile_error').show().delay(0).fadeIn('show');
+                jQuery('#mobile_error').show().delay(2000).fadeOut('show');
                 $('html, body').animate({
-
-                    scrollTop: $('#validate').offset().top - 150
-
+                    scrollTop: $('#mobile').offset().top - 150
                 }, 1000);
-
-                return false;
-
-            }
-            var mobileNumberPattern = /^[0-9]{10}$/;
-
-            if (mobile.match(mobileNumberPattern)) {
-
-                jQuery('#validate').html("Please Enter Valid Mobile");
-
-                jQuery('#validate').show().delay(0).fadeIn('show');
-
-                jQuery('#validate').show().delay(2000).fadeOut('show');
-
-                $('html, body').animate({
-
-                    scrollTop: $('#validate').offset().top - 150
-
-                }, 1000);
-
                 return false;
 
             }

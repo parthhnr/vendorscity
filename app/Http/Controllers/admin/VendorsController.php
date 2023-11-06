@@ -71,7 +71,7 @@ class VendorsController extends Controller
         }
         else
         {
-            $data['mobile']=0;
+            $data['mobile']=null;
         }
               
         $data['vendor'] = 1;
@@ -218,10 +218,11 @@ class VendorsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        echo"<pre>";
-        print_r($request->post());
-        echo"</pre>";exit;
-        $data['role_id']=$_POST['role_id'];
+        // echo"<pre>";
+        // print_r($request->post());
+        // echo"</pre>";exit;
+
+        $data['role_id']=$_POST['hidden_role_id'];
         $data['name']=$_POST['name'];
         $data['user_name']=$_POST['user_name'];       
         $data['companywebsite']=$_POST['companywebsite'];

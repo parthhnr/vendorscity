@@ -69,13 +69,14 @@
 
                                     <select class="form-control" id="user_id" name="user_id">
 
-                                        <option value="" selected>Select User Category</option>
+                                        <option value="">Select User Category</option>
 
                                         @foreach ($user_category as $user_data)
                                             <option value="{{ $user_data->id }}">{{ $user_data->cname }}</option>
                                         @endforeach
 
                                     </select>
+                                    <p class="form-error-text" id="user_error" style="color: red; margin-top: 10px;"></p>
 
                                 </div>
 
@@ -85,6 +86,7 @@
 
                                     <input id="name" name="name" type="text" class="form-control"
                                         placeholder="Enter Name" value="" />
+                                    <p class="form-error-text" id="name_error" style="color: red; margin-top: 10px;"></p>
 
                                 </div>
 
@@ -94,6 +96,8 @@
 
                                     <input id="user_name" name="user_name" type="text" class="form-control"
                                         placeholder="Enter User Name" value="" />
+                                    <p class="form-error-text" id="user_name_error" style="color: red; margin-top: 10px;">
+                                    </p>
 
                                 </div>
 
@@ -103,6 +107,8 @@
 
                                     <input id="password" name="password" type="password" class="form-control"
                                         placeholder="Enter Password" value="" />
+                                    <p class="form-error-text" id="password_error" style="color: red; margin-top: 10px;">
+                                    </p>
 
                                 </div>
 
@@ -112,6 +118,9 @@
 
                                     <input id="conf_password" name="conf_password" type="password" class="form-control"
                                         placeholder="Enter Confirm Password" value="" />
+                                    <p class="form-error-text" id="con_password_error"
+                                        style="color: red; margin-top: 10px;">
+                                    </p>
 
                                 </div>
 
@@ -121,6 +130,8 @@
 
                                     <input id="email" name="email" type="text" class="form-control"
                                         placeholder="Enter Email" value="" />
+                                    <p class="form-error-text" id="email_error" style="color: red; margin-top: 10px;">
+                                    </p>
 
                                 </div>
 
@@ -131,6 +142,8 @@
                                     <input id="mobile" name="mobile" type="text" class="form-control"
                                         placeholder="Enter Mobile No." onkeypress="return validateNumber(event)"
                                         value="" />
+                                    <p class="form-error-text" id="mobile_error" style="color: red; margin-top: 10px;">
+                                    </p>
 
                                 </div>
 
@@ -143,7 +156,8 @@
                                 <button class="btn btn-primary mb-1" type="button" disabled id="spinner_button"
                                     style="display: none;">
 
-                                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                    <span class="spinner-border spinner-border-sm" role="status"
+                                        aria-hidden="true"></span>
 
                                     Loading...
 
@@ -199,22 +213,16 @@
     <script>
         function category_validation() {
 
-            var select = jQuery("#select").val();
+            var user_id = jQuery("#user_id").val();
 
-            if (select == '') {
+            if (user_id == '') {
 
-                jQuery('#validate').html("Please Select User Category");
-
-                jQuery('#validate').show().delay(0).fadeIn('show');
-
-                jQuery('#validate').show().delay(2000).fadeOut('show');
-
+                jQuery('#user_error').html("Please Select User Category");
+                jQuery('#user_error').show().delay(0).fadeIn('show');
+                jQuery('#user_error').show().delay(2000).fadeOut('show');
                 $('html, body').animate({
-
-                    scrollTop: $('#validate').offset().top - 150
-
+                    scrollTop: $('#user_id').offset().top - 150
                 }, 1000);
-
                 return false;
 
             }
@@ -225,18 +233,12 @@
 
             if (name == '') {
 
-                jQuery('#validate').html("Please Enter Name");
-
-                jQuery('#validate').show().delay(0).fadeIn('show');
-
-                jQuery('#validate').show().delay(2000).fadeOut('show');
-
+                jQuery('#name_error').html("Please Enter Name");
+                jQuery('#name_error').show().delay(0).fadeIn('show');
+                jQuery('#name_error').show().delay(2000).fadeOut('show');
                 $('html, body').animate({
-
-                    scrollTop: $('#validate').offset().top - 150
-
+                    scrollTop: $('#name').offset().top - 150
                 }, 1000);
-
                 return false;
 
             }
@@ -247,18 +249,12 @@
 
             if (user_name == '') {
 
-                jQuery('#validate').html("Please Enter User Name");
-
-                jQuery('#validate').show().delay(0).fadeIn('show');
-
-                jQuery('#validate').show().delay(2000).fadeOut('show');
-
+                jQuery('#user_name_error').html("Please Enter User Name");
+                jQuery('#user_name_error').show().delay(0).fadeIn('show');
+                jQuery('#user_name_error').show().delay(2000).fadeOut('show');
                 $('html, body').animate({
-
-                    scrollTop: $('#validate').offset().top - 150
-
+                    scrollTop: $('#user_name').offset().top - 150
                 }, 1000);
-
                 return false;
 
             }
@@ -269,18 +265,12 @@
 
             if (password == '') {
 
-                jQuery('#validate').html("Please Enter Password");
-
-                jQuery('#validate').show().delay(0).fadeIn('show');
-
-                jQuery('#validate').show().delay(2000).fadeOut('show');
-
+                jQuery('#password_error').html("Please Enter Password");
+                jQuery('#password_error').show().delay(0).fadeIn('show');
+                jQuery('#password_error').show().delay(2000).fadeOut('show');
                 $('html, body').animate({
-
-                    scrollTop: $('#validate').offset().top - 150
-
+                    scrollTop: $('#password').offset().top - 150
                 }, 1000);
-
                 return false;
 
             }
@@ -291,18 +281,12 @@
 
             if (conf_password == '') {
 
-                jQuery('#validate').html("Please Enter Confirm Password");
-
-                jQuery('#validate').show().delay(0).fadeIn('show');
-
-                jQuery('#validate').show().delay(2000).fadeOut('show');
-
+                jQuery('#con_password_error').html("Please Enter Confirm Password");
+                jQuery('#con_password_error').show().delay(0).fadeIn('show');
+                jQuery('#con_password_error').show().delay(2000).fadeOut('show');
                 $('html, body').animate({
-
-                    scrollTop: $('#validate').offset().top - 150
-
+                    scrollTop: $('#conf_password').offset().top - 150
                 }, 1000);
-
                 return false;
 
             }
@@ -311,18 +295,12 @@
 
             if (conf_password != password) {
 
-                jQuery('#validate').html("Confirm Password Doesn't Match Password");
-
-                jQuery('#validate').show().delay(0).fadeIn('show');
-
-                jQuery('#validate').show().delay(2000).fadeOut('show');
-
+                jQuery('#con_password_error').html("Confirm Password Doesn't Match Password");
+                jQuery('#con_password_error').show().delay(0).fadeIn('show');
+                jQuery('#con_password_error').show().delay(2000).fadeOut('show');
                 $('html, body').animate({
-
-                    scrollTop: $('#validate').offset().top - 150
-
+                    scrollTop: $('#conf_password').offset().top - 150
                 }, 1000);
-
                 return false;
 
             }
@@ -333,18 +311,12 @@
 
             if (email == '') {
 
-                jQuery('#validate').html("Please Enter Email");
-
-                jQuery('#validate').show().delay(0).fadeIn('show');
-
-                jQuery('#validate').show().delay(2000).fadeOut('show');
-
+                jQuery('#email_error').html("Plaese Enter Email Address.");
+                jQuery('#email_error').show().delay(0).fadeIn('show');
+                jQuery('#email_error').show().delay(2000).fadeOut('show');
                 $('html, body').animate({
-
-                    scrollTop: $('#validate').offset().top - 150
-
+                    scrollTop: $('#email').offset().top - 150
                 }, 1000);
-
                 return false;
 
             }
@@ -355,18 +327,12 @@
 
             if (!filter.test(email)) {
 
-                jQuery('#validate').html("Enter Valid Email Address.");
-
-                jQuery('#validate').show().delay(0).fadeIn('show');
-
-                jQuery('#validate').show().delay(2000).fadeOut('show');
-
+                jQuery('#email_error').html("Plaese Enter Valid Email Address.");
+                jQuery('#email_error').show().delay(0).fadeIn('show');
+                jQuery('#email_error').show().delay(2000).fadeOut('show');
                 $('html, body').animate({
-
-                    scrollTop: $('#validate').offset().top - 150
-
+                    scrollTop: $('#email').offset().top - 150
                 }, 1000);
-
                 return false;
 
             }
@@ -377,18 +343,24 @@
 
             if (mobile == '') {
 
-                jQuery('#validate').html("Please Enter Mobile");
-
-                jQuery('#validate').show().delay(0).fadeIn('show');
-
-                jQuery('#validate').show().delay(2000).fadeOut('show');
-
+                jQuery('#mobile_error').html("Plaese Enter Mobile.");
+                jQuery('#mobile_error').show().delay(0).fadeIn('show');
+                jQuery('#mobile_error').show().delay(2000).fadeOut('show');
                 $('html, body').animate({
-
-                    scrollTop: $('#validate').offset().top - 150
-
+                    scrollTop: $('#mobile').offset().top - 150
                 }, 1000);
+                return false;
 
+            }
+            var filter = /^\d{10}$/;
+            if (!filter.test(mobile)) {
+
+                jQuery('#mobile_error').html("Plaese Enter Valid Mobile.");
+                jQuery('#mobile_error').show().delay(0).fadeIn('show');
+                jQuery('#mobile_error').show().delay(2000).fadeOut('show');
+                $('html, body').animate({
+                    scrollTop: $('#mobile').offset().top - 150
+                }, 1000);
                 return false;
 
             }
