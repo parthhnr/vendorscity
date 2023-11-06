@@ -71,7 +71,7 @@
 
             @if (in_array('9', $permission1))
                 <li class="{{ request()->segment(2) == 'price' ? 'active' : '' }}"><a
-                        href="{{ route('price.index') }}"
+                        href="{{ route('price.edit', 1) }}"
                         class="{{ request()->segment(2) == 'price' ? 'active' : '' }}">
                         <i data-feather="credit-card"></i><span>Price</span></a>
                 </li>

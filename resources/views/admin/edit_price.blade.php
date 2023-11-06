@@ -14,15 +14,15 @@
 
                 <div class="col-sm-12">
 
-                    <h3 class="page-title">Edit Price</h3>
+                    <h3 class="page-title">Price</h3>
 
                     <ul class="breadcrumb">
 
                         <li class="breadcrumb-item"><a href="{{ url('/admin') }}">Dashboard</a></li>
 
-                        <li class="breadcrumb-item"><a href="{{ route('price.index') }}">Price</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('price.edit', 1) }}">Price</a></li>
 
-                        <li class="breadcrumb-item active">Edit Price</li>
+                        <li class="breadcrumb-item active">Price</li>
 
                     </ul>
 
@@ -34,7 +34,17 @@
 
         <!-- /Page Header -->
 
+        @if ($message = Session::get('success'))
 
+               <div class="alert alert-success alert-dismissible fade show">
+
+                   <strong>Success!</strong> {{ $message }}
+
+                   <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+
+               </div>
+
+           @endif
 
         <div id="validate" class="alert alert-danger alert-dismissible fade show" style="display: none;">
 
@@ -66,32 +76,65 @@
 
                             <div class="row">
 
+
+                                <h5>Based on Booking Services</h5>
+
                                 <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label for="service_type" style="width: 100%;">Service Type</label>
-                                        <div style="padding: 9px 0;">
-                                            <label>
-                                            <input type="radio" name="service_type" value="Based on Booking Services" id="service_type" @if ($price->service_type == 'Based on Booking Services') {{ 'checked' }} @endif>
-                                            Based on Booking Services
-                                            </label>
-                                             <label>
-                                            <input type="radio" name="service_type" value="Based on Listing Criteria" id="service_type" @if ($price->service_type == 'Based on Listing Criteria') {{ 'checked' }} @endif>
-                                            Based on Listing Criteria
-                                            </label>
-                                        </div>
-                                        <p class="form-error-text" id="service_error" style="color: red; margin-top: 10px;"></p>
-                                    </div>
-                                </div>
 
                                 <div class="form-group">
 
-                                    <label for="name">Price</label>
+                                    <label for="based_on_booking_service_label">Label</label>
 
-                                    <input id="price" name="price" type="text" class="form-control"
+                                    <input id="based_on_booking_service_label" name="based_on_booking_service_label" type="text" class="form-control"
 
-                                        placeholder="Enter Price" value="{{ $price->price }}" />
-                                        <p class="form-error-text" id="price_error" style="color: red; margin-top: 10px;"></p>
+                                        placeholder="Enter Label" value="{{ $price->based_on_booking_service_label }}" />
+                                        <p class="form-error-text" id="based_on_booking_service_label_error" style="color: red; margin-top: 10px;"></p>
 
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+
+                                <div class="form-group">
+
+                                    <label for="based_on_booking_service_price">Price</label>
+
+                                    <input id="based_on_booking_service_price" name="based_on_booking_service_price" type="text" class="form-control"
+
+                                        placeholder="Enter Price" value="{{ $price->based_on_booking_service_price }}" onkeypress="return validateNumber(event)"/>
+                                        <p class="form-error-text" id="based_on_booking_service_price" style="color: red; margin-top: 10px;"></p>
+
+                                    </div>
+                                </div>
+
+                                 <h5>Based on Listing Criteria</h5>
+
+                                <div class="col-lg-6">
+
+                                <div class="form-group">
+
+                                    <label for="based_on_listing_criteria_label">Label</label>
+
+                                    <input id="based_on_listing_criteria_label" name="based_on_listing_criteria_label" type="text" class="form-control"
+
+                                        placeholder="Enter Label" value="{{ $price->based_on_listing_criteria_label }}" />
+                                        <p class="form-error-text" id="based_on_booking_service_label_error" style="color: red; margin-top: 10px;"></p>
+
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+
+                                <div class="form-group">
+
+                                    <label for="based_on_listing_criteria_price">Price</label>
+
+                                    <input id="based_on_listing_criteria_price" name="based_on_listing_criteria_price" type="text" class="form-control"
+
+                                        placeholder="Enter Price" value="{{ $price->based_on_listing_criteria_price }}" onkeypress="return validateNumber(event)"/>
+                                        <p class="form-error-text" id="based_on_listing_criteria_price" style="color: red; margin-top: 10px;"></p>
+
+                                    </div>
                                 </div>
 
 
@@ -99,7 +142,7 @@
 
                             <div class="text-end mt-4">
 
-                                <a class="btn btn-primary" href="{{ route('price.index') }}"> Cancel</a>
+                                <!-- <a class="btn btn-primary" href="{{ route('price.index') }}"> Cancel</a> -->
 
 
 
@@ -143,67 +186,68 @@
 
 
 
-    <script>
-
-        $(function() {
-
-            $("#name").keyup(function() {
-
-                var Text = $(this).val();
-
-                Text = Text.toLowerCase();
-
-                Text = Text.replace(/[^a-zA-Z0-9]+/g, '-');
-
-                $("#page_url").val(Text);
-
-            });
-
-        });
-
-    </script>
 
     <script>
 
-        var radioButtons = document.querySelectorAll('input[type="radio"][name="service_type"]');
-        function isRadioButtonSelected() {
-            for (var i = 0; i < radioButtons.length; i++) {
-                if (radioButtons[i].checked) {
-                    return true;
-                }
+        function validateNumber(event) {
+
+            var key = window.event ? event.keyCode : event.which;
+
+            if (event.keyCode === 8 || event.keyCode === 46) {
+
+                return true;
+
+            } else if (key < 48 || key > 57) {
+
+                return false;
+
+            } else {
+
+                return true;
+
             }
-            return false;
+
         }
+
+        // var radioButtons = document.querySelectorAll('input[type="radio"][name="service_type"]');
+        // function isRadioButtonSelected() {
+        //     for (var i = 0; i < radioButtons.length; i++) {
+        //         if (radioButtons[i].checked) {
+        //             return true;
+        //         }
+        //     }
+        //     return false;
+        // }
 
         function category_validation() {
 
-              if (!isRadioButtonSelected()) {
+            //   if (!isRadioButtonSelected()) {
 
-                jQuery('#service_error').html("Please Select Service Type");
-                jQuery('#service_error').show().delay(0).fadeIn('show');
-                jQuery('#service_error').show().delay(2000).fadeOut('show');
-                $('html, body').animate({
-                    scrollTop: $('#serviceid').offset().top - 150
-                }, 1000);
-                return false;
+            //     jQuery('#service_error').html("Please Select Service Type");
+            //     jQuery('#service_error').show().delay(0).fadeIn('show');
+            //     jQuery('#service_error').show().delay(2000).fadeOut('show');
+            //     $('html, body').animate({
+            //         scrollTop: $('#serviceid').offset().top - 150
+            //     }, 1000);
+            //     return false;
 
-            }
+            // }
             
 
 
-            var price = jQuery("#price").val();
+            // var price = jQuery("#price").val();
 
-            if (price == '') {
+            // if (price == '') {
 
-                jQuery('#price_error').html("Please Enter Price");
+            //     jQuery('#price_error').html("Please Enter Price");
 
-                jQuery('#price_error').show().delay(0).fadeIn('show');
+            //     jQuery('#price_error').show().delay(0).fadeIn('show');
 
-                jQuery('#price_error').show().delay(2000).fadeOut('show');
+            //     jQuery('#price_error').show().delay(2000).fadeOut('show');
 
-                return false;
+            //     return false;
 
-            }
+            // }
 
 
 

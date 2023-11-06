@@ -62,13 +62,18 @@ class Pricecontroller extends Controller
 
         $group = Price::find($id);
 
-        $group->service_type          = $request->service_type;
+        $group->based_on_booking_service_label          = $request->based_on_booking_service_label;
 
-        $group->price      = $request->price;
+        $group->based_on_booking_service_price       = $request->based_on_booking_service_price;
+
+        $group->based_on_listing_criteria_label      = $request->based_on_listing_criteria_label;
+
+        $group->based_on_listing_criteria_price      = $request->based_on_listing_criteria_price;
+
 
         $group->save();
 
-        return redirect()->route('price.index')->with('success','Price data Updated successfully');;
+        return redirect()->route('price.edit',1)->with('success','Price data Updated successfully');;
 
     }
 
