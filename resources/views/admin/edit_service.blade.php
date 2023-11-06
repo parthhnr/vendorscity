@@ -91,10 +91,12 @@
 
                                 <div class="form-group">
 
-                                    <label for="name">service Name</label>
+                                    <label for="name">Service Name</label>
 
                                     <input id="servicename" name="servicename" type="text" class="form-control"
-                                        placeholder="Enter service Name" value="{{ $service->servicename }}" />
+                                        placeholder="Enter Service Name" value="{{ $service->servicename }}" />
+
+                                <p class="form-error-text" id="service_error" style="color: red; margin-top: 10px;"></p>
 
                                 </div>
 
@@ -236,16 +238,14 @@
 
             var servicename = jQuery("#servicename").val();
 
-            if (servicename == '') {
-
-                jQuery('#validate').html("Please Enter service Name");
-
-                jQuery('#validate').show().delay(0).fadeIn('show');
-
-                jQuery('#validate').show().delay(2000).fadeOut('show');
-
+           if (servicename == '') {
+                jQuery('#service_error').html("Please Enter Service Name");
+                jQuery('#service_error').show().delay(0).fadeIn('show');
+                jQuery('#service_error').show().delay(2000).fadeOut('show');
+                $('html, body').animate({
+                    scrollTop: $('#servicename').offset().top - 150
+                }, 1000);
                 return false;
-
             }
 
 

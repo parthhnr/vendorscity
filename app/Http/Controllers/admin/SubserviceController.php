@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Admin\Subservice;
-use App\Models\Admin\service;
+use App\Models\Admin\Service;
 use Image;
 
 class SubserviceController extends Controller
@@ -41,19 +41,18 @@ class SubserviceController extends Controller
      */
     public function store(Request $request)
     {
+        // echo"<pre>";
+        // print_r($request->post());
+        // echo"</pre>";exit;
        
         $subservice= New Subservice;
         $subservice->serviceid=$request->serviceid;
         $subservice->subservicename=$request->subservicename;        
         $subservice->description=$request->description;
         $subservice->charge=$request->charge;
-        $subservice->no_of_inquiry=$request->no_of_inquiry; 
-        if($request->is_bookable !=''){
-            $subservice->is_bookable=$request->is_bookable;
-        } 
-        else{
-            $subservice->is_bookable=0;
-        }  
+        $subservice->no_of_inquiry=$request->no_of_inquiry;        
+        $subservice->is_bookable=$request->is_bookable;
+        
         
         if($request->hasfile('image') != ''){
 
@@ -98,9 +97,9 @@ class SubserviceController extends Controller
      */
     public function edit(Subservice $subservice)
     {
+       
         
-        $data['all_service'] = service::orderBy('id','DESC')->get();
-
+        $data['all_service'] = Service::orderBy('id','DESC')->get();       
     
         return view('admin.edit_subservice',compact('subservice'),$data);
     }
@@ -162,6 +161,6 @@ class SubserviceController extends Controller
 
         Subservice::whereIn('id',$delete_id)->delete();
 
-        return redirect()->route('subservice.index')->with('success','Sub Service has been deleted successfully');
+        return redirect()->route('subservice.index')->with('success','Sub Service Deleted Successfully');
     }
 }

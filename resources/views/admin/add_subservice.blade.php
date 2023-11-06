@@ -62,16 +62,8 @@
                             @csrf
 
                             <div class="row">
-
-
-                                <div class="form-group">
-
-                                    <label for="name">Sub Service Name</label>
-                                    <input id="subservicename" name="subservicename" type="text" class="form-control"
-                                        placeholder="Enter Sub Service Name" value="" />
-
-                                </div>
-
+                                
+                                <div class="col-lg-6">
                                 <div class="form-group">
 
                                     <label for="name">Service</label>
@@ -88,52 +80,65 @@
                                         @endforeach
 
                                     </select>
+                                     <p class="form-error-text" id="service_error" style="color: red; margin-top: 10px;"></p>
 
+                                </div> </div>
+
+                                <div class="col-lg-6">
+                                <div class="form-group">
+
+                                    <label for="name">Sub Service</label>
+                                    <input id="subservicename" name="subservicename" type="text" class="form-control"
+                                        placeholder="Enter Sub Service" value="" />
+
+                                        <p class="form-error-text" id="subservice_error" style="color: red; margin-top: 10px;"></p>
+                                </div>
                                 </div>
 
-
+                                <div class="col-lg-6">
                                 <div class="form-group">
 
                                     <label for="name">Image (600px x 765px)</label>
 
                                     <input id="image" name="image" type="file" class="form-control"value="" />
+                                    <p class="form-error-text" id="image_error" style="color: red; margin-top: 10px;"></p>
+                                </div></div>
 
-                                </div>
 
-                                <div class="form-group">
-
-                                    <label style="width: 100%;">Is Bookable</label>
-
-                                    <div style="padding: 9px 0;">
-
-                                        <input type="radio" name="is_bookable" value="0" id="book">
-
-                                        Book Now
-
-                                        <input type="radio" name="is_bookable" value="1" id="book"> Enquiry
-
+                               <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label style="width: 100%;">Is Bookable</label>
+                                        <div style="padding: 9px 0;">
+                                            <input type="radio" name="is_bookable" value="0" id="book_now">
+                                            Book Now
+                                            <input type="radio" name="is_bookable" value="1" id="enquiry">
+                                            Enquiry
+                                        </div>
+                                        <p class="form-error-text" id="book_error" style="color: red; margin-top: 10px;"></p>
                                     </div>
-
-                                    <p id="discount_type_error" style="display: none;color: red"></p>
-
                                 </div>
 
+
+
+                                 <div class="col-lg-6">
                                 <div class="form-group">
 
                                     <label for="name">Charge</label>
 
                                     <input id="charge" name="charge" type="text" class="form-control"
-                                        placeholder="Enter Charge" value="" />
-
+                                        placeholder="Enter Charge" value="" onkeypress="return validateNumber(event)"/>
+                                         <p class="form-error-text" id="charge_error" style="color: red; margin-top: 10px;"></p>
                                 </div>
+                            </div>
+                                 <div class="col-lg-6">
                                 <div class="form-group">
 
                                     <label for="name">No Of Inquiry</label>
 
                                     <input id="no_of_inquiry" name="no_of_inquiry" type="text" class="form-control"
-                                        placeholder="No Of Inquiry" value="" />
-
-                                </div>
+                                        placeholder="No Of Inquiry" value=""  onkeypress="return validateNumber(event)"/>
+                                    <p class="form-error-text" id="inquiry_error" style="color: red; margin-top: 10px;"></p>
+                                </div></div>
                                 <div class="form-group">
 
                                     <label for="description" style="margin:15px 0 5px 0px; width:100%;">
@@ -208,66 +213,79 @@
 
     <script>
         function subservice_validation() {
-
-
-
-            var servicename = jQuery("#servicename").val();
-
-            if (servicename == '') {
-
-                jQuery('#validate').html("Please Select Service");
-
-                jQuery('#validate').show().delay(0).fadeIn('show');
-
-                jQuery('#validate').show().delay(2000).fadeOut('show');
-
-                return false;
-
-            }
-            var subservicename = jQuery("#subservicename").val();
-
-            if (subservicename == '') {
-
-                jQuery('#validate').html("Please Enter Sub Service Name");
-
-                jQuery('#validate').show().delay(0).fadeIn('show');
-
-                jQuery('#validate').show().delay(2000).fadeOut('show');
-
-                return false;
-
-            }
-
-
-
+           
             var serviceid = jQuery("#serviceid").val();
 
             if (serviceid == '') {
-
-                jQuery('#validate').html("Please Enter Service Id");
-
-                jQuery('#validate').show().delay(0).fadeIn('show');
-
-                jQuery('#validate').show().delay(2000).fadeOut('show');
-
+                jQuery('#service_error').html("Please Select Service");
+                jQuery('#service_error').show().delay(0).fadeIn('show');
+                jQuery('#service_error').show().delay(2000).fadeOut('show');
+                $('html, body').animate({
+                    scrollTop: $('#serviceid').offset().top - 150
+                }, 1000);
                 return false;
-
             }
+
+
+
+            
+            var subservicename = jQuery("#subservicename").val();
+             if (subservicename == '') {
+                jQuery('#subservice_error').html("Please Enter Sub Service");
+                jQuery('#subservice_error').show().delay(0).fadeIn('show');
+                jQuery('#subservice_error').show().delay(2000).fadeOut('show');
+                $('html, body').animate({
+                    scrollTop: $('#subservicename').offset().top - 150
+                }, 1000);
+                return false;
+            }         
 
 
 
             var image = jQuery("#image").val();
-
-            if (image == '') {
-
-                jQuery('#validate').html("Please Select Image");
-
-                jQuery('#validate').show().delay(0).fadeIn('show');
-
-                jQuery('#validate').show().delay(2000).fadeOut('show');
-
+           if (image == '') {
+                jQuery('#image_error').html("Please Select Image");
+                jQuery('#image_error').show().delay(0).fadeIn('show');
+                jQuery('#image_error').show().delay(2000).fadeOut('show');
+                $('html, body').animate({
+                    scrollTop: $('#image').offset().top - 150
+                }, 1000);
                 return false;
+            }
 
+            var bookNow = jQuery("#book_now");
+            var enquiry = jQuery("#enquiry");
+
+            if (!bookNow.is(":checked") && !enquiry.is(":checked")) {
+                jQuery('#book_error').html("Please Select Is Bookable");
+                jQuery('#book_error').show().delay(2000).fadeOut('show');
+                $('html, body').animate({
+                    scrollTop: jQuery('#book_now').offset().top - 150
+                }, 1000);
+                return false;
+            }
+
+
+             var charge = jQuery("#charge").val();
+           if (charge == '') {
+                jQuery('#charge_error').html("Please Enter Charge");
+                jQuery('#charge_error').show().delay(0).fadeIn('show');
+                jQuery('#charge_error').show().delay(2000).fadeOut('show');
+                $('html, body').animate({
+                    scrollTop: $('#charge').offset().top - 150
+                }, 1000);
+                return false;
+            } 
+
+            var no_of_inquiry = jQuery("#no_of_inquiry").val();
+           if (no_of_inquiry == '') {
+                jQuery('#inquiry_error').html("Please Enter No Of Inquiry");
+                jQuery('#inquiry_error').show().delay(0).fadeIn('show');
+                jQuery('#inquiry_error').show().delay(2000).fadeOut('show');
+                $('html, body').animate({
+                    scrollTop: $('#no_of_inquiry').offset().top - 150
+                }, 1000);
+                return false;
             }
 
 
@@ -296,6 +314,28 @@
                 console.error(error);
 
             });
+
+
+            function validateNumber(event) {
+
+            var key = window.event ? event.keyCode : event.which;
+
+            if (event.keyCode === 8 || event.keyCode === 46) {
+
+                return true;
+
+            } else if (key < 48 || key > 57) {
+
+                return false;
+
+            } else {
+
+                return true;
+
+            }
+
+        }
+
     </script>
 
 @stop

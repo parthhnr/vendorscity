@@ -75,7 +75,9 @@ class CityController extends Controller
     {
 
         $data['country_data'] = DB::table('countries')->select('*')->orderBy('id','DESC')->get();       
-        $data['state_data'] = DB::table('states')->select('*')->orderBy('id','DESC')->get();
+        $data['state_data'] = DB::table('states')->select('*')->where('country_id', $city->country)->orderBy('id','DESC')->get();
+
+        //echo "<pre>";print_r($city->country);echo "</pre>";exit;
         
         return view('admin.edit_city',compact('city'),$data);
     }
@@ -110,7 +112,7 @@ class CityController extends Controller
         $delete_id = $request->selected;
         // echo $delete_id;exit;
         City::whereIn('id',$delete_id)->delete();
-        return redirect()->route('city.index')->with('success','City has been deleted successfully');
+        return redirect()->route('city.index')->with('success','City Deleted Successfully');
     }
 
     function state_show(){

@@ -51,7 +51,7 @@ class VendorsController extends Controller
         // print_r($request->post());
         // echo"</pre>";exit;
         
-        $data['role_id']=$_POST['role_id'];
+        $data['role_id']=$_POST['hidden_role_id'];
         $data['name']=$_POST['name'];
         $data['user_name']=$_POST['user_name'];       
         $data['companywebsite']=$_POST['companywebsite'];
@@ -75,6 +75,7 @@ class VendorsController extends Controller
         }
               
         $data['vendor'] = 1;
+        $data['is_active'] = 0;
 
         if ($request->hasFile('vatcertificate')) 
     {
@@ -217,9 +218,9 @@ class VendorsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //  echo"<pre>";
-        // print_r($request->post());
-        // echo"</pre>";exit;
+        echo"<pre>";
+        print_r($request->post());
+        echo"</pre>";exit;
         $data['role_id']=$_POST['role_id'];
         $data['name']=$_POST['name'];
         $data['user_name']=$_POST['user_name'];       
@@ -234,7 +235,14 @@ class VendorsController extends Controller
         $data['socialmedai']=$_POST['socialmedai'];
         // $data['password']=Hash::make ($_POST['password']);        
         $data['email']=$_POST['email'];
-        $data['mobile']=$_POST['mobile'];       
+        if($_POST['mobile'] !='')
+        {
+            $data['mobile']=$_POST['mobile'];
+        }
+        else
+        {
+            $data['mobile']=null;
+        }       
         $data['vendor'] = 1;
 
         if ($request->hasFile('vatcertificate')) 
@@ -399,6 +407,22 @@ class VendorsController extends Controller
         $result = DB::table('vendors_attribute')->where('pid', '=',$service)->where('id', '=',$id)->delete();
 
         return redirect()->route('vendors.edit',$service)->with('success','Vendors Attribute has been deleted successfully');
+
+    }
+
+    public  function change_status_vendors(){
+
+
+
+        $id=$_POST['id'];
+
+        $value=$_POST['value'];
+
+        
+
+        DB::table('users')->where('id',$id)->update(array('is_active'=>$value));
+
+        echo"1";
 
     }
 }
