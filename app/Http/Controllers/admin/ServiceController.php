@@ -97,6 +97,6 @@ class ServiceController extends Controller
     {
         $delete_id=$request->selected;
         Service::whereIn('id',$delete_id)->delete();
-        return redirect()->route('service.index')->with('success','Service Has Been Deleted Successfully');
+        return redirect()->route('service.index')->with('success','Service Deleted Successfully');
     }
 }

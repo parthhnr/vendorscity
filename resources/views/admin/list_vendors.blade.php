@@ -78,6 +78,14 @@
         @endif
 
 
+        <div class="alert alert-success alert-dismissible fade show success_show" style="display: none;">
+
+            <strong>Success! </strong><span id="success_message"></span>
+
+        </div>
+
+
+
 
         <!-- Search Filter -->
 
@@ -171,6 +179,8 @@
 
                                             <th>Mobile</th>
 
+                                             <th>Status</th>
+
                                             @if (in_array('8', $edit_perm))
                                                 <th class="text-right">Actions</th>
                                             @endif
@@ -218,13 +228,39 @@
                                                 <td>
                                                     {!! Helper::cityname($vendors_data[$i]->city) !!}
                                                 </td>
-                                                <td>
-                                                    {{ $vendors_data[$i]->mobile }}
+                                                 <td>
+                                                        @if($vendors_data[$i]->mobile == 0)
+                                                            {{ '-' }}
+                                                        @else
+                                                            {{ $vendors_data[$i]->mobile }}
+                                                        @endif
                                                 </td>
 
-                                                {{-- <td>
-                                                    {{ $vendors_data[$i]->created_at }}
-                                                </td> --}}
+                                                <td>
+
+                                                    <div class="form-group">
+
+                                                        <select class="form-select" name="is_active" id="is_active"
+
+                                                            onchange="fun_status('{{ $vendors_data[$i]->id }}',this.value);return false;">
+
+                                                            <option value="0"
+
+                                                                {{ $vendors_data[$i]->is_active == 0 ? 'selecetd' : '' }}>Active
+
+                                                            </option>
+
+                                                            <option value="1"
+
+                                                                {{ $vendors_data[$i]->is_active == 1 ? 'selected' : '' }}>Inactive
+
+                                                            </option>
+
+                                                        </select>
+
+                                                    </div>
+
+                                                </td>
 
                                                 @if (in_array('8', $edit_perm))
                                                     <td class="text-right">
@@ -333,6 +369,40 @@
 
 </div>
 
+<!-- set order Modal -->
+
+<div class="modal custom-modal fade" id="status_modell" role="dialog">
+
+    <div class="modal-dialog modal-dialog-centered">
+
+        <div class="modal-content">
+
+            <div class="modal-body">
+
+                <div class="modal-text text-center">
+
+                    <h3>Are you sure you want to change the status </h3>
+
+                    <input type="hidden" name="is_active_id" id="is_active_id" value="">
+
+                    <input type="hidden" name="is_active_val" id="is_active_val" value="">
+
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+
+                    <button type="button" class="btn btn-primary" onclick="fun_review_status();">Yes</button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- /set orderModal -->
+
 <script>
     function delete_category() {
 
@@ -357,6 +427,60 @@
     function form_sub() {
 
         $('#form').submit();
+
+    }
+</script>
+
+<script>
+    function fun_status(id, value) {
+
+        // alert(value);
+
+        $('#is_active_id').val(id);
+
+        $('#is_active_val').val(value);
+
+        $('#status_modell').modal('show');
+
+    }
+
+    function fun_review_status() {
+
+        var id = $('#is_active_id').val();
+
+        var value = $('#is_active_val').val();
+
+        $.ajax({
+
+            type: "post",
+
+            url: "{{ url('change_status_vendors') }}",
+
+            data: {
+
+                "_token": "{{ csrf_token() }}",
+
+                "id": id,
+
+                "value": value,
+
+            },
+
+            success: function(returndata) {
+
+                if (returndata == 1)
+
+                    $('#success_message').text('Status has been Updated successfully');
+
+                $('.success_show').show().delay(0).fadeIn('show');
+
+                $('.success_show').show().delay(5000).fadeOut('show');
+
+                $('#status_modell').modal('hide');
+
+            }
+
+        });
 
     }
 </script>

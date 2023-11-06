@@ -50,6 +50,9 @@ Route::get('/view-clear', function() {
 
 /*------Front routes start ------*/
 
+
+
+
 /*------End Front routes  ------*/
 
 /*------vendors routes start ------*/
@@ -133,6 +136,7 @@ Route::get('/admin', function () {
     Route::resource('admin/vendors','App\Http\Controllers\admin\VendorsController');  
     Route::get('delete_vendors',[VendorsController::class,'destroy'])->name('delete_vendors');
     Route::get('remove_vendors_att/{pid}/{id}', [VendorsController::class, 'remove_vendors_att'])->name('remove_vendors_att'); 
+    Route::post('change_status_vendors','App\Http\Controllers\admin\VendorsController@change_status_vendors');
 
     
     

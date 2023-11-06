@@ -44,6 +44,7 @@
                                                <option value="{{ $country->id }}">{{ $country->country }}</option>
                                            @endforeach
                                        </select>
+                                        <p class="form-error-text" id="country_error" style="color: red; margin-top: 10px;"></p>
                                    </div>
 
                                    <div class="form-group">
@@ -56,12 +57,14 @@
                                                @endforeach
                                            </select>
                                        </span>
+                                       <p class="form-error-text" id="state_error" style="color: red; margin-top: 10px;"></p>
                                    </div>
 
                                    <div class="form-group">
                                        <label for="name">City</label>
                                        <input id="name" name="name" type="text" class="form-control"
                                            placeholder="Enter City Name" value="" />
+                                     <p class="form-error-text" id="city_error" style="color: red; margin-top: 10px;"></p>
                                    </div>
 
                                </div>
@@ -119,13 +122,36 @@
 
        <script>
            function category_validation() {
+               var country = jQuery("#country").val();
+               if (country == '') {
+                jQuery('#country_error').html("Please Select Country");
+                jQuery('#country_error').show().delay(0).fadeIn('show');
+                jQuery('#country_error').show().delay(2000).fadeOut('show');
+                $('html, body').animate({
+                    scrollTop: $('#country').offset().top - 150
+                }, 1000);
+                return false;
+            }
+               var state = jQuery("#state").val();
+                if (state == '') {
+                jQuery('#state_error').html("Please Select State");
+                jQuery('#state_error').show().delay(0).fadeIn('show');
+                jQuery('#state_error').show().delay(2000).fadeOut('show');
+                $('html, body').animate({
+                    scrollTop: $('#state').offset().top - 150
+                }, 1000);
+                return false;
+            }
                var name = jQuery("#name").val();
-               if (name == '') {
-                   jQuery('#validate').html("Please Enter Category Name");
-                   jQuery('#validate').show().delay(0).fadeIn('show');
-                   jQuery('#validate').show().delay(2000).fadeOut('show');
-                   return false;
-               }
+                if (name == '') {
+                jQuery('#city_error').html("Please Enter City");
+                jQuery('#city_error').show().delay(0).fadeIn('show');
+                jQuery('#city_error').show().delay(2000).fadeOut('show');
+                $('html, body').animate({
+                    scrollTop: $('#name').offset().top - 150
+                }, 1000);
+                return false;
+            }
 
 
                $('#spinner_button').show();

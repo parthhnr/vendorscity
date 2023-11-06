@@ -208,7 +208,7 @@
 
                                                <th>Select</th>
 
-                                               <th>Service</th>
+                                               <th>Service Name</th>
 
                                                {{-- <th>Name</th> --}}
 

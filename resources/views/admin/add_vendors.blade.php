@@ -62,20 +62,27 @@
                             @csrf
 
                             <div class="row">
-
-                                <div class="form-group">
-                                    <label for="category">User Category</label>
-                                    <select class="form-control" id="role_id" name="role_id">
-                                        @foreach ($permission_data as $permission)
-                                            <option value="{{ $permission->id }}">{{ $permission->cname }}</option>
-                                        @endforeach
-                                    </select>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="category">User Category</label>
+                                        <select class="form-control" id="role_id" name="role_id" disabled>
+                                            @foreach ($permission_data as $permission)
+                                                <option value="{{ $permission->id }}" data-value="{{ $permission->id }}">
+                                                    {{ $permission->cname }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        <input type="hidden" name="hidden_role_id" id="hidden_role_id" value="">
+                                    </div>
                                 </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="name">Company Name</label>
+                                        <input id="name" name="name" type="text" class="form-control"
+                                            placeholder="Enter Name" value="" />
 
-                                <div class="form-group">
-                                    <label for="name">Company Name</label>
-                                    <input id="name" name="name" type="text" class="form-control"
-                                        placeholder="Enter Name" value="" />
+                                             <p class="form-error-text" id="name_error" style="color: red; margin-top: 10px;"></p>
+                                    </div>
                                 </div>
 
                                 <div class="form-group">
@@ -117,9 +124,9 @@
                                     <div class="col-sm-12">
 
                                         <button
-                                            style="border: medium none;margin-right: 0px;line-height: 25px;margin-top: -62px;"
+                                            style="border: medium none;margin-right: 50px;line-height: 25px;margin-top: -62px;"
                                             class="submit btn bg-purple pull-right" type="button"
-                                            id="add_field_button12">Add Price </button>
+                                            id="add_field_button12">Add</button>
 
                                     </div>
 
@@ -128,102 +135,130 @@
                                 {{-- add more End --}}
 
 
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="name">Company Website</label>
+                                        <input id="companywebsite" name="companywebsite" type="text"
+                                            class="form-control" placeholder="Enter Company Website" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="category">Company City</label>
+                                        <select class="form-control" id="city" name="city">
+                                            <option value="">Select Company City</option>
+                                            @foreach ($city_data as $city)
+                                                <option value="{{ $city->id }}">{{ $city->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="name">Company Role</label>
+                                        <input id="crole" name="crole" type="text" class="form-control"
+                                            placeholder="Enter Company Role" value="" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="name">Parent Company Name</label>
+                                        <input id="parentcname" name="parentcname" type="text" class="form-control"
+                                            placeholder="Enter Parent Company Name" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="name">Establishment Date</label>
+                                        <input id="establishment_date" name="establishment_date" type="date"
+                                            class="form-control" placeholder="Select Establishment Date" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="name">VAT Certificate </label>
+                                        <input id="vatcertificate" name="vatcertificate" type="file"
+                                            class="form-control" placeholder="Select VAT Certificate" />
 
-                                <div class="form-group">
-                                    <label for="name">Company Website</label>
-                                    <input id="companywebsite" name="companywebsite" type="text" class="form-control"
-                                        placeholder="Enter Company Website" />
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="category">Company City</label>
-                                    <select class="form-control" id="city" name="city">
-                                        <option value="">Select Company City</option>
-                                        @foreach ($city_data as $city)
-                                            <option value="{{ $city->id }}">{{ $city->name }}</option>
-                                        @endforeach
-                                    </select>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="name">TRN Certificate </label>
+                                        <input id="trncertificate" name="trncertificate" type="file"
+                                            class="form-control" placeholder="Select TRN Certificate" />
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="name">Company Role</label>
-                                    <input id="crole" name="crole" type="text" class="form-control"
-                                        placeholder="Enter Company Role" value="" />
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="name">Trade License</label>
+                                        <input id="tradelicense" name="tradelicense" type="file" class="form-control"
+                                            placeholder="Select Trade License" />
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="name">Parent Company Name</label>
-                                    <input id="parentcname" name="parentcname" type="text" class="form-control"
-                                        placeholder="Enter Parent Company Name" />
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="name">TL expiry date</label>
+                                        <input id="tlexpiry" name="tlexpiry" type="date" class="form-control"
+                                            placeholder="Select TL expiry date" />
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="name">Establishment Date</label>
-                                    <input id="establishment_date" name="establishment_date" type="date"
-                                        class="form-control" placeholder="Select Establishment Date" />
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        @php $maxStaff=20; @endphp
+                                        <label for="">No Of Staff</label>
+                                        <select class="form-control" id="staff" name="staff">
+                                            <option value="">Select No Of Staff</option>
+                                            @for ($i = 1; $i <= $maxStaff; $i++)
+                                                <option value="{{ $i }}">{{ $i }}</option>
+                                            @endfor
+                                        </select>
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="name">VAT Certificate </label>
-                                    <input id="vatcertificate" name="vatcertificate" type="file" class="form-control"
-                                        placeholder="Select VAT Certificate" />
-
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="name">Remarks</label>
+                                        <input id="remarks" name="remarks" type="text" class="form-control"
+                                            placeholder="Enter Remarks" />
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="name">TRN Certificate </label>
-                                    <input id="trncertificate" name="trncertificate" type="file" class="form-control"
-                                        placeholder="Select TRN Certificate" />
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="name">Social Media</label>
+                                        <input id="socialmedai" name="socialmedai" type="text" class="form-control"
+                                            placeholder="Enter Social Media" />
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="name">Trade License</label>
-                                    <input id="tradelicense" name="tradelicense" type="file" class="form-control"
-                                        placeholder="Select Trade License" />
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="name">Email For Login</label>
+                                        <input id="email" name="email" type="text" class="form-control"
+                                            placeholder="Enter Email" />
+                                        <p class="form-error-text" id="email_error" style="color: red; margin-top: 10px;"></p>
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="name">TL expiry date</label>
-                                    <input id="tlexpiry" name="tlexpiry" type="date" class="form-control"
-                                        placeholder="Select TL expiry date" />
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="name">Password</label>
+                                        <input id="password" name="password" type="password" class="form-control"
+                                            placeholder="Enter Password" />
+                                    </div>
                                 </div>
-
-                                <div class="form-group">
-                                    @php $maxStaff=20; @endphp
-                                    <label for="">No Of Staff</label>
-                                    <select class="form-control" id="staff" name="staff">
-                                        <option value="">Select No Of Staff</option>
-                                        @for ($i = 1; $i <= $maxStaff; $i++)
-                                            <option value="{{ $i }}">{{ $i }}</option>
-                                        @endfor
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="name">Remarks</label>
-                                    <input id="remarks" name="remarks" type="text" class="form-control"
-                                        placeholder="Enter Remarks" />
-                                </div>
-                                <div class="form-group">
-                                    <label for="name">Social Media</label>
-                                    <input id="socialmedai" name="socialmedai" type="text" class="form-control"
-                                        placeholder="Enter Social Media" />
-                                </div>
-                                <div class="form-group">
-                                    <label for="name">Email for Login</label>
-                                    <input id="email" name="email" type="text" class="form-control"
-                                        placeholder="Enter Email" />
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="name">Password</label>
-                                    <input id="password" name="password" type="password" class="form-control"
-                                        placeholder="Enter Password" />
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="name">Confirm Password</label>
-                                    <input id="conf_password" name="conf_password" type="password" class="form-control"
-                                        placeholder="Enter Confirm Password" />
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="name">Confirm Password</label>
+                                        <input id="conf_password" name="conf_password" type="password"
+                                            class="form-control" placeholder="Enter Confirm Password" />
+                                    </div>
                                 </div>
 
 
-
-                                <div class="form-group">
-                                    <label for="name">Company Mobile No.</label>
-                                    <input id="mobile" name="mobile" type="text" class="form-control"
-                                        placeholder="Enter Mobile No." onkeypress="return validateNumber(event)" />
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="name">Company Mobile No.</label>
+                                        <input id="mobile" name="mobile" type="text" class="form-control"
+                                            placeholder="Enter Mobile No." onkeypress="return validateNumber(event)" />
+                                    </div>
                                 </div>
 
                             </div>
@@ -270,6 +305,14 @@
 
 
     <script>
+        $(document).ready(function() {
+            var role_id = jQuery("#role_id").val();
+
+            $("#hidden_role_id").val(role_id);
+        });
+
+
+
         $(function() {
 
             $("#name").keyup(function() {
@@ -292,46 +335,38 @@
     <script>
         function category_validation() {
 
-            var role_id = jQuery("#role_id").val();
+            // var role_id = jQuery("#role_id").val();
 
-            if (role_id == '') {
+            // if (role_id == '') {
 
-                jQuery('#validate').html("Please Select User Category");
+            //     jQuery('#validate').html("Please Select User Category");
 
-                jQuery('#validate').show().delay(0).fadeIn('show');
+            //     jQuery('#validate').show().delay(0).fadeIn('show');
 
-                jQuery('#validate').show().delay(2000).fadeOut('show');
+            //     jQuery('#validate').show().delay(2000).fadeOut('show');
 
-                $('html, body').animate({
+            //     $('html, body').animate({
 
-                    scrollTop: $('#validate').offset().top - 150
+            //         scrollTop: $('#validate').offset().top - 150
 
-                }, 1000);
+            //     }, 1000);
 
-                return false;
+            //     return false;
 
-            }
+            // }
 
 
 
             var name = jQuery("#name").val();
 
-            if (name == '') {
-
-                jQuery('#validate').html("Please Enter Company Name");
-
-                jQuery('#validate').show().delay(0).fadeIn('show');
-
-                jQuery('#validate').show().delay(2000).fadeOut('show');
-
+             if (name == '') {
+                jQuery('#name_error').html("Please Enter Company Name");
+                jQuery('#name_error').show().delay(0).fadeIn('show');
+                jQuery('#name_error').show().delay(2000).fadeOut('show');
                 $('html, body').animate({
-
-                    scrollTop: $('#validate').offset().top - 150
-
+                    scrollTop: $('#name').offset().top - 150
                 }, 1000);
-
                 return false;
-
             }
 
 
@@ -358,21 +393,13 @@
             var email = jQuery("#email").val();
 
             if (email == '') {
-
-                jQuery('#validate').html("Please Enter Email For Login");
-
-                jQuery('#validate').show().delay(0).fadeIn('show');
-
-                jQuery('#validate').show().delay(2000).fadeOut('show');
-
+                jQuery('#email_error').html("Please Enter Email");
+                jQuery('#email_error').show().delay(0).fadeIn('show');
+                jQuery('#email_error').show().delay(2000).fadeOut('show');
                 $('html, body').animate({
-
-                    scrollTop: $('#validate').offset().top - 150
-
+                    scrollTop: $('#email').offset().top - 150
                 }, 1000);
-
                 return false;
-
             }
 
 
@@ -381,18 +408,12 @@
 
             if (!filter.test(email)) {
 
-                jQuery('#validate').html("Enter Valid Email Address.");
-
-                jQuery('#validate').show().delay(0).fadeIn('show');
-
-                jQuery('#validate').show().delay(2000).fadeOut('show');
-
+                jQuery('#email_error').html("Please  Enter Valid Email");
+                jQuery('#email_error').show().delay(0).fadeIn('show');
+                jQuery('#email_error').show().delay(2000).fadeOut('show');
                 $('html, body').animate({
-
-                    scrollTop: $('#validate').offset().top - 150
-
+                    scrollTop: $('#email').offset().top - 150
                 }, 1000);
-
                 return false;
 
             }
@@ -405,18 +426,12 @@
 
             if (password == '') {
 
-                jQuery('#validate').html("Please Enter Password");
-
-                jQuery('#validate').show().delay(0).fadeIn('show');
-
-                jQuery('#validate').show().delay(2000).fadeOut('show');
-
+                 jQuery('#password_error').html("Please  Enter Password");
+                jQuery('#password_error').show().delay(0).fadeIn('show');
+                jQuery('#password_error').show().delay(2000).fadeOut('show');
                 $('html, body').animate({
-
-                    scrollTop: $('#validate').offset().top - 150
-
+                    scrollTop: $('#password').offset().top - 150
                 }, 1000);
-
                 return false;
 
             }

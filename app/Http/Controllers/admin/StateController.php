@@ -10,9 +10,9 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 
-use App\Models\admin\State;
+use App\Models\Admin\State;
 
-use App\Models\admin\Country;
+use App\Models\Admin\Country;
 
 
 
@@ -172,7 +172,7 @@ class StateController extends Controller
 
 
 
-        return redirect()->route('state.index')->with('success', 'State Update Successfully');
+        return redirect()->route('state.index')->with('success', 'State Updated Successfully');
 
     }
 
@@ -198,7 +198,7 @@ class StateController extends Controller
 
         State::whereIn('id',$delete_id)->delete();
 
-        return redirect()->route('state.index')->with('success','State has been deleted successfully');
+        return redirect()->route('state.index')->with('success','State  Deleted Successfully');
 
     }
 

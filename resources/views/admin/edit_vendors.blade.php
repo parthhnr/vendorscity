@@ -65,14 +65,15 @@
 
                                 <div class="form-group">
                                     <label for="vendors">User Category</label>
-                                    <select class="form-control" id="role_id" name="role_id">
+                                    <select class="form-control" id="role_id" name="role_id" disabled>
                                         @foreach ($permission_data as $permission)
                                             <option value="{{ $permission->id }}" <?php if ($permission->id == $vendors->name) {
                                                 echo 'selected';
-                                            } ?>>
+                                            } ?> selected>
                                                 {{ $permission->cname }}</option>
                                         @endforeach
                                     </select>
+                                    <input type="hidden" name="hidden_role_id" id="hidden_role_id" value="">
                                 </div>
 
                                 <div class="form-group">
@@ -182,9 +183,9 @@
 
                                     <div class="col-sm-12">
                                         <button
-                                            style="border: medium none;margin-right: -21px;line-height: 26px;margin-top: -62px;"
+                                            style="border: medium none;margin-right: 50px;line-height: 26px;margin-top: -62px;"
                                             class="submit btn bg-purple pull-right" type="button"
-                                            id="add_field_button12">Add Price </button>
+                                            id="add_field_button12">Add</button>
                                     </div>
                                 </div>
 
@@ -257,7 +258,7 @@
                                         placeholder="Select TL expiry date" value="{{ $vendors->tlexpiry }}" />
                                 </div>
                                 <div class="form-group">
-                                    @php $maxStaff = 5; @endphp
+                                    @php $maxStaff = 20; @endphp
                                     <label for="">No Of Staff</label>
                                     <select class="form-control" id="staff" name="staff">
                                         <option value="">Select No Of Staff</option>
@@ -352,6 +353,12 @@
 
     <script>
         function category_validation() {
+
+            $(document).ready(function() {
+                var role_id = jQuery("#role_id").val();
+
+                $("#hidden_role_id").val(role_id);
+            });
 
             var select = jQuery("#select").val();
 
@@ -532,6 +539,25 @@
             if (mobile == '') {
 
                 jQuery('#validate').html("Please Enter Mobile");
+
+                jQuery('#validate').show().delay(0).fadeIn('show');
+
+                jQuery('#validate').show().delay(2000).fadeOut('show');
+
+                $('html, body').animate({
+
+                    scrollTop: $('#validate').offset().top - 150
+
+                }, 1000);
+
+                return false;
+
+            }
+            var mobileNumberPattern = /^[0-9]{10}$/;
+
+            if (mobile.match(mobileNumberPattern)) {
+
+                jQuery('#validate').html("Please Enter Valid Mobile");
 
                 jQuery('#validate').show().delay(0).fadeIn('show');
 

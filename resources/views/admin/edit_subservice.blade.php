@@ -67,15 +67,6 @@
 
                                 <div class="form-group">
 
-                                    <label for="name">subservice Name</label>
-
-                                    <input id="subservicename" name="subservicename" type="text" class="form-control"
-                                        placeholder="Enter subservice Name" value="{{ $subservice->subservicename }}" />
-
-                                </div>
-
-                                <div class="form-group">
-
                                     <label for="name">Service</label>
 
                                     <select name="serviceid" id="serviceid" class="form-control">
@@ -90,8 +81,20 @@
                                         @endforeach
 
                                     </select>
+                                    <p class="form-error-text" id="service_error" style="color: red; margin-top: 10px;"></p>
 
                                 </div>
+
+                                <div class="form-group">
+
+                                    <label for="name">Sub Service</label>
+
+                                    <input id="subservicename" name="subservicename" type="text" class="form-control"
+                                        placeholder="Enter Sub Service" value="{{ $subservice->subservicename }}" />
+                                     <p class="form-error-text" id="subservice_error" style="color: red; margin-top: 10px;"></p>
+                                </div>
+
+                                
 
                                 <div class="form-group">
 
@@ -113,14 +116,14 @@
 
                                     <div style="padding: 9px 0;">
 
-                                        <input type="radio" name="is_bookable" id="book" value="0"
+                                        <input type="radio" name="is_bookable" id="book_now" value="0"
                                             @if ($subservice->is_bookable == 0) {{ 'checked' }} @endif>
                                         Book Now
-                                        <input type="radio" name="is_bookable" id="book" value="1"
+                                        <input type="radio" name="is_bookable" id="enquiry" value="1"
                                             @if ($subservice->is_bookable == 1) {{ 'checked' }} @endif> Enquiry
                                     </div>
 
-                                    <p id="discount_type_error" style="display: none;color: red"></p>
+                                   <p class="form-error-text" id="book_error" style="color: red; margin-top: 10px;"></p>
 
                                 </div>
                                 <div class="form-group">
@@ -128,7 +131,8 @@
                                     <label for="name">Charge</label>
 
                                     <input id="charge" name="charge" type="text" class="form-control"
-                                        placeholder="Enter Charge" value="{{ $subservice->charge }}" />
+                                        placeholder="Enter Charge" value="{{ $subservice->charge }}" onkeypress="return validateNumber(event)" />
+                                    <p class="form-error-text" id="charge_error" style="color: red; margin-top: 10px;"></p>
 
                                 </div>
                                 <div class="form-group">
@@ -136,7 +140,9 @@
                                     <label for="name">No Of Inquiry</label>
 
                                     <input id="no_of_inquiry" name="no_of_inquiry" type="text" class="form-control"
-                                        placeholder="Enter No Of Inquiry" value="{{ $subservice->no_of_inquiry }}" />
+                                        placeholder="Enter No Of Inquiry" value="{{ $subservice->no_of_inquiry }}" onkeypress="return validateNumber(event)" />
+
+                                         <p class="form-error-text" id="inquiry_error" style="color: red; margin-top: 10px;"></p>
 
                                 </div>
                                 <div class="form-group">
@@ -207,6 +213,27 @@
             });
 
         });
+
+
+         function validateNumber(event) {
+
+            var key = window.event ? event.keyCode : event.which;
+
+            if (event.keyCode === 8 || event.keyCode === 46) {
+
+                return true;
+
+            } else if (key < 48 || key > 57) {
+
+                return false;
+
+            } else {
+
+                return true;
+
+            }
+
+        }
     </script>
 
 
@@ -214,34 +241,62 @@
     <script>
         function subservice_validation() {
 
-            var name = jQuery("#name").val();
-
-            if (name == '') {
-
-                jQuery('#validate').html("Please Enter subservice Name");
-
-                jQuery('#validate').show().delay(0).fadeIn('show');
-
-                jQuery('#validate').show().delay(2000).fadeOut('show');
-
+            var serviceid = jQuery("#serviceid").val();
+            if (serviceid == '') {
+                jQuery('#service_error').html("Please Select Service");
+                jQuery('#service_error').show().delay(0).fadeIn('show');
+                jQuery('#service_error').show().delay(2000).fadeOut('show');
+                $('html, body').animate({
+                    scrollTop: $('#serviceid').offset().top - 150
+                }, 1000);
                 return false;
-
             }
 
 
 
-            var page_url = jQuery("#page_url").val();
-
-            if (page_url == '') {
-
-                jQuery('#validate').html("Please Enter Page Url");
-
-                jQuery('#validate').show().delay(0).fadeIn('show');
-
-                jQuery('#validate').show().delay(2000).fadeOut('show');
-
+            var subservicename = jQuery("#subservicename").val();
+             if (subservicename == '') {
+                jQuery('#subservice_error').html("Please Enter Sub Service");
+                jQuery('#subservice_error').show().delay(0).fadeIn('show');
+                jQuery('#subservice_error').show().delay(2000).fadeOut('show');
+                $('html, body').animate({
+                    scrollTop: $('#subservicename').offset().top - 150
+                }, 1000);
                 return false;
+            } 
 
+              var bookNow = jQuery("#book_now");
+            var enquiry = jQuery("#enquiry");
+
+            if (!bookNow.is(":checked") && !enquiry.is(":checked")) {
+                jQuery('#book_error').html("Please Select Is Bookable");
+                jQuery('#book_error').show().delay(2000).fadeOut('show');
+                $('html, body').animate({
+                    scrollTop: jQuery('#book_now').offset().top - 150
+                }, 1000);
+                return false;
+            } 
+
+             var charge = jQuery("#charge").val();
+           if (charge == '') {
+                jQuery('#charge_error').html("Please Enter Charge");
+                jQuery('#charge_error').show().delay(0).fadeIn('show');
+                jQuery('#charge_error').show().delay(2000).fadeOut('show');
+                $('html, body').animate({
+                    scrollTop: $('#charge').offset().top - 150
+                }, 1000);
+                return false;
+            } 
+
+            var no_of_inquiry = jQuery("#no_of_inquiry").val();
+           if (no_of_inquiry == '') {
+                jQuery('#inquiry_error').html("Please Enter No Of Inquiry");
+                jQuery('#inquiry_error').show().delay(0).fadeIn('show');
+                jQuery('#inquiry_error').show().delay(2000).fadeOut('show');
+                $('html, body').animate({
+                    scrollTop: $('#no_of_inquiry').offset().top - 150
+                }, 1000);
+                return false;
             }
 
 

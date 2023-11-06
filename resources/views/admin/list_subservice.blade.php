@@ -201,17 +201,19 @@
 
                                                <th>Select</th>
 
-                                               <th>Service Name</th>
+                                               <th>Service</th>
 
-                                               <th>Service Id</th>
+                                               <th>Sub Service</th>
 
                                                <th>Image</th>
 
-                                               {{-- <th>Set Order</th> --}}
+                                               <!-- {{-- <th>Set Order</th> --}} -->
 
-                                               <!-- <th>mobile</th> -->
+                                               <th>Charge</th>
 
-                                               <!-- <th>Image</th> -->
+                                               <th>No Of Inquiry</th>
+
+                                               <th>Is Bookable</th>
 
                                                @if (in_array('5', $edit_perm))
                                                    <th class="text-right">Actions</th>
@@ -226,6 +228,8 @@
                                        <tbody>
 
                                            @foreach ($subservice_data as $data)
+
+                                          
                                                <tr>
 
                                                    <td><input name="selected[]" id="selected[]" value="{{ $data->id }}"
@@ -247,6 +251,33 @@
 
                                                    <td><img src="{{ url('public/upload/subservice/large/' . $data->image) }}"
                                                            width="50px" height="50px"></td>
+
+                                                      <td>
+                                                        @if($data->charge !='')
+                                                        {{ $data->charge }}
+                                                        @else
+                                                        {{ '-' }}
+                                                        @endif
+
+                                                   </td>
+                                                   <td>
+                                                     @if($data->no_of_inquiry !='')
+                                                       {{ $data->no_of_inquiry }}
+                                                        @else
+                                                        {{ '-' }}
+                                                        @endif
+
+                                                   </td>
+                                                   <td>
+                                                        @if ($data->is_bookable == 0)
+                                                            Book Now
+                                                        @elseif ($data->is_bookable == 1)
+                                                            Enquiry
+                                                        @else
+                                                            Unknown Value
+                                                        @endif
+                                                    </td>
+
 
                                                    @if (in_array('5', $edit_perm))
                                                        <td class="text-right">
