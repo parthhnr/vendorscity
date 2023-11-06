@@ -68,6 +68,14 @@
                 </li>
 
             @endif
+
+            @if (in_array('9', $permission1))
+                <li class="{{ request()->segment(2) == 'price' ? 'active' : '' }}"><a
+                        href="{{ route('price.index') }}"
+                        class="{{ request()->segment(2) == 'price' ? 'active' : '' }}">
+                        <i data-feather="credit-card"></i><span>Price</span></a>
+                </li>
+            @endif
             
             @if(Auth::user()->vendor != 1)
             @if (in_array('6', $permission1) || in_array('7', $permission1))
