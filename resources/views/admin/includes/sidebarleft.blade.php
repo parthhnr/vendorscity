@@ -73,6 +73,23 @@
             @endif
 
             @if (Auth::user()->vendor != 1)
+
+            @if (in_array('8', $permission1))
+                    <li class="{{ request()->segment(2) == 'vendors' ? 'active' : '' }}"><a
+                            href="{{ route('vendors.index') }}"
+                            class="{{ request()->segment(2) == 'vendors' ? 'active' : '' }}">
+                            <i class="fa fa-users"></i><span>Vendors</span></a>
+                    </li>
+                @endif
+
+                 @if (in_array('9', $permission1))
+                    <li class="{{ request()->segment(2) == 'price' ? 'active' : '' }}"><a
+                            href="{{ route('price.edit', 1) }}"
+                            class="{{ request()->segment(2) == 'price' ? 'active' : '' }}">
+                            <i data-feather="credit-card"></i><span>price</span></a>
+                    </li>
+                @endif
+
                 @if (in_array('6', $permission1) || in_array('7', $permission1))
                     <li class="submenu">
                         <a href="#"
@@ -98,13 +115,7 @@
                 @endif
 
 
-                @if (in_array('8', $permission1))
-                    <li class="{{ request()->segment(2) == 'vendors' ? 'active' : '' }}"><a
-                            href="{{ route('vendors.index') }}"
-                            class="{{ request()->segment(2) == 'vendors' ? 'active' : '' }}">
-                            <i class="fa fa-users"></i><span>Vendors</span></a>
-                    </li>
-                @endif
+                
 
             @endif
 

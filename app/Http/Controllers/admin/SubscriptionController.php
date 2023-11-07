@@ -153,6 +153,32 @@ class SubscriptionController extends Controller
         $data['country_data'] = DB::table('countries')->select('*')->orderBy('id','DESC')->get();
         $data['state_data'] = DB::table('states')->select('*')->orderBy('id','DESC')->get();
         $data['allcity'] = DB::table('cities')->select('*')->get();
+
+         if(request()->input('action') == 'add'){
+
+            $currentDateTime = date("Y-m-d H:i:s");
+            $end_date = date('Y-m-d H:i:s', strtotime($currentDateTime . ' +30 days'));
+
+            $data_new['vendor_id'] = Auth::user()->id;
+            $data_new['subscription_name'] = request()->input('subscription_name');
+            $data_new['subscription_id'] = request()->input('subscription_id');
+            // $data['country'] = request()->input('country');
+            // $data['state'] = request()->input('state');
+            // $data['city'] = request()->input('city');
+            // $data['services'] = implode(',', request()->input('services'));
+            // $data['sub_service'] = implode(',', request()->input('sub_service'));
+            $data_new['total'] = request()->input('total');
+            $data_new['startdate'] = $currentDateTime;
+            $data_new['enddate'] = $end_date;
+            $data_new['added_date'] = $currentDateTime;
+
+            $id = DB::table('subscription')->insertGetId($data_new);
+
+            return redirect()->route('subscription.index')->with('success','Subscription Purchased Successfully.');
+
+            //echo "<pre>";print_r($_POST);echo "</pre>";exit;
+
+         }
         
         return view('admin.based_on_booking_services',$data);
     }
@@ -161,6 +187,32 @@ class SubscriptionController extends Controller
         $data['country_data'] = DB::table('countries')->select('*')->orderBy('id','DESC')->get();
         $data['state_data'] = DB::table('states')->select('*')->orderBy('id','DESC')->get();
         $data['allcity'] = DB::table('cities')->select('*')->get();
+
+        if(request()->input('action') == 'add'){
+
+            $currentDateTime = date("Y-m-d H:i:s");
+            $end_date = date('Y-m-d H:i:s', strtotime($currentDateTime . ' +30 days'));
+
+            $data_new['vendor_id'] = Auth::user()->id;
+            $data_new['subscription_name'] = request()->input('subscription_name');
+            $data_new['subscription_id'] = request()->input('subscription_id');
+            // $data['country'] = request()->input('country');
+            // $data['state'] = request()->input('state');
+            // $data['city'] = request()->input('city');
+            // $data['services'] = implode(',', request()->input('services'));
+            // $data['sub_service'] = implode(',', request()->input('sub_service'));
+            $data_new['total'] = request()->input('total');
+            $data_new['startdate'] = $currentDateTime;
+            $data_new['enddate'] = $end_date;
+            $data_new['added_date'] = $currentDateTime;
+
+            $id = DB::table('subscription')->insertGetId($data_new);
+
+            return redirect()->route('subscription.index')->with('success','Subscription Purchased Successfully.');
+
+            //echo "<pre>";print_r($_POST);echo "</pre>";exit;
+
+         }
         
         return view('admin.based_on_listing_criteria',$data);
     }

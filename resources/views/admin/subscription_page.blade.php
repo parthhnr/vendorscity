@@ -67,20 +67,22 @@
                     </div>
                 </div>
             </div>
+
+            @php
+
+                $price_data = DB::table('prices')->select('*')->orderBy('id', 'desc')->first();
+
+                //echo "<pre>";print_r($price_data);echo "</pre>";
+
+            @endphp 
+
+            @if($price_data->based_on_booking_service_price != '')
             <div class="col-xl-4 col-sm-6 col-12 mt-2">
                 <div class="card">
                     <div class="card-body">
-                       <!--  <div class="dash-widget-header">
-                          
-                            <div class="dash-count">
-                                <div class="dash-title"><a href="{{ route('based_on_booking_services') }}">Based on Booking Services</a></div>
-                               
-                            </div>
-                        </div> -->
-
                         <div class="dash-widget-header text-center" style="display:block">
                             <div class="dash-count">
-                                <div class="dash-title"><a href="{{ route('based_on_booking_services') }}" style=" margin-bottom: 25px;display: inline-block;">Based on Booking Services</a></div>
+                                <div class="dash-title"><a href="{{ route('based_on_booking_services') }}" style=" margin-bottom: 25px;display: inline-block;">{{$price_data->based_on_booking_service_label}}</a></div>
                                 <a href="{{ route('based_on_booking_services') }}" class="btn btn-rounded btn-outline-primary">Buy Now</a>
                                 
                                 <!-- <div class="dash-counts">
@@ -91,6 +93,9 @@
                     </div>
                 </div>
             </div>
+            @endif
+
+             @if($price_data->based_on_listing_criteria_price != '')
             <div class="col-xl-4 col-sm-6 col-12 mt-2">
                 <div class="card">
                     <div class="card-body">
@@ -104,7 +109,7 @@
 
                         <div class="dash-widget-header text-center" style="display:block">
                             <div class="dash-count">
-                                <div class="dash-title"><a href="{{ route('based_on_listing_criteria') }}" style=" margin-bottom: 25px;display: inline-block;">Based on Listing Criteria</a></div>
+                                <div class="dash-title"><a href="{{ route('based_on_listing_criteria') }}" style=" margin-bottom: 25px;display: inline-block;">{{$price_data->based_on_listing_criteria_label}}</a></div>
                                 <a href="{{ route('based_on_listing_criteria') }}" class="btn btn-rounded btn-outline-primary">Buy Now</a>
                                 
                                 <!-- <div class="dash-counts">
@@ -115,6 +120,14 @@
                     </div>
                 </div>
             </div>
+            @endif
+
+            @php
+            $id = Auth::user()->id;
+            $result = DB::table('subscription')->select('*')->where('vendor_id','=',$id)->orderBy('id', 'desc')->get();
+            $result_new = $result->toArray();
+            //echo "<pre>";print_r($result_new);echo "</pre>";
+            @endphp 
 
             <div class="col-lg-12">
                             <div class="card">
@@ -123,32 +136,33 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="table-responsive">
+                                        @if(isset($result_new) && !empty($result_new))
                                         <table class="table table-striped mb-0">
                                             <thead>
                                                 <tr>
-                                                    <th>Firstname</th>
-                                                    <th>Lastname</th>
-                                                    <th>Email</th>
+                                                    <th>Subscription Name</th>
+                                                    <th>Total</th>
+                                                    <th>Start Date</th>
+                                                    <th>End Date</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
+
+                                                @foreach($result_new as $subs_data)
                                                 <tr>
-                                                    <td>John</td>
-                                                    <td>Doe</td>
-                                                    <td>john@example.com</td>
+                                                    <td>{{$subs_data->subscription_name}}</td>
+                                                    <td>{{$subs_data->total}}</td>
+                                                    <td>{{date("d-m-Y", strtotime($subs_data->startdate))}}</td>
+                                                    <td>{{date("d-m-Y", strtotime($subs_data->enddate))}}</td>
                                                 </tr>
-                                                <tr>
-                                                    <td>Mary</td>
-                                                    <td>Moe</td>
-                                                    <td>mary@example.com</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>July</td>
-                                                    <td>Dooley</td>
-                                                    <td>july@example.com</td>
-                                                </tr>
+                                                @endforeach
+                                               
                                             </tbody>
                                         </table>
+                                        @else
+                                            {{'No Data Found'}}
+
+                                        @endif
                                     </div>
                                 </div>
                             </div>
