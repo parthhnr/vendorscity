@@ -163,6 +163,8 @@ Route::get('/admin', function () {
     Route::post('subservice_table_change', 'App\Http\Controllers\admin\SubscriptionController@subservice_table_change');
 
     Route::post('base_on_service_lead',[SubscriptionController::class,'base_on_service_lead'])->name('base_on_service_lead');
+    Route::post('based_on_booking_services',[SubscriptionController::class,'based_on_booking_services'])->name('based_on_booking_services');
+    Route::post('based_on_listing_criteria',[SubscriptionController::class,'based_on_listing_criteria'])->name('based_on_listing_criteria');
 
 
     

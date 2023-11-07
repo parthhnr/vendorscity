@@ -11,7 +11,7 @@
                        <h3 class="page-title">Based on Services Leads</h3>
                        <ul class="breadcrumb">
                            <li class="breadcrumb-item"><a href="{{ url('/vendors') }}">Dashboard</a></li>
-                           <li class="breadcrumb-item"><a href="{{ route('subscription.index') }}">Based on Services Leads</a></li>
+                           <li class="breadcrumb-item"><a href="{{ route('subscription.index') }}">Subscription</a></li>
                            <li class="breadcrumb-item active">Based on Services Leads</li>
                        </ul>
                    </div>
