@@ -19,15 +19,23 @@
             }
         @endphp
 
+
+
         <ul>
             <li class="menu-title"><span>Main</span></li>
-            <li class="{{ request()->segment(1) == 'admin' && request()->segment(2) == '' ? 'active' : '' }}">
+            
                  @if(Auth::user()->vendor != 1)
-                <a href="{{ url('/admin') }}"><i data-feather="home"></i> <span>Dashboard</span></a>
-                @else
-                 <a href="{{ url('/vendors') }}"><i data-feather="home"></i> <span>Dashboard</span></a>
-                 @endif
+                 <li class="{{ request()->segment(1) == 'admin' && request()->segment(2) == ''  ? 'active' : '' }}">
+                <a href="{{ url('/admin') }}" class="{{ request()->segment(1) == 'admin'  ? 'active' : '' }}"><i data-feather="home"></i> <span>Dashboard</span></a>
             </li>
+                @else
+                <li class="{{ request()->segment(1) == 'vendors' ? 'active' : '' }}">
+                 <a href="{{ url('/vendors') }}" class="{{ request()->segment(1) == 'vendors' ? 'active' : '' }}"><i data-feather="home"></i> <span>Dashboard</span></a>
+                 </li>
+                 @endif
+            
+            @if(Auth::user()->vendor != 1)
+
             @if (in_array('1', $permission1) ||
                     in_array('2', $permission1) ||
                     in_array('3', $permission1) ||
@@ -77,7 +85,7 @@
                 </li>
             @endif
             
-            @if(Auth::user()->vendor != 1)
+            
             @if (in_array('6', $permission1) || in_array('7', $permission1))
                 <li class="submenu">
                     <a href="#"
@@ -102,6 +110,14 @@
             @endif
             @endif
 
+             @if(Auth::user()->vendor == 1)
+            <li class="{{ request()->segment(2) == 'subscription' || request()->segment(1) == 'base_on_service_lead' || request()->segment(1) == 'based_on_booking_services' || request()->segment(1) == 'based_on_listing_criteria' ? 'active' : '' }}"><a
+                        href="{{ route('subscription.index') }}"
+                        class="{{ request()->segment(2) == 'subscription' ? 'active' : '' }}">
+                        <i class="fa fa-file"></i><span>Subscription</span></a>
+                </li>
+                @endif
+
             @if (in_array('8', $permission1))
                 <li class="{{ request()->segment(2) == 'vendors' ? 'active' : '' }}"><a
                         href="{{ route('vendors.index') }}"
@@ -109,6 +125,10 @@
                         <i class="fa fa-users"></i><span>Vendors</span></a>
                 </li>
             @endif
+
+            
+                
+            
         </ul>
     </div>
 

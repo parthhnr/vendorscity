@@ -63,7 +63,7 @@
 
                             <div class="row">
 
-                                <div class="form-group">
+                                <div class="form-group" style="display:none">
                                     <label for="vendors">User Category</label>
                                     <select class="form-control" id="role_id" name="role_id" disabled>
                                         @foreach ($permission_data as $permission)
