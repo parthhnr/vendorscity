@@ -62,7 +62,7 @@
                             @csrf
 
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-6" style="display: none;">
                                     <div class="form-group">
                                         <label for="category">User Category</label>
                                         <select class="form-control" id="role_id" name="role_id" disabled>
@@ -75,13 +75,14 @@
                                         <input type="hidden" name="hidden_role_id" id="hidden_role_id" value="">
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="name">Company Name</label>
                                         <input id="name" name="name" type="text" class="form-control"
                                             placeholder="Enter Name" value="" />
 
-                                             <p class="form-error-text" id="name_error" style="color: red; margin-top: 10px;"></p>
+                                        <p class="form-error-text" id="name_error" style="color: red; margin-top: 10px;">
+                                        </p>
                                     </div>
                                 </div>
 
@@ -234,7 +235,8 @@
                                         <label for="name">Email For Login</label>
                                         <input id="email" name="email" type="text" class="form-control"
                                             placeholder="Enter Email" />
-                                        <p class="form-error-text" id="email_error" style="color: red; margin-top: 10px;"></p>
+                                        <p class="form-error-text" id="email_error"
+                                            style="color: red; margin-top: 10px;"></p>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -242,6 +244,8 @@
                                         <label for="name">Password</label>
                                         <input id="password" name="password" type="password" class="form-control"
                                             placeholder="Enter Password" />
+                                        <p class="form-error-text" id="password_error"
+                                            style="color: red; margin-top: 10px;"></p>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -249,6 +253,8 @@
                                         <label for="name">Confirm Password</label>
                                         <input id="conf_password" name="conf_password" type="password"
                                             class="form-control" placeholder="Enter Confirm Password" />
+                                        <p class="form-error-text" id="confirm_password_error"
+                                            style="color: red; margin-top: 10px;"></p>
                                     </div>
                                 </div>
 
@@ -258,6 +264,8 @@
                                         <label for="name">Company Mobile No.</label>
                                         <input id="mobile" name="mobile" type="text" class="form-control"
                                             placeholder="Enter Mobile No." onkeypress="return validateNumber(event)" />
+                                        <p class="form-error-text" id="mobile_error"
+                                            style="color: red; margin-top: 10px;"></p>
                                     </div>
                                 </div>
 
@@ -359,7 +367,7 @@
 
             var name = jQuery("#name").val();
 
-             if (name == '') {
+            if (name == '') {
                 jQuery('#name_error').html("Please Enter Company Name");
                 jQuery('#name_error').show().delay(0).fadeIn('show');
                 jQuery('#name_error').show().delay(2000).fadeOut('show');
@@ -426,7 +434,7 @@
 
             if (password == '') {
 
-                 jQuery('#password_error').html("Please  Enter Password");
+                jQuery('#password_error').html("Please  Enter Password");
                 jQuery('#password_error').show().delay(0).fadeIn('show');
                 jQuery('#password_error').show().delay(2000).fadeOut('show');
                 $('html, body').animate({
@@ -442,18 +450,12 @@
 
             if (conf_password == '') {
 
-                jQuery('#validate').html("Please Enter Confirm Password");
-
-                jQuery('#validate').show().delay(0).fadeIn('show');
-
-                jQuery('#validate').show().delay(2000).fadeOut('show');
-
+                jQuery('#confirm_password_error').html("Please  Enter Confirm-Password");
+                jQuery('#confirm_password_error').show().delay(0).fadeIn('show');
+                jQuery('#confirm_password_error').show().delay(2000).fadeOut('show');
                 $('html, body').animate({
-
-                    scrollTop: $('#validate').offset().top - 150
-
+                    scrollTop: $('#conf_password').offset().top - 150
                 }, 1000);
-
                 return false;
 
             }
@@ -462,45 +464,30 @@
 
             if (conf_password != password) {
 
-                jQuery('#validate').html("Confirm Password Doesn't Match Password");
-
-                jQuery('#validate').show().delay(0).fadeIn('show');
-
-                jQuery('#validate').show().delay(2000).fadeOut('show');
-
+                jQuery('#confirm_password_error').html("Confirm Password Doesn't Match Password");
+                jQuery('#confirm_password_error').show().delay(0).fadeIn('show');
+                jQuery('#confirm_password_error').show().delay(2000).fadeOut('show');
                 $('html, body').animate({
-
-                    scrollTop: $('#validate').offset().top - 150
-
+                    scrollTop: $('#conf_password').offset().top - 150
                 }, 1000);
-
                 return false;
 
             }
 
+            var mobile = jQuery("#mobile").val();
+            var filter = /^\d{10}$/;
 
+            if (mobile != '' && !filter.test(mobile)) {
 
+                jQuery('#mobile_error').html("Please Enter Valid Mobile");
+                jQuery('#mobile_error').show().delay(0).fadeIn('show');
+                jQuery('#mobile_error').show().delay(2000).fadeOut('show');
+                $('html, body').animate({
+                    scrollTop: $('#mobile').offset().top - 150
+                }, 1000);
+                return false;
 
-
-            // var mobile = jQuery("#mobile").val();
-
-            // if (mobile == '') {
-
-            //     jQuery('#validate').html("Please Enter Mobile");
-
-            //     jQuery('#validate').show().delay(0).fadeIn('show');
-
-            //     jQuery('#validate').show().delay(2000).fadeOut('show');
-
-            //     $('html, body').animate({
-
-            //         scrollTop: $('#validate').offset().top - 150
-
-            //     }, 1000);
-
-            //     return false;
-
-            // }
+            }
 
             $('#spinner_button').show();
 
