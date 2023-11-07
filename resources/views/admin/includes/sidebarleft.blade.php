@@ -22,76 +22,80 @@
         <ul>
             <li class="menu-title"><span>Main</span></li>
             <li class="{{ request()->segment(1) == 'admin' && request()->segment(2) == '' ? 'active' : '' }}">
-                 @if(Auth::user()->vendor != 1)
-                <a href="{{ url('/admin') }}"><i data-feather="home"></i> <span>Dashboard</span></a>
+                @if (Auth::user()->vendor != 1)
+                    <a href="{{ url('/admin') }}"><i data-feather="home"></i> <span>Dashboard</span></a>
                 @else
-                 <a href="{{ url('/vendors') }}"><i data-feather="home"></i> <span>Dashboard</span></a>
-                 @endif
+                    <a href="{{ url('/vendors') }}"><i data-feather="home"></i> <span>Dashboard</span></a>
+                @endif
             </li>
-            @if (in_array('1', $permission1) ||
-                    in_array('2', $permission1) ||
-                    in_array('3', $permission1) ||
-                    in_array('4', $permission1) ||
-                    in_array('5', $permission1))
-                <li class="submenu">
-                    <a href="#"
-                        class="{{ request()->segment(2) == 'country' || request()->segment(2) == 'state' || request()->segment(2) == 'city' || request()->segment(2) == 'service' || request()->segment(2) == 'subservice' ? 'active' : '' }}"><i
-                            data-feather="pie-chart"></i> <span> Master</span> <span class="menu-arrow"></span></a>
-                    <ul>
-                        @if (in_array('1', $permission1))
-                            <li><a href="{{ route('country.index') }}"
-                                    class="{{ request()->segment(2) == 'country' ? 'active' : '' }}">Country</a>
-                            </li>
-                        @endif
-                        @if (in_array('2', $permission1))
-                            <li><a href="{{ route('state.index') }}"
-                                    class="{{ request()->segment(2) == 'state' ? 'active' : '' }}">State</a>
-                            </li>
-                        @endif
-                        @if (in_array('3', $permission1))
-                            <li><a href="{{ route('city.index') }}"
-                                    class="{{ request()->segment(2) == 'city' ? 'active' : '' }}">City</a>
-                            </li>
-                        @endif
-                        @if (in_array('4', $permission1))
-                            <li><a href="{{ route('service.index') }}"
-                                    class="{{ request()->segment(2) == 'service' ? 'active' : '' }}">Service</a>
-                            </li>
-                        @endif
-                        @if (in_array('5', $permission1))
-                            <li><a href="{{ route('subservice.index') }}"
-                                    class="{{ request()->segment(2) == 'subservice' ? 'active' : '' }}">Sub Service</a>
-                            </li>
-                        @endif
+            @if (Auth::user()->vendor != 1)
+                @if (in_array('1', $permission1) ||
+                        in_array('2', $permission1) ||
+                        in_array('3', $permission1) ||
+                        in_array('4', $permission1) ||
+                        in_array('5', $permission1))
+                    <li class="submenu">
+                        <a href="#"
+                            class="{{ request()->segment(2) == 'country' || request()->segment(2) == 'state' || request()->segment(2) == 'city' || request()->segment(2) == 'service' || request()->segment(2) == 'subservice' ? 'active' : '' }}"><i
+                                data-feather="pie-chart"></i> <span> Master</span> <span class="menu-arrow"></span></a>
+                        <ul>
+                            @if (in_array('1', $permission1))
+                                <li><a href="{{ route('country.index') }}"
+                                        class="{{ request()->segment(2) == 'country' ? 'active' : '' }}">Country</a>
+                                </li>
+                            @endif
+                            @if (in_array('2', $permission1))
+                                <li><a href="{{ route('state.index') }}"
+                                        class="{{ request()->segment(2) == 'state' ? 'active' : '' }}">State</a>
+                                </li>
+                            @endif
+                            @if (in_array('3', $permission1))
+                                <li><a href="{{ route('city.index') }}"
+                                        class="{{ request()->segment(2) == 'city' ? 'active' : '' }}">City</a>
+                                </li>
+                            @endif
+                            @if (in_array('4', $permission1))
+                                <li><a href="{{ route('service.index') }}"
+                                        class="{{ request()->segment(2) == 'service' ? 'active' : '' }}">Service</a>
+                                </li>
+                            @endif
+                            @if (in_array('5', $permission1))
+                                <li><a href="{{ route('subservice.index') }}"
+                                        class="{{ request()->segment(2) == 'subservice' ? 'active' : '' }}">Sub
+                                        Service</a>
+                                </li>
+                            @endif
 
-                    </ul>
-                </li>
+                        </ul>
+                    </li>
 
+                @endif
             @endif
-            
-            @if(Auth::user()->vendor != 1)
-            @if (in_array('6', $permission1) || in_array('7', $permission1))
-                <li class="submenu">
-                    <a href="#"
-                        class="{{ request()->segment(2) == 'userpermission' || request()->segment(2) == 'adminuser' ? 'active' : '' }}"><i
-                            data-feather="user"></i> <span> User Management</span> <span class="menu-arrow"></span>
-                    </a>
-                    <ul>
-                        @if (in_array('6', $permission1))
-                            <li class="{{ request()->segment(2) == 'userpermission' ? 'active' : '' }}">
-                                <a href="{{ route('userpermission.index') }}">
-                                    <i class="fa fa-hand-o-up"></i> User Permission
-                                </a>
-                            </li>
-                        @endif
-                        @if (in_array('7', $permission1))
-                            <li class="{{ request()->segment(2) == 'adminuser' ? 'active' : '' }}">
-                                <a href="{{ route('adminuser.index') }}"><i data-feather="lock"></i> Admin User </a>
-                            </li>
-                        @endif
-                    </ul>
-                </li>
-            @endif
+
+            @if (Auth::user()->vendor != 1)
+                @if (in_array('6', $permission1) || in_array('7', $permission1))
+                    <li class="submenu">
+                        <a href="#"
+                            class="{{ request()->segment(2) == 'userpermission' || request()->segment(2) == 'adminuser' ? 'active' : '' }}"><i
+                                data-feather="user"></i> <span> User Management</span> <span class="menu-arrow"></span>
+                        </a>
+                        <ul>
+                            @if (in_array('6', $permission1))
+                                <li class="{{ request()->segment(2) == 'userpermission' ? 'active' : '' }}">
+                                    <a href="{{ route('userpermission.index') }}">
+                                        <i class="fa fa-hand-o-up"></i> User Permission
+                                    </a>
+                                </li>
+                            @endif
+                            @if (in_array('7', $permission1))
+                                <li class="{{ request()->segment(2) == 'adminuser' ? 'active' : '' }}">
+                                    <a href="{{ route('adminuser.index') }}"><i data-feather="lock"></i> Admin User
+                                    </a>
+                                </li>
+                            @endif
+                        </ul>
+                    </li>
+                @endif
             @endif
 
             @if (in_array('8', $permission1))
@@ -101,6 +105,15 @@
                         <i class="fa fa-users"></i><span>Vendors</span></a>
                 </li>
             @endif
+
+            @if (Auth::user()->vendor == 1)
+                <li class="{{ request()->segment(2) == 'vendorsprofile' ? 'active' : '' }}"><a
+                        href="{{ route('vendorsprofile.index') }}"
+                        class="{{ request()->segment(2) == 'vendorsprofile' ? 'active' : '' }}">
+                        <i class="fa fa-users"></i><span>Profile</span></a>
+                </li>
+            @endif
+
         </ul>
     </div>
 

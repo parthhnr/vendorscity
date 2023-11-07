@@ -23,6 +23,7 @@ use App\Http\Controllers\admin\CityController;
 use App\Http\Controllers\admin\ServiceController;
 use App\Http\Controllers\admin\SubserviceController;
 use App\Http\Controllers\admin\VendorsController;
+use App\Http\Controllers\admin\VendorsProfileController;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -138,7 +139,8 @@ Route::get('/admin', function () {
     Route::get('remove_vendors_att/{pid}/{id}', [VendorsController::class, 'remove_vendors_att'])->name('remove_vendors_att'); 
     Route::post('change_status_vendors','App\Http\Controllers\admin\VendorsController@change_status_vendors');
 
-    
+    Route::resource('vendorsprofile','App\Http\Controllers\admin\VendorsProfileController');
+    Route::get('remove_vendorsprofile_att/{pid}/{id}', [VendorsProfileController::class, 'remove_vendorsprofile_att'])->name('remove_vendorsprofile_att');
     
 
 });

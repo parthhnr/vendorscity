@@ -14,15 +14,15 @@
 
                 <div class="col-sm-12">
 
-                    <h3 class="page-title">Edit User</h3>
+                    <h3 class="page-title">Edit Vendors</h3>
 
                     <ul class="breadcrumb">
 
                         <li class="breadcrumb-item"><a href="{{ url('/admin') }}">Dashboard</a></li>
 
-                        <li class="breadcrumb-item"><a href="{{ route('vendors.index') }}">User</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('vendors.index') }}">Vendors</a></li>
 
-                        <li class="breadcrumb-item active">Edit User</li>
+                        <li class="breadcrumb-item active">Edit Vendors</li>
 
                     </ul>
 
