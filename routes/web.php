@@ -147,7 +147,7 @@ Route::get('/admin', function () {
 
     Route::resource('vendorsprofile','App\Http\Controllers\admin\VendorsProfileController');
     Route::get('remove_vendorsprofile_att/{pid}/{id}', [VendorsProfileController::class, 'remove_vendorsprofile_att'])->name('remove_vendorsprofile_att');
-=======
+
 
     Route::resource('admin/price','App\Http\Controllers\admin\Pricecontroller');  
     Route::get('delete_price',[Pricecontroller::class,'destroy'])->name('delete_price');
