@@ -23,8 +23,12 @@ use App\Http\Controllers\admin\CityController;
 use App\Http\Controllers\admin\ServiceController;
 use App\Http\Controllers\admin\SubserviceController;
 use App\Http\Controllers\admin\VendorsController;
+
+use App\Http\Controllers\admin\VendorsProfileController;
+
 use App\Http\Controllers\admin\Pricecontroller;
 use App\Http\Controllers\admin\SubscriptionController;
+
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -141,6 +145,10 @@ Route::get('/admin', function () {
     Route::post('change_status_vendors','App\Http\Controllers\admin\VendorsController@change_status_vendors');
 
 
+    Route::resource('vendorsprofile','App\Http\Controllers\admin\VendorsProfileController');
+    Route::get('remove_vendorsprofile_att/{pid}/{id}', [VendorsProfileController::class, 'remove_vendorsprofile_att'])->name('remove_vendorsprofile_att');
+=======
+
     Route::resource('admin/price','App\Http\Controllers\admin\Pricecontroller');  
     Route::get('delete_price',[Pricecontroller::class,'destroy'])->name('delete_price');
 
@@ -158,6 +166,7 @@ Route::get('/admin', function () {
 
 
     
+
     
 
 });
