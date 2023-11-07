@@ -130,7 +130,7 @@
                 <li class="{{ request()->segment(2) == 'vendorsprofile' ? 'active' : '' }}"><a
                         href="{{ route('vendorsprofile.index') }}"
                         class="{{ request()->segment(2) == 'vendorsprofile' ? 'active' : '' }}">
-                        <i class="fa fa-users"></i><span>Profile</span></a>
+                        <i class="fa fa-user-plus"></i><span>Profile</span></a>
                 </li>
             @endif
 

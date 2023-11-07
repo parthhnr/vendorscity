@@ -33,30 +33,13 @@
                    <!-- /Page Header -->
 
                    <div class="profile-cover">
-                       <!-- <div class="profile-cover-wrap">
-                                            <img class="profile-cover-img" src="assets/img/profiles/avatar-02.jpg" alt="Profile Cover"> -->
 
-                       <!-- Custom File Cover -->
-                       <!-- <div class="cover-content">
-                                                <div class="custom-file-btn">
-                                                    <input type="file" class="custom-file-btn-input" id="cover_upload">
-                                                    <label class="custom-file-btn-label btn btn-sm btn-white" for="cover_upload">
-                                                        <i class="fas fa-camera"></i>
-                                                        <span class="d-none d-sm-inline-block ms-1">Update Cover</span>
-                                                    </label>
-                                                </div>
-                                            </div> -->
-                       <!-- /Custom File Cover -->
-                       <!-- </div> -->
                    </div>
 
                    <div class="text-center mb-5">
                        <label class="avatar avatar-xxl profile-cover-avatar" for="avatar_upload">
                            <img class="avatar-img" src="{{ asset('public/upload/no-image.jpg') }}" alt="Profile Image">
-                           <!-- <input type="file" id="avatar_upload">
-                                            <span class="avatar-edit">
-                                                <i data-feather="edit-2" class="avatar-uploader-icon shadow-soft"></i>
-                                            </span> -->
+
                        </label>
                        <h2>{{ Auth::user()->name }} <i class="fas fa-certificate text-primary small" data-toggle="tooltip"
                                data-placement="top" title="" data-original-title="Verified"></i></h2>
@@ -69,26 +52,13 @@
                                    <i class="fa-solid fa-mobile"></i>{{ Auth::user()->mobile }}
                                </li>
                            @endif
-                           <!--  <li class="list-inline-item">
-                                                <i class="far fa-calendar-alt"></i> <span>Joined November 2017</span>
-                                            </li> -->
+
                        </ul>
                    </div>
 
                    <div class="row">
                        <div class="col-lg-12">
-                           <!-- <div class="card card-body">
-                                                <h5>Complete your profile</h5> -->
 
-                           <!-- Progress -->
-                           <!-- <div class="d-flex justify-content-between align-items-center">
-                                                    <div class="progress progress-md flex-grow-1">
-                                                        <div class="progress-bar bg-primary" role="progressbar" style="width: 30%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
-                                                    </div>
-                                                    <span class="ms-4">30%</span>
-                                                </div> -->
-                           <!-- /Progress -->
-                           <!-- </div> -->
 
                            @php
                                $addmore = DB::table('vendors_attribute')
@@ -124,7 +94,13 @@
                                                        <small class="text-dark">POC Full</small>
                                                    </li>
                                                    <li class="pb-2">
-                                                       {{ $addmore->poc }}
+                                                       @if ($addmore && $addmore->poc !== null)
+                                                           {{ $addmore->poc }}
+                                                       @else
+                                                           {{ '-' }}
+                                                       @endif
+
+
                                                    </li>
                                                </div>
                                                <div class="col-lg-3">
@@ -132,15 +108,24 @@
                                                        <small class="text-dark">POC Title</small>
                                                    </li>
                                                    <li class="pb-2">
-                                                       {{ $addmore->poctitle }}
+                                                       @if ($addmore && $addmore->poctitle !== null)
+                                                           {{ $addmore->poctitle }}
+                                                       @else
+                                                           {{ '-' }}
+                                                       @endif
                                                    </li>
                                                </div>
                                                <div class="col-lg-3">
                                                    <li class="pt-2 pb-0">
-                                                       <small class="text-dark">Company Email</small>
+                                                       <small class="text-dark">Company
+                                                           Email</small>
                                                    </li>
                                                    <li class="pb-2">
-                                                       {{ $addmore->c_email }}
+                                                       @if ($addmore && $addmore->c_email !== null)
+                                                           {{ $addmore->c_email }}
+                                                       @else
+                                                           {{ '-' }}
+                                                       @endif
                                                    </li>
                                                </div>
                                                <div class="col-lg-3">
@@ -148,7 +133,11 @@
                                                        <small class="text-dark">Company Telephone</small>
                                                    </li>
                                                    <li class="pb-2">
-                                                       {{ $addmore->telephone }}
+                                                       @if ($addmore && $addmore->telephone !== null)
+                                                           {{ $addmore->telephone }}
+                                                       @else
+                                                           {{ '-' }}
+                                                       @endif
                                                    </li>
                                                </div>
                                            </div>
@@ -302,53 +291,7 @@
 
                        </div>
 
-                       <!-- <div class="col-lg-8">
-                                            <div class="card">
-                                                <div class="card-header">
-                                                    <h5 class="card-title">Activity</h5>
-                                                </div>
-                                                <div class="card-body card-body-height">
-                                                    <ul class="activity-feed">
-                                                        <li class="feed-item">
-                                                            <div class="feed-date">Nov 16</div>
-                                                            <span class="feed-text"><a href="profile.html">Brian Johnson</a> has paid the invoice <a href="view-invoice.html">"#DF65485"</a></span>
-                                                        </li>
-                                                        <li class="feed-item">
-                                                            <div class="feed-date">Nov 7</div>
-                                                            <span class="feed-text"><a href="profile.html">Marie Canales</a>  has accepted your estimate <a href="view-estimate.html">#GTR458789</a></span>
-                                                        </li>
-                                                        <li class="feed-item">
-                                                            <div class="feed-date">Oct 24</div>
-                                                            <span class="feed-text">New expenses added <a href="expenses.html">"#TR018756</a></span>
-                                                        </li>
-                                                        <li class="feed-item">
-                                                            <div class="feed-date">Oct 24</div>
-                                                            <span class="feed-text">New expenses added <a href="expenses.html">"#TR018756</a></span>
-                                                        </li>
-                                                        <li class="feed-item">
-                                                            <div class="feed-date">Oct 24</div>
-                                                            <span class="feed-text">New expenses added <a href="expenses.html">"#TR018756</a></span>
-                                                        </li>
-                                                        <li class="feed-item">
-                                                            <div class="feed-date">Oct 24</div>
-                                                            <span class="feed-text">New expenses added <a href="expenses.html">"#TR018756</a></span>
-                                                        </li>
-                                                        <li class="feed-item">
-                                                            <div class="feed-date">Oct 24</div>
-                                                            <span class="feed-text">New expenses added <a href="expenses.html">"#TR018756</a></span>
-                                                        </li>
-                                                        <li class="feed-item">
-                                                            <div class="feed-date">Jan 27</div>
-                                                            <span class="feed-text"><a href="profile.html">Robert Martin</a> gave a review for <a href="product-details.html">"Dell Laptop"</a></span>
-                                                        </li>
-                                                        <li class="feed-item">
-                                                            <div class="feed-date">Jan 14</div>
-                                                            <span class="feed-text">New customer registered <a href="profile.html">"Tori Carter"</a></span>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div> -->
+
                    </div>
                </div>
            </div>
@@ -358,7 +301,7 @@
        <!-- /Page Wrapper -->
 
        </div>
-       <!--  <!-- /Main Wrapper -->
+       <!--  /Main Wrapper -->
 
        <!-- jQuery -->
        <script src="assets/js/jquery-3.6.0.min.js"></script>
