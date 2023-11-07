@@ -34,9 +34,13 @@
                        <div class="card-body">
 
                            <!-- Form -->
-                           <form>
+                           <form id="category_form" action="{{ route('vendorsprofile.update', $vendorsprofile->id) }}"
+                               method="POST" enctype="multipart/form-data">
+                               @csrf
+
+                               @method('PUT')
                                <div class="row form-group">
-                                   <label for="name" class="col-sm-3 col-form-label input-label">Name</label>
+                                   <label for="name" class="col-sm-3 col-form-label input-label">Image</label>
                                    <div class="col-sm-9">
                                        <div class="d-flex align-items-center">
                                            <label class="avatar avatar-xxl profile-cover-avatar m-0" for="edit_img">
@@ -50,13 +54,34 @@
                                        </div>
                                    </div>
                                </div>
+
+                               <div class="form-group" style="display: none;">
+                                   <label for="vendors">User Category</label>
+                                   <select class="form-control" id="role_id" name="role_id">
+                                       @foreach ($permission_data as $permission)
+                                           <option value="{{ $permission->id }}" <?php if ($permission->id == $vendorsprofile->name) {
+                                               echo 'selected';
+                                           } ?>>
+                                               {{ $permission->cname }}</option>
+                                       @endforeach
+                                   </select>
+                                   <input type="hidden" name="hidden_role_id" id="hidden_role_id" value="">
+
+                               </div>
+
                                <div class="row form-group">
                                    <label for="name" class="col-sm-3 col-form-label input-label">Company
                                        Name</label>
                                    <div class="col-sm-9">
-                                       <input type="text" class="form-control" id="name" placeholder="Your Name"
-                                           value="{{ $vendorsprofile->name }}">
+                                       <input type="text" class="form-control" id="name" name="name"
+                                           placeholder="Company Name" value="{{ $vendorsprofile->name }}">
+                                       <p class="form-error-text" id="name_error" style="color: red; margin-top: 10px;"></p>
                                    </div>
+
+                               </div>
+                               <div class="form-group">
+                                   <input id="user_name" name="user_name" type="hidden" class="form-control"
+                                       placeholder="Enter  Name" value="{{ $vendorsprofile->user_name }}" />
                                </div>
 
 
@@ -160,11 +185,160 @@
                                    </div>
                                </div>
 
+                               <div class="row form-group">
+                                   <label for="name" class="col-sm-3 col-form-label input-label">Company
+                                       Website</label>
+                                   <div class="col-sm-9">
+                                       <input type="text" class="form-control" id="companywebsite"
+                                           name="companywebsite" placeholder="Company Website"
+                                           value="{{ $vendorsprofile->companywebsite }}">
+                                   </div>
+                               </div>
+                               <div class="row form-group">
+                                   <label for="name" class="col-sm-3 col-form-label input-label">Company City</label>
+                                   <div class="col-sm-9">
+                                       <select class="form-control" id="city" name="city">
+                                           @foreach ($city_data as $city)
+                                               <option value="{{ $city->id }}" <?php if ($city->id == $vendorsprofile->city) {
+                                                   echo 'selected';
+                                               } ?>>
+                                                   {{ $city->name }}</option>
+                                           @endforeach
+                                       </select>
+                                   </div>
+                               </div>
+                               <div class="row form-group">
+                                   <label for="name" class="col-sm-3 col-form-label input-label">Company Role</label>
+                                   <div class="col-sm-9">
+                                       <input type="text" class="form-control" id="crole" name="crole"
+                                           placeholder="Company Role" value="{{ $vendorsprofile->crole }}">
+                                   </div>
+                               </div>
+                               <div class="row form-group">
+                                   <label for="name" class="col-sm-3 col-form-label input-label">Parent Company
+                                       Name</label>
+                                   <div class="col-sm-9">
+                                       <input type="text" class="form-control" id="parentcname" name="parentcname"
+                                           placeholder="Parent Company Name" value="{{ $vendorsprofile->parentcname }}">
+                                   </div>
+                               </div>
+                               <div class="row form-group">
+                                   <label for="name" class="col-sm-3 col-form-label input-label">Establishment
+                                       Date</label>
+                                   <div class="col-sm-9">
+                                       <input type="date" class="form-control" id="establishment_date"
+                                           name="establishment_date" placeholder="Select Establishment Date"
+                                           value="{{ $vendorsprofile->establishment_date }}">
+                                   </div>
+                               </div>
+                               <div class="row form-group">
+                                   <label for="name" class="col-sm-3 col-form-label input-label">VAT
+                                       Certificate</label>
+                                   <div class="col-sm-9">
+                                       <input id="vatcertificate" name="vatcertificate" type="file"
+                                           class="form-control" placeholder="Select VAT Certificate" />
+                                       @if ($vendorsprofile->vatcertificate != '')
+                                           <img src="{{ asset('public/upload/vendors/' . $vendorsprofile->vatcertificate) }}"
+                                               style="width: 5%;margin-top: 10px;" />
+                                       @endif
+                                   </div>
+                               </div>
+
+                               <div class="row form-group">
+                                   <label for="name" class="col-sm-3 col-form-label input-label">TRN
+                                       Certificate</label>
+                                   <div class="col-sm-9">
+                                       <input id="trncertificate" name="trncertificate" type="file"
+                                           class="form-control" placeholder="Select TRN Certificate" />
+                                       @if ($vendorsprofile->trncertificate != '')
+                                           <img src="{{ asset('public/upload/vendors/' . $vendorsprofile->trncertificate) }}"
+                                               style="width: 5%;margin-top: 10px;" />
+                                       @endif
+                                   </div>
+                               </div>
+
+                               <div class="row form-group">
+                                   <label for="name" class="col-sm-3 col-form-label input-label">Trade License</label>
+                                   <div class="col-sm-9">
+                                       <input id="tradelicense" name="tradelicense" type="file" class="form-control"
+                                           placeholder="Select Trade License" />
+                                       @if ($vendorsprofile->tradelicense != '')
+                                           <img src="{{ asset('public/upload/vendors/' . $vendorsprofile->tradelicense) }}"
+                                               style="width: 5%;margin-top: 10px;" />
+                                       @endif
+                                   </div>
+                               </div>
+
+                               <div class="row form-group">
+                                   <label for="name" class="col-sm-3 col-form-label input-label">TL expiry
+                                       date</label>
+                                   <div class="col-sm-9">
+                                       <input type="date" class="form-control" id="tlexpiry" name="tlexpiry"
+                                           placeholder="Select TL expiry date" value="{{ $vendorsprofile->tlexpiry }}">
+                                   </div>
+                               </div>
+                               <div class="row form-group">
+                                   @php $maxStaff = 20; @endphp
+                                   <label for="name" class="col-sm-3 col-form-label input-label">No Of Staff</label>
+                                   <div class="col-sm-9">
+                                       <select class="form-control" id="staff" name="staff">
+                                           <option value="">Select No Of Staff</option>
+                                           @for ($i = 1; $i <= $maxStaff; $i++)
+                                               <option value="{{ $i }}"
+                                                   @if ($i == $vendorsprofile->staff) selected @endif>
+                                                   {{ $i }}
+                                               </option>
+                                           @endfor
+                                       </select>
+                                   </div>
+                               </div>
+
+                               <div class="row form-group">
+                                   <label for="name" class="col-sm-3 col-form-label input-label">Remarks</label>
+                                   <div class="col-sm-9">
+                                       <input type="text" class="form-control" id="remarks" name="remarks"
+                                           placeholder="Enter Remarks" value="{{ $vendorsprofile->remarks }}">
+                                   </div>
+                               </div>
+                               <div class="row form-group">
+                                   <label for="name" class="col-sm-3 col-form-label input-label">Social Media</label>
+                                   <div class="col-sm-9">
+                                       <input type="text" class="form-control" id="socialmedai" name="socialmedai"
+                                           placeholder="Enter Social Media" value="{{ $vendorsprofile->socialmedai }}">
+                                   </div>
+                               </div>
+
+                               <div class="row form-group">
+                                   <label for="name" class="col-sm-3 col-form-label input-label">Email for
+                                       Login</label>
+                                   <div class="col-sm-9">
+                                       <input type="text" class="form-control" id="email" name="email"
+                                           placeholder="Enter Email for Login" value="{{ $vendorsprofile->email }}">
+                                       <p class="form-error-text" id="email_error" style="color: red; margin-top: 10px;">
+                                       </p>
+                                   </div>
+
+                               </div>
+
+                               <div class="row form-group">
+                                   <label for="name" class="col-sm-3 col-form-label input-label">Mobile No.</label>
+                                   <div class="col-sm-9">
+                                       <input type="text" class="form-control" id="mobile" name="mobile"
+                                           placeholder="Enter Enter Mobile No." value="{{ $vendorsprofile->mobile }}">
+
+                                       <p class="form-error-text" id="mobile_error"
+                                           style="color: red; margin-top: 10px;"></p>
+                                   </div>
+                               </div>
+
+
 
 
 
                                <div class="text-end">
-                                   <button type="submit" class="btn btn-primary">Update</button>
+                                   {{-- <button type="submit" class="btn btn-primary">Update</button> --}}
+                                   <button type="button" class="btn btn-primary"
+                                       onclick="javascript:category_validation()" id="submit_button">Submit</button>
                                </div>
                            </form>
                            <!-- /Form -->
@@ -244,4 +418,109 @@
                })
 
            });
+       </script>
+       <script>
+           $(document).ready(function() {
+               var role_id = jQuery("#role_id").val();
+
+               $("#hidden_role_id").val(role_id);
+           });
+
+
+
+           $(function() {
+
+               $("#name").keyup(function() {
+
+                   var Text = $(this).val();
+
+                   Text = Text.toLowerCase();
+
+                   Text = Text.replace(/[^a-zA-Z0-9]+/g, ' ');
+
+                   $("#user_name").val(Text);
+
+               });
+
+           });
+
+
+           function category_validation() {
+
+               $(document).ready(function() {
+                   var role_id = jQuery("#role_id").val();
+
+                   $("#hidden_role_id").val(role_id);
+               });
+
+
+
+
+
+               var name = jQuery("#name").val();
+
+               if (name == '') {
+
+                   jQuery('#name_error').html("Please Enter Company Name");
+                   jQuery('#name_error').show().delay(0).fadeIn('show');
+                   jQuery('#name_error').show().delay(2000).fadeOut('show');
+                   $('html, body').animate({
+                       scrollTop: $('#name').offset().top - 150
+                   }, 1000);
+                   return false;
+
+               }
+
+               var email = jQuery("#email").val();
+
+               if (email == '') {
+
+                   jQuery('#email_error').html("Please Enter Email for Login");
+                   jQuery('#email_error').show().delay(0).fadeIn('show');
+                   jQuery('#email_error').show().delay(2000).fadeOut('show');
+                   $('html, body').animate({
+                       scrollTop: $('#email').offset().top - 150
+                   }, 1000);
+                   return false;
+
+               }
+
+
+
+               var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+
+               if (!filter.test(email)) {
+
+                   jQuery('#email_error').html("Please Enter Valid Email for Login");
+                   jQuery('#email_error').show().delay(0).fadeIn('show');
+                   jQuery('#email_error').show().delay(2000).fadeOut('show');
+                   $('html, body').animate({
+                       scrollTop: $('#email').offset().top - 150
+                   }, 1000);
+                   return false;
+
+               }
+
+               var mobile = jQuery("#mobile").val();
+               var filter = /^\d{10}$/;
+
+               if (mobile != '' && !filter.test(mobile)) {
+
+                   jQuery('#mobile_error').html("Please Enter Valid Mobile");
+                   jQuery('#mobile_error').show().delay(0).fadeIn('show');
+                   jQuery('#mobile_error').show().delay(2000).fadeOut('show');
+                   $('html, body').animate({
+                       scrollTop: $('#mobile').offset().top - 150
+                   }, 1000);
+                   return false;
+
+               }
+
+               $('#spinner_button').show();
+
+               $('#submit_button').hide();
+
+               $('#category_form').submit();
+
+           }
        </script>

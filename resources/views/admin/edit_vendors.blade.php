@@ -82,6 +82,7 @@
                                     <label for="name">Company Name</label>
                                     <input id="name" name="name" type="text" class="form-control"
                                         placeholder="Enter Name" value="{{ $vendors->name }}" />
+                                    <p class="form-error-text" id="name_error" style="color: red; margin-top: 10px;"></p>
                                 </div>
 
 
@@ -362,6 +363,26 @@
             $("#hidden_role_id").val(role_id);
         });
 
+
+
+        $(function() {
+
+            $("#name").keyup(function() {
+
+                var Text = $(this).val();
+
+                Text = Text.toLowerCase();
+
+                Text = Text.replace(/[^a-zA-Z0-9]+/g, ' ');
+
+                $("#user_name").val(Text);
+
+            });
+
+        });
+
+
+
         function category_validation() {
 
             $(document).ready(function() {
@@ -370,22 +391,16 @@
                 $("#hidden_role_id").val(role_id);
             });
 
-            var select = jQuery("#select").val();
+            var name = jQuery("#name").val();
 
-            if (select == '') {
+            if (name == '') {
 
-                jQuery('#validate').html("Please Select User Category");
-
-                jQuery('#validate').show().delay(0).fadeIn('show');
-
-                jQuery('#validate').show().delay(2000).fadeOut('show');
-
+                jQuery('#name_error').html("Please Enter Company Name");
+                jQuery('#name_error').show().delay(0).fadeIn('show');
+                jQuery('#name_error').show().delay(2000).fadeOut('show');
                 $('html, body').animate({
-
-                    scrollTop: $('#validate').offset().top - 150
-
+                    scrollTop: $('#name').offset().top - 150
                 }, 1000);
-
                 return false;
 
             }
