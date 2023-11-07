@@ -27,6 +27,8 @@
 
         <script src="{{ asset('public/admin/assets/js/script.js') }}"></script>
 
+        
+
         </body>
 
         </html>

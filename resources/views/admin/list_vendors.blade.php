@@ -20,7 +20,6 @@
 
     @endphp
 
-
 <style type="text/css">
 
 body {
@@ -298,20 +297,9 @@ input[type="checkbox"]:checked + .slider:before {
                                                             {{ $vendors_data[$i]->mobile }}
                                                         @endif
                                                 </td>
-                                                <!-- <td>
-                                                    <div class="form-group">
-                                                        <select class="form-select" name="is_active" id="is_active"
-                                                            onchange="fun_status('{{ $vendors_data[$i]->id }}',this.value);return false;">
-                                                            <option value="0"
-                                                                {{ $vendors_data[$i]->is_active == 0 ? 'selecetd' : '' }}>Active
-                                                            </option>
-                                                            <option value="1"
-                                                                {{ $vendors_data[$i]->is_active == 1 ? 'selected' : '' }}>Inactive
-                                                            </option>
-                                                        </select>
-                                                    </div>
-                                                </td> -->
 
+
+                                          
                                                 <td>
                                                     <div class="form-group">
                                                         <label class="toggle">

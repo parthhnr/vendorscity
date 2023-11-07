@@ -24,6 +24,7 @@ use App\Http\Controllers\admin\ServiceController;
 use App\Http\Controllers\admin\SubserviceController;
 use App\Http\Controllers\admin\VendorsController;
 use App\Http\Controllers\admin\Pricecontroller;
+use App\Http\Controllers\admin\SubscriptionController;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -142,6 +143,19 @@ Route::get('/admin', function () {
 
     Route::resource('admin/price','App\Http\Controllers\admin\Pricecontroller');  
     Route::get('delete_price',[Pricecontroller::class,'destroy'])->name('delete_price');
+
+    Route::resource('admin/subscription','App\Http\Controllers\admin\SubscriptionController');
+    Route::get('base_on_service_lead',[SubscriptionController::class,'base_on_service_lead'])->name('base_on_service_lead');
+    Route::get('based_on_booking_services',[SubscriptionController::class,'based_on_booking_services'])->name('based_on_booking_services');
+    Route::get('based_on_listing_criteria',[SubscriptionController::class,'based_on_listing_criteria'])->name('based_on_listing_criteria');
+
+    Route::post('state_show_subscription', 'App\Http\Controllers\admin\SubscriptionController@state_show_subscription');
+    Route::post('city_show', 'App\Http\Controllers\admin\SubscriptionController@city_show');
+    Route::post('subservice_change', 'App\Http\Controllers\admin\SubscriptionController@subservice_change');
+    Route::post('subservice_table_change', 'App\Http\Controllers\admin\SubscriptionController@subservice_table_change');
+
+    Route::post('base_on_service_lead',[SubscriptionController::class,'base_on_service_lead'])->name('base_on_service_lead');
+
 
     
     
