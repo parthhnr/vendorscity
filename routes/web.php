@@ -167,6 +167,9 @@ Route::get('/admin', function () {
     Route::post('based_on_listing_criteria',[SubscriptionController::class,'based_on_listing_criteria'])->name('based_on_listing_criteria');
 
     Route::resource('admin/subscription-details','App\Http\Controllers\admin\Subscriptiondetails_controller');
+
+    Route::post('vendor_check_mail', 'App\Http\Controllers\admin\VendorsController@vendor_check_mail');
+    Route::post('vendor_edit_check_mail', 'App\Http\Controllers\admin\VendorsController@vendor_edit_check_mail');
     
 
     

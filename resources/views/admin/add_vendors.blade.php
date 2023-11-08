@@ -378,27 +378,6 @@
                 return false;
             }
 
-
-
-            var user_name = jQuery("#user_name").val();
-
-            if (user_name == '') {
-
-                jQuery('#validate').html("Please Enter User Name");
-
-                jQuery('#validate').show().delay(0).fadeIn('show');
-
-                jQuery('#validate').show().delay(2000).fadeOut('show');
-
-                $('html, body').animate({
-
-                    scrollTop: $('#validate').offset().top - 150
-
-                }, 1000);
-
-                return false;
-
-            }
             var email = jQuery("#email").val();
 
             if (email == '') {
@@ -427,74 +406,101 @@
 
             }
 
+           var url = '{{ url('vendor_check_mail') }}';
+
+           $.ajax({
+               url: url,
+               type: 'post',
+               data: {
+                   "_token": "{{ csrf_token() }}",
+                   "email": email
+               },
+               success: function(msg) {
+                   if(msg == 1){
+                        jQuery('#email_error').html("Email Address Already Exists");
+                        jQuery('#email_error').show().delay(0).fadeIn('show');
+                        jQuery('#email_error').show().delay(2000).fadeOut('show');
+                        $('html, body').animate({
+                            scrollTop: $('#email').offset().top - 150
+                        }, 1000);
+                        return false;
+
+                   }else{
+
+                        var password = jQuery("#password").val();
+
+                        if (password == '') {
+
+                            jQuery('#password_error').html("Please  Enter Password");
+                            jQuery('#password_error').show().delay(0).fadeIn('show');
+                            jQuery('#password_error').show().delay(2000).fadeOut('show');
+                            $('html, body').animate({
+                                scrollTop: $('#password').offset().top - 150
+                            }, 1000);
+                            return false;
+
+                        }
+
+
+
+                        var conf_password = jQuery("#conf_password").val();
+
+                        if (conf_password == '') {
+
+                            jQuery('#confirm_password_error').html("Please  Enter Confirm-Password");
+                            jQuery('#confirm_password_error').show().delay(0).fadeIn('show');
+                            jQuery('#confirm_password_error').show().delay(2000).fadeOut('show');
+                            $('html, body').animate({
+                                scrollTop: $('#conf_password').offset().top - 150
+                            }, 1000);
+                            return false;
+
+                        }
+
+
+
+                        if (conf_password != password) {
+
+                            jQuery('#confirm_password_error').html("Confirm Password Doesn't Match Password");
+                            jQuery('#confirm_password_error').show().delay(0).fadeIn('show');
+                            jQuery('#confirm_password_error').show().delay(2000).fadeOut('show');
+                            $('html, body').animate({
+                                scrollTop: $('#conf_password').offset().top - 150
+                            }, 1000);
+                            return false;
+
+                        }
+
+                        var mobile = jQuery("#mobile").val();
+                        var filter = /^\d{10}$/;
+
+                        if (mobile != '' && !filter.test(mobile)) {
+
+                            jQuery('#mobile_error').html("Please Enter Valid Mobile");
+                            jQuery('#mobile_error').show().delay(0).fadeIn('show');
+                            jQuery('#mobile_error').show().delay(2000).fadeOut('show');
+                            $('html, body').animate({
+                                scrollTop: $('#mobile').offset().top - 150
+                            }, 1000);
+                            return false;
+
+                        }
+
+                        $('#spinner_button').show();
+
+                        $('#submit_button').hide();
+
+                        $('#category_form').submit();
+
+                   }
+               }
+           });
 
 
 
 
-            var password = jQuery("#password").val();
 
-            if (password == '') {
-
-                jQuery('#password_error').html("Please  Enter Password");
-                jQuery('#password_error').show().delay(0).fadeIn('show');
-                jQuery('#password_error').show().delay(2000).fadeOut('show');
-                $('html, body').animate({
-                    scrollTop: $('#password').offset().top - 150
-                }, 1000);
-                return false;
-
-            }
-
-
-
-            var conf_password = jQuery("#conf_password").val();
-
-            if (conf_password == '') {
-
-                jQuery('#confirm_password_error').html("Please  Enter Confirm-Password");
-                jQuery('#confirm_password_error').show().delay(0).fadeIn('show');
-                jQuery('#confirm_password_error').show().delay(2000).fadeOut('show');
-                $('html, body').animate({
-                    scrollTop: $('#conf_password').offset().top - 150
-                }, 1000);
-                return false;
-
-            }
-
-
-
-            if (conf_password != password) {
-
-                jQuery('#confirm_password_error').html("Confirm Password Doesn't Match Password");
-                jQuery('#confirm_password_error').show().delay(0).fadeIn('show');
-                jQuery('#confirm_password_error').show().delay(2000).fadeOut('show');
-                $('html, body').animate({
-                    scrollTop: $('#conf_password').offset().top - 150
-                }, 1000);
-                return false;
-
-            }
-
-            var mobile = jQuery("#mobile").val();
-            var filter = /^\d{10}$/;
-
-            if (mobile != '' && !filter.test(mobile)) {
-
-                jQuery('#mobile_error').html("Please Enter Valid Mobile");
-                jQuery('#mobile_error').show().delay(0).fadeIn('show');
-                jQuery('#mobile_error').show().delay(2000).fadeOut('show');
-                $('html, body').animate({
-                    scrollTop: $('#mobile').offset().top - 150
-                }, 1000);
-                return false;
-
-            }
-
-            $('#spinner_button').show();
-
-            $('#submit_button').hide();
-
-            $('#category_form').submit();
+            
 
         }
     </script>

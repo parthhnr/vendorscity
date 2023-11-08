@@ -335,6 +335,9 @@
                                         <input id="email" name="email" type="text" class="form-control"
                                             placeholder="Enter Email" value="{{ $vendors->email }}" />
 
+                                        <p class="form-error-text" id="email_error"
+                                            style="color: red; margin-top: 10px;"></p>
+
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
@@ -448,128 +451,19 @@
             }
 
 
-
-            var name = jQuery("#name").val();
-
-            if (name == '') {
-
-                jQuery('#validate').html("Please Enter Name");
-
-                jQuery('#validate').show().delay(0).fadeIn('show');
-
-                jQuery('#validate').show().delay(2000).fadeOut('show');
-
-                $('html, body').animate({
-
-                    scrollTop: $('#validate').offset().top - 150
-
-                }, 1000);
-
-                return false;
-
-            }
-
-
-
-            var user_name = jQuery("#user_name").val();
-
-            if (user_name == '') {
-
-                jQuery('#validate').html("Please Enter User Name");
-
-                jQuery('#validate').show().delay(0).fadeIn('show');
-
-                jQuery('#validate').show().delay(2000).fadeOut('show');
-
-                $('html, body').animate({
-
-                    scrollTop: $('#validate').offset().top - 150
-
-                }, 1000);
-
-                return false;
-
-            }
-
-
-
-            var password = jQuery("#password").val();
-
-            if (password == '') {
-
-                jQuery('#validate').html("Please Enter Password");
-
-                jQuery('#validate').show().delay(0).fadeIn('show');
-
-                jQuery('#validate').show().delay(2000).fadeOut('show');
-
-                $('html, body').animate({
-
-                    scrollTop: $('#validate').offset().top - 150
-
-                }, 1000);
-
-                return false;
-
-            }
-
-
-
-            // var conf_password = jQuery("#conf_password").val();
-
-            // if (conf_password == '') {
-
-            //     jQuery('#validate').html("Please Enter Confirm Password");
-
-            //     jQuery('#validate').show().delay(0).fadeIn('show');
-
-            //     jQuery('#validate').show().delay(2000).fadeOut('show');
-
-            //     $('html, body').animate({
-
-            //         scrollTop: $('#validate').offset().top - 150
-
-            //     }, 1000);
-
-            //     return false;
-
-            // }
-
-
-
-            // if (conf_password != password) {
-
-            //     jQuery('#validate').html("Confirm Password Doesn't Match Password");
-
-            //     jQuery('#validate').show().delay(0).fadeIn('show');
-
-            //     jQuery('#validate').show().delay(2000).fadeOut('show');
-
-            //     $('html, body').animate({
-
-            //         scrollTop: $('#validate').offset().top - 150
-
-            //     }, 1000);
-
-            //     return false;
-
-            // }
-
-
-
             var email = jQuery("#email").val();
 
             if (email == '') {
 
-                jQuery('#validate').html("Please Enter Email");
+                jQuery('#email_error').html("Please Enter Email");
 
-                jQuery('#validate').show().delay(0).fadeIn('show');
+                jQuery('#email_error').show().delay(0).fadeIn('show');
 
-                jQuery('#validate').show().delay(2000).fadeOut('show');
+                jQuery('#email_error').show().delay(2000).fadeOut('show');
 
                 $('html, body').animate({
 
-                    scrollTop: $('#validate').offset().top - 150
+                    scrollTop: $('#email').offset().top - 150
 
                 }, 1000);
 
@@ -583,15 +477,15 @@
 
             if (!filter.test(email)) {
 
-                jQuery('#validate').html("Enter Valid Email Address.");
+                jQuery('#email_error').html("Enter Valid Email Address.");
 
-                jQuery('#validate').show().delay(0).fadeIn('show');
+                jQuery('#email_error').show().delay(0).fadeIn('show');
 
-                jQuery('#validate').show().delay(2000).fadeOut('show');
+                jQuery('#email_error').show().delay(2000).fadeOut('show');
 
                 $('html, body').animate({
 
-                    scrollTop: $('#validate').offset().top - 150
+                    scrollTop: $('#email').offset().top - 150
 
                 }, 1000);
 
@@ -599,26 +493,57 @@
 
             }
 
-            var mobile = jQuery("#mobile").val();
-            var filter = /^\d{10}$/;
+            var url = '{{ url('vendor_edit_check_mail') }}';
+            var vendor_id = '{{$vendors->id}}';
 
-            if (mobile != '' && !filter.test(mobile)) {
+            $.ajax({
+               url: url,
+               type: 'post',
+               data: {
+                   "_token": "{{ csrf_token() }}",
+                   "email": email,
+                   "vendor_id": vendor_id
+               },
+               success: function(msg) {
+                    if(msg == 1){
+                        jQuery('#email_error').html("Email Address Already Exists");
+                        jQuery('#email_error').show().delay(0).fadeIn('show');
+                        jQuery('#email_error').show().delay(2000).fadeOut('show');
+                        $('html, body').animate({
+                            scrollTop: $('#email').offset().top - 150
+                        }, 1000);
+                        return false;
 
-                jQuery('#mobile_error').html("Please Enter Valid Mobile");
-                jQuery('#mobile_error').show().delay(0).fadeIn('show');
-                jQuery('#mobile_error').show().delay(2000).fadeOut('show');
-                $('html, body').animate({
-                    scrollTop: $('#mobile').offset().top - 150
-                }, 1000);
-                return false;
+                   }else{
 
-            }
+                    var mobile = jQuery("#mobile").val();
+                    var filter = /^\d{10}$/;
 
-            $('#spinner_button').show();
+                    if (mobile != '' && !filter.test(mobile)) {
 
-            $('#submit_button').hide();
+                        jQuery('#mobile_error').html("Please Enter Valid Mobile");
+                        jQuery('#mobile_error').show().delay(0).fadeIn('show');
+                        jQuery('#mobile_error').show().delay(2000).fadeOut('show');
+                        $('html, body').animate({
+                            scrollTop: $('#mobile').offset().top - 150
+                        }, 1000);
+                        return false;
 
-            $('#category_form').submit();
+                    }
+
+                    $('#spinner_button').show();
+
+                    $('#submit_button').hide();
+
+                    $('#category_form').submit();
+
+                   }
+               }
+           });
+
+            
+
+            
 
         }
     </script>
