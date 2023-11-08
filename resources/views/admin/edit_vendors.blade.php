@@ -36,11 +36,23 @@
 
 
 
-        <div id="validate" class="alert alert-danger alert-dismissible fade show" style="display: none;">
+        @if ($message = Session::get('success'))
+            <div class="alert alert-success alert-dismissible fade show">
 
-            <span id="login_error"></span>
+                <strong>Success!</strong> {{ $message }}
 
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+
+            </div>
+        @endif
+
+
+
+        <div class="alert alert-success alert-dismissible fade show success_show" style="display: none;">
+
+            <strong>Success! </strong><span id="success_message"></span>
+
+            <!-- <button type="button" class="btn-close" data-bs-dismiss="alert"></button> -->
 
         </div>
 
@@ -130,7 +142,8 @@
                                             <div class="col-md-2">
                                                 <div class="form-group"> <label for="telephone">Company Telephone</label>
                                                     <input type="text" id="telephoneu" name="telephoneu[]"
-                                                        class="form-control" placeholder="Enter Telephone"
+                                                        onkeypress="return validateNumber(event)" class="form-control"
+                                                        placeholder="Enter Telephone"
                                                         value="{{ $attribute_data[$i]->telephone }}">
                                                 </div>
                                             </div>
@@ -175,7 +188,8 @@
                                         <div class="col-md-2">
                                             <div class="form-group"> <label for="telephone">Company Telephone</label>
                                                 <input type="text" id="telephone" name="telephone1[]"
-                                                    class="form-control" placeholder="Enter Telephone">
+                                                    onkeypress="return validateNumber(event)" class="form-control"
+                                                    placeholder="Enter Telephone">
                                             </div>
                                         </div>
                                     </div>
@@ -194,94 +208,118 @@
 
                                 {{-- add more End --}}
 
-
-                                <div class="form-group">
-                                    <label for="name">Company Website</label>
-                                    <input id="companywebsite" name="companywebsite" type="text" class="form-control"
-                                        placeholder="Enter Company Website" value="{{ $vendors->companywebsite }}" />
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="name">Company Website</label>
+                                        <input id="companywebsite" name="companywebsite" type="text"
+                                            class="form-control" placeholder="Enter Company Website"
+                                            value="{{ $vendors->companywebsite }}" />
+                                    </div>
                                 </div>
-
-                                <div class="form-group">
-                                    <label for="vendors">Company City</label>
-                                    <select class="form-control" id="city" name="city">
-                                        @foreach ($city_data as $city)
-                                            <option value="{{ $city->id }}" <?php if ($city->id == $vendors->city) {
-                                                echo 'selected';
-                                            } ?>>
-                                                {{ $city->name }}</option>
-                                        @endforeach
-                                    </select>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="vendors">Company City</label>
+                                        <select class="form-control" id="city" name="city">
+                                            @foreach ($city_data as $city)
+                                                <option value="{{ $city->id }}" <?php if ($city->id == $vendors->city) {
+                                                    echo 'selected';
+                                                } ?>>
+                                                    {{ $city->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="name">Company Role</label>
-                                    <input id="crole" name="crole" type="text" class="form-control"
-                                        placeholder="Enter Company Role" value="{{ $vendors->crole }}" />
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="name">Company Role</label>
+                                        <input id="crole" name="crole" type="text" class="form-control"
+                                            placeholder="Enter Company Role" value="{{ $vendors->crole }}" />
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="name">Parent Company Name</label>
-                                    <input id="parentcname" name="parentcname" type="text" class="form-control"
-                                        placeholder="Enter Parent Company Name" value="{{ $vendors->parentcname }}" />
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="name">Parent Company Name</label>
+                                        <input id="parentcname" name="parentcname" type="text" class="form-control"
+                                            placeholder="Enter Parent Company Name"
+                                            value="{{ $vendors->parentcname }}" />
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="name">Establishment Date</label>
-                                    <input id="establishment_date" name="establishment_date" type="date"
-                                        class="form-control" placeholder="Select Establishment Date"
-                                        value="{{ $vendors->establishment_date }}" />
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="name">Establishment Date</label>
+                                        <input id="establishment_date" name="establishment_date" type="date"
+                                            class="form-control" placeholder="Select Establishment Date"
+                                            value="{{ $vendors->establishment_date }}" />
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="name">VAT Certificate </label>
-                                    <input id="vatcertificate" name="vatcertificate" type="file" class="form-control"
-                                        placeholder="Select VAT Certificate" />
-                                    @if ($vendors->vatcertificate != '')
-                                        <img src="{{ asset('public/upload/vendors/' . $vendors->vatcertificate) }}"
-                                            style="width: 10%;margin-top: 10px;" />
-                                    @endif
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="name">VAT Certificate </label>
+                                        <input id="vatcertificate" name="vatcertificate" type="file"
+                                            class="form-control" placeholder="Select VAT Certificate" />
+                                        @if ($vendors->vatcertificate != '')
+                                            <img src="{{ asset('public/upload/vendors/' . $vendors->vatcertificate) }}"
+                                                style="width: 10%;margin-top: 10px;" />
+                                        @endif
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="name">TRN Certificate </label>
-                                    <input id="trncertificate" name="trncertificate" type="file" class="form-control"
-                                        placeholder="Select TRN Certificate" />
-                                    @if ($vendors->trncertificate != '')
-                                        <img src="{{ asset('public/upload/vendors/' . $vendors->trncertificate) }}"
-                                            style="width: 10%;margin-top: 10px;" />
-                                    @endif
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="name">TRN Certificate </label>
+                                        <input id="trncertificate" name="trncertificate" type="file"
+                                            class="form-control" placeholder="Select TRN Certificate" />
+                                        @if ($vendors->trncertificate != '')
+                                            <img src="{{ asset('public/upload/vendors/' . $vendors->trncertificate) }}"
+                                                style="width: 10%;margin-top: 10px;" />
+                                        @endif
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="name">Trade License</label>
-                                    <input id="tradelicense" name="tradelicense" type="file" class="form-control"
-                                        placeholder="Select Trade License" />
-                                    @if ($vendors->tradelicense != '')
-                                        <img src="{{ asset('public/upload/vendors/' . $vendors->tradelicense) }}"
-                                            style="width: 10%;margin-top: 10px;" />
-                                    @endif
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="name">Trade License</label>
+                                        <input id="tradelicense" name="tradelicense" type="file" class="form-control"
+                                            placeholder="Select Trade License" />
+                                        @if ($vendors->tradelicense != '')
+                                            <img src="{{ asset('public/upload/vendors/' . $vendors->tradelicense) }}"
+                                                style="width: 10%;margin-top: 10px;" />
+                                        @endif
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="name">TL expiry date</label>
-                                    <input id="tlexpiry" name="tlexpiry" type="date" class="form-control"
-                                        placeholder="Select TL expiry date" value="{{ $vendors->tlexpiry }}" />
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="name">TL expiry date</label>
+                                        <input id="tlexpiry" name="tlexpiry" type="date" class="form-control"
+                                            placeholder="Select TL expiry date" value="{{ $vendors->tlexpiry }}" />
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    @php $maxStaff = 20; @endphp
-                                    <label for="">No Of Staff</label>
-                                    <select class="form-control" id="staff" name="staff">
-                                        <option value="">Select No Of Staff</option>
-                                        @for ($i = 1; $i <= $maxStaff; $i++)
-                                            <option value="{{ $i }}"
-                                                @if ($i == $vendors->staff) selected @endif>
-                                                {{ $i }}
-                                            </option>
-                                        @endfor
-                                    </select>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        @php $maxStaff = 20; @endphp
+                                        <label for="">No Of Staff</label>
+                                        <select class="form-control" id="staff" name="staff">
+                                            <option value="">Select No Of Staff</option>
+                                            @for ($i = 1; $i <= $maxStaff; $i++)
+                                                <option value="{{ $i }}"
+                                                    @if ($i == $vendors->staff) selected @endif>
+                                                    {{ $i }}
+                                                </option>
+                                            @endfor
+                                        </select>
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="name">Remarks</label>
-                                    <input id="remarks" name="remarks" type="text" class="form-control"
-                                        placeholder="Enter Remarks" value="{{ $vendors->remarks }}" />
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="name">Remarks</label>
+                                        <input id="remarks" name="remarks" type="text" class="form-control"
+                                            placeholder="Enter Remarks" value="{{ $vendors->remarks }}" />
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="name">Social Media</label>
-                                    <input id="socialmedai" name="socialmedai" type="text" class="form-control"
-                                        placeholder="Enter Social Media" value="{{ $vendors->socialmedai }}" />
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="name">Social Media</label>
+                                        <input id="socialmedai" name="socialmedai" type="text" class="form-control"
+                                            placeholder="Enter Social Media" value="{{ $vendors->socialmedai }}" />
+                                    </div>
                                 </div>
                                 {{-- <div class="form-group">
                                     <label for="name">Password</label>
@@ -289,26 +327,30 @@
                                         placeholder="Enter Password" value="{{ $vendors->password }}" />
                                 </div> --}}
 
+                                <div class="col-lg-6">
+                                    <div class="form-group">
 
-                                <div class="form-group">
+                                        <label for="name">Email for Login</label>
 
-                                    <label for="name">Email for Login</label>
+                                        <input id="email" name="email" type="text" class="form-control"
+                                            placeholder="Enter Email" value="{{ $vendors->email }}" />
 
-                                    <input id="email" name="email" type="text" class="form-control"
-                                        placeholder="Enter Email" value="{{ $vendors->email }}" />
-
+                                    </div>
                                 </div>
+                                <div class="col-lg-6">
 
-                                <div class="form-group">
+                                    <div class="form-group">
 
-                                    <label for="name">Mobile No.</label>
+                                        <label for="name">Mobile No.</label>
 
-                                    <input id="mobile" name="mobile" type="text" class="form-control"
-                                        placeholder="Enter Mobile No." onkeypress="return validateNumber(event)"
-                                        value="{{ $vendors->mobile }}" />
-                                    <p class="form-error-text" id="mobile_error" style="color: red; margin-top: 10px;">
-                                    </p>
+                                        <input id="mobile" name="mobile" type="text" class="form-control"
+                                            placeholder="Enter Mobile No." onkeypress="return validateNumber(event)"
+                                            value="{{ $vendors->mobile }}" />
+                                        <p class="form-error-text" id="mobile_error"
+                                            style="color: red; margin-top: 10px;">
+                                        </p>
 
+                                    </div>
                                 </div>
 
                             </div>
@@ -645,7 +687,7 @@
 
                     $(wrapper).append(
 
-                        '<div class="row"><div class="col-md-2"><div class="form-group"> <label for="poc">POC Full</label><input type="text" id="poc" name="poc1[]" class="form-control" placeholder="Enter POC"></div></div><div class="col-md-2"><div class="form-group"> <label for="poctitle">POC Title</label><input type="text" id="poctitle" name="poctitle1[]" class="form-control" placeholder="Enter  POC Title"></div></div><div class="col-md-2"><div class="form-group"> <label for="email">Company Email</label><input type="text" id="c_email" name="c_email1[]" class="form-control" placeholder="Enter Email"></div></div><div class="col-md-2"><div class="form-group"> <label for="telephone">Company Telephone</label><input type="text" id="telephone" name="telephone1[]" class="form-control" placeholder="Enter Telephone"></div></div><a href="#" class="btn btn-danger pull-right remove_field1" style="margin-right: 0;margin-top: 22px;width: 9%;float: right;height: 40px;margin-left: 150px;">Remove</a></div>'
+                        '<div class="row"><div class="col-md-2"><div class="form-group"> <label for="poc">POC Full</label><input type="text" id="poc" name="poc1[]" class="form-control" placeholder="Enter POC"></div></div><div class="col-md-2"><div class="form-group"> <label for="poctitle">POC Title</label><input type="text" id="poctitle" name="poctitle1[]" class="form-control" placeholder="Enter  POC Title"></div></div><div class="col-md-2"><div class="form-group"> <label for="email">Company Email</label><input type="text" id="c_email" name="c_email1[]" class="form-control" placeholder="Enter Email"></div></div><div class="col-md-2"><div class="form-group"> <label for="telephone">Company Telephone</label><input type="text" id="telephone" name="telephone1[]" onkeypress="return validateNumber(event)" class="form-control" placeholder="Enter Telephone"></div></div><a href="#" class="btn btn-danger pull-right remove_field1" style="margin-right: 0;margin-top: 22px;width: 9%;float: right;height: 40px;margin-left: 150px;">Remove</a></div>'
 
                     );
 

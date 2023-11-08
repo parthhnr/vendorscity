@@ -9,6 +9,9 @@
     echo"</pre>";exit;
 @endphp --}}
 
+       @php
+           $vendor_data = Auth::user();
+       @endphp
 
 
        <!-- Page Wrapper -->
@@ -31,6 +34,26 @@
                        </div>
                    </div>
                    <!-- /Page Header -->
+                   @if ($message = Session::get('success'))
+                       <div class="alert alert-success alert-dismissible fade show">
+
+                           <strong>Success!</strong> {{ $message }}
+
+                           <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+
+                       </div>
+                   @endif
+
+
+
+                   <div class="alert alert-success alert-dismissible fade show success_show" style="display: none;">
+
+                       <strong>Success! </strong><span id="success_message"></span>
+
+                       <!-- <button type="button" class="btn-close" data-bs-dismiss="alert"></button> -->
+
+                   </div>
+
 
                    <div class="profile-cover">
 
@@ -38,18 +61,23 @@
 
                    <div class="text-center mb-5">
                        <label class="avatar avatar-xxl profile-cover-avatar" for="avatar_upload">
-                           <img class="avatar-img" src="{{ asset('public/upload/no-image.jpg') }}" alt="Profile Image">
+                           <img class="avatar-img" src="{{ asset('public/upload/vendors/small/' . $vendor_data->image) }}"
+                               alt="Profile Image">
 
                        </label>
-                       <h2>{{ Auth::user()->name }} <i class="fas fa-certificate text-primary small" data-toggle="tooltip"
+                       <h2>{{ $vendor_data->name }} <i class="fas fa-certificate text-primary small" data-toggle="tooltip"
                                data-placement="top" title="" data-original-title="Verified"></i></h2>
                        <ul class="list-inline">
-                           <li class="list-inline-item">
-                               <i class="far fa-building"></i> <span>{{ Auth::user()->companywebsite }}</span>
-                           </li>
-                           @if (Auth::user()->mobile != '')
+
+                           @if ($vendor_data->companywebsite != '')
                                <li class="list-inline-item">
-                                   <i class="fa-solid fa-mobile"></i>{{ Auth::user()->mobile }}
+                                   <i class="far fa-building"></i> <span>{{ $vendor_data->companywebsite }}</span>
+                               </li>
+                           @endif
+
+                           @if ($vendor_data->mobile != '')
+                               <li class="list-inline-item">
+                                   <i class="fa-solid fa-mobile"></i>{{ $vendor_data->mobile }}
                                </li>
                            @endif
 
@@ -61,9 +89,9 @@
 
 
                            @php
-                               $addmore = DB::table('vendors_attribute')
-                                   ->where('pid', Auth::user()->id)
-                                   ->first();
+                               $addmore_data = DB::table('vendors_attribute')
+                                   ->where('pid', $vendor_data->id)
+                                   ->get();
                            @endphp
 
                            <div class="card">
@@ -71,76 +99,84 @@
                                    <h5 class="card-title d-flex justify-content-between">
                                        <span>Profile</span>
                                        <a class="btn btn-sm btn-white"
-                                           href="{{ route('vendorsprofile.edit', Auth::user()->id) }}">Edit</a>
+                                           href="{{ route('vendorsprofile.edit', $vendor_data->id) }}">Edit</a>
                                    </h5>
                                </div>
                                <div class="card-body">
 
                                    <ul class="list-unstyled mb-0">
                                        <div class="row">
-
                                            <div class="col-lg-12">
                                                <li class="py-0">
                                                    <small class="text-dark">Company Name</small>
                                                </li>
                                                <li>
-                                                   {{ Auth::user()->name }}
+                                                   @if ($vendor_data->name != '')
+                                                       {{ $vendor_data->name }}
+                                                   @else
+                                                       {{ '-' }}
+                                                   @endif
+
                                                </li>
                                            </div>
+                                           @if ($addmore_data != '')
 
-                                           <div class="row mt-2 mb-2">
-                                               <div class="col-lg-3">
-                                                   <li class="pt-2 pb-0">
-                                                       <small class="text-dark">POC Full</small>
-                                                   </li>
-                                                   <li class="pb-2">
-                                                       @if ($addmore && $addmore->poc !== null)
-                                                           {{ $addmore->poc }}
-                                                       @else
-                                                           {{ '-' }}
-                                                       @endif
+                                               <div class="row mt-2 mb-2">
 
+                                                   @foreach ($addmore_data as $addmore)
+                                                       <div class="col-lg-3">
+                                                           <li class="pt-2 pb-0">
+                                                               <small class="text-dark">POC Full</small>
+                                                           </li>
+                                                           <li class="pb-2">
+                                                               @if ($addmore && $addmore->poc !== null)
+                                                                   {{ $addmore->poc }}
+                                                               @else
+                                                                   {{ '-' }}
+                                                               @endif
 
-                                                   </li>
+                                                           </li>
+                                                       </div>
+                                                       <div class="col-lg-3">
+                                                           <li class="pt-2 pb-0">
+                                                               <small class="text-dark">POC Title</small>
+                                                           </li>
+                                                           <li class="pb-2">
+                                                               @if ($addmore && $addmore->poctitle !== null)
+                                                                   {{ $addmore->poctitle }}
+                                                               @else
+                                                                   {{ '-' }}
+                                                               @endif
+                                                           </li>
+                                                       </div>
+                                                       <div class="col-lg-3">
+                                                           <li class="pt-2 pb-0">
+                                                               <small class="text-dark">Company
+                                                                   Email</small>
+                                                           </li>
+                                                           <li class="pb-2">
+                                                               @if ($addmore && $addmore->c_email !== null)
+                                                                   {{ $addmore->c_email }}
+                                                               @else
+                                                                   {{ '-' }}
+                                                               @endif
+                                                           </li>
+                                                       </div>
+                                                       <div class="col-lg-3">
+                                                           <li class="pt-2 pb-0">
+                                                               <small class="text-dark">Company Telephone</small>
+                                                           </li>
+                                                           <li class="pb-2">
+                                                               @if ($addmore && $addmore->telephone !== null)
+                                                                   {{ $addmore->telephone }}
+                                                               @else
+                                                                   {{ '-' }}
+                                                               @endif
+                                                           </li>
+                                                       </div>
+                                                   @endforeach
                                                </div>
-                                               <div class="col-lg-3">
-                                                   <li class="pt-2 pb-0">
-                                                       <small class="text-dark">POC Title</small>
-                                                   </li>
-                                                   <li class="pb-2">
-                                                       @if ($addmore && $addmore->poctitle !== null)
-                                                           {{ $addmore->poctitle }}
-                                                       @else
-                                                           {{ '-' }}
-                                                       @endif
-                                                   </li>
-                                               </div>
-                                               <div class="col-lg-3">
-                                                   <li class="pt-2 pb-0">
-                                                       <small class="text-dark">Company
-                                                           Email</small>
-                                                   </li>
-                                                   <li class="pb-2">
-                                                       @if ($addmore && $addmore->c_email !== null)
-                                                           {{ $addmore->c_email }}
-                                                       @else
-                                                           {{ '-' }}
-                                                       @endif
-                                                   </li>
-                                               </div>
-                                               <div class="col-lg-3">
-                                                   <li class="pt-2 pb-0">
-                                                       <small class="text-dark">Company Telephone</small>
-                                                   </li>
-                                                   <li class="pb-2">
-                                                       @if ($addmore && $addmore->telephone !== null)
-                                                           {{ $addmore->telephone }}
-                                                       @else
-                                                           {{ '-' }}
-                                                       @endif
-                                                   </li>
-                                               </div>
-                                           </div>
+                                           @endif
 
 
                                            <div class="col-lg-6">
@@ -148,7 +184,12 @@
                                                    <small class="text-dark">Company Website</small>
                                                </li>
                                                <li class="pb-2">
-                                                   {{ Auth::user()->companywebsite }}
+                                                   @if ($vendor_data->companywebsite != '')
+                                                       {{ $vendor_data->companywebsite }}
+                                                   @else
+                                                       {{ '-' }}
+                                                   @endif
+
                                                </li>
                                            </div>
 
@@ -158,7 +199,12 @@
                                                    <small class="text-dark">Company City</small>
                                                </li>
                                                <li class="pb-2">
-                                                   {!! Helper::cityname(Auth::user()->city) !!}
+                                                   @if ($vendor_data->city != '')
+                                                       {!! Helper::cityname($vendor_data->city) !!}
+                                                   @else
+                                                       {{ '-' }}
+                                                   @endif
+
                                                </li>
                                            </div>
 
@@ -167,7 +213,11 @@
                                                    <small class="text-dark">Company Role</small>
                                                </li>
                                                <li class="pb-2">
-                                                   {{ Auth::user()->crole }}
+                                                   @if ($vendor_data->crole != '')
+                                                       {{ $vendor_data->crole }}
+                                                   @else
+                                                       {{ '-' }}
+                                                   @endif
                                                </li>
                                            </div>
 
@@ -176,7 +226,12 @@
                                                    <small class="text-dark">Parent Company Name</small>
                                                </li>
                                                <li class="pb-2">
-                                                   {{ Auth::user()->parentcname }}
+                                                   @if ($vendor_data->parentcname != '')
+                                                       {{ $vendor_data->parentcname }}
+                                                   @else
+                                                       {{ '-' }}
+                                                   @endif
+
                                                </li>
                                            </div>
 
@@ -186,9 +241,13 @@
                                                </li>
                                                <li class="pb-2">
                                                    @php
-                                                       $establishment_Date = Auth::user()->establishment_date;
+                                                       $establishment_Date = $vendor_data->establishment_date;
                                                    @endphp
-                                                   {{ \Carbon\Carbon::parse($establishment_Date)->format('d-m-Y') }}
+                                                   @if ($establishment_Date != '' && $establishment_Date != '0000-00-00')
+                                                       {{ \Carbon\Carbon::parse($establishment_Date)->format('d-m-Y') }}
+                                                   @else
+                                                       {{ '-' }}
+                                                   @endif
 
                                                </li>
                                            </div>
@@ -198,8 +257,13 @@
                                                    <small class="text-dark">VAT Certificate</small>
                                                </li>
                                                <li class="pb-2">
-                                                   <img src="{{ asset('public/upload/vendors/' . Auth::user()->vatcertificate) }}"
-                                                       style="width: 10%;margin-top: 10px;" />
+                                                   @if ($vendor_data->vatcertificate != '')
+                                                       <img src="{{ asset('public/upload/vendors/' . $vendor_data->vatcertificate) }}"
+                                                           style="width: 10%;margin-top: 10px;" />
+                                                   @else
+                                                       {{ '-' }}
+                                                   @endif
+
                                                </li>
                                            </div>
 
@@ -208,8 +272,13 @@
                                                    <small class="text-dark">TRN Certificate</small>
                                                </li>
                                                <li class="pb-2">
-                                                   <img src="{{ asset('public/upload/vendors/' . Auth::user()->trncertificate) }}"
-                                                       style="width: 10%;margin-top: 10px;" />
+                                                   @if ($vendor_data->trncertificate != '')
+                                                       <img src="{{ asset('public/upload/vendors/' . $vendor_data->trncertificate) }}"
+                                                           style="width: 10%;margin-top: 10px;" />
+                                                   @else
+                                                       {{ '-' }}
+                                                   @endif
+
                                                </li>
                                            </div>
 
@@ -219,8 +288,13 @@
                                                    <small class="text-dark">Trade License</small>
                                                </li>
                                                <li class="pb-2">
-                                                   <img src="{{ asset('public/upload/vendors/' . Auth::user()->tradelicense) }}"
-                                                       style="width: 10%;margin-top: 10px;" />
+                                                   @if ($vendor_data->tradelicense)
+                                                       <img src="{{ asset('public/upload/vendors/' . $vendor_data->tradelicense) }}"
+                                                           style="width: 10%;margin-top: 10px;" />
+                                                   @else
+                                                       {{ '-' }}
+                                                   @endif
+
                                                </li>
                                            </div>
 
@@ -230,12 +304,13 @@
                                                </li>
                                                <li class="pb-2">
                                                    @php
-                                                       $Tl_Date = Auth::user()->tlexpiry;
+                                                       $Tl_Date = $vendor_data->tlexpiry;
                                                    @endphp
-                                                   {{ \Carbon\Carbon::parse($Tl_Date)->format('d-m-Y') }}
-
-
-
+                                                   @if ($Tl_Date != '' && $Tl_Date != '0000-00-00')
+                                                       {{ \Carbon\Carbon::parse($Tl_Date)->format('d-m-Y') }}
+                                                   @else
+                                                       {{ \Carbon\Carbon::parse()->format('-') }}
+                                                   @endif
                                                </li>
                                            </div>
 
@@ -245,7 +320,12 @@
                                                    <small class="text-dark">No Of Staff</small>
                                                </li>
                                                <li class="pb-2">
-                                                   {{ Auth::user()->staff }}
+                                                   @if ($vendor_data->staff != '')
+                                                       {{ $vendor_data->staff }}
+                                                   @else
+                                                       {{ '-' }}
+                                                   @endif
+
                                                </li>
                                            </div>
 
@@ -254,7 +334,12 @@
                                                    <small class="text-dark">Remarks</small>
                                                </li>
                                                <li class="pb-2">
-                                                   {{ Auth::user()->remarks }}
+                                                   @if ($vendor_data->remarks != '')
+                                                       {{ $vendor_data->remarks }}
+                                                   @else
+                                                       {{ '-' }}
+                                                   @endif
+
                                                </li>
                                            </div>
 
@@ -263,7 +348,12 @@
                                                    <small class="text-dark">Social Media</small>
                                                </li>
                                                <li class="pb-2">
-                                                   {{ Auth::user()->socialmedai }}
+                                                   @if ($vendor_data->socialmedai != '')
+                                                       {{ $vendor_data->socialmedai }}
+                                                   @else
+                                                       {{ '-' }}
+                                                   @endif
+
                                                </li>
                                            </div>
 
@@ -272,7 +362,11 @@
                                                    <small class="text-dark">Email For Login</small>
                                                </li>
                                                <li class="pb-2">
-                                                   {{ Auth::user()->email }}
+                                                   @if ($vendor_data->email != '')
+                                                       {{ $vendor_data->email }}
+                                                   @else
+                                                       {{ '-' }}
+                                                   @endif
                                                </li>
                                            </div>
 
@@ -281,7 +375,11 @@
                                                    <small class="text-dark">Company Mobile No</small>
                                                </li>
                                                <li class="pb-2">
-                                                   {{ Auth::user()->mobile }}
+                                                   @if ($vendor_data->mobile != '')
+                                                       {{ $vendor_data->mobile }}
+                                                   @else
+                                                       {{ '-' }}
+                                                   @endif
                                                </li>
                                            </div>
                                        </div>
