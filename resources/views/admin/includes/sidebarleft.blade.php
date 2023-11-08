@@ -86,7 +86,7 @@
                     <li class="{{ request()->segment(2) == 'price' ? 'active' : '' }}"><a
                             href="{{ route('price.edit', 1) }}"
                             class="{{ request()->segment(2) == 'price' ? 'active' : '' }}">
-                            <i data-feather="credit-card"></i><span>price</span></a>
+                            <i data-feather="credit-card"></i><span>Price</span></a>
                     </li>
                 @endif
 
@@ -126,7 +126,7 @@
                         class="{{ request()->segment(2) == 'vendorsprofile' ? 'active' : '' }}">
                         <i class="fa fa-user-plus"></i><span>Profile</span></a>
                 </li>
-                
+
                 <li
                     class="{{ request()->segment(2) == 'subscription' || request()->segment(1) == 'base_on_service_lead' || request()->segment(1) == 'based_on_booking_services' || request()->segment(1) == 'based_on_listing_criteria' ? 'active' : '' }}">
                     <a href="{{ route('subscription.index') }}"
