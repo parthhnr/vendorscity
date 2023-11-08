@@ -64,34 +64,6 @@
 
 
 
-                   @if (in_array('7', $edit_perm))
-
-                       <div class="col-auto">
-
-
-
-                           <a class="btn btn-primary me-1" href="{{ route('size.create') }}">
-
-                               <i class="fas fa-plus"></i> Add Size
-
-                           </a>
-
-                           <a class="btn btn-danger me-1" href="javascript:void('0');" onclick="delete_category();">
-
-                               <i class="fas fa-trash"></i> Delete
-
-                           </a>
-
-                           <!--  <a class="btn btn-primary filter-btn" href="javascript:void(0);" id="filter_search">
-
-                                     <i class="fas fa-filter"></i> Filter
-
-                                     </a> -->
-
-                       </div>
-
-                   @endif
-
 
 
 
