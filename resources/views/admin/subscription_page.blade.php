@@ -70,6 +70,8 @@
 
             @php
 
+
+
                 $price_data = DB::table('prices')->select('*')->orderBy('id', 'desc')->first();
 
                 //echo "<pre>";print_r($price_data);echo "</pre>";
@@ -123,8 +125,12 @@
             @endif
 
             @php
+
+            $currentDate = now(); 
+
             $id = Auth::user()->id;
-            $result = DB::table('subscription')->select('*')->where('vendor_id','=',$id)->orderBy('id', 'desc')->get();
+
+            $result = DB::table('subscription')->select('*')->where('vendor_id','=',$id)->where('enddate', '>=', $currentDate)->orderBy('id', 'desc')->get();
             $result_new = $result->toArray();
             //echo "<pre>";print_r($result_new);echo "</pre>";
             @endphp 
@@ -144,6 +150,7 @@
                                                     <th>Total</th>
                                                     <th>Start Date</th>
                                                     <th>End Date</th>
+                                                    <th>Status</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -154,6 +161,7 @@
                                                     <td>{{$subs_data->total}}</td>
                                                     <td>{{date("d-m-Y", strtotime($subs_data->startdate))}}</td>
                                                     <td>{{date("d-m-Y", strtotime($subs_data->enddate))}}</td>
+                                                    <td> <span class="badge badge-pill bg-success-light">Active</span></td>
                                                 </tr>
                                                 @endforeach
                                                

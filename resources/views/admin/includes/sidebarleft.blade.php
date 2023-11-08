@@ -120,6 +120,13 @@
             @endif
 
             @if (Auth::user()->vendor == 1)
+
+                <li class="{{ request()->segment(2) == 'vendorsprofile' ? 'active' : '' }}"><a
+                        href="{{ route('vendorsprofile.index') }}"
+                        class="{{ request()->segment(2) == 'vendorsprofile' ? 'active' : '' }}">
+                        <i class="fa fa-user-plus"></i><span>Profile</span></a>
+                </li>
+                
                 <li
                     class="{{ request()->segment(2) == 'subscription' || request()->segment(1) == 'base_on_service_lead' || request()->segment(1) == 'based_on_booking_services' || request()->segment(1) == 'based_on_listing_criteria' ? 'active' : '' }}">
                     <a href="{{ route('subscription.index') }}"
@@ -127,10 +134,12 @@
                         <i class="fa fa-file"></i><span>Subscription</span></a>
                 </li>
 
-                <li class="{{ request()->segment(2) == 'vendorsprofile' ? 'active' : '' }}"><a
-                        href="{{ route('vendorsprofile.index') }}"
-                        class="{{ request()->segment(2) == 'vendorsprofile' ? 'active' : '' }}">
-                        <i class="fa fa-user-plus"></i><span>Profile</span></a>
+                
+
+                <li class="{{ request()->segment(2) == 'subscription-details' ? 'active' : '' }}"><a
+                        href="{{ route('subscription-details.index') }}"
+                        class="{{ request()->segment(2) == 'subscription-details' ? 'active' : '' }}">
+                        <i class="fa fa-file"></i><span>Subscription Details</span></a>
                 </li>
             @endif
 

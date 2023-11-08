@@ -166,7 +166,7 @@ Route::get('/admin', function () {
     Route::post('based_on_booking_services',[SubscriptionController::class,'based_on_booking_services'])->name('based_on_booking_services');
     Route::post('based_on_listing_criteria',[SubscriptionController::class,'based_on_listing_criteria'])->name('based_on_listing_criteria');
 
-
+    Route::resource('admin/subscription-details','App\Http\Controllers\admin\Subscriptiondetails_controller');
     
 
     
