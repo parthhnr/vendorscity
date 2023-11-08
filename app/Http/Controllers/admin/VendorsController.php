@@ -417,9 +417,7 @@ class VendorsController extends Controller
 
         $id=$_POST['id'];
 
-        $value=$_POST['value'];
-
-        
+        $value=$_POST['value'];       
 
         DB::table('users')->where('id',$id)->update(array('is_active'=>$value));
 

@@ -114,7 +114,8 @@
                                     </div>
                                     <div class="col-md-2">
                                         <div class="form-group"> <label for="telephone">Company Telephone</label>
-                                            <input type="text" id="telephone" name="telephone[]" class="form-control"
+                                            <input type="text" id="telephone" name="telephone[]"
+                                                onkeypress="return validateNumber(event)" class="form-control"
                                                 placeholder="Enter Telephone">
                                         </div>
                                     </div>
@@ -547,7 +548,7 @@
 
                     $(wrapper).append(
 
-                        '<div class="row"><div class="col-md-2"><div class="form-group"><label for="poc">POC Full</label><input type="text" id="poc" name="poc[]" class="form-control" placeholder="Enter POC"></div></div><div class="col-md-2"><div class="form-group"> <label for="poctitle">POC Title</label><input type="text" id="poctitle" name="poctitle[]" class="form-control" placeholder="Enter  POC Title"></div></div><div class="col-md-2"><div class="form-group"> <label for="email">Company Email</label><input type="text" id="c_email" name="c_email[]" class="form-control" placeholder="Enter Email"></div></div><div class="col-md-2"><div class="form-group"><label for="telephone">Company Telephone</label><input type="text" id="telephone" name="telephone[]" class="form-control" placeholder="Enter Telephone"></div></div><a href="#" class="btn btn-danger pull-right remove_field1" style="margin-right: 0;margin-top: 23px;width: 10%;float: right;height: 38px;margin-left: 127px;">Remove</a></div>'
+                        '<div class="row"><div class="col-md-2"><div class="form-group"><label for="poc">POC Full</label><input type="text" id="poc" name="poc[]" class="form-control" placeholder="Enter POC"></div></div><div class="col-md-2"><div class="form-group"> <label for="poctitle">POC Title</label><input type="text" id="poctitle" name="poctitle[]" class="form-control" placeholder="Enter  POC Title"></div></div><div class="col-md-2"><div class="form-group"> <label for="email">Company Email</label><input type="text" id="c_email" name="c_email[]" class="form-control" placeholder="Enter Email"></div></div><div class="col-md-2"><div class="form-group"><label for="telephone">Company Telephone</label><input type="text" id="telephone" name="telephone[]" onkeypress="return validateNumber(event)" class="form-control" placeholder="Enter Telephone"></div></div><a href="#" class="btn btn-danger pull-right remove_field1" style="margin-right: 0;margin-top: 23px;width: 10%;float: right;height: 38px;margin-left: 127px;">Remove</a></div>'
                     );
 
                 }

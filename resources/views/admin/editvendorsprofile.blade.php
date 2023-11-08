@@ -22,6 +22,26 @@
                </div>
            </div>
 
+           @if ($message = Session::get('success'))
+               <div class="alert alert-success alert-dismissible fade show">
+
+                   <strong>Success!</strong> {{ $message }}
+
+                   <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+
+               </div>
+           @endif
+
+
+
+           <div class="alert alert-success alert-dismissible fade show success_show" style="display: none;">
+
+               <strong>Success! </strong><span id="success_message"></span>
+
+               <!-- <button type="button" class="btn-close" data-bs-dismiss="alert"></button> -->
+
+           </div>
+
            <div class="row">
 
 
@@ -45,7 +65,8 @@
                                        <div class="d-flex align-items-center">
                                            <label class="avatar avatar-xxl profile-cover-avatar m-0" for="edit_img">
                                                <img id="avatarImg" class="avatar-img"
-                                                   src="{{ asset('public/upload/no-image.jpg') }}" alt="Profile Image">
+                                                   src="{{ asset('public/upload/vendors/small/' . $vendorsprofile->image) }}"
+                                                   alt="Profile Image">
                                                <input type="file" name="image" id="edit_img">
                                                <span class="avatar-edit">
                                                    <i data-feather="edit-2" class="avatar-uploader-icon shadow-soft"></i>
@@ -101,8 +122,9 @@
 
                                            <div class="col-md-2">
                                                <div class="form-group"> <label for="poc">POC Full</label>
-                                                   <input type="text" id="pocu" name="pocu[]" class="form-control"
-                                                       placeholder="Enter POC" value="{{ $attribute_data[$i]->poc }}">
+                                                   <input type="text" id="pocu" name="pocu[]"
+                                                       class="form-control" placeholder="Enter POC"
+                                                       value="{{ $attribute_data[$i]->poc }}">
                                                </div>
                                            </div>
                                            <div class="col-md-2">
@@ -122,7 +144,8 @@
                                            <div class="col-md-2">
                                                <div class="form-group"> <label for="telephone">Company Telephone</label>
                                                    <input type="text" id="telephoneu" name="telephoneu[]"
-                                                       class="form-control" placeholder="Enter Telephone"
+                                                       onkeypress="return validateNumber(event)" class="form-control"
+                                                       placeholder="Enter Telephone"
                                                        value="{{ $attribute_data[$i]->telephone }}">
                                                </div>
                                            </div>
@@ -168,7 +191,8 @@
                                        <div class="col-md-2">
                                            <div class="form-group"> <label for="telephone">Company Telephone</label>
                                                <input type="text" id="telephone" name="telephone1[]"
-                                                   class="form-control" placeholder="Enter Telephone">
+                                                   onkeypress="return validateNumber(event)" class="form-control"
+                                                   placeholder="Enter Telephone">
                                            </div>
                                        </div>
                                    </div>
@@ -324,7 +348,8 @@
                                    <label for="name" class="col-sm-3 col-form-label input-label">Mobile No.</label>
                                    <div class="col-sm-9">
                                        <input type="text" class="form-control" id="mobile" name="mobile"
-                                           placeholder="Enter Enter Mobile No." value="{{ $vendorsprofile->mobile }}">
+                                           onkeypress="return validateNumber(event)" placeholder="Enter Enter Mobile No."
+                                           value="{{ $vendorsprofile->mobile }}">
 
                                        <p class="form-error-text" id="mobile_error"
                                            style="color: red; margin-top: 10px;"></p>
@@ -399,7 +424,7 @@
 
                        $(wrapper).append(
 
-                           '<div class="row"><div class="col-md-2"><div class="form-group"><label for="poc">POC Full</label><input type="text" id="poc" name="poc1[]" class="form-control" placeholder="Enter POC"></div></div><div class="col-md-2"><div class="form-group"> <label for="poctitle">POC Title</label><input type="text" id="poctitle" name="poctitle1[]" class="form-control" placeholder="Enter  POC Title"></div></div><div class="col-md-2"><div class="form-group"> <label for="email">Company Email</label><input type="text" id="c_email" name="c_email1[]" class="form-control" placeholder="Enter Email"></div></div><div class="col-md-2"><div class="form-group"> <label for="telephone">Company Telephone</label><input type="text" id="telephone" name="telephone1[]" class="form-control" placeholder="Enter Telephone"></div></div><a href="#" class="btn btn-danger pull-right remove_field1" style="margin-right: 0;margin-top: 22px;width: 9%;float: right;height: 40px;margin-left: 150px;">Remove</a></div>'
+                           '<div class="row"><div class="col-md-2"><div class="form-group"><label for="poc">POC Full</label><input type="text" id="poc" name="poc1[]" class="form-control" placeholder="Enter POC"></div></div><div class="col-md-2"><div class="form-group"> <label for="poctitle">POC Title</label><input type="text" id="poctitle" name="poctitle1[]" class="form-control" placeholder="Enter  POC Title"></div></div><div class="col-md-2"><div class="form-group"> <label for="email">Company Email</label><input type="text" id="c_email" name="c_email1[]" class="form-control" placeholder="Enter Email"></div></div><div class="col-md-2"><div class="form-group"> <label for="telephone">Company Telephone</label><input type="text" id="telephone" name="telephone1[]" onkeypress="return validateNumber(event)" class="form-control" placeholder="Enter Telephone"></div></div><a href="#" class="btn btn-danger pull-right remove_field1" style="margin-right: 0;margin-top: 22px;width: 9%;float: right;height: 40px;margin-left: 150px;">Remove</a></div>'
 
                        );
 
@@ -521,6 +546,28 @@
                $('#submit_button').hide();
 
                $('#category_form').submit();
+
+           }
+       </script>
+
+       <script type="text/javascript">
+           function validateNumber(event) {
+
+               var key = window.event ? event.keyCode : event.which;
+
+               if (event.keyCode === 8 || event.keyCode === 46) {
+
+                   return true;
+
+               } else if (key < 48 || key > 57) {
+
+                   return false;
+
+               } else {
+
+                   return true;
+
+               }
 
            }
        </script>

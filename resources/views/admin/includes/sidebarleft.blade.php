@@ -74,7 +74,7 @@
 
             @if (Auth::user()->vendor != 1)
 
-            @if (in_array('8', $permission1))
+                @if (in_array('8', $permission1))
                     <li class="{{ request()->segment(2) == 'vendors' ? 'active' : '' }}"><a
                             href="{{ route('vendors.index') }}"
                             class="{{ request()->segment(2) == 'vendors' ? 'active' : '' }}">
@@ -82,7 +82,7 @@
                     </li>
                 @endif
 
-                 @if (in_array('9', $permission1))
+                @if (in_array('9', $permission1))
                     <li class="{{ request()->segment(2) == 'price' ? 'active' : '' }}"><a
                             href="{{ route('price.edit', 1) }}"
                             class="{{ request()->segment(2) == 'price' ? 'active' : '' }}">
@@ -115,15 +115,15 @@
                 @endif
 
 
-                
+
 
             @endif
 
             @if (Auth::user()->vendor == 1)
 
-                <li class="{{ request()->segment(2) == 'vendorsprofile' ? 'active' : '' }}"><a
+                <li class="{{ request()->segment(1) == 'vendorsprofile' ? 'active' : '' }}"><a
                         href="{{ route('vendorsprofile.index') }}"
-                        class="{{ request()->segment(2) == 'vendorsprofile' ? 'active' : '' }}">
+                        class="{{ request()->segment(1) == 'vendorsprofile' ? 'active' : '' }}">
                         <i class="fa fa-user-plus"></i><span>Profile</span></a>
                 </li>
                 
@@ -134,12 +134,14 @@
                         <i class="fa fa-file"></i><span>Subscription</span></a>
                 </li>
 
+
                 
 
                 <li class="{{ request()->segment(2) == 'subscription-details' ? 'active' : '' }}"><a
                         href="{{ route('subscription-details.index') }}"
                         class="{{ request()->segment(2) == 'subscription-details' ? 'active' : '' }}">
                         <i class="fa fa-file"></i><span>Subscription Details</span></a>
+
                 </li>
             @endif
 

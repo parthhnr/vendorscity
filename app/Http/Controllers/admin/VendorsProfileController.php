@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use DB;
+use Image;
 use App\Models\Admin\City;
 use App\Models\Admin\UserPermission;
 
@@ -85,7 +86,7 @@ class VendorsProfileController extends Controller
     public function update(Request $request, $id)
     {
         // echo "<pre>";
-        // print_r($request->post());
+        // print_r($_FILES);
         // echo "</pre>";exit;
         
         $data['role_id']=$_POST['hidden_role_id'];
@@ -111,6 +112,25 @@ class VendorsProfileController extends Controller
             $data['mobile']=null;
         }       
         $data['vendor'] = 1;
+
+        if($request->hasfile('image') != ''){
+
+            $image = $request->file('image');
+            $remove_space = str_replace(' ', '-', $image->getClientOriginalName());
+            $data['image'] = time() . $remove_space;
+            $destinationPath = public_path('upload/vendors/small');
+            $img = Image::make($image->path());
+            $width=100;
+            $height=100;
+            $img->resize($width,$height,function($constraint){
+            })->save($destinationPath.'/'.$data['image']);
+              
+            $destinationPath = public_path('upload/vendors/');
+            $image->move($destinationPath,$data['image']);
+            $image = $data['image'];
+            $data['image']  = $image;
+        }
+
 
         if ($request->hasFile('vatcertificate')) 
     {
@@ -160,7 +180,9 @@ class VendorsProfileController extends Controller
     }
 
        
-
+    // echo"<pre>";
+    // print_r($data);
+    // echo"</pre>";exit;
 //    $vendors_id = DB::table('users')->insertGetId($data);
     DB::table('users')->where('id', $id)->update($data);
 
@@ -272,7 +294,7 @@ class VendorsProfileController extends Controller
 
         $result = DB::table('vendors_attribute')->where('pid', '=',$service)->where('id', '=',$id)->delete();
 
-        return redirect()->route('vendorsprofile',$service)->with('success','Vendors Attribute has been deleted successfully');
+        return redirect()->route('vendorsprofile.edit',$service)->with('success',' Deleted Successfully');
 
     }
 }
