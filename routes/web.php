@@ -36,23 +36,26 @@ use App\Http\Controllers\admin\SubscriptionController;
 
 //Clear config cache:
 Route::get('/config-cache', function() {
-    $exitCode = Artisan::call('config:cache');
+    Artisan::call('config:cache');
+    Artisan::call('cache:clear');
+    Artisan::call('view:clear');
+    Artisan::call('optimize:clear');
     return 'Config cache cleared';
 }); 
 // Clear application cache:
-Route::get('/clear-cache', function() {
-    $exitCode = Artisan::call('cache:clear');
-    return 'Application cache cleared';
-});
-// Clear view cache:
-Route::get('/view-clear', function() {
-    $exitCode = Artisan::call('view:clear');
-    return 'View cache cleared';
-});
- Route::get('/optimize-clear', function() {
-    $exitCode = Artisan::call('optimize:clear');
-    return 'Application cache cleared successfully';
-});
+// Route::get('/clear-cache', function() {
+//     $exitCode = Artisan::call('cache:clear');
+//     return 'Application cache cleared';
+// });
+// // Clear view cache:
+// Route::get('/view-clear', function() {
+//     $exitCode = Artisan::call('view:clear');
+//     return 'View cache cleared';
+// });
+//  Route::get('/optimize-clear', function() {
+//     $exitCode = Artisan::call('optimize:clear');
+//     return 'Application cache cleared successfully';
+// });
 
 /*------Front routes start ------*/
 

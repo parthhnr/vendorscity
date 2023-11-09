@@ -8,17 +8,28 @@
        @php
            $vendor_data = Auth::user();
        @endphp
-       {{-- @php
-           echo '<pre>';
-           print_r($vendor_data);
-           echo '</pre>';
-           exit();
-       @endphp --}}
 
-
-       <!-- Page Wrapper -->
-       <!-- <div class="page-wrapper"> -->
        <div class="content container-fluid">
+
+           @if ($message = Session::get('success'))
+               <div class="alert alert-success alert-dismissible fade show">
+
+                   <strong>Success!</strong> {{ $message }}
+
+                   <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+
+               </div>
+           @endif
+
+
+
+           <div class="alert alert-success alert-dismissible fade show success_show" style="display: none;">
+
+               <strong>Success! </strong><span id="success_message"></span>
+
+               <!-- <button type="button" class="btn-close" data-bs-dismiss="alert"></button> -->
+
+           </div>
 
            <div class="row justify-content-lg-center">
                <div class="col-lg-10">
@@ -36,25 +47,7 @@
                        </div>
                    </div>
                    <!-- /Page Header -->
-                   @if ($message = Session::get('success'))
-                       <div class="alert alert-success alert-dismissible fade show">
 
-                           <strong>Success!</strong> {{ $message }}
-
-                           <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-
-                       </div>
-                   @endif
-
-
-
-                   <div class="alert alert-success alert-dismissible fade show success_show" style="display: none;">
-
-                       <strong>Success! </strong><span id="success_message"></span>
-
-                       <!-- <button type="button" class="btn-close" data-bs-dismiss="alert"></button> -->
-
-                   </div>
 
 
                    <div class="profile-cover"
@@ -87,7 +80,7 @@
 
                            @if ($vendor_data->mobile != '')
                                <li class="list-inline-item">
-                                   <i class="fa-solid fa-mobile"></i>{{ $vendor_data->mobile }}
+                                   <i class="ion-ipod"></i> <span>{{ $vendor_data->mobile }}</span>
                                </li>
                            @endif
 
@@ -268,14 +261,24 @@
                                                </li>
                                                <li class="pb-2">
                                                    @if ($vendor_data->vatcertificate != '')
-                                                       <img src="{{ asset('public/upload/vendors/' . $vendor_data->vatcertificate) }}"
-                                                           style="width: 10%;margin-top: 10px;" />
+                                                       <a href="{{ asset('public/upload/vendors/' . $vendor_data->vatcertificate) }}"
+                                                           download>
+                                                           <button class="btn btn-primary">Download</button>
+                                                       </a>
                                                    @else
                                                        {{ '-' }}
                                                    @endif
-
                                                </li>
                                            </div>
+
+                                           {{-- <div class="col-lg-2">
+                                               <li class="pt-2 pb-0">
+                                               </li>
+                                               <li class="pt-4">
+
+                                               </li>
+                                           </div> --}}
+
 
                                            <div class="col-lg-6">
                                                <li class="pt-2 pb-0">
@@ -283,14 +286,26 @@
                                                </li>
                                                <li class="pb-2">
                                                    @if ($vendor_data->trncertificate != '')
-                                                       <img src="{{ asset('public/upload/vendors/' . $vendor_data->trncertificate) }}"
-                                                           style="width: 10%;margin-top: 10px;" />
+                                                       <a href="{{ asset('public/upload/vendors/' . $vendor_data->trncertificate) }}"
+                                                           download>
+                                                           <button class="btn btn-primary">Download</button>
+                                                       </a>
                                                    @else
                                                        {{ '-' }}
                                                    @endif
 
                                                </li>
                                            </div>
+                                           {{-- <div class="col-lg-2">
+                                               <li class="pt-2 pb-0">
+                                               </li>
+                                               <li class="pt-4">
+                                                   <a href="{{ asset('public/upload/vendors/' . $vendor_data->trncertificate) }}"
+                                                       download>
+                                                       <button class="btn btn-primary">Download</button>
+                                                   </a>
+                                               </li>
+                                           </div> --}}
 
 
                                            <div class="col-lg-6">
@@ -298,15 +313,27 @@
                                                    <small class="text-dark">Trade License</small>
                                                </li>
                                                <li class="pb-2">
-                                                   @if ($vendor_data->tradelicense)
-                                                       <img src="{{ asset('public/upload/vendors/' . $vendor_data->tradelicense) }}"
-                                                           style="width: 10%;margin-top: 10px;" />
+                                                   @if ($vendor_data->tradelicense != '')
+                                                       <a href="{{ asset('public/upload/vendors/' . $vendor_data->tradelicense) }}"
+                                                           download>
+                                                           <button class="btn btn-primary">Download</button>
+                                                       </a>
                                                    @else
                                                        {{ '-' }}
                                                    @endif
 
                                                </li>
                                            </div>
+                                           {{-- <div class="col-lg-2">
+                                               <li class="pt-2 pb-0">
+                                               </li>
+                                               <li class="pt-4">
+                                                   <a href="{{ asset('public/upload/vendors/' . $vendor_data->tradelicense) }}"
+                                                       download>
+                                                       <button class="btn btn-primary">Download</button>
+                                                   </a>
+                                               </li>
+                                           </div> --}}
 
                                            <div class="col-lg-6">
                                                <li class="pt-2 pb-0">
@@ -429,27 +456,26 @@
        </body>
 
        </html> -->
-
+       {{-- 
        <div class="col">
 
            <h2 class="page-title">Dashboard</h2>
 
-       </div>
+       </div> --}}
 
        </div>
 
        </div>
-       <!--  @php
+       {{-- @php
 
-           // Now you can access user data
+           Now you can access user data
 
-           echo '<pre>';
-           print_r(Auth::user()->vendor);
-           echo '</pre>';
-
+              echo '<pre>';
+              print_r(Auth::user()->vendor);
+              echo '</pre>';
        @endphp -->
-       <h4>Welcome To {{-- Auth::user()->name --}}</h4>
+       <h4>Welcome To Auth::user()->name</h4>
 
-       </div>
+       </div> --}}
 
    @stop

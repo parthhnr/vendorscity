@@ -118,10 +118,10 @@ class VendorsProfileController extends Controller
             $image = $request->file('image');
             $remove_space = str_replace(' ', '-', $image->getClientOriginalName());
             $data['image'] = time() . $remove_space;
-            $destinationPath = public_path('upload/vendors/small');
+            $destinationPath = public_path('upload/vendors/small/');
             $img = Image::make($image->path());
-            $width=100;
-            $height=100;
+            $width=300;
+            $height=300;
             $img->resize($width,$height,function($constraint){
             })->save($destinationPath.'/'.$data['image']);
               
