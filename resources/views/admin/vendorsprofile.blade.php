@@ -3,15 +3,17 @@
    @section('content')
 
 
-       {{-- @php
-    echo"<pre>";
-        print_r(Auth::user());
-    echo"</pre>";exit;
-@endphp --}}
+
 
        @php
            $vendor_data = Auth::user();
        @endphp
+       {{-- @php
+           echo '<pre>';
+           print_r($vendor_data);
+           echo '</pre>';
+           exit();
+       @endphp --}}
 
 
        <!-- Page Wrapper -->
@@ -55,14 +57,22 @@
                    </div>
 
 
-                   <div class="profile-cover">
+                   <div class="profile-cover"
+                       style="padding: 1.75rem 2rem;position:none;border-radius: 0rem;height:0rem
+                   ">
 
                    </div>
 
                    <div class="text-center mb-5">
                        <label class="avatar avatar-xxl profile-cover-avatar" for="avatar_upload">
-                           <img class="avatar-img" src="{{ asset('public/upload/vendors/small/' . $vendor_data->image) }}"
-                               alt="Profile Image">
+                           @if ($vendor_data->image != '')
+                               <img class="avatar-img"
+                                   src="{{ asset('public/upload/vendors/small/' . $vendor_data->image) }}"
+                                   alt="Profile Image">
+                           @else
+                               <img class="avatar-img" src="{{ asset('public/upload/avatar.jpg') }}" alt="Profile Image">
+                           @endif
+
 
                        </label>
                        <h2>{{ $vendor_data->name }} <i class="fas fa-certificate text-primary small" data-toggle="tooltip"

@@ -75,7 +75,7 @@ class VendorsController extends Controller
         }
               
         $data['vendor'] = 1;
-        $data['is_active'] = 0;
+        $data['is_active'] = 1;
 
         if ($request->hasFile('vatcertificate')) 
     {
@@ -423,5 +423,43 @@ class VendorsController extends Controller
 
         echo"1";
 
+    }
+
+    function vendor_check_mail(){
+
+        $email = $_POST['email']; // Replace with the email you want to search for
+
+        $result = DB::table('users')
+            ->select('*')
+            ->where('email', $email)
+            ->first();
+
+        if ($result) {
+            return 1;
+        } else {
+            return 0;
+        }
+
+            echo $result;
+    }
+
+    function vendor_edit_check_mail(){
+
+        $email = $_POST['email'];
+        $vendor_id = $_POST['vendor_id'];
+
+        $result = DB::table('users')
+            ->select('*')
+            ->where('email', $email)
+            ->where('id', '!=', $vendor_id) // Exclude user with ID 1
+            ->first();
+
+        if ($result) {
+            return 1;
+        } else {
+            return 0;
+        }
+
+            echo $result;
     }
 }
