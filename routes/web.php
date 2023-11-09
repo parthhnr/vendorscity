@@ -135,6 +135,11 @@ Route::get('/admin', function () {
     Route::resource('admin/city','App\Http\Controllers\admin\CityController');
     Route::get('/admin/delete_city', [CityController::class, 'destroy'])->name('delete_city');
     Route::post('state_show', 'App\Http\Controllers\admin\CityController@state_show');
+    Route::get('/admin/bulk_upload_city', [CityController::class, 'bulk_upload_city'])->name('bulk_upload_city');
+    Route::post('/admin/bulk_upload_city', [CityController::class, 'bulk_upload_city'])->name('bulk_upload_city');
+
+
+
 
     Route::resource('admin/service','App\Http\Controllers\admin\ServiceController');  
     Route::get('delete_service',[ServiceController::class,'destroy'])->name('delete_service'); 

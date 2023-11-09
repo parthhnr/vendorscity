@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use App\Models\Admin\City;
 use Session;
 use DB;
+use Maatwebsite\Excel\Facades\Excel;
+use Maatwebsite\Excel\Concerns\WithHeadingRow;
+
 
 class CityController extends Controller
 {
@@ -135,5 +138,37 @@ class CityController extends Controller
         $html .="</select>";
         //echo "<pre>";print_r($html);echo "</pre>";exit;
         echo $html;
+    }
+
+    function bulk_upload_city(Request $request){
+
+        if($request->input('action') == 'add_bulk'){
+
+
+            $path = $request->file('csv')->getRealPath();
+
+            $data = Excel::toArray(new class implements WithHeadingRow {
+                public function headingRow(): int
+                {
+                    return 1; // Skip the header row in the file
+                }
+            }, $path);
+
+            if (!empty($data)) {
+
+                foreach ($data[0] as $row) {
+
+                    echo "<pre>";print_r($row);echo "</pre>";
+                }
+
+            }
+            exit;
+
+            //$file = $request->file('csv');
+
+            
+        }
+
+        return view('admin.bulk_city_upload');
     }
 }
