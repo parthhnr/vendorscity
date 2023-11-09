@@ -201,6 +201,7 @@
                                                <th>Start Date</th>
                                                <th>End Date</th>
                                                <th>Status</th>
+                                               <th>Action</th>
                                            </tr>
 
                                        </thead>
@@ -228,6 +229,18 @@
                                                             <span class="badge badge-pill bg-success-light">Active</span>
                                                         @endif
 
+                                                    </td>
+                                                    <td class="text-end">
+                                                        <div class="dropdown dropdown-action">
+                                                            <a href="#" class="action-icon dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-ellipsis-h"></i></a>
+                                                            <div class="dropdown-menu dropdown-menu-right">
+                                                                
+                                                                <a class="dropdown-item" href="{{route('subscription-details.show', $data->id)}}"><i class="far fa-eye me-2"></i>View Detail</a>
+                                                                
+                                                                <a class="dropdown-item" href="{{ route('vendor-invoice', ['id' => $data->id]) }}"><i data-feather="clipboard" class="me-2"></i>Invoice</a>
+                                                                
+                                                            </div>
+                                                        </div>
                                                     </td>
                                                </tr>
                                                @php

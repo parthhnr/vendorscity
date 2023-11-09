@@ -28,6 +28,7 @@ use App\Http\Controllers\admin\VendorsProfileController;
 
 use App\Http\Controllers\admin\Pricecontroller;
 use App\Http\Controllers\admin\SubscriptionController;
+use App\Http\Controllers\admin\Subscriptiondetails_controller;
 
 
 // Route::get('/', function () {
@@ -170,7 +171,10 @@ Route::get('/admin', function () {
 
     Route::post('vendor_check_mail', 'App\Http\Controllers\admin\VendorsController@vendor_check_mail');
     Route::post('vendor_edit_check_mail', 'App\Http\Controllers\admin\VendorsController@vendor_edit_check_mail');
+
+    Route::get('admin/vendor-invoice/{id}', 'App\Http\Controllers\admin\Subscriptiondetails_controller@vendor_invoice')->name('vendor-invoice');
     
+
 
     
 
