@@ -120,7 +120,6 @@
             @endif
 
             @if (Auth::user()->vendor == 1)
-
                 <li class="{{ request()->segment(1) == 'vendorsprofile' ? 'active' : '' }}"><a
                         href="{{ route('vendorsprofile.index') }}"
                         class="{{ request()->segment(1) == 'vendorsprofile' ? 'active' : '' }}">
@@ -135,7 +134,7 @@
                 </li>
 
 
-                
+
 
                 <li class="{{ request()->segment(2) == 'subscription-details' || request()->segment(2) == 'vendor-invoice' ? 'active' : '' }}"><a
                         href="{{ route('subscription-details.index') }}"

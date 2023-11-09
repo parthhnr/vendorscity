@@ -220,6 +220,7 @@
                                     <div class="form-group">
                                         <label for="vendors">Company City</label>
                                         <select class="form-control" id="city" name="city">
+                                            <option value="">Select Company City</option>
                                             @foreach ($city_data as $city)
                                                 <option value="{{ $city->id }}" <?php if ($city->id == $vendors->city) {
                                                     echo 'selected';
@@ -494,18 +495,18 @@
             }
 
             var url = '{{ url('vendor_edit_check_mail') }}';
-            var vendor_id = '{{$vendors->id}}';
+            var vendor_id = '{{ $vendors->id }}';
 
             $.ajax({
-               url: url,
-               type: 'post',
-               data: {
-                   "_token": "{{ csrf_token() }}",
-                   "email": email,
-                   "vendor_id": vendor_id
-               },
-               success: function(msg) {
-                    if(msg == 1){
+                url: url,
+                type: 'post',
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                    "email": email,
+                    "vendor_id": vendor_id
+                },
+                success: function(msg) {
+                    if (msg == 1) {
                         jQuery('#email_error').html("Email Address Already Exists");
                         jQuery('#email_error').show().delay(0).fadeIn('show');
                         jQuery('#email_error').show().delay(2000).fadeOut('show');
@@ -514,36 +515,36 @@
                         }, 1000);
                         return false;
 
-                   }else{
+                    } else {
 
-                    var mobile = jQuery("#mobile").val();
-                    var filter = /^\d{10}$/;
+                        var mobile = jQuery("#mobile").val();
+                        var filter = /^\d{10}$/;
 
-                    if (mobile != '' && !filter.test(mobile)) {
+                        if (mobile != '' && !filter.test(mobile)) {
 
-                        jQuery('#mobile_error').html("Please Enter Valid Mobile");
-                        jQuery('#mobile_error').show().delay(0).fadeIn('show');
-                        jQuery('#mobile_error').show().delay(2000).fadeOut('show');
-                        $('html, body').animate({
-                            scrollTop: $('#mobile').offset().top - 150
-                        }, 1000);
-                        return false;
+                            jQuery('#mobile_error').html("Please Enter Valid Mobile");
+                            jQuery('#mobile_error').show().delay(0).fadeIn('show');
+                            jQuery('#mobile_error').show().delay(2000).fadeOut('show');
+                            $('html, body').animate({
+                                scrollTop: $('#mobile').offset().top - 150
+                            }, 1000);
+                            return false;
+
+                        }
+
+                        $('#spinner_button').show();
+
+                        $('#submit_button').hide();
+
+                        $('#category_form').submit();
 
                     }
+                }
+            });
 
-                    $('#spinner_button').show();
 
-                    $('#submit_button').hide();
 
-                    $('#category_form').submit();
 
-                   }
-               }
-           });
-
-            
-
-            
 
         }
     </script>

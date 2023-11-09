@@ -60,7 +60,8 @@
 
                                @method('PUT')
                                <div class="row form-group">
-                                   <label for="name" class="col-sm-3 col-form-label input-label">Image</label>
+                                   <label for="name" class="col-sm-3 col-form-label input-label">Image (300px x
+                                       300px)</label>
                                    <div class="col-sm-9">
                                        <div class="d-flex align-items-center">
                                            <label class="avatar avatar-xxl profile-cover-avatar m-0" for="edit_img">
@@ -228,6 +229,7 @@
                                    <label for="name" class="col-sm-3 col-form-label input-label">Company City</label>
                                    <div class="col-sm-9">
                                        <select class="form-control" id="city" name="city">
+                                           <option value="">Select Company City</option>
                                            @foreach ($city_data as $city)
                                                <option value="{{ $city->id }}" <?php if ($city->id == $vendorsprofile->city) {
                                                    echo 'selected';
@@ -268,8 +270,16 @@
                                        <input id="vatcertificate" name="vatcertificate" type="file"
                                            class="form-control" placeholder="Select VAT Certificate" />
                                        @if ($vendorsprofile->vatcertificate != '')
-                                           <img src="{{ asset('public/upload/vendors/' . $vendorsprofile->vatcertificate) }}"
-                                               style="width: 5%;margin-top: 10px;" />
+                                           @php
+                                               $extension = pathinfo($vendorsprofile->vatcertificate, PATHINFO_EXTENSION);
+                                           @endphp
+                                           @if (strtolower($extension) == 'pdf')
+                                               <p>{{ $vendorsprofile->vatcertificate }}</p>
+                                           @else
+                                               <img src="{{ asset('public/upload/vendors/' . $vendorsprofile->vatcertificate) }}"
+                                                   style="width: 10%;margin-top: 10px;" />
+                                           @endif
+
                                        @endif
                                    </div>
                                </div>
@@ -281,8 +291,15 @@
                                        <input id="trncertificate" name="trncertificate" type="file"
                                            class="form-control" placeholder="Select TRN Certificate" />
                                        @if ($vendorsprofile->trncertificate != '')
-                                           <img src="{{ asset('public/upload/vendors/' . $vendorsprofile->trncertificate) }}"
-                                               style="width: 5%;margin-top: 10px;" />
+                                           @php
+                                               $extension = pathinfo($vendorsprofile->trncertificate, PATHINFO_EXTENSION);
+                                           @endphp
+                                           @if (strtolower($extension) == 'pdf')
+                                               <p>{{ $vendorsprofile->trncertificate }}</p>
+                                           @else
+                                               <img src="{{ asset('public/upload/vendors/' . $vendorsprofile->trncertificate) }}"
+                                                   style="width: 10%;margin-top: 10px;" />
+                                           @endif
                                        @endif
                                    </div>
                                </div>
@@ -293,8 +310,15 @@
                                        <input id="tradelicense" name="tradelicense" type="file" class="form-control"
                                            placeholder="Select Trade License" />
                                        @if ($vendorsprofile->tradelicense != '')
-                                           <img src="{{ asset('public/upload/vendors/' . $vendorsprofile->tradelicense) }}"
-                                               style="width: 5%;margin-top: 10px;" />
+                                           @php
+                                               $extension = pathinfo($vendorsprofile->tradelicense, PATHINFO_EXTENSION);
+                                           @endphp
+                                           @if (strtolower($extension) == 'pdf')
+                                               <p>{{ $vendorsprofile->tradelicense }}</p>
+                                           @else
+                                               <img src="{{ asset('public/upload/vendors/' . $vendorsprofile->tradelicense) }}"
+                                                   style="width: 10%;margin-top: 10px;" />
+                                           @endif
                                        @endif
                                    </div>
                                </div>
@@ -364,6 +388,11 @@
                                </div>
 
                                <div class="text-end">
+
+
+                                   <a class="btn btn-primary" href="{{ route('vendorsprofile.index') }}">Cancel</a>
+                                   <button type="button" class="btn btn-primary"
+                                       onclick="javascript:category_validation()" id="submit_button">Submit</button>
                                    {{-- <button type="submit" class="btn btn-primary">Update</button> --}}
                                    <button class="btn btn-primary mb-1" type="button" disabled id="spinner_button"
                                        style="display: none;">
@@ -374,8 +403,7 @@
                                        Loading...
 
                                    </button>
-                                   <button type="button" class="btn btn-primary"
-                                       onclick="javascript:category_validation()" id="submit_button">Submit</button>
+
                                </div>
                            </form>
                            <!-- /Form -->
@@ -390,6 +418,77 @@
        {{-- </div> --}}
        <!-- /Main Wrapper -->
 
+       <!-- Delete  Modal -->
+
+       <div class="modal custom-modal fade" id="delete_model" role="dialog">
+
+           <div class="modal-dialog modal-dialog-centered">
+
+               <div class="modal-content">
+
+                   <div class="modal-body">
+                       <input type="hidden" name="hidden_url" id="hidden_url">
+
+                       <div class="modal-icon text-center mb-3">
+
+                           <i class="fas fa-trash-alt text-danger"></i>
+
+                       </div>
+
+                       <div class="modal-text text-center">
+
+                           <!-- <h3>Delete Expense Category</h3> -->
+
+                           <p>Are you sure want to delete?</p>
+
+                       </div>
+
+                   </div>
+
+                   <div class="modal-footer text-center">
+
+                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+
+                       <button type="button" class="btn btn-primary" onclick="form_sub();">Delete</button>
+
+                   </div>
+
+               </div>
+
+           </div>
+
+       </div>
+
+       <!-- /Delete Modal -->
+
+       <!-- Select one record Category Modal -->
+
+       <div class="modal custom-modal fade" id="select_one_record" role="dialog">
+
+           <div class="modal-dialog modal-dialog-centered">
+
+               <div class="modal-content">
+
+                   <div class="modal-body">
+
+                       <div class="modal-text text-center">
+
+                           <h3>Please select at least one record to delete</h3>
+
+                           <!-- <p>Are you sure want to delete?</p> -->
+
+                       </div>
+
+                   </div>
+
+               </div>
+
+           </div>
+
+       </div>
+
+       <!-- /Select one record Category Modal -->
+
 
    @stop
    @section('footer_js')
@@ -398,7 +497,11 @@
        <script>
            function singledelete(url) {
 
-               var checked = $("#form input:checked").length > 0;
+
+               var checked = url.length > 0;
+
+               $('#hidden_url').val(url);
+
 
                if (!checked) {
 
@@ -412,23 +515,16 @@
 
 
 
+           }
 
+           function form_sub() {
+               var url = $('#hidden_url').val();
 
-
-
-               var t = confirm('Are You Sure To Delete The Attribute ?');
-
-               if (t) {
-
-                   window.location.href = url;
-
-               } else {
-
-                   return false;
-
-               }
+               window.location.href = url;
 
            }
+
+
 
 
 
@@ -600,4 +696,28 @@
                }
 
            }
+       </script>
+
+       <script>
+           $(document).ready(function() {
+               // Listen for changes in the file input
+               $("#edit_img").change(function() {
+                   readURL(this);
+               });
+
+               // Function to read and display the selected image
+               function readURL(input) {
+                   if (input.files && input.files[0]) {
+                       var reader = new FileReader();
+
+                       reader.onload = function(e) {
+                           // Set the 'src' attribute of the image tag to the selected image
+                           $("#avatarImg").attr("src", e.target.result);
+
+                       };
+
+                       reader.readAsDataURL(input.files[0]);
+                   }
+               }
+           });
        </script>
