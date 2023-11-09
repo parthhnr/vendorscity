@@ -50,6 +50,42 @@ class Subscriptiondetails_controller extends Controller
 
     }
 
+    public function show($id)
+
+    {
+        $data['country_data'] = DB::table('countries')->select('*')->orderBy('id','DESC')->get();
+        $data['state_data'] = DB::table('states')->select('*')->orderBy('id','DESC')->get();
+        $data['allcity'] = DB::table('cities')->select('*')->get();
+        $data['allservices'] = DB::table('services')->select('*')->get();
+        $data['allsub_services'] = DB::table('subservices')->select('*')->get();
+
+        $result = DB::table('subscription')
+            ->select('*')
+            ->where('id', '=', $id)
+            ->orderBy('id', 'desc')
+            ->first();
+
+        $data['all_data']=$result;
+
+        return view('admin.view_subscription_detail',$data);
+
+        //echo "<pre>";print_r($result);echo "</pre>";exit;
+
+    }
+
+    public function vendor_invoice ($id){
+
+        $result = DB::table('subscription')
+            ->select('*')
+            ->where('id', '=', $id)
+            ->orderBy('id', 'desc')
+            ->first();
+
+        $data['all_data']=$result;
+        return view('admin.view_subscription_invoice',$data);
+    }
+
+
 
 
 }

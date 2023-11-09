@@ -137,9 +137,9 @@
 
                 
 
-                <li class="{{ request()->segment(2) == 'subscription-details' ? 'active' : '' }}"><a
+                <li class="{{ request()->segment(2) == 'subscription-details' || request()->segment(2) == 'vendor-invoice' ? 'active' : '' }}"><a
                         href="{{ route('subscription-details.index') }}"
-                        class="{{ request()->segment(2) == 'subscription-details' ? 'active' : '' }}">
+                        class="{{ request()->segment(2) == 'subscription-details' || request()->segment(2) == 'vendor-invoice' ? 'active' : '' }}">
                         <i class="fa fa-file"></i><span>Subscription Details</span></a>
 
                 </li>
