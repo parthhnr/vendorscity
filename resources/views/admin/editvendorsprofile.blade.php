@@ -64,9 +64,15 @@
                                    <div class="col-sm-9">
                                        <div class="d-flex align-items-center">
                                            <label class="avatar avatar-xxl profile-cover-avatar m-0" for="edit_img">
-                                               <img id="avatarImg" class="avatar-img"
-                                                   src="{{ asset('public/upload/vendors/small/' . $vendorsprofile->image) }}"
-                                                   alt="Profile Image">
+                                               @if ($vendorsprofile->image != '')
+                                                   <img id="avatarImg" class="avatar-img"
+                                                       src="{{ asset('public/upload/vendors/small/' . $vendorsprofile->image) }}"
+                                                       alt="Profile Image">
+                                               @else
+                                                   <img class="avatar-img" src="{{ asset('public/upload/avatar.jpg') }}"
+                                                       alt="Profile Image">
+                                               @endif
+
                                                <input type="file" name="image" id="edit_img">
                                                <span class="avatar-edit">
                                                    <i data-feather="edit-2" class="avatar-uploader-icon shadow-soft"></i>
@@ -337,7 +343,8 @@
                                        Login</label>
                                    <div class="col-sm-9">
                                        <input type="text" class="form-control" id="email" name="email"
-                                           placeholder="Enter Email for Login" value="{{ $vendorsprofile->email }}">
+                                           placeholder="Enter Email for Login" value="{{ $vendorsprofile->email }}"
+                                           readonly>
                                        <p class="form-error-text" id="email_error" style="color: red; margin-top: 10px;">
                                        </p>
                                    </div>
@@ -356,12 +363,17 @@
                                    </div>
                                </div>
 
-
-
-
-
                                <div class="text-end">
                                    {{-- <button type="submit" class="btn btn-primary">Update</button> --}}
+                                   <button class="btn btn-primary mb-1" type="button" disabled id="spinner_button"
+                                       style="display: none;">
+
+                                       <span class="spinner-border spinner-border-sm" role="status"
+                                           aria-hidden="true"></span>
+
+                                       Loading...
+
+                                   </button>
                                    <button type="button" class="btn btn-primary"
                                        onclick="javascript:category_validation()" id="submit_button">Submit</button>
                                </div>
@@ -385,6 +397,24 @@
        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
        <script>
            function singledelete(url) {
+
+               var checked = $("#form input:checked").length > 0;
+
+               if (!checked) {
+
+                   $('#select_one_record').modal('show');
+
+               } else {
+
+                   $('#delete_model').modal('show');
+
+               }
+
+
+
+
+
+
 
                var t = confirm('Are You Sure To Delete The Attribute ?');
 
