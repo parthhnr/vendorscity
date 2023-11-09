@@ -141,5 +141,16 @@ class Helper{
             echo "-";
         }
 	}
+
+    public static function subservicename(int $id){
+
+        $result = DB::table('subservices')->where('id',$id)->first();                                                     
+        
+        if($result !='' && isset($result)){
+            return $result->subservicename;
+        }else{
+            echo "-";
+        }
+    }
 	
 } 
