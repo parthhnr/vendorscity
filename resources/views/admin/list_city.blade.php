@@ -32,6 +32,14 @@
                    </div>
                    @if (in_array('3', $edit_perm))
                        <div class="col-auto">
+                            <a class="btn btn-primary me-1" href="{{ route('bulk_upload_city') }}">
+                               Download Bulk Upload City Format
+                            </a>
+
+                            <a class="btn btn-primary me-1" href="{{ route('bulk_upload_city') }}">
+                               <i class="fas fa-plus"></i> Bulk Upload City
+                            </a>
+
                            <a class="btn btn-primary me-1" href="{{ route('city.create') }}">
                                <i class="fas fa-plus"></i> Add City
                            </a>

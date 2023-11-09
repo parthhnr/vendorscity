@@ -36,12 +36,12 @@
                         in_array('5', $permission1))
                     <li class="submenu">
                         <a href="#"
-                            class="{{ request()->segment(2) == 'country' || request()->segment(2) == 'state' || request()->segment(2) == 'city' || request()->segment(2) == 'service' || request()->segment(2) == 'subservice' ? 'active' : '' }}">
+                            class="{{ request()->segment(2) == 'country' || request()->segment(2) == 'state' || request()->segment(2) == 'city' || request()->segment(2) == 'service' || request()->segment(2) == 'subservice' || request()->segment(2) == 'bulk_upload_city' ? 'active' : '' }}">
                             <i data-feather="pie-chart"></i> <span> Master</span> <span class="menu-arrow"></span></a>
                         <ul>
                             @if (in_array('1', $permission1))
                                 <li><a href="{{ route('country.index') }}"
-                                        class="{{ request()->segment(2) == 'country' ? 'active' : '' }}">Country</a>
+                                        class="{{ request()->segment(2) == 'country'  ? 'active' : '' }}">Country</a>
                                 </li>
                             @endif
                             @if (in_array('2', $permission1))
@@ -51,7 +51,7 @@
                             @endif
                             @if (in_array('3', $permission1))
                                 <li><a href="{{ route('city.index') }}"
-                                        class="{{ request()->segment(2) == 'city' ? 'active' : '' }}">City</a>
+                                        class="{{ request()->segment(2) == 'city' || request()->segment(2) == 'bulk_upload_city' ? 'active' : '' }}">City</a>
                                 </li>
                             @endif
                             @if (in_array('4', $permission1))
