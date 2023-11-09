@@ -143,6 +143,18 @@
                         <i class="fa fa-file"></i><span>Subscription Details</span></a>
 
                 </li>
+
+                <li class="{{ request()->segment(2) == 'leads' ? 'active' : '' }}"><a
+                        href="{{ route('leads.index') }}"
+                        class="{{ request()->segment(1) == 'leads' ? 'active' : '' }}">
+                        <i class="fa fa-file"></i><span>Leads</span></a>
+                </li>
+
+                <li class="{{ request()->segment(2) == 'acceptleads' ? 'active' : '' }}"><a
+                        href="{{ route('acceptleads.index') }}"
+                        class="{{ request()->segment(1) == 'acceptleads' ? 'active' : '' }}">
+                        <i class="fa fa-file"></i><span>Accepted Leads</span></a>
+                </li>
             @endif
 
         </ul>
