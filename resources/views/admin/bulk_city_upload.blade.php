@@ -6,11 +6,11 @@
         <div class="page-header">
             <div class="row">
                 <div class="col-sm-12">
-                    <h3 class="page-title">Upload Contact</h3>
+                    <h3 class="page-title">Upload City</h3>
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{ url('/admin') }}">Dashboard</a></li>
-                        <li class="breadcrumb-item"><a href="">Contact Us</a></li>
-                        <li class="breadcrumb-item active">Add Upload Contact</li>
+                        <li class="breadcrumb-item"><a href="{{route('city.index')}}">City</a></li>
+                        <li class="breadcrumb-item active">Add Upload City</li>
                     </ul>
                 </div>
             </div>
