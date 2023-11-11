@@ -41,7 +41,7 @@
                         <ul>
                             @if (in_array('1', $permission1))
                                 <li><a href="{{ route('country.index') }}"
-                                        class="{{ request()->segment(2) == 'country' ? 'active' : '' }}">Country</a>
+                                        class="{{ request()->segment(2) == 'country'  ? 'active' : '' }}">Country</a>
                                 </li>
                             @endif
                             @if (in_array('2', $permission1))
@@ -89,13 +89,6 @@
                             <i data-feather="credit-card"></i><span>Price</span></a>
                     </li>
                 @endif
-                @if (in_array('10', $permission1))
-                    <li class="{{ request()->segment(2) == 'cms' ? 'active' : '' }}"><a
-                            href="{{ route('cms.index') }}"
-                            class="{{ request()->segment(2) == 'cms' ? 'active' : '' }}">
-                            <i class="fa fa-user"></i><span>CMS</span></a>
-                    </li>
-                @endif
 
                 @if (in_array('6', $permission1) || in_array('7', $permission1))
                     <li class="submenu">
@@ -127,6 +120,7 @@
             @endif
 
             @if (Auth::user()->vendor == 1)
+
                 <li class="{{ request()->segment(1) == 'vendorsprofile' ? 'active' : '' }}"><a
                         href="{{ route('vendorsprofile.index') }}"
                         class="{{ request()->segment(1) == 'vendorsprofile' ? 'active' : '' }}">
@@ -141,17 +135,20 @@
                 </li>
 
 
+                
 
-
-                <li
-                    class="{{ request()->segment(2) == 'subscription-details' || request()->segment(2) == 'vendor-invoice' ? 'active' : '' }}">
-                    <a href="{{ route('subscription-details.index') }}"
+                <li class="{{ request()->segment(2) == 'subscription-details' || request()->segment(2) == 'vendor-invoice' ? 'active' : '' }}"><a
+                        href="{{ route('subscription-details.index') }}"
                         class="{{ request()->segment(2) == 'subscription-details' || request()->segment(2) == 'vendor-invoice' ? 'active' : '' }}">
                         <i class="fa fa-file"></i><span>Subscription Details</span></a>
 
                 </li>
 
-
+                <li class="{{ request()->segment(2) == 'leads' ? 'active' : '' }}"><a
+                        href="{{ route('leads.index') }}"
+                        class="{{ request()->segment(1) == 'leads' ? 'active' : '' }}">
+                        <i class="fa fa-file"></i><span>Leads</span></a>
+                </li>
 
                 <li class="{{ request()->segment(2) == 'acceptleads' ? 'active' : '' }}"><a
                         href="{{ route('acceptleads.index') }}"
@@ -159,10 +156,6 @@
                         <i class="fa fa-file"></i><span>Accepted Leads</span></a>
                 </li>
             @endif
-            <li class="{{ request()->segment(2) == 'leads' ? 'active' : '' }}"><a href="{{ route('leads.index') }}"
-                    class="{{ request()->segment(1) == 'leads' ? 'active' : '' }}">
-                    <i class="fa fa-file"></i><span>Leads</span></a>
-            </li>
 
         </ul>
     </div>

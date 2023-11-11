@@ -98,7 +98,6 @@ class CityController extends Controller
         $city->country = $request->country;
         $city->state = $request->state;
         $city->name = $request->name;
-
         $city->save();
 
         return redirect()->route('city.index')->with('success','City Updated Successfully.');

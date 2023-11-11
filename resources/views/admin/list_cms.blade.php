@@ -6,29 +6,17 @@
 
         $userId = Auth::id();
 
-        
-
         $get_user_data = Helper::get_user_data($userId);
-
-        
 
         $get_permission_data = Helper::get_permission_data($get_user_data->role_id);
 
-        
-
         $edit_perm = [];
 
-        
-
         if ($get_permission_data->editperm != '') {
-
             $edit_perm = $get_permission_data->editperm;
 
             $edit_perm = explode(',', $edit_perm);
-
         }
-
-        
 
     @endphp
 
@@ -60,34 +48,32 @@
 
                 </div>
 
-                @if (in_array('12', $edit_perm))
-
+                @if (in_array('10', $edit_perm))
                     <div class="col-auto">
 
 
 
-                       <!--  <a class="btn btn-primary me-1" href="{{ route('cms.create') }}">
+                        <a class="btn btn-primary me-1" href="{{ route('cms.create') }}">
 
                             <i class="fas fa-plus"></i> Add CMS
 
                         </a>
- -->
+
                         {{-- <a class="btn btn-primary filter-btn" href="javascript:void(0);" id="filter_search">
 
                         <i class="fas fa-filter"></i> Filter
 
                     </a> --}}
 
-                        <!-- <a class="btn btn-danger me-1" href="javascript:void('0');" onclick="delete_cms();">
+                        <a class="btn btn-danger me-1" href="javascript:void('0');" onclick="delete_cms();">
 
                             <i class="fas fa-trash"></i> Delete
 
-                        </a> -->
+                        </a>
 
 
 
                     </div>
-
                 @endif
 
 
@@ -98,33 +84,7 @@
 
 
 
-        <!-- /Page Header -->
 
-
-
-        <!-- @if ($message = Session::get('success'))
-
-    <div class="alert alert-success">
-
-                                                                                                                                                                                                                                                                                                                                                             <p>{{ $message }}</p>
-
-                                                                                                                                                                                                                                                                                                                                                            </div>
-
-    @endif  -->
-
-
-
-        <!-- Search Filter -->
-
-
-
-        <!-- Search Filter -->
-
-
-
-
-
-        <!-- /Search Filter -->
 
 
 
@@ -133,7 +93,6 @@
 
 
         @if ($message = Session::get('success'))
-
             <div class="alert alert-success alert-dismissible fade show">
 
                 <strong>Success!</strong> {{ $message }}
@@ -141,7 +100,6 @@
                 <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
 
             </div>
-
         @endif
 
 
@@ -154,7 +112,7 @@
 
                     <div class="card-body">
 
-                        <form id="form" action="{{ route('cms-delete') }}" enctype="multipart/form-data">
+                        <form id="form" action="{{ route('delete_cms') }}" enctype="multipart/form-data">
 
                             <INPUT TYPE="hidden" NAME="hidPgRefRan" VALUE="<?php echo rand(); ?>">
 
@@ -168,14 +126,12 @@
 
                                         <tr>
 
-                                            <!-- <th>Select</th> -->
+                                            <th>Select</th>
 
                                             <th>Name</th>
 
-                                            @if (in_array('12', $edit_perm))
-
+                                            @if (in_array('10', $edit_perm))
                                                 <th class="text-right">Actions</th>
-
                                             @endif
 
                                         </tr>
@@ -191,18 +147,15 @@
 
 
                                             @foreach ($cms_data as $data)
-
                                                 <tr>
 
-                                                    <!-- <td>
+                                                    <td>
 
                                                         <input name="selected[]" id="selected[]" value="{{ $data->id }}"
-
                                                             type="checkbox" class="minimal-red"
-
                                                             style="height: 20px;width: 20px;border-radius: 0px;cms: red;">
 
-                                                    </td> -->
+                                                    </td>
 
                                                     <td>
 
@@ -210,28 +163,21 @@
 
                                                     </td>
 
-                                                    @if (in_array('12', $edit_perm))
-
+                                                    @if (in_array('10', $edit_perm))
                                                         <td class="text-right">
 
                                                             <a class="btn btn-primary"
-
                                                                 href="{{ route('cms.edit', $data->id) }}"><i
-
                                                                     class="far fa-edit"></i></a>
 
                                                         </td>
-
                                                     @endif
 
                                                 </tr>
-
                                             @endforeach
 
                                     </tbody>
-
                                 @else
-
                                     <tr>
 
                                         <td class="text-center" colspan="8">{{ 'No Data Found !' }}</td>
@@ -347,7 +293,6 @@
 
 
 <script>
-
     function delete_cms() {
 
         // alert('test');
@@ -375,6 +320,4 @@
         $('#form').submit();
 
     }
-
 </script>
-
