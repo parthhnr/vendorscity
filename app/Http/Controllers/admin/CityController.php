@@ -146,23 +146,83 @@ class CityController extends Controller
 
             $path = $request->file('csv')->getRealPath();
 
-            $data = Excel::toArray(new class implements WithHeadingRow {
-                public function headingRow(): int
-                {
-                    return 1; // Skip the header row in the file
-                }
-            }, $path);
+            // $data = Excel::toArray(new class implements WithHeadingRow {
+            //     public function headingRow(): int
+            //     {
+            //         return 1; // Skip the header row in the file
+            //     }
+            // }, $path);
+
+           $data = Excel::toArray(new class implements WithHeadingRow {
+    public function headingRow(): int
+    {
+        return 1; // Skip the header row in the file
+    }
+}, $path)[0];
 
             if (!empty($data)) {
 
                 foreach ($data[0] as $row) {
 
-                    echo "<pre>";print_r($row);echo "</pre>";
+                   $countries =  DB::table('countries')
+                                ->where('country', 'LIKE', $row['country'])
+                                ->first();
+
+
+                    
+
+                    if($countries != ''){
+                        $country_id = $countries->id;
+                        $data_update_country['country'] = $row['country'];
+                        //DB::table('countries')->where('id', $country_id)->update($data_update);
+                    }else{
+                        //$country_id = 0;
+                        $data_update_country['country'] = $row['country'];
+                        $country_id = DB::table('countries')->insertGetId($data_update_country);
+                    }
+
+                    $states =  DB::table('states')
+                                ->where('country_id', $country_id)
+                                ->where('state', 'LIKE', $row['state'])
+                                ->first();
+
+                    if($states != ''){
+                        $states_id = $states->id;
+                        $data_update_states['country_id'] = $country_id;
+                        $data_update_states['state'] = $row['state'];
+                        DB::table('states')->where('id', $states_id)->update($data_update_states);
+                    }else{
+                        $data_update_states['country_id'] = $country_id;
+                        $data_update_states['state'] = $row['state'];
+                        $states_id = DB::table('states')->insertGetId($data_update_states);
+                    }
+
+                    $cities =  DB::table('cities')
+                                ->where('country', $country_id)
+                                ->where('state', $states_id)
+                                ->where('name', 'LIKE', $row['cities'])
+                                ->first();
+
+                    if($cities != ''){
+                        $data_update_cities['country'] = $country_id;
+                        $data_update_cities['state'] = $states_id;
+                        $data_update_cities['name'] = $row['cities'];
+                        DB::table('cities')->where('id', $cities->id)->update($data_update_cities);
+                    }else{
+
+                        $data_update_cities['country'] = $country_id;
+                        $data_update_cities['state'] = $states_id;
+                        $data_update_cities['name'] = $row['cities'];
+                        $states_id = DB::table('cities')->insertGetId($data_update_cities);
+
+                    }
+
+                    //echo "<pre>";print_r($cities);echo "</pre>";
                 }
 
             }
-            exit;
-
+            //exit;
+            return redirect()->route('city.index')->with('success','Data Insert Successfully');
             //$file = $request->file('csv');
 
             
