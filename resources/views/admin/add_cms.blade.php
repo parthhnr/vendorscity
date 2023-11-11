@@ -35,6 +35,8 @@
                                         <label for="name"> Name</label>
                                         <input id="name" name="name" type="text" class="form-control"
                                             placeholder="Enter Name" value="" />
+                                        <p class="form-error-text" id="name_error" style="color: red; margin-top: 10px;">
+                                        </p>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
@@ -100,9 +102,12 @@
         function cms_validation() {
             var name = jQuery("#name").val();
             if (name == '') {
-                jQuery('#validate').html("Please Enter  Name");
-                jQuery('#validate').show().delay(0).fadeIn('show');
-                jQuery('#validate').show().delay(2000).fadeOut('show');
+                jQuery('#name_error').html("Please Enter Name");
+                jQuery('#name_error').show().delay(0).fadeIn('show');
+                jQuery('#name_error').show().delay(2000).fadeOut('show');
+                $('html, body').animate({
+                    scrollTop: $('#name').offset().top - 150
+                }, 1000);
                 return false;
             }
             // var meta_title = jQuery("#meta_title").val();

@@ -31,7 +31,6 @@ use App\Http\Controllers\admin\SubscriptionController;
 use App\Http\Controllers\admin\Subscriptiondetails_controller;
 use App\Http\Controllers\admin\Leadscontroller;
 use App\Http\Controllers\admin\AcceptLeadscontroller;
-use App\Http\Controllers\admin\CmsController;
 
 
 // Route::get('/', function () {
@@ -40,26 +39,23 @@ use App\Http\Controllers\admin\CmsController;
 
 //Clear config cache:
 Route::get('/config-cache', function() {
-    Artisan::call('config:cache');
-    Artisan::call('cache:clear');
-    Artisan::call('view:clear');
-    Artisan::call('optimize:clear');
+    $exitCode = Artisan::call('config:cache');
     return 'Config cache cleared';
 }); 
 // Clear application cache:
-// Route::get('/clear-cache', function() {
-//     $exitCode = Artisan::call('cache:clear');
-//     return 'Application cache cleared';
-// });
-// // Clear view cache:
-// Route::get('/view-clear', function() {
-//     $exitCode = Artisan::call('view:clear');
-//     return 'View cache cleared';
-// });
-//  Route::get('/optimize-clear', function() {
-//     $exitCode = Artisan::call('optimize:clear');
-//     return 'Application cache cleared successfully';
-// });
+Route::get('/clear-cache', function() {
+    $exitCode = Artisan::call('cache:clear');
+    return 'Application cache cleared';
+});
+// Clear view cache:
+Route::get('/view-clear', function() {
+    $exitCode = Artisan::call('view:clear');
+    return 'View cache cleared';
+});
+ Route::get('/optimize-clear', function() {
+    $exitCode = Artisan::call('optimize:clear');
+    return 'Application cache cleared successfully';
+});
 
 /*------Front routes start ------*/
 
@@ -187,10 +183,6 @@ Route::get('/admin', function () {
 
     Route::resource('admin/leads','App\Http\Controllers\admin\Leadscontroller'); 
     Route::resource('admin/acceptleads','App\Http\Controllers\admin\AcceptLeadscontroller'); 
-
-
-    Route::resource('admin/cms','App\Http\Controllers\admin\CmsController'); 
-    Route::get('delete_cms',[CmsController::class,'destroy'])->name('delete_cms');
     
 
 

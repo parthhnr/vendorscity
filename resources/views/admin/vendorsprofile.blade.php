@@ -455,7 +455,7 @@
 
        </body>
 
-       </html> -->
+       </html>
        {{-- 
        <div class="col">
 

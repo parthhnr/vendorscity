@@ -28,10 +28,6 @@ use App\Http\Controllers\admin\VendorsProfileController;
 
 use App\Http\Controllers\admin\Pricecontroller;
 use App\Http\Controllers\admin\SubscriptionController;
-use App\Http\Controllers\admin\Subscriptiondetails_controller;
-use App\Http\Controllers\admin\Leadscontroller;
-use App\Http\Controllers\admin\AcceptLeadscontroller;
-use App\Http\Controllers\admin\CmsController;
 
 
 // Route::get('/', function () {
@@ -40,26 +36,23 @@ use App\Http\Controllers\admin\CmsController;
 
 //Clear config cache:
 Route::get('/config-cache', function() {
-    Artisan::call('config:cache');
-    Artisan::call('cache:clear');
-    Artisan::call('view:clear');
-    Artisan::call('optimize:clear');
+    $exitCode = Artisan::call('config:cache');
     return 'Config cache cleared';
 }); 
 // Clear application cache:
-// Route::get('/clear-cache', function() {
-//     $exitCode = Artisan::call('cache:clear');
-//     return 'Application cache cleared';
-// });
-// // Clear view cache:
-// Route::get('/view-clear', function() {
-//     $exitCode = Artisan::call('view:clear');
-//     return 'View cache cleared';
-// });
-//  Route::get('/optimize-clear', function() {
-//     $exitCode = Artisan::call('optimize:clear');
-//     return 'Application cache cleared successfully';
-// });
+Route::get('/clear-cache', function() {
+    $exitCode = Artisan::call('cache:clear');
+    return 'Application cache cleared';
+});
+// Clear view cache:
+Route::get('/view-clear', function() {
+    $exitCode = Artisan::call('view:clear');
+    return 'View cache cleared';
+});
+ Route::get('/optimize-clear', function() {
+    $exitCode = Artisan::call('optimize:clear');
+    return 'Application cache cleared successfully';
+});
 
 /*------Front routes start ------*/
 
@@ -139,11 +132,6 @@ Route::get('/admin', function () {
     Route::resource('admin/city','App\Http\Controllers\admin\CityController');
     Route::get('/admin/delete_city', [CityController::class, 'destroy'])->name('delete_city');
     Route::post('state_show', 'App\Http\Controllers\admin\CityController@state_show');
-    Route::get('/admin/bulk_upload_city', [CityController::class, 'bulk_upload_city'])->name('bulk_upload_city');
-    Route::post('/admin/bulk_upload_city', [CityController::class, 'bulk_upload_city'])->name('bulk_upload_city');
-
-
-
 
     Route::resource('admin/service','App\Http\Controllers\admin\ServiceController');  
     Route::get('delete_service',[ServiceController::class,'destroy'])->name('delete_service'); 
@@ -178,21 +166,8 @@ Route::get('/admin', function () {
     Route::post('based_on_booking_services',[SubscriptionController::class,'based_on_booking_services'])->name('based_on_booking_services');
     Route::post('based_on_listing_criteria',[SubscriptionController::class,'based_on_listing_criteria'])->name('based_on_listing_criteria');
 
-    Route::resource('admin/subscription-details','App\Http\Controllers\admin\Subscriptiondetails_controller');
 
-    Route::post('vendor_check_mail', 'App\Http\Controllers\admin\VendorsController@vendor_check_mail');
-    Route::post('vendor_edit_check_mail', 'App\Http\Controllers\admin\VendorsController@vendor_edit_check_mail');
-
-    Route::get('admin/vendor-invoice/{id}', 'App\Http\Controllers\admin\Subscriptiondetails_controller@vendor_invoice')->name('vendor-invoice');
-
-    Route::resource('admin/leads','App\Http\Controllers\admin\Leadscontroller'); 
-    Route::resource('admin/acceptleads','App\Http\Controllers\admin\AcceptLeadscontroller'); 
-
-
-    Route::resource('admin/cms','App\Http\Controllers\admin\CmsController'); 
-    Route::get('delete_cms',[CmsController::class,'destroy'])->name('delete_cms');
     
-
 
     
 

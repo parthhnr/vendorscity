@@ -294,7 +294,7 @@ class VendorsProfileController extends Controller
 
         $result = DB::table('vendors_attribute')->where('pid', '=',$service)->where('id', '=',$id)->delete();
 
-        return redirect()->route('vendorsprofile.edit',$service)->with('success',' Deleted Successfully');
+        return redirect()->route('vendorsprofile.edit',$service)->with('success','Vendors Attributes Deleted Successfully');
 
     }
 }

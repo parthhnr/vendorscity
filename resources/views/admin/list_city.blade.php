@@ -32,13 +32,13 @@
                    </div>
                    @if (in_array('3', $edit_perm))
                        <div class="col-auto">
-                            <a class="btn btn-primary me-1" href="{{ route('bulk_upload_city') }}">
+                           <a class="btn btn-primary me-1" href="{{ route('bulk_upload_city') }}">
                                Download Bulk Upload City Format
-                            </a>
+                           </a>
 
-                            <a class="btn btn-primary me-1" href="{{ route('bulk_upload_city') }}">
+                           <a class="btn btn-primary me-1" href="{{ route('bulk_upload_city') }}">
                                <i class="fas fa-plus"></i> Bulk Upload City
-                            </a>
+                           </a>
 
                            <a class="btn btn-primary me-1" href="{{ route('city.create') }}">
                                <i class="fas fa-plus"></i> Add City
@@ -47,9 +47,7 @@
                                onclick="delete_city();return false;">
                                <i class="fas fa-trash"></i> Delete
                            </a>
-                           <!-- <a class="btn btn-primary filter-btn" href="javascript:void(0);" id="filter_search">
-                                                                 <i class="fas fa-filter"></i>
-                                                                </a> -->
+
                        </div>
                    @endif
                </div>
@@ -63,32 +61,6 @@
                </div>
            @endif
 
-           <!-- Search Filter -->
-           <!-- <div id="filter_inputs" class="card filter-card">
-                                                              <div class="card-body pb-0">
-                                                               <div class="row">
-                                                                <div class="col-sm-6 col-md-3">
-                                                                 <div class="form-group">
-                                                                  <label>Name</label>
-                                                                  <input type="text" class="form-control">
-                                                                 </div>
-                                                                </div>
-                                                                <div class="col-sm-6 col-md-3">
-                                                                 <div class="form-group">
-                                                                  <label>Email</label>
-                                                                  <input type="text" class="form-control">
-                                                                 </div>
-                                                                </div>
-                                                                <div class="col-sm-6 col-md-3">
-                                                                 <div class="form-group">
-                                                                  <label>Phone</label>
-                                                                  <input type="text" class="form-control">
-                                                                 </div>
-                                                                </div>
-                                                               </div>
-                                                              </div>
-                                                             </div> -->
-           <!-- /Search Filter -->
 
 
 
