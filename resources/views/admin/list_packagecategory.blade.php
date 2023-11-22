@@ -80,8 +80,8 @@
                                         <tr>
                                             <th>Select</th>
                                             <th>Service</th>
-                                            <th>Subservice</th>
-                                            <th>Catgory</th>
+                                            <th>Sub Service</th>
+                                            <th>Package Catgory</th>
                                             <!-- <th>Page Url</th> -->
                                             @if (in_array('11', $edit_perm))
                                                 <th class="text-right">Actions</th>

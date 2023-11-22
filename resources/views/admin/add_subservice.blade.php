@@ -129,10 +129,10 @@
                                 <div class="col-lg-6">
                                     <div class="form-group">
 
-                                        <label for="name">Charge</label>
+                                        <label for="name">Inquiry Charge</label>
 
                                         <input id="charge" name="charge" type="text" class="form-control"
-                                            placeholder="Enter Charge" value=""
+                                            placeholder="Enter Inquiry Charge" value=""
                                             onkeypress="return validateNumber(event)" />
                                         <p class="form-error-text" id="charge_error" style="color: red; margin-top: 10px;">
                                         </p>
@@ -289,7 +289,7 @@
 
             var charge = jQuery("#charge").val();
             if (charge == '') {
-                jQuery('#charge_error').html("Please Enter Charge");
+                jQuery('#charge_error').html("Please Enter Inquiry Charge");
                 jQuery('#charge_error').show().delay(0).fadeIn('show');
                 jQuery('#charge_error').show().delay(2000).fadeOut('show');
                 $('html, body').animate({

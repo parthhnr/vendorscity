@@ -197,9 +197,9 @@
 
                                                <th>Image</th>
 
-                                               <!-- {{-- <th>Set Order</th> --}} -->
+                                               {{-- <!-- <th>Set Order</th> --> --}}
 
-                                               <th>Charge</th>
+                                               <th>Inquiry Charge</th>
 
                                                <th>No Of Inquiry</th>
 
@@ -290,8 +290,6 @@
                                                    @endif
                                                </tr>
                                            @endforeach
-
-
 
                                        </tbody>
 

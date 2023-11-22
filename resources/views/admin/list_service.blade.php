@@ -25,9 +25,6 @@
        <div class="content container-fluid">
 
 
-
-
-
            <!-- Page Header -->
 
            <div class="page-header">
@@ -71,13 +68,7 @@
 
                        </div>
                    @endif
-
-
-
-
-
                </div>
-
            </div>
 
 

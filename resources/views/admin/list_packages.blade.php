@@ -80,7 +80,7 @@
                                         <tr>
                                             <th>Select</th>
                                             <th>Service</th>
-                                            <th>Subservice</th>
+                                            <th>Sub Service</th>
                                             <th>Packages Catgory</th>
                                             <th>Name</th>
                                             <th>Image</th>
