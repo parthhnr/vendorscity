@@ -51,7 +51,11 @@ class SubserviceController extends Controller
         $subservice->description=$request->description;
         $subservice->charge=$request->charge;
         $subservice->no_of_inquiry=$request->no_of_inquiry;        
-        $subservice->is_bookable=$request->is_bookable;
+        // $subservice->serviceprice=$request->serviceprice;        
+       
+        $subservice->is_bookable = implode(',', $request->is_bookable);
+
+
         
         
         if($request->hasfile('image') != ''){
@@ -73,6 +77,10 @@ class SubserviceController extends Controller
             $image = "";
         }
         $subservice->image  = $image;
+
+        // echo"<pre>";
+        // print_r($subservice);
+        // echo"</pre>";exit;
        
         $subservice->save();
         return redirect()->route('subservice.index')->with('success', 'Sub Service Added Successfully');
@@ -113,9 +121,7 @@ class SubserviceController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // echo"<pre>";
-        // print_r($request->post());
-        // echo"</pre>";exit;
+       
         
         $subservice=Subservice::find($id);
         $subservice->serviceid=$request->serviceid;
@@ -123,7 +129,9 @@ class SubserviceController extends Controller
         $subservice->description=$request->description;
         $subservice->charge=$request->charge;
         $subservice->no_of_inquiry=$request->no_of_inquiry;
-        $subservice->is_bookable=$request->is_bookable;          
+        // $subservice->serviceprice=$request->serviceprice;
+        
+        $subservice->is_bookable = implode(',', $request->is_bookable);       
 
 
         if($request->hasfile('image') != ''){

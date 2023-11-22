@@ -62,83 +62,104 @@
                             @csrf
 
                             <div class="row">
-                                
-                                <div class="col-lg-6">
-                                <div class="form-group">
-
-                                    <label for="name">Service</label>
-
-                                    <select name="serviceid" id="serviceid" class="form-control">
-
-                                        <option value=""> Select Service</option>
-
-                                        @foreach ($service_data as $all_service_data)
-                                            <option value="{{ $all_service_data['id'] }}">
-                                                {{ $all_service_data['servicename'] }}
-
-                                            </option>
-                                        @endforeach
-
-                                    </select>
-                                     <p class="form-error-text" id="service_error" style="color: red; margin-top: 10px;"></p>
-
-                                </div> </div>
 
                                 <div class="col-lg-6">
-                                <div class="form-group">
+                                    <div class="form-group">
 
-                                    <label for="name">Sub Service</label>
-                                    <input id="subservicename" name="subservicename" type="text" class="form-control"
-                                        placeholder="Enter Sub Service" value="" />
+                                        <label for="name">Service</label>
 
-                                        <p class="form-error-text" id="subservice_error" style="color: red; margin-top: 10px;"></p>
-                                </div>
+                                        <select name="serviceid" id="serviceid" class="form-control">
+
+                                            <option value=""> Select Service</option>
+
+                                            @foreach ($service_data as $all_service_data)
+                                                <option value="{{ $all_service_data['id'] }}">
+                                                    {{ $all_service_data['servicename'] }}
+
+                                                </option>
+                                            @endforeach
+
+                                        </select>
+                                        <p class="form-error-text" id="service_error" style="color: red; margin-top: 10px;">
+                                        </p>
+
+                                    </div>
                                 </div>
 
                                 <div class="col-lg-6">
-                                <div class="form-group">
+                                    <div class="form-group">
 
-                                    <label for="name">Image (600px x 765px)</label>
+                                        <label for="name">Sub Service</label>
+                                        <input id="subservicename" name="subservicename" type="text" class="form-control"
+                                            placeholder="Enter Sub Service" value="" />
 
-                                    <input id="image" name="image" type="file" class="form-control"value="" />
-                                    <p class="form-error-text" id="image_error" style="color: red; margin-top: 10px;"></p>
-                                </div></div>
+                                        <p class="form-error-text" id="subservice_error"
+                                            style="color: red; margin-top: 10px;"></p>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+
+                                        <label for="name">Image (600px x 765px)</label>
+
+                                        <input id="image" name="image" type="file" class="form-control"value="" />
+                                        <p class="form-error-text" id="image_error" style="color: red; margin-top: 10px;">
+                                        </p>
+                                    </div>
+                                </div>
 
 
-                               <div class="col-lg-6">
+                                <div class="col-lg-6">
                                     <div class="form-group">
                                         <label style="width: 100%;">Is Bookable</label>
                                         <div style="padding: 9px 0;">
-                                            <input type="radio" name="is_bookable" value="0" id="book_now">
+                                            <input type="checkbox" name="is_bookable[]" value="0" id="is_bookable">
                                             Book Now
-                                            <input type="radio" name="is_bookable" value="1" id="enquiry">
-                                            Enquiry
+                                            <input type="checkbox" name="is_bookable[]" value="1" id="is_bookable">
+                                            Inquiry
                                         </div>
-                                        <p class="form-error-text" id="book_error" style="color: red; margin-top: 10px;"></p>
+                                        <p class="form-error-text" id="book_error" style="color: red; margin-top: 10px;">
+                                        </p>
                                     </div>
                                 </div>
 
 
 
-                                 <div class="col-lg-6">
-                                <div class="form-group">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
 
-                                    <label for="name">Charge</label>
+                                        <label for="name">Charge</label>
 
-                                    <input id="charge" name="charge" type="text" class="form-control"
-                                        placeholder="Enter Charge" value="" onkeypress="return validateNumber(event)"/>
-                                         <p class="form-error-text" id="charge_error" style="color: red; margin-top: 10px;"></p>
+                                        <input id="charge" name="charge" type="text" class="form-control"
+                                            placeholder="Enter Charge" value=""
+                                            onkeypress="return validateNumber(event)" />
+                                        <p class="form-error-text" id="charge_error" style="color: red; margin-top: 10px;">
+                                        </p>
+                                    </div>
                                 </div>
-                            </div>
-                                 <div class="col-lg-6">
-                                <div class="form-group">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
 
-                                    <label for="name">No Of Inquiry</label>
+                                        <label for="name">No Of Inquiry</label>
 
-                                    <input id="no_of_inquiry" name="no_of_inquiry" type="text" class="form-control"
-                                        placeholder="No Of Inquiry" value=""  onkeypress="return validateNumber(event)"/>
-                                    <p class="form-error-text" id="inquiry_error" style="color: red; margin-top: 10px;"></p>
-                                </div></div>
+                                        <input id="no_of_inquiry" name="no_of_inquiry" type="text" class="form-control"
+                                            placeholder="No Of Inquiry" value=""
+                                            onkeypress="return validateNumber(event)" />
+                                        <p class="form-error-text" id="inquiry_error"
+                                            style="color: red; margin-top: 10px;"></p>
+                                    </div>
+                                </div>
+                                {{-- <div class="form-group" style="display: none">
+
+                                    <label for="name">Booking Service Price</label>
+                                    <input id="serviceprice" name="serviceprice" type="text" class="form-control"
+                                        placeholder="Booking Service Price" value=""
+                                        onkeypress="return validateNumber(event)" />
+                                    <p class="form-error-text" id="serviceprice_error"
+                                        style="color: red; margin-top: 10px;"></p>
+                                </div> --}}
+
                                 <div class="form-group">
 
                                     <label for="description" style="margin:15px 0 5px 0px; width:100%;">
@@ -148,6 +169,7 @@
                                     <textarea id="description" name="description" class="form-control" placeholder="Enter Description"></textarea>
 
                                 </div>
+
 
                             </div>
 
@@ -160,7 +182,8 @@
                                 <button class="btn btn-primary mb-1" type="button" disabled id="spinner_button"
                                     style="display: none;">
 
-                                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                    <span class="spinner-border spinner-border-sm" role="status"
+                                        aria-hidden="true"></span>
 
                                     Loading...
 
@@ -213,7 +236,7 @@
 
     <script>
         function subservice_validation() {
-           
+
             var serviceid = jQuery("#serviceid").val();
 
             if (serviceid == '') {
@@ -228,9 +251,9 @@
 
 
 
-            
+
             var subservicename = jQuery("#subservicename").val();
-             if (subservicename == '') {
+            if (subservicename == '') {
                 jQuery('#subservice_error').html("Please Enter Sub Service");
                 jQuery('#subservice_error').show().delay(0).fadeIn('show');
                 jQuery('#subservice_error').show().delay(2000).fadeOut('show');
@@ -238,12 +261,12 @@
                     scrollTop: $('#subservicename').offset().top - 150
                 }, 1000);
                 return false;
-            }         
+            }
 
 
 
             var image = jQuery("#image").val();
-           if (image == '') {
+            if (image == '') {
                 jQuery('#image_error').html("Please Select Image");
                 jQuery('#image_error').show().delay(0).fadeIn('show');
                 jQuery('#image_error').show().delay(2000).fadeOut('show');
@@ -253,21 +276,19 @@
                 return false;
             }
 
-            var bookNow = jQuery("#book_now");
-            var enquiry = jQuery("#enquiry");
-
-            if (!bookNow.is(":checked") && !enquiry.is(":checked")) {
+            var isBookableCheckboxes = jQuery('input[name="is_bookable[]"]:checked');
+            if (isBookableCheckboxes.length === 0) {
                 jQuery('#book_error').html("Please Select Is Bookable");
                 jQuery('#book_error').show().delay(2000).fadeOut('show');
                 $('html, body').animate({
-                    scrollTop: jQuery('#book_now').offset().top - 150
+                    scrollTop: jQuery('#is_bookable').offset().top - 150
                 }, 1000);
                 return false;
             }
 
 
-             var charge = jQuery("#charge").val();
-           if (charge == '') {
+            var charge = jQuery("#charge").val();
+            if (charge == '') {
                 jQuery('#charge_error').html("Please Enter Charge");
                 jQuery('#charge_error').show().delay(0).fadeIn('show');
                 jQuery('#charge_error').show().delay(2000).fadeOut('show');
@@ -275,10 +296,10 @@
                     scrollTop: $('#charge').offset().top - 150
                 }, 1000);
                 return false;
-            } 
+            }
 
             var no_of_inquiry = jQuery("#no_of_inquiry").val();
-           if (no_of_inquiry == '') {
+            if (no_of_inquiry == '') {
                 jQuery('#inquiry_error').html("Please Enter No Of Inquiry");
                 jQuery('#inquiry_error').show().delay(0).fadeIn('show');
                 jQuery('#inquiry_error').show().delay(2000).fadeOut('show');
@@ -287,6 +308,16 @@
                 }, 1000);
                 return false;
             }
+            // var serviceprice = jQuery("#serviceprice").val();
+            // if (serviceprice == '') {
+            //     jQuery('#serviceprice_error').html("Please Enter  Booking Service Price");
+            //     jQuery('#serviceprice_error').show().delay(0).fadeIn('show');
+            //     jQuery('#serviceprice_error').show().delay(2000).fadeOut('show');
+            //     $('html, body').animate({
+            //         scrollTop: $('#serviceprice').offset().top - 150
+            //     }, 1000);
+            //     return false;
+            // }
 
 
 
@@ -316,7 +347,7 @@
             });
 
 
-            function validateNumber(event) {
+        function validateNumber(event) {
 
             var key = window.event ? event.keyCode : event.which;
 
@@ -335,7 +366,6 @@
             }
 
         }
-
     </script>
 
 @stop

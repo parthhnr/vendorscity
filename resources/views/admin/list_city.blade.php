@@ -33,10 +33,9 @@
                    @if (in_array('3', $edit_perm))
                        <div class="col-auto">
 
-                           <a class="btn btn-primary me-1" href="{{ route('bulk_upload_city') }}">
 
-                             <a class="btn btn-primary me-1" href="{{ asset('public/upload/city_upload.xlsx') }}">
 
+                           <a class="btn btn-primary me-1" href="{{ asset('public/upload/city_upload.xlsx') }}">
                                Download Bulk Upload City Format
                            </a>
 
@@ -45,7 +44,7 @@
 
                            </a>
 
-                            </a> 
+
 
 
                            <a class="btn btn-primary me-1" href="{{ route('city.create') }}">

@@ -63,23 +63,17 @@
 
                             <div class="row">
 
-                                {{-- <div class="form-group">
-
-                                    <label for="name">Group</label>
-
-                                    <select name="group_id" id="group_id" class="form-control">
-
-                                        <option value=""> Select Group</option>
-
-                                        @foreach ($all_group as $all_group_data)
-                                            <option value="{{ $all_group_data['id'] }}">{{ $all_group_data['name'] }}
-
-                                            </option>
+                                <div class="form-group">
+                                    <label for="country">Country</label>
+                                    <select class="form-control" id="country" name="country">
+                                        <option value="">Select Country</option>
+                                        @foreach ($country_data as $country)
+                                            <option value="{{ $country->id }}">{{ $country->country }}</option>
                                         @endforeach
-
                                     </select>
+                                    <p class="form-error-text" id="country_error" style="color: red; margin-top: 10px;"></p>
+                                </div>
 
-                                </div> --}}
 
 
 
@@ -88,9 +82,9 @@
                                     <label for="name">Service Name</label>
 
                                     <input id="servicename" name="servicename" type="text" class="form-control"
-                                        placeholder="Enter Service Name" value="" />
+                                        placeholder="Enter Service Name" />
 
-                                 <p class="form-error-text" id="service_error" style="color: red; margin-top: 10px;"></p>
+                                    <p class="form-error-text" id="service_error" style="color: red; margin-top: 10px;"></p>
 
                                 </div>
 
@@ -236,10 +230,18 @@
 
 
 
+            var country = jQuery("#country").val();
+            if (country == '') {
+                jQuery('#country_error').html("Please Select Country");
+                jQuery('#country_error').show().delay(0).fadeIn('show');
+                jQuery('#country_error').show().delay(2000).fadeOut('show');
+                $('html, body').animate({
+                    scrollTop: $('#country').offset().top - 150
+                }, 1000);
+                return false;
+            }
             var servicename = jQuery("#servicename").val();
-
-
-             if (servicename == '') {
+            if (servicename == '') {
                 jQuery('#service_error').html("Please Enter Service Name");
                 jQuery('#service_error').show().delay(0).fadeIn('show');
                 jQuery('#service_error').show().delay(2000).fadeOut('show');

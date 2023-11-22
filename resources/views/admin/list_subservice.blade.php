@@ -69,11 +69,7 @@
 
                            </a>
 
-                           <!--  <a class="btn btn-primary filter-btn" href="javascript:void(0);" id="filter_search">
 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             <i class="fas fa-filter"></i> Filter
-
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             </a> -->
 
                        </div>
                    @endif
@@ -90,13 +86,7 @@
 
 
 
-           <!-- @if ($message = Session::get('success'))
-    <div class="alert alert-success">
 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             <p>{{ $message }}</p>
-
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </div>
-    @endif -->
 
 
 
@@ -228,8 +218,6 @@
                                        <tbody>
 
                                            @foreach ($subservice_data as $data)
-
-                                          
                                                <tr>
 
                                                    <td><input name="selected[]" id="selected[]" value="{{ $data->id }}"
@@ -252,31 +240,43 @@
                                                    <td><img src="{{ url('public/upload/subservice/large/' . $data->image) }}"
                                                            width="50px" height="50px"></td>
 
-                                                      <td>
-                                                        @if($data->charge !='')
-                                                        {{ $data->charge }}
-                                                        @else
-                                                        {{ '-' }}
-                                                        @endif
+                                                   <td>
+                                                       @if ($data->charge != '')
+                                                           {{ $data->charge }}
+                                                       @else
+                                                           {{ '-' }}
+                                                       @endif
 
                                                    </td>
                                                    <td>
-                                                     @if($data->no_of_inquiry !='')
-                                                       {{ $data->no_of_inquiry }}
-                                                        @else
-                                                        {{ '-' }}
-                                                        @endif
+                                                       @if ($data->no_of_inquiry != '')
+                                                           {{ $data->no_of_inquiry }}
+                                                       @else
+                                                           {{ '-' }}
+                                                       @endif
 
                                                    </td>
                                                    <td>
-                                                        @if ($data->is_bookable == 0)
-                                                            Book Now
-                                                        @elseif ($data->is_bookable == 1)
-                                                            Enquiry
-                                                        @else
-                                                            Unknown Value
-                                                        @endif
-                                                    </td>
+                                                       @php
+                                                           $isBookableValues = explode(',', $data->is_bookable);
+                                                       @endphp
+
+                                                       @if (!empty($isBookableValues))
+                                                           @foreach ($isBookableValues as $key => $value)
+                                                               @if ($value == '0')
+                                                                   Book Now
+                                                               @elseif ($value == '1')
+                                                                   @if ($key > 0)
+                                                                       ,
+                                                                   @endif
+                                                                   Inquiry
+                                                               @endif
+                                                           @endforeach
+                                                       @else
+                                                           Unknown Value
+                                                       @endif
+                                                   </td>
+
 
 
                                                    @if (in_array('5', $edit_perm))
