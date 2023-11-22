@@ -86,7 +86,7 @@
                     <li class="{{ request()->segment(2) == 'price' ? 'active' : '' }}"><a
                             href="{{ route('price.edit', 1) }}"
                             class="{{ request()->segment(2) == 'price' ? 'active' : '' }}">
-                            <i data-feather="credit-card"></i><span>Price</span></a>
+                            <i data-feather="credit-card"></i><span>SubscriptionPrice</span></a>
                     </li>
                 @endif
 

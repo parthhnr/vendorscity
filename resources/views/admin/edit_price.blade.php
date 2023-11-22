@@ -97,7 +97,7 @@
 
                                 <div class="form-group">
 
-                                    <label for="based_on_booking_service_price">Price</label>
+                                    <label for="based_on_booking_service_price">Price (%)</label>
 
                                     <input id="based_on_booking_service_price" name="based_on_booking_service_price" type="text" class="form-control"
 
@@ -127,7 +127,7 @@
 
                                 <div class="form-group">
 
-                                    <label for="based_on_listing_criteria_price">Price</label>
+                                    <label for="based_on_listing_criteria_price">Price (%)</label>
 
                                     <input id="based_on_listing_criteria_price" name="based_on_listing_criteria_price" type="text" class="form-control"
 

@@ -147,23 +147,25 @@ class CityController extends Controller
 
             $path = $request->file('csv')->getRealPath();
 
-            // $data = Excel::toArray(new class implements WithHeadingRow {
-            //     public function headingRow(): int
-            //     {
-            //         return 1; // Skip the header row in the file
-            //     }
-            // }, $path);
+            $data = Excel::toArray(new class implements WithHeadingRow {
+                public function headingRow(): int
+                {
+                    return 1; // Skip the header row in the file
+                }
+            }, $path);
 
-           $data = Excel::toArray(new class implements WithHeadingRow {
-    public function headingRow(): int
-    {
-        return 1; // Skip the header row in the file
-    }
-}, $path)[0];
+//            $data = Excel::toArray(new class implements WithHeadingRow {
+//     public function headingRow(): int
+//     {
+//         return 1; // Skip the header row in the file
+//     }
+// }, $path)[0];
 
             if (!empty($data)) {
 
                 foreach ($data[0] as $row) {
+
+                    //echo "<pre>";print_r($row);echo "</pre>";exit;
 
                    $countries =  DB::table('countries')
                                 ->where('country', 'LIKE', $row['country'])
