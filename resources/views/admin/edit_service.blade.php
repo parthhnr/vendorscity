@@ -87,6 +87,20 @@
 
                                 </div> --}}
 
+                                <div class="form-group">
+                                    <label for="country">Country</label>
+                                    <select class="form-control" id="country" name="country"
+                                        onchange="state_change(this.value);">
+                                        <option value="">Select Country</option>
+                                        @foreach ($country_data as $country)
+                                            <option value="{{ $country->id }}"
+                                                {{ $country->id == $service->country ? 'selected' : '' }}>
+                                                {{ $country->country }}</option>
+                                        @endforeach
+                                    </select>
+                                    <p class="form-error-text" id="country_error" style="color: red; margin-top: 10px;"></p>
+                                </div>
+
 
 
                                 <div class="form-group">
@@ -96,7 +110,7 @@
                                     <input id="servicename" name="servicename" type="text" class="form-control"
                                         placeholder="Enter Service Name" value="{{ $service->servicename }}" />
 
-                                <p class="form-error-text" id="service_error" style="color: red; margin-top: 10px;"></p>
+                                    <p class="form-error-text" id="service_error" style="color: red; margin-top: 10px;"></p>
 
                                 </div>
 
@@ -236,9 +250,21 @@
     <script>
         function service_validation() {
 
+            var country = jQuery("#country").val();
+
+            if (country == '') {
+                jQuery('#country_error').html("Please Select Country");
+                jQuery('#country_error').show().delay(0).fadeIn('show');
+                jQuery('#country_error').show().delay(2000).fadeOut('show');
+                $('html, body').animate({
+                    scrollTop: $('#country').offset().top - 150
+                }, 1000);
+                return false;
+            }
+
             var servicename = jQuery("#servicename").val();
 
-           if (servicename == '') {
+            if (servicename == '') {
                 jQuery('#service_error').html("Please Enter Service Name");
                 jQuery('#service_error').show().delay(0).fadeIn('show');
                 jQuery('#service_error').show().delay(2000).fadeOut('show');

@@ -152,5 +152,16 @@ class Helper{
             echo "-";
         }
     }
+    public static function packagescategory(int $id){
+
+        $result = DB::table('package_categories')->where('id',$id)->first();                                                     
+        
+        if($result !='' && isset($result)){
+            return $result->name;
+        }else{
+            echo "-";
+        }
+    }
+    
 	
 } 

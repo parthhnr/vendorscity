@@ -32,6 +32,8 @@ use App\Http\Controllers\admin\Subscriptiondetails_controller;
 use App\Http\Controllers\admin\Leadscontroller;
 use App\Http\Controllers\admin\AcceptLeadscontroller;
 use App\Http\Controllers\admin\CmsController;
+use App\Http\Controllers\admin\PackageCategoryController;
+use App\Http\Controllers\admin\PackagesController;
 
 
 // Route::get('/', function () {
@@ -191,8 +193,16 @@ Route::get('/admin', function () {
 
     Route::resource('admin/cms','App\Http\Controllers\admin\CmsController'); 
     Route::get('delete_cms',[CmsController::class,'destroy'])->name('delete_cms');
-    
 
+    Route::resource('admin/packagecategory', '\App\Http\Controllers\admin\PackageCategoryController');
+    Route::post('subservice_show', 'App\Http\Controllers\admin\PackageCategoryController@subservice_show');
+    Route::get('delete_packagecategory',[PackageCategoryController::class,'destroy'])->name('delete_packagecategory');
+    
+    
+    Route::resource('admin/packages', '\App\Http\Controllers\admin\PackagesController');
+    Route::post('subservice_show', 'App\Http\Controllers\admin\PackagesController@subservice_show');
+    Route::post('packagecategory_show', 'App\Http\Controllers\admin\PackagesController@packagecategory_show');
+    Route::get('delete_packages',[PackagesController::class,'destroy'])->name('delete_packages');
 
     
 

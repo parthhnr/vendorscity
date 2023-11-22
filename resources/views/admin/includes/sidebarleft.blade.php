@@ -163,6 +163,20 @@
                     class="{{ request()->segment(1) == 'leads' ? 'active' : '' }}">
                     <i class="fa fa-file"></i><span>Leads</span></a>
             </li>
+            @if (in_array('11', $permission1))
+                <li class="{{ request()->segment(2) == 'packagecategory' ? 'active' : '' }}"><a
+                        href="{{ route('packagecategory.index') }}"
+                        class="{{ request()->segment(2) == 'packagecategory' ? 'active' : '' }}">
+                        <i class="fa fa-user"></i><span>Package Category</span></a>
+                </li>
+            @endif
+            @if (in_array('12', $permission1))
+                <li class="{{ request()->segment(2) == 'packages' ? 'active' : '' }}"><a
+                        href="{{ route('packages.index') }}"
+                        class="{{ request()->segment(2) == 'packages' ? 'active' : '' }}">
+                        <i class="fa fa-user"></i><span>Packages</span></a>
+                </li>
+            @endif
 
         </ul>
     </div>

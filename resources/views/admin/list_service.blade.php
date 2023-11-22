@@ -69,12 +69,6 @@
 
                            </a>
 
-                           <!--  <a class="btn btn-primary filter-btn" href="javascript:void(0);" id="filter_search">
-
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         <i class="fas fa-filter"></i> Filter
-
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         </a> -->
-
                        </div>
                    @endif
 
@@ -86,17 +80,6 @@
 
            </div>
 
-           <!-- /Page Header -->
-
-
-
-           <!-- @if ($message = Session::get('success'))
-    <div class="alert alert-success">
-
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         <p>{{ $message }}</p>
-
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </div>
-    @endif -->
 
 
 
@@ -208,6 +191,8 @@
 
                                                <th>Select</th>
 
+                                               <th>Country</th>
+
                                                <th>Service Name</th>
 
                                                {{-- <th>Name</th> --}}
@@ -241,7 +226,7 @@
 
                                                    </td>
 
-
+                                                   <td>{!! Helper::countryname($data->country) !!}</td>
 
                                                    <td>{{ $data->servicename }}</td>
 

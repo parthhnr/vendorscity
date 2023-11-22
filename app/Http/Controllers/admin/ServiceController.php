@@ -4,8 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+use App\Models\Admin\City;
 use App\Models\Admin\Service;
+use DB;
 
 class ServiceController extends Controller
 {
@@ -27,8 +28,9 @@ class ServiceController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        return view('admin.add_service');
+    {   
+        $data['country_data'] = DB::table('countries')->select('*')->orderBy('id','DESC')->get();
+        return view('admin.add_service',$data);
     }
 
     /**
@@ -40,6 +42,7 @@ class ServiceController extends Controller
     public function store(Request $request)
     {
         $service=New Service;
+        $service->country = $request->country;
         $service->servicename=$request->servicename;
 
         $service->save();
@@ -67,7 +70,9 @@ class ServiceController extends Controller
      */
     public function edit(Service $service)
     {
-        return view('admin.edit_service',compact('service'));
+        $data['country_data'] = DB::table('countries')->select('*')->orderBy('id','DESC')->get();
+        
+        return view('admin.edit_service',compact('service'),$data);
     }
 
     /**
@@ -80,6 +85,7 @@ class ServiceController extends Controller
     public function update(Request $request, $id)
     {
         $service= Service::find($id);
+        $service->country=$request->country;
         $service->servicename=$request->servicename;
 
         $service->update();
