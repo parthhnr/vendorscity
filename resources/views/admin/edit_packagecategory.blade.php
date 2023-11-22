@@ -68,7 +68,7 @@
 
 
                                 <div class="form-group">
-                                    <label for="name">Package Category</label>
+                                    <label for="name">Package Category Name</label>
                                     <input id="name" name="name" type="text" class="form-control"
                                         placeholder="Enter Package Category Name" value="{{ $packagecategory->name }}" />
                                     <p class="form-error-text" id="name_error" style="color: red; margin-top: 10px;"></p>
@@ -150,7 +150,7 @@
             }
             var name = jQuery("#name").val();
             if (name == '') {
-                jQuery('#name_error').html("Please Enter Package Category");
+                jQuery('#name_error').html("Please Enter Package Category Name");
                 jQuery('#name_error').show().delay(0).fadeIn('show');
                 jQuery('#name_error').show().delay(2000).fadeOut('show');
                 $('html, body').animate({

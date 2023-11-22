@@ -161,7 +161,7 @@ class PackagesController extends Controller
         $service_id = $_POST['service_id'];
         // echo $service_id;exit;
         
-        $result = DB::table('subservices')->select('*')->where('serviceid','=',$service_id)->get();        
+        $result = DB::table('subservices')->select('*')->where('serviceid','=',$service_id)->orderBy('id','DESC')->get();        
 
         $result_new = $result->toArray();
 
@@ -183,7 +183,7 @@ class PackagesController extends Controller
         $subservice_id = $_POST['subservice_id'];
         // echo $service_id;exit;
         
-        $result = DB::table('package_categories')->select('*')->where('service_id','=',$subservice_id)->get();        
+        $result = DB::table('package_categories')->select('*')->where('subservice_id','=',$subservice_id)->orderBy('id','DESC')->get();        
 
         $result_new = $result->toArray();
 

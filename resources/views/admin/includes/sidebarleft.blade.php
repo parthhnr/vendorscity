@@ -93,7 +93,27 @@
                     <li class="{{ request()->segment(2) == 'cms' ? 'active' : '' }}"><a
                             href="{{ route('cms.index') }}"
                             class="{{ request()->segment(2) == 'cms' ? 'active' : '' }}">
-                            <i class="fa fa-user"></i><span>CMS</span></a>
+                            <i class="fa fa-file"></i><span>CMS</span></a>
+                    </li>
+                @endif
+
+                <li class="{{ request()->segment(2) == 'leads' ? 'active' : '' }}"><a
+                        href="{{ route('leads.index') }}"
+                        class="{{ request()->segment(1) == 'leads' ? 'active' : '' }}">
+                        <i class="fa fa-file"></i><span>Leads</span></a>
+                </li>
+                @if (in_array('11', $permission1))
+                    <li class="{{ request()->segment(2) == 'packagecategory' ? 'active' : '' }}"><a
+                            href="{{ route('packagecategory.index') }}"
+                            class="{{ request()->segment(2) == 'packagecategory' ? 'active' : '' }}">
+                            <i class="fa fa-file"></i><span>Package Category</span></a>
+                    </li>
+                @endif
+                @if (in_array('12', $permission1))
+                    <li class="{{ request()->segment(2) == 'packages' ? 'active' : '' }}"><a
+                            href="{{ route('packages.index') }}"
+                            class="{{ request()->segment(2) == 'packages' ? 'active' : '' }}">
+                            <i class="fa fa-file"></i><span>Packages</span></a>
                     </li>
                 @endif
 
@@ -120,9 +140,6 @@
                         </ul>
                     </li>
                 @endif
-
-
-
 
             @endif
 
@@ -159,24 +176,7 @@
                         <i class="fa fa-file"></i><span>Accepted Leads</span></a>
                 </li>
             @endif
-            <li class="{{ request()->segment(2) == 'leads' ? 'active' : '' }}"><a href="{{ route('leads.index') }}"
-                    class="{{ request()->segment(1) == 'leads' ? 'active' : '' }}">
-                    <i class="fa fa-file"></i><span>Leads</span></a>
-            </li>
-            @if (in_array('11', $permission1))
-                <li class="{{ request()->segment(2) == 'packagecategory' ? 'active' : '' }}"><a
-                        href="{{ route('packagecategory.index') }}"
-                        class="{{ request()->segment(2) == 'packagecategory' ? 'active' : '' }}">
-                        <i class="fa fa-user"></i><span>Package Category</span></a>
-                </li>
-            @endif
-            @if (in_array('12', $permission1))
-                <li class="{{ request()->segment(2) == 'packages' ? 'active' : '' }}"><a
-                        href="{{ route('packages.index') }}"
-                        class="{{ request()->segment(2) == 'packages' ? 'active' : '' }}">
-                        <i class="fa fa-user"></i><span>Packages</span></a>
-                </li>
-            @endif
+
 
         </ul>
     </div>

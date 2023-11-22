@@ -30,8 +30,8 @@ class PackageCategoryController extends Controller
      */
     public function create()
     {
-        $data['service_data'] = DB::table('services')->select('*')->orderBy('id','DESC')->get();   
-        
+        $data['service_data'] = DB::table('services')->select('*')->orderBy('id','DESC')->get();
+
         $data['subservice_data'] = DB::table('subservices')->select('*')->orderBy('id','DESC')->get();
         return view('admin.add_packagecategory',$data);
     }
@@ -76,7 +76,7 @@ class PackageCategoryController extends Controller
     {   
         $data['packagecategory'] = DB::table('package_categories')->where('id', $id)->first();
         $data['service_data'] = DB::table('services')->orderBy('id','DESC')->get();       
-        $data['subservice_data'] = DB::table('subservices')->where('serviceid',$data['packagecategory']->service_id)->get();
+        $data['subservice_data'] = DB::table('subservices')->where('serviceid',$data['packagecategory']->service_id)->orderBy('id','DESC')->get();
         
       
 
@@ -118,7 +118,7 @@ class PackageCategoryController extends Controller
         $service_id = $_POST['service_id'];
         // echo $service_id;exit;
         
-        $result = DB::table('subservices')->select('*')->where('serviceid','=',$service_id)->get();        
+        $result = DB::table('subservices')->select('*')->where('serviceid','=',$service_id)->orderBy('id','DESC')->get();        
 
         $result_new = $result->toArray();
 

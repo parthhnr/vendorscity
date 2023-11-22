@@ -35,66 +35,82 @@
                             enctype="multipart/form-data">
                             @csrf
                             <div class="row">
-
-                                <div class="form-group">
-                                    <label for="service">Service</label>
-                                    <select class="form-control" id="service_id" name="service_id"
-                                        onchange="subservice_change(this.value);">
-                                        <option value="">Select Service</option>
-                                        @foreach ($service_data as $service)
-                                            <option value="{{ $service->id }}">{{ $service->servicename }}</option>
-                                        @endforeach
-                                    </select>
-                                    <p class="form-error-text" id="service_error" style="color: red; margin-top: 10px;"></p>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="service">Service</label>
+                                        <select class="form-control" id="service_id" name="service_id"
+                                            onchange="subservice_change(this.value);">
+                                            <option value="">Select Service</option>
+                                            @foreach ($service_data as $service)
+                                                <option value="{{ $service->id }}">{{ $service->servicename }}</option>
+                                            @endforeach
+                                        </select>
+                                        <p class="form-error-text" id="service_error" style="color: red; margin-top: 10px;">
+                                        </p>
+                                    </div>
                                 </div>
-
-                                <div class="form-group">
-                                    <label for="state">Sub Service</label>
-                                    <span id="subservice_chang">
-                                        <select class="form-control" id="subservice_id" name="subservice_id"
-                                            onchange="packagecategory_change(this.value);">
-                                            <option value="">Select Sub Service</option>
-                                            @foreach ($subservice_data as $subservice)
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="state">Sub Service</label>
+                                        <span id="subservice_chang">
+                                            <select class="form-control" id="subservice_id" name="subservice_id"
+                                                onchange="packagecategory_change(this.value);">
+                                                <option value="">Select Sub Service</option>
+                                                {{-- @foreach ($subservice_data as $subservice)
                                                 <option value="{{ $subservice->id }}">{{ $subservice->subservicename }}
                                                 </option>
-                                            @endforeach
+                                            @endforeach --}}
 
-                                        </select>
-                                    </span>
-                                    <p class="form-error-text" id="subservice_error" style="color: red; margin-top: 10px;">
-                                    </p>
+                                            </select>
+                                        </span>
+                                        <p class="form-error-text" id="subservice_error"
+                                            style="color: red; margin-top: 10px;">
+                                        </p>
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="state">Package Category</label>
-                                    <span id="packagecategory_chang">
-                                        <select class="form-control" id="packagecategory_id" name="packagecategory_id">
-                                            <option value="">Select Package Category</option>
-                                        </select>
-                                    </span>
-                                    <p class="form-error-text" id="packagecategory_error"
-                                        style="color: red; margin-top: 10px;">
-                                    </p>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="state">Package Category</label>
+                                        <span id="packagecategory_chang">
+                                            <select class="form-control" id="packagecategory_id" name="packagecategory_id">
+                                                <option value="">Select Package Category</option>
+                                            </select>
+                                        </span>
+                                        <p class="form-error-text" id="packagecategory_error"
+                                            style="color: red; margin-top: 10px;">
+                                        </p>
+                                    </div>
                                 </div>
 
-                                <div class="form-group">
-                                    <label for="name">Name</label>
-                                    <input id="name" name="name" type="text" class="form-control"
-                                        placeholder="Enter  Name" value="" />
-                                    <p class="form-error-text" id="name_error" style="color: red; margin-top: 10px;"></p>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="name">Name</label>
+                                        <input id="name" name="name" type="text" class="form-control"
+                                            placeholder="Enter  Name" value="" />
+                                        <p class="form-error-text" id="name_error" style="color: red; margin-top: 10px;">
+                                        </p>
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="name">Price</label>
-                                    <input id="price" name="price" type="text" class="form-control"
-                                        placeholder="Enter Price" onkeypress="return validateNumber(event)"
-                                        value="" />
-                                    <p class="form-error-text" id="price_error" style="color: red; margin-top: 10px;"></p>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="name">Price</label>
+                                        <input id="price" name="price" type="text" class="form-control"
+                                            placeholder="Enter Price" onkeypress="return validateNumber(event)"
+                                            value="" />
+                                        <p class="form-error-text" id="price_error" style="color: red; margin-top: 10px;">
+                                        </p>
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="name">Image</label>
-                                    <input id="image" name="image" type="file" class="form-control"
-                                        placeholder="Enter" value="" />
-                                    <p class="form-error-text" id="image_error" style="color: red; margin-top: 10px;"></p>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="name">Image</label>
+                                        <input id="image" name="image" type="file" class="form-control"
+                                            placeholder="Enter" value="" />
+                                        <p class="form-error-text" id="image_error" style="color: red; margin-top: 10px;">
+                                        </p>
+                                    </div>
                                 </div>
+
                                 <div class="form-group">
                                     <label for="name"> Description</label>
                                     <textarea name="description" id="description" cols="30" rows="10"></textarea>
@@ -173,7 +189,7 @@
             }
             var subservice_id = jQuery("#subservice_id").val();
             if (subservice_id == '') {
-                jQuery('#subservice_error').html("Please Select Subservice");
+                jQuery('#subservice_error').html("Please Select Sub Service");
                 jQuery('#subservice_error').show().delay(0).fadeIn('show');
                 jQuery('#subservice_error').show().delay(2000).fadeOut('show');
                 $('html, body').animate({

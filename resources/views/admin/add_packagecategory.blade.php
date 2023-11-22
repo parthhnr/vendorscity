@@ -61,9 +61,9 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="name">Category Name</label>
+                                    <label for="name">Package Category Name</label>
                                     <input id="name" name="name" type="text" class="form-control"
-                                        placeholder="Enter Category Name" value="" />
+                                        placeholder="Enter Package Category Name" value="" />
                                     <p class="form-error-text" id="name_error" style="color: red; margin-top: 10px;"></p>
                                 </div>
 
@@ -122,7 +122,7 @@
             }
             var subservice_id = jQuery("#subservice_id").val();
             if (subservice_id == '') {
-                jQuery('#subservice_error').html("Please Select Subservice");
+                jQuery('#subservice_error').html("Please Select Sub Service");
                 jQuery('#subservice_error').show().delay(0).fadeIn('show');
                 jQuery('#subservice_error').show().delay(2000).fadeOut('show');
                 $('html, body').animate({
@@ -132,7 +132,7 @@
             }
             var name = jQuery("#name").val();
             if (name == '') {
-                jQuery('#name_error').html("Please Enter Name");
+                jQuery('#name_error').html("Please Enter Package Category Name");
                 jQuery('#name_error').show().delay(0).fadeIn('show');
                 jQuery('#name_error').show().delay(2000).fadeOut('show');
                 $('html, body').animate({
