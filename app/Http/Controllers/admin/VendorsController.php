@@ -462,4 +462,10 @@ class VendorsController extends Controller
 
             echo $result;
     }
+
+    public function subscription($id){
+
+        $data['id'] = $id;
+        return view('admin.subscription_page',$data);
+    }
 }

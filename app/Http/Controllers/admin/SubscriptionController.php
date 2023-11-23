@@ -86,14 +86,16 @@ class SubscriptionController extends Controller
         //
     }
 
-    public  function base_on_service_lead(){
+    public  function base_on_service_lead($id){
+
+
 
         if(request()->input('action') == 'add'){
 
             $currentDateTime = date("Y-m-d H:i:s");
             $end_date = date('Y-m-d H:i:s', strtotime($currentDateTime . ' +30 days'));
 
-            $data['vendor_id'] = Auth::user()->id;
+            $data['vendor_id'] = request()->input('vendor_id');
             $data['subscription_name'] = request()->input('subscription_name');
             $data['subscription_id'] = request()->input('subscription_id');
             $data['country'] = request()->input('country');
@@ -113,7 +115,7 @@ class SubscriptionController extends Controller
 
             $this->insert_attribute($content);
 
-            return redirect()->route('subscription.index')->with('success','Subscription Purchased Successfully.');
+            return redirect()->route('vendors.index')->with('success','Subscription Purchased Successfully.');
 
             //echo "<pre>";print_r($data);echo "</pre>";exit;
         }
@@ -122,6 +124,7 @@ class SubscriptionController extends Controller
         $data['allcity'] = DB::table('cities')->select('*')->get();
         $data['allservices'] = DB::table('services')->select('*')->get();
         $data['allsub_services'] = DB::table('subservices')->select('*')->get();
+        $data['id'] = $id;
 
         return view('admin.base_on_service_lead',$data);
     }
@@ -149,7 +152,7 @@ class SubscriptionController extends Controller
     }
 
 
-    public  function based_on_booking_services(){
+    public  function based_on_booking_services($id){
         $data['country_data'] = DB::table('countries')->select('*')->orderBy('id','DESC')->get();
         $data['state_data'] = DB::table('states')->select('*')->orderBy('id','DESC')->get();
         $data['allcity'] = DB::table('cities')->select('*')->get();
@@ -159,7 +162,7 @@ class SubscriptionController extends Controller
             $currentDateTime = date("Y-m-d H:i:s");
             $end_date = date('Y-m-d H:i:s', strtotime($currentDateTime . ' +30 days'));
 
-            $data_new['vendor_id'] = Auth::user()->id;
+            $data_new['vendor_id'] = request()->input('vendor_id');
             $data_new['subscription_name'] = request()->input('subscription_name');
             $data_new['subscription_id'] = request()->input('subscription_id');
             // $data['country'] = request()->input('country');
@@ -174,16 +177,18 @@ class SubscriptionController extends Controller
 
             $id = DB::table('subscription')->insertGetId($data_new);
 
-            return redirect()->route('subscription.index')->with('success','Subscription Purchased Successfully.');
+            return redirect()->route('vendors.index')->with('success','Subscription Purchased Successfully.');
 
             //echo "<pre>";print_r($_POST);echo "</pre>";exit;
 
          }
+
+         $data['id'] = $id;
         
         return view('admin.based_on_booking_services',$data);
     }
 
-    public  function based_on_listing_criteria(){
+    public  function based_on_listing_criteria($id){
         $data['country_data'] = DB::table('countries')->select('*')->orderBy('id','DESC')->get();
         $data['state_data'] = DB::table('states')->select('*')->orderBy('id','DESC')->get();
         $data['allcity'] = DB::table('cities')->select('*')->get();
@@ -193,7 +198,7 @@ class SubscriptionController extends Controller
             $currentDateTime = date("Y-m-d H:i:s");
             $end_date = date('Y-m-d H:i:s', strtotime($currentDateTime . ' +30 days'));
 
-            $data_new['vendor_id'] = Auth::user()->id;
+            $data_new['vendor_id'] = request()->input('vendor_id');
             $data_new['subscription_name'] = request()->input('subscription_name');
             $data_new['subscription_id'] = request()->input('subscription_id');
             // $data['country'] = request()->input('country');
@@ -208,11 +213,13 @@ class SubscriptionController extends Controller
 
             $id = DB::table('subscription')->insertGetId($data_new);
 
-            return redirect()->route('subscription.index')->with('success','Subscription Purchased Successfully.');
+            return redirect()->route('vendors.index')->with('success','Subscription Purchased Successfully.');
 
             //echo "<pre>";print_r($_POST);echo "</pre>";exit;
 
          }
+
+         $data['id'] = $id;
         
         return view('admin.based_on_listing_criteria',$data);
     }

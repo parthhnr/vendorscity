@@ -116,6 +116,16 @@
                             <i class="fa fa-file"></i><span>Packages</span></a>
                     </li>
                 @endif
+<!-- 
+                @if (in_array('13', $permission1))
+
+                <li
+                    class="{{ request()->segment(2) == 'subscription' || request()->segment(1) == 'base_on_service_lead' || request()->segment(1) == 'based_on_booking_services' || request()->segment(1) == 'based_on_listing_criteria' ? 'active' : '' }}">
+                    <a href="{{ route('subscription.index') }}"
+                        class="{{ request()->segment(2) == 'subscription' ? 'active' : '' }}">
+                        <i class="fa fa-file"></i><span>Subscription</span></a>
+                </li>
+                 @endif -->
 
                 @if (in_array('6', $permission1) || in_array('7', $permission1))
                     <li class="submenu">
@@ -141,6 +151,8 @@
                     </li>
                 @endif
 
+                 
+
             @endif
 
             @if (Auth::user()->vendor == 1)
@@ -150,12 +162,7 @@
                         <i class="fa fa-user-plus"></i><span>Profile</span></a>
                 </li>
 
-                <li
-                    class="{{ request()->segment(2) == 'subscription' || request()->segment(1) == 'base_on_service_lead' || request()->segment(1) == 'based_on_booking_services' || request()->segment(1) == 'based_on_listing_criteria' ? 'active' : '' }}">
-                    <a href="{{ route('subscription.index') }}"
-                        class="{{ request()->segment(2) == 'subscription' ? 'active' : '' }}">
-                        <i class="fa fa-file"></i><span>Subscription</span></a>
-                </li>
+                
 
 
 

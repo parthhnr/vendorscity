@@ -316,6 +316,9 @@ input[type="checkbox"]:checked + .slider:before {
                                                             href="{{ route('vendors.edit', $vendors_data[$i]->id) }}"><i
                                                                 class="far fa-edit"></i></a>
 
+                                                        <a class="btn btn-primary"
+                                                            href="{{ route('vendors.subscription', $vendors_data[$i]->id) }}">Subscription</a>
+
                                                     </td>
                                                 @endif
 
