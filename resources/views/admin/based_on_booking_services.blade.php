@@ -19,8 +19,8 @@
                        <!-- <h3 class="page-title">Add City</h3> -->
                        <h3 class="page-title">{{$price_data->based_on_booking_service_label}}</h3>
                        <ul class="breadcrumb">
-                           <li class="breadcrumb-item"><a href="{{ url('/vendors') }}">Dashboard</a></li>
-                           <li class="breadcrumb-item"><a href="{{ route('subscription.index') }}">Subscription</a></li>
+                           <li class="breadcrumb-item"><a href="{{ url('/admin') }}">Dashboard</a></li>
+                           <li class="breadcrumb-item"><a href="{{ route('vendors.subscription', $id) }}">Subscription</a></li>
                            <li class="breadcrumb-item active">{{$price_data->based_on_booking_service_label}}</li>
                        </ul>
                    </div>
@@ -39,8 +39,10 @@
                    <div class="card">
                        <div class="card-body">
                            <!-- <h4 class="card-title">Category</h4> -->
-                           <form action="{{ route('based_on_booking_services') }}" id="category_form_new" method="POST"
+                           <form action="{{ route('based_on_booking_services', ['id' => $id]) }}" id="category_form_new" method="POST"
                                enctype="multipart/form-data">
+
+                               <input type="hidden" name="vendor_id" id="subscription_id" value="{{$id}}">
                                
                                <input type="hidden" name="subscription_id" id="subscription_id" value="2">
                                <input type="hidden" name="action" id="subscription_id" value="add">

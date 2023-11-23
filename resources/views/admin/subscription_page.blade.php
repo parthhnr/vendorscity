@@ -56,8 +56,8 @@
                     <div class="card-body">
                         <div class="dash-widget-header text-center" style="display:block">
                             <div class="dash-count">
-                                <div class="dash-title"><a href="{{ route('base_on_service_lead') }}" style=" margin-bottom: 25px;display: inline-block;">Based on Services Leads</a></div>
-                                <a href="{{ route('base_on_service_lead') }}" class="btn btn-rounded btn-outline-primary">Buy Now</a>
+                                <div class="dash-title"><a href="{{ route('base_on_service_lead', ['id' => $id]) }}" style=" margin-bottom: 25px;display: inline-block;">Based on Services Leads</a></div>
+                                <a href="{{ route('base_on_service_lead', ['id' => $id]) }}" class="btn btn-rounded btn-outline-primary">Buy Now</a>
                                 
                                 <!-- <div class="dash-counts">
                                     <p>This is Box</p>
@@ -84,8 +84,8 @@
                     <div class="card-body">
                         <div class="dash-widget-header text-center" style="display:block">
                             <div class="dash-count">
-                                <div class="dash-title"><a href="{{ route('based_on_booking_services') }}" style=" margin-bottom: 25px;display: inline-block;">{{$price_data->based_on_booking_service_label}}</a></div>
-                                <a href="{{ route('based_on_booking_services') }}" class="btn btn-rounded btn-outline-primary">Buy Now</a>
+                                <div class="dash-title"><a href="{{ route('based_on_booking_services', ['id' => $id]) }}" style=" margin-bottom: 25px;display: inline-block;">{{$price_data->based_on_booking_service_label}}</a></div>
+                                <a href="{{ route('based_on_booking_services', ['id' => $id]) }}" class="btn btn-rounded btn-outline-primary">Buy Now</a>
                                 
                                 <!-- <div class="dash-counts">
                                     <p>This is Box</p>
@@ -101,18 +101,12 @@
             <div class="col-xl-4 col-sm-6 col-12 mt-2">
                 <div class="card">
                     <div class="card-body">
-                        <!-- <div class="dash-widget-header">
-                            
-                            <div class="dash-count">
-                                <div class="dash-title"><a href="{{ route('based_on_listing_criteria') }}">Based on Listing Criteria</a></div>
-                                
-                            </div>
-                        </div> -->
+                       
 
                         <div class="dash-widget-header text-center" style="display:block">
                             <div class="dash-count">
-                                <div class="dash-title"><a href="{{ route('based_on_listing_criteria') }}" style=" margin-bottom: 25px;display: inline-block;">{{$price_data->based_on_listing_criteria_label}}</a></div>
-                                <a href="{{ route('based_on_listing_criteria') }}" class="btn btn-rounded btn-outline-primary">Buy Now</a>
+                                <div class="dash-title"><a href="{{ route('based_on_listing_criteria', ['id' => $id]) }}" style=" margin-bottom: 25px;display: inline-block;">{{$price_data->based_on_listing_criteria_label}}</a></div>
+                                <a href="{{ route('based_on_listing_criteria', ['id' => $id]) }}" class="btn btn-rounded btn-outline-primary">Buy Now</a>
                                 
                                 <!-- <div class="dash-counts">
                                     <p>This is Box</p>
@@ -128,7 +122,7 @@
 
             $currentDate = now(); 
 
-            $id = Auth::user()->id;
+            $id =$id;
 
             $result = DB::table('subscription')->select('*')->where('vendor_id','=',$id)->where('enddate', '>=', $currentDate)->orderBy('id', 'desc')->get();
             $result_new = $result->toArray();
