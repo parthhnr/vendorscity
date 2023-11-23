@@ -197,7 +197,7 @@ class PackagesController extends Controller
                 $html .= "<option value='".$result[$i]->id ."'>".$result[$i]->name."</option>";
             }
         }
-        $html .="</select>";
+        $html .="</select>"; 
         
         echo $html;
     }

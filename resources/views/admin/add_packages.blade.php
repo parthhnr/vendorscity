@@ -103,7 +103,7 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label for="name">Image</label>
+                                        <label for="name">Image (100px x 100px)</label>
                                         <input id="image" name="image" type="file" class="form-control"
                                             placeholder="Enter" value="" />
                                         <p class="form-error-text" id="image_error" style="color: red; margin-top: 10px;">
