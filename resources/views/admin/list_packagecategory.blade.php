@@ -81,7 +81,7 @@
                                             <th>Select</th>
                                             <th>Service</th>
                                             <th>Sub Service</th>
-                                            <th>Package Catgory</th>
+                                            <th>Package Category</th>
                                             <!-- <th>Page Url</th> -->
                                             @if (in_array('11', $edit_perm))
                                                 <th class="text-right">Actions</th>

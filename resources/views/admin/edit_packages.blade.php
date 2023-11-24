@@ -123,6 +123,32 @@
                                             style="color: red; margin-top: 10px;"></p>
                                     </div>
                                 </div>
+
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Discount</label>
+                                        <input type="text" class="form-control" id="discount" name="discount"
+                                            placeholder="Enter Discount" onkeypress="return validateNumber(event)"
+                                            value="{{ $packages->discount }}">
+                                    </div>
+
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label style="width: 100%;">Discount Type</label>
+                                        <div style="padding: 9px 0;">
+                                            <input type="radio" name="discount_type" value="0"
+                                                @if ($packages->discount_type == 0) {{ 'checked' }} @endif>
+                                            Percentage
+                                            <input type="radio" name="discount_type" value="1"
+                                                @if ($packages->discount_type == 1) {{ 'checked' }} @endif> Price
+                                            <input type="radio" name="discount_type" value="2"
+                                                @if ($packages->discount_type == 2) {{ 'checked' }} @endif> None
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <div class="form-group">
                                     <label for="name"> Description</label>
                                     <textarea name="description" id="description" cols="30" rows="10">{{ $packages->description }}</textarea>

@@ -116,16 +116,22 @@
                             <i class="fa fa-file"></i><span>Packages</span></a>
                     </li>
                 @endif
-<!-- 
+                @if (in_array('14', $permission1))
+                    <li class="{{ request()->segment(2) == 'adminwallet' ? 'active' : '' }}"><a
+                            href="{{ route('adminwallet.index') }}"
+                            class="{{ request()->segment(2) == 'adminwallet' ? 'active' : '' }}">
+                            <i class="fa fa-file"></i><span>Admin Wallet</span></a>
+                    </li>
+                @endif
+                <!--
                 @if (in_array('13', $permission1))
-
-                <li
+<li
                     class="{{ request()->segment(2) == 'subscription' || request()->segment(1) == 'base_on_service_lead' || request()->segment(1) == 'based_on_booking_services' || request()->segment(1) == 'based_on_listing_criteria' ? 'active' : '' }}">
                     <a href="{{ route('subscription.index') }}"
                         class="{{ request()->segment(2) == 'subscription' ? 'active' : '' }}">
                         <i class="fa fa-file"></i><span>Subscription</span></a>
                 </li>
-                 @endif -->
+@endif -->
 
                 @if (in_array('6', $permission1) || in_array('7', $permission1))
                     <li class="submenu">
@@ -151,7 +157,7 @@
                     </li>
                 @endif
 
-                 
+
 
             @endif
 
@@ -162,7 +168,7 @@
                         <i class="fa fa-user-plus"></i><span>Profile</span></a>
                 </li>
 
-                
+
 
 
 
@@ -181,6 +187,12 @@
                         href="{{ route('acceptleads.index') }}"
                         class="{{ request()->segment(1) == 'acceptleads' ? 'active' : '' }}">
                         <i class="fa fa-file"></i><span>Accepted Leads</span></a>
+                </li>
+
+                <li class="{{ request()->segment(1) == 'wallet' ? 'active' : '' }}"><a
+                        href="{{ route('wallet.index') }}"
+                        class="{{ request()->segment(1) == 'wallet' ? 'active' : '' }}">
+                        <i class="fa fa-file"></i><span>Wallet</span></a>
                 </li>
             @endif
 

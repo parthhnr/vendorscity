@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Session;
 use DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 
 class SubscriptionController extends Controller
 {
@@ -86,7 +87,7 @@ class SubscriptionController extends Controller
         //
     }
 
-    public  function base_on_service_lead($id){
+    public  function base_on_service_lead($vendor_id){
 
 
 
@@ -115,7 +116,10 @@ class SubscriptionController extends Controller
 
             $this->insert_attribute($content);
 
-            return redirect()->route('vendors.index')->with('success','Subscription Purchased Successfully.');
+             return Redirect::route('vendors.subscription', ['id' => $vendor_id])->with('success', 'Subscription Purchased Successfully.');
+            // return redirect()->route('vendors.subscription', ['id' => $vendor_id])->with('success', 'Subscription Purchased Successfully.');
+
+            
 
             //echo "<pre>";print_r($data);echo "</pre>";exit;
         }
@@ -124,7 +128,7 @@ class SubscriptionController extends Controller
         $data['allcity'] = DB::table('cities')->select('*')->get();
         $data['allservices'] = DB::table('services')->select('*')->get();
         $data['allsub_services'] = DB::table('subservices')->select('*')->get();
-        $data['id'] = $id;
+        $data['id'] = $vendor_id;
 
         return view('admin.base_on_service_lead',$data);
     }
@@ -152,7 +156,7 @@ class SubscriptionController extends Controller
     }
 
 
-    public  function based_on_booking_services($id){
+    public  function based_on_booking_services($vendor_id){
         $data['country_data'] = DB::table('countries')->select('*')->orderBy('id','DESC')->get();
         $data['state_data'] = DB::table('states')->select('*')->orderBy('id','DESC')->get();
         $data['allcity'] = DB::table('cities')->select('*')->get();
@@ -177,18 +181,20 @@ class SubscriptionController extends Controller
 
             $id = DB::table('subscription')->insertGetId($data_new);
 
-            return redirect()->route('vendors.index')->with('success','Subscription Purchased Successfully.');
+            return Redirect::route('vendors.subscription', ['id' => $vendor_id])->with('success', 'Subscription Purchased Successfully.');
+
+            
 
             //echo "<pre>";print_r($_POST);echo "</pre>";exit;
 
          }
 
-         $data['id'] = $id;
+         $data['id'] = $vendor_id;
         
         return view('admin.based_on_booking_services',$data);
     }
 
-    public  function based_on_listing_criteria($id){
+    public  function based_on_listing_criteria($vendor_id){
         $data['country_data'] = DB::table('countries')->select('*')->orderBy('id','DESC')->get();
         $data['state_data'] = DB::table('states')->select('*')->orderBy('id','DESC')->get();
         $data['allcity'] = DB::table('cities')->select('*')->get();
@@ -213,13 +219,13 @@ class SubscriptionController extends Controller
 
             $id = DB::table('subscription')->insertGetId($data_new);
 
-            return redirect()->route('vendors.index')->with('success','Subscription Purchased Successfully.');
+            return Redirect::route('vendors.subscription', ['id' => $vendor_id])->with('success', 'Subscription Purchased Successfully.');
 
             //echo "<pre>";print_r($_POST);echo "</pre>";exit;
 
          }
 
-         $data['id'] = $id;
+         $data['id'] = $vendor_id;
         
         return view('admin.based_on_listing_criteria',$data);
     }

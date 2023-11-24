@@ -101,6 +101,7 @@
                                         </p>
                                     </div>
                                 </div>
+
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label for="name">Image (100px x 100px)</label>
@@ -108,6 +109,31 @@
                                             placeholder="Enter" value="" />
                                         <p class="form-error-text" id="image_error" style="color: red; margin-top: 10px;">
                                         </p>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Discount</label>
+                                        <input type="text" class="form-control" id="discount" name="discount"
+                                            placeholder="Enter Discount" onkeypress="return validateNumber(event)">
+                                    </div>
+
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label style="width: 100%;">Discount Type</label>
+                                        <div style="padding: 9px 0;">
+                                            <input type="radio" name="discount_type" value="0"
+                                                id="percentageRadio">
+                                            Percentage
+                                            <input type="radio" name="discount_type" value="1" id="priceRadio">
+                                            Price
+                                            <input type="radio" name="discount_type" value="2" checked
+                                                id="noneRadio">None
+                                        </div>
+
                                     </div>
                                 </div>
 
@@ -237,6 +263,7 @@
                 }, 1000);
                 return false;
             }
+
 
 
             $('#spinner_button').show();

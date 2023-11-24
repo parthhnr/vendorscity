@@ -162,6 +162,16 @@ class Helper{
             echo "-";
         }
     }
+    public static function vendorsname(int $id){
+
+        $result = DB::table('users')->where('id',$id)->first();                                                     
+        
+        if($result !='' && isset($result)){
+            return $result->name;
+        }else{
+            echo "-";
+        }
+    }
     
 	
 } 

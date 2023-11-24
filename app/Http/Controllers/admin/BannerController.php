@@ -375,4 +375,3 @@ class BannerController extends Controller
     }
 
 }
-

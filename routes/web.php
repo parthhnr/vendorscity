@@ -34,6 +34,8 @@ use App\Http\Controllers\admin\AcceptLeadscontroller;
 use App\Http\Controllers\admin\CmsController;
 use App\Http\Controllers\admin\PackageCategoryController;
 use App\Http\Controllers\admin\PackagesController;
+use App\Http\Controllers\admin\WalletController;
+use App\Http\Controllers\admin\AdminWalletController;
 
 
 // Route::get('/', function () {
@@ -212,6 +214,15 @@ Route::get('/admin', function () {
     Route::post('subservice_show', 'App\Http\Controllers\admin\PackagesController@subservice_show');
     Route::post('packagecategory_show', 'App\Http\Controllers\admin\PackagesController@packagecategory_show');
     Route::get('delete_packages',[PackagesController::class,'destroy'])->name('delete_packages');
+
+    Route::resource('wallet', '\App\Http\Controllers\admin\WalletController');
+
+    Route::resource('admin/adminwallet', '\App\Http\Controllers\admin\AdminWalletController');
+    Route::post('change_status_wallet','App\Http\Controllers\admin\AdminWalletController@change_status_wallet');
+
+
+    
+
 
     
 

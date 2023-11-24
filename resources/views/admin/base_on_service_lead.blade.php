@@ -11,7 +11,8 @@
                        <h3 class="page-title">Based on Services Leads</h3>
                        <ul class="breadcrumb">
                            <li class="breadcrumb-item"><a href="{{ url('/admin') }}">Dashboard</a></li>
-                           <li class="breadcrumb-item"><a href="{{ route('vendors.subscription', $id) }}">Subscription</a></li>
+                           <li class="breadcrumb-item"><a href="{{ route('vendors.subscription', $id) }}">Subscription</a>
+                           </li>
                            <li class="breadcrumb-item active">Based on Services Leads</li>
                        </ul>
                    </div>
@@ -40,14 +41,14 @@
                    <div class="card">
                        <div class="card-body">
                            <!-- <h4 class="card-title">Category</h4> -->
-                           <form action="{{ route('base_on_service_lead', ['id' => $id]) }}" id="category_form_new" method="POST"
-                               enctype="multipart/form-data">
+                           <form action="{{ route('base_on_service_lead', ['id' => $id]) }}" id="category_form_new"
+                               method="POST" enctype="multipart/form-data">
                                <input type="hidden" name="subscription_name" id="subscription_name"
                                    value="Based on Services Leads">
                                <input type="hidden" name="subscription_id" id="subscription_id" value="1">
                                <input type="hidden" name="action" id="subscription_id" value="add">
 
-                               <input type="hidden" name="vendor_id" id="subscription_id" value="{{$id}}">
+                               <input type="hidden" name="vendor_id" id="subscription_id" value="{{ $id }}">
 
                                @csrf
                                <div class="row">
@@ -124,7 +125,7 @@
 
                                </div>
                                <div class="text-end mt-4">
-                                   <a class="btn btn-primary" href="{{ route('subscription.index') }}"> Back</a>
+                                   <a class="btn btn-primary" href="{{ route('vendors.subscription', $id) }}"> Back</a>
                                    <button class="btn btn-primary mb-1" type="button" disabled id="spinner_button"
                                        style="display: none;">
                                        <span class="spinner-border spinner-border-sm" role="status"
