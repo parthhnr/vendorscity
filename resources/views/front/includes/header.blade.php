@@ -1,421 +1,421 @@
- <!doctype html>
-<html class="no-js" lang="en">
-    <head>
-        @if($meta_title != '')
-        <title>{{$meta_title}}</title>
 
-        @else
-        <title>Sagar Store</title>
+        <!DOCTYPE html>
+<html dir="ltr" lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="keywords" content="bidding, fiverr, freelance marketplace, freelancers, freelancing, gigs, hiring, job board, job portal, job posting, jobs marketplace, peopleperhour, proposals, sell services, upwork">
+<meta name="description" content="Freeio - Freelance Marketplace HTML Template">
+<meta name="CreativeLayers" content="ATFN">
+<!-- css file -->
+<link rel="stylesheet" href="{{asset('public/site/css/bootstrap.min.css')}}">
+<link rel="stylesheet" href="{{asset('public/site/css/jquery-ui.min.css')}}">
+<link rel="stylesheet" href="{{asset('public/site/css/ace-responsive-menu.css')}}">
+<link rel="stylesheet" href="{{asset('public/site/css/menu.css')}}">
+<link rel="stylesheet" href="{{asset('public/site/css/fontawesome.css')}}">
+<link rel="stylesheet" href="{{asset('public/site/css/flaticon.css')}}">
+<link rel="stylesheet" href="{{asset('public/site/css/bootstrap-select.min.css')}}">
+<link rel="stylesheet" href="{{asset('public/site/css/animate.css')}}">
+<link rel="stylesheet" href="{{asset('public/site/css/slider.css')}}">
+<link rel="stylesheet" href="{{asset('public/site/css/style.css')}}">
+<link rel="stylesheet" href="{{asset('public/site/css/ud-custom-spacing.css')}}">
+<!-- Responsive stylesheet -->
+<link rel="stylesheet" href="css/responsive.css">
+<!-- Title -->
+<title>VendorsCity</title>
+<!-- Favicon -->
+<link href="{{asset('public/site/images/VC-SHORT-COLOR-FINAL.png')}}" sizes="128x128" rel="shortcut icon" type="image/x-icon" />
+<link href="{{asset('public/site/images/VC-SHORT-COLOR-FINAL.png')}}" sizes="128x128" rel="shortcut icon" />
+<!-- Apple Touch Icon -->
+<link href="{{asset('public/site/images/apple-touch-icon-60x60.png')}}" sizes="60x60" rel="apple-touch-icon">
+<link href="{{asset('public/site/images/apple-touch-icon-72x72.png')}}" sizes="72x72" rel="apple-touch-icon">
+<link href="{{asset('public/site/images/apple-touch-icon-114x114.png')}}" sizes="114x114" rel="apple-touch-icon">
+<link href="{{asset('public/site/images/apple-touch-icon-180x180.png')}}" sizes="180x180" rel="apple-touch-icon">
 
-        @endif
-        
-        <meta charset="utf-8">
-        @if($meta_keyword != '')
-        <meta name="keywords" content="{{$meta_keyword}}" />
-        @endif
+<link rel="stylesheet" href="{{asset('public/site/css/customstyle.css')}}">
 
-        @if($meta_description)
-        <meta name="description" content="{{$meta_description}}" />
-        @endif
-        <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="author" content="ThemeZaa">
-        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1" />
-         <meta name="description" content="">  -->
-        <!-- favicon icon -->
-        <!-- <link rel="shortcut icon" href="images/favicon.png"> -->
-        <link rel="apple-touch-icon" href="{{asset('public/site/images/apple-touch-icon-57x57.png')}}">
-        <link rel="apple-touch-icon" sizes="72x72" href="{{asset('public/site/images/apple-touch-icon-72x72.png')}}">
-        <link rel="apple-touch-icon" sizes="114x114" href="{{asset('public/site/images/apple-touch-icon-114x114.png')}}">
-        <!-- style sheets and font icons  -->
-        <link rel="stylesheet" type="text/css" href="{{asset('public/site/css/font-icons.min.css')}}">
-        <link rel="stylesheet" type="text/css" href="{{asset('public/site/css/theme-vendors.min.css')}}">
-        <link rel="stylesheet" type="text/css" href="{{asset('public/site/css/style.css')}}" />
-        <link rel="stylesheet" type="text/css" href="{{asset('public/site/css/style-p.css')}}" />
 
-        <link rel="stylesheet" type="text/css" href="css/responsive.css" />
-        <!-- revolution slider -->
-        <link rel='stylesheet' href="{{asset('public/site/revolution/revolution-addons/bubblemorph/css/revolution.addon.bubblemorph.css')}}" type='text/css' media='all' />
-        <link rel="stylesheet" type="text/css" href="{{asset('public/site/revolution/css/settings.css')}}">
-        <link rel="stylesheet" type="text/css" href="{{asset('public/site/revolution/css/layers.css')}}">
-        <link rel="stylesheet" type="text/css" href="{{asset('public/site/revolution/css/navigation.css')}}">
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<![endif]-->
 
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-        <style>
-            .valierror {
-        background-color: #ee2e34;
-        border-color: #ee2e34;
-        color: #fff;
-    }
-    .alert-message {
-        background-size: 40px 40px;
-        background-image: linear-gradient(
-    135deg, rgba(255, 255, 255, .05) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .05) 50%, rgba(255, 255, 255, .05) 75%, transparent 75%, transparent);
-        /* box-shadow: inset 0 -1px 0 rgb(255 255 255 / 40%); */
-        width: 100%;
-        border: 0px solid;
-        color: #fff;
-        padding: 10px;
-        
-        animation: animate-bg 5s linear infinite;
-        display: block;
-        margin-bottom: 5px;
-        top: 0;
-    z-index: 9999;
-    }
-    .successmain {
-        background-color: #09c6ab;
-        border-color: #09c6ab;
-    }
-    .size_active {
-        background: #ABABAB;
-        color: #000;
-        border: 1px solid #09c6ab !important;
-    }
-    .color_active {
-        border: 1px solid #09c6ab !important;
-    }
-    .alert-message_cart {
-        background-size: 40px 40px;
-        background-image: linear-gradient(
-    135deg, rgba(255, 255, 255, .05) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .05) 50%, rgba(255, 255, 255, .05) 75%, transparent 75%, transparent);
-        width: 100%;
-        border: 0px solid;
-        color: #000;
-        padding: 10px;
-        animation: animate-bg 5s linear infinite;
-    }
-    .topalert_cart {
-        z-index: 9999;
-        text-align: center;
-        padding: 10px;
-        font-size: 18px;
-        color: #fff !important;
-        position: fixed;
-        top: 0px;
-    }
-    .successcart {
-        background-color: #09c6ab;
-        border-color: #09c6ab;
-    }    
-    @media (min-width: 992px){
-        .navbar-expand-lg .navbar-collapse {
-        display: flex!important;
-        flex-basis: auto;
-        float: right;
-        }    
-    }
-    .contact_successmain {
-        background-color: #09c6ab;
-        border-color: #09c6ab;
-        z-index: 9999999;
-        position: absolute;
-    }
-    .contact_successmain1 {
-        background-color: #09c6ab;
-        border-color: #09c6ab;
-        z-index: 9999999;
-        /*position: absolute;*/
-    }
-    .ui-menu{
-        z-index: 3500 !important;
-    }
-     .ad-tag {
-        position: absolute; left:initial;
-        right: 12px;
-        top: 4%;
-    }
-    </style>
-        
-    </head>
-    <body data-mobile-nav-style="classic">
- <!-- start header -->
- <div id="message_succsess" class="successmain alert-message topalert" style="text-align: center;display: none; position: fixed;"></div>
- <div id="message_error" class="valierror alert-message topalert" style="display:none;text-align: center;
- position: fixed;"></div>
-
-        <header class="header-with-topbar">
-            <div class="top-bar bg-extra-dark-gray d-none d-md-inline-block padding-35px-lr md-no-padding-lr">
-                <div class="container-fluid nav-header-container">
-                    <div class="d-flex flex-wrap align-items-center">
-                        <div class="col-12 text-center text-sm-start col-sm-auto me-auto ps-lg-0">
-                            <p class="text-medium m-0"><span class="font-weight-500 text-white">Offer: </span>Worldwide free shipping for all orders of $150</p>
-                        </div>
-                        <div class="col-auto d-none d-sm-block text-end px-lg-0 font-size-0">
-                            <div class="top-bar-contact">
-                                <span class="top-bar-contact-list border-none md-no-padding-right">
-                                    <i class="feather icon-feather-phone-call icon-extra-small text-white"></i>+91 9876543210
-                                </span>
-                                <span class="top-bar-contact-list d-none d-lg-inline-block border-none pe-0">
-                                    <i class="feather icon-feather-map-pin icon-extra-small text-white"></i>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit
-                                </span>
-                            </div>
-                        </div>
-                    </div>
+</head>
+<body>
+<div class="wrapper ovh">
+  <div class="preloader"></div>
+  
+  <!-- Main Header Nav -->
+  <header class="header-nav nav-homepage-style stricky main-menu border-0">
+    <!-- Ace Responsive Menu -->
+    <nav class="posr"> 
+      <div class="container posr">
+        <div class="row align-items-center justify-content-between">
+          <div class="col-auto px-0 px-xl-3">
+            <div class="d-flex align-items-center justify-content-between">
+              <div class="logos">
+                <a class="header-logo logo1" href="index.html"><img src="{{asset('public/site/images/VC-LONG-COLOR.png')}}" alt="Header Logo"></a>
+                <a class="header-logo logo2" href="index.html"><img src="{{asset('public/site/images/VC-LONG-COLOR.png')}}" alt="Header Logo"></a>
+              </div>
+              <div class="home1_style at-home2" >
+                <div id="mega-menu">
+                  <div class="text-center"><a class="btn-mega fw500 " href="#"><span class="pr5 fz15 vam flaticon-menu"></span> Categories</a></div>
+                  
                 </div>
+              </div>
+              <!-- Responsive Menu Structure-->
+              <ul id="respMenu" class="ace-responsive-menu" data-menu-style="horizontal">
+                <li class="visible_list"> <a class="list-item" href="#"><span class="title">Home</span></a>
+                  <!-- Level Two-->
+                 <!--  <ul>
+                    <li><a href="index.html">Home V1</a></li>
+                    <li><a href="index2.html">Home V2</a></li>
+                    <li><a href="index3.html">Home V3</a></li>
+                    <li><a href="index4.html">Home V4</a></li>
+                    <li><a href="index5.html">Home V5</a></li>
+                    <li><a href="index6.html">Home V6</a></li>
+                    <li><a href="index7.html">Home V7</a></li>
+                    <li><a href="index8.html">Home V8</a></li>
+                    <li><a href="index9.html">Home V9</a></li>
+                    <li><a href="index10.html">Home V10</a></li>
+                    <li><a href="index11.html">Home V11</a></li>
+                    <li><a href="index12.html">Home V12</a></li>
+                    <li><a href="index13.html">Home V13</a></li>
+                    <li><a href="index14.html">Home V14</a></li>
+                    <li><a href="index15.html">Home V15</a></li>
+                    <li><a href="index16.html">Home V16</a></li>
+                    <li><a href="index17.html">Home V17</a></li>
+                    <li><a href="index18.html">Home V18</a></li>
+                    <li><a href="index19.html">Home V19</a></li>
+                    <li><a href="index20.html">Home V20</a></li>
+                  </ul> -->
+                </li>
+                <!-- <li class="visible_list"> <a class="list-item" href="#"><span class="title">Browse Jobs</span></a>
+                  <ul >
+                    <li> <a href="#"><span class="title">Services</span></a>
+                      <ul>
+                        <li><a href="page-service-v1.html">Service v1</a></li>
+                        <li><a href="page-service-v2.html">Service v2</a></li>
+                        <li><a href="page-service-v3.html">Service v3</a></li>
+                        <li><a href="page-service-v4.html">Service v4</a></li>
+                        <li><a href="page-service-v5.html">Service v5</a></li>
+                        <li><a href="page-service-v6.html">Service v6</a></li>
+                        <li><a href="page-service-v7.html">Service v7</a></li>
+                        <li><a href="page-service-all.html">Service All</a></li>
+                        <li><a href="page-service-single.html">Service Single</a></li>
+                        <li><a href="page-service-single-v1.html">Single V1</a></li>
+                        <li><a href="page-service-single-v2.html">Single V2</a></li>
+                      </ul>
+                    </li>
+                    <li> <a href="#"><span class="title">Projects</span></a>
+                      <ul>
+                        <li><a href="page-project-v1.html">Project v1</a></li>
+                        <li><a href="page-project-list-v1.html">List v1</a></li>
+                        <li><a href="page-project-list-v2.html">List v2</a></li>
+                        <li><a href="page-project-list-v3.html">List v3</a></li>
+                        <li><a href="page-project-single.html">Project Single</a></li>
+                        <li><a href="page-project-single-v1.html">Single V1</a></li>
+                        <li><a href="page-project-single-v2.html">Single V2</a></li>
+                      </ul>
+                    </li>
+                    <li> <a href="#"><span class="title">Job View</span></a>
+                      <ul>
+                        <li><a href="page-job-list-v1.html">Job list v1</a></li>
+                        <li><a href="page-job-list-v2.html">Job list v2</a></li>
+                        <li><a href="page-job-list-v3.html">Job list V3</a></li>
+                        <li><a href="page-job-list-single.html">Job Single</a></li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+                <li class="visible_list"> <a class="list-item" href="#"><span class="title">Users</span></a>
+                  <ul>
+                    <li> <a href="#"><span class="title">Dashboard</span></a>
+                      <ul>
+                        <li><a href="page-dashboard.html">Dashboard</a></li>
+                        <li><a href="page-dashboard-proposal.html">Proposal</a></li>
+                        <li><a href="page-dashboard-save.html">Saved</a></li>
+                        <li><a href="page-dashboard-message.html">Message</a></li>
+                        <li><a href="page-dashboard-reviews.html">Reviews</a></li>
+                        <li><a href="page-dashboard-invoice.html">Invoice</a></li>
+                        <li><a href="page-dashboard-payouts.html">Payouts</a></li>
+                        <li><a href="page-dashboard-statement.html">Statement</a></li>
+                        <li><a href="page-dashboard-manage-service.html">Manage Service</a></li>
+                        <li><a href="page-dashboard-add-service.html">Add Services</a></li>
+                        <li><a href="page-dashboard-manage-jobs.html">Manage Jobs</a></li>
+                        <li><a href="page-dashboard-manage-project.html">Manage Project</a></li>
+                        <li><a href="page-dashboard-create-project.html">Create Project</a></li>
+                        <li><a href="page-dashboard-profile.html">My Profile</a></li>
+                      </ul>
+                    </li>
+                    <li> <a href="#"><span class="title">Employee</span></a>
+                      <ul>
+                        <li><a href="page-employee-v1.html">Employee V1</a></li>
+                        <li><a href="page-employee-v2.html">Employee V2</a></li>
+                        <li><a href="page-employee-single.html">Employee Single</a></li>
+                      </ul>
+                    </li>
+                    <li> <a href="#"><span class="title">Freelancer</span></a>
+                      <ul>
+                        <li><a href="page-freelancer-v1.html">Freelancer V1</a></li>
+                        <li><a href="page-freelancer-v2.html">Freelancer V2</a></li>
+                        <li><a href="page-freelancer-v3.html">Freelancer V3</a></li>
+                        <li><a href="page-freelancer-list-v1.html">List V1</a></li>
+                        <li><a href="page-freelancer-list-v2.html">List V2</a></li>
+                        <li><a href="page-freelancer-list-v3.html">List V3</a></li>
+                        <li><a href="page-freelancer-single.html">Freelancer Single</a></li>
+                        <li><a href="page-freelancer-single-v1.html">Single V1</a></li>
+                        <li><a href="page-freelancer-single-v2.html">Single V2</a></li>
+                      </ul>
+                    </li>
+                    <li> <a href="page-become-seller.html"><span class="title">Become Seller</span></a></li>
+                  </ul>
+                </li>
+                <li class="visible_list"> <a class="list-item" href="#"><span class="title">Pages</span></a>
+                  <ul>
+                    <li> <a href="#"><span class="title">About</span></a>
+                      <ul>
+                        <li><a href="page-about.html">About v1</a></li>
+                        <li><a href="page-about-v2.html">About v2</a></li>
+                      </ul>
+                    </li>
+                    <li> <a href="#"><span class="title">Blog</span></a>
+                      <ul>
+                        <li><a href="page-blog-v1.html">List V1</a></li>
+                        <li><a href="page-blog-v2.html">List V2</a></li>
+                        <li><a href="page-blog-v3.html">List V3</a></li>
+                        <li><a href="page-blog-single.html">Single</a></li>
+                      </ul>
+                    </li>
+                    <li> <a href="#"><span class="title">Shop</span></a>
+                      <ul>
+                        <li><a href="page-shop.html">List</a></li>
+                        <li><a href="page-shop-single.html">Single</a></li>
+                        <li><a href="page-shop-cart.html">Cart</a></li>
+                        <li><a href="page-shop-checkout.html">Checkout</a></li>
+                        <li><a href="page-shop-order.html">Order</a></li>
+                      </ul>
+                    </li>
+                    <li><a href="page-contact.html">Contact</a></li>
+                    <li><a href="page-error.html">404</a></li>
+                    <li><a href="page-faq.html">Faq</a></li>
+                    <li><a href="page-help.html">Help</a></li>
+                    <li><a href="page-invoice.html">Invoices</a></li>
+                    <li><a href="page-login.html">Login</a></li>
+                    <li><a href="page-pricing.html">Pricing</a></li>
+                    <li><a href="page-register.html">Register</a></li>
+                    <li><a href="page-terms.html">Terms</a></li>
+                    <li><a href="page-ui-element.html">UI Elements</a></li>
+                  </ul>
+                </li> -->
+                <li> <a class="list-item pe-0" href="page-contact.html">Vendor Database</a></li>
+                <li> <a class="list-item pe-0" href="page-contact.html">Book Services</a></li>
+                <li> <a class="list-item pe-0" href="page-contact.html">Get Free Quote</a></li>
+                
+              </ul>
             </div>
-            <!-- start navigation -->
-            <nav class="navbar navbar-expand-lg navbar-boxed navbar-light bg-white header-light top-space fixed-top header-reverse-scroll">
-                <div class="container-fluid nav-header-container">
-                    <div class="col-auto col-sm-6 col-lg-2 me-auto ps-lg-0">
-                        <a class="navbar-brand" href="{{ url('/') }}">
-                            <img src="{{asset('public/site/images/sagar-logo.png')}}" data-at2x="{{asset('public/site/images/sagar-logo.png')}}" alt="" class="default-logo">
-                            <!--<img src="images/sagar-logo.png" data-at2x="images/sagar-logo.png" alt="" class="alt-logo">-->
-                            <!--<img src="images/sagar-logo.png" data-at2x="images/sagar-logo.png" class="mobile-logo" alt="">-->
-                        </a>
-                    </div>
-                    <div class="col-auto col-lg-8 menu-order px-lg-0">
-                        <button class="navbar-toggler float-end" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-line"></span>
-                            <span class="navbar-toggler-line"></span>
-                            <span class="navbar-toggler-line"></span>
-                            <span class="navbar-toggler-line"></span>
-                        </button>
-                        <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
-                            <ul class="navbar-nav alt-font">
-                                <li class="nav-item"><a href="{{ url('/') }}" class="nav-link">Home</a></li>
+          </div>
+          <div class="col-auto pe-0 pe-xl-3">
+            <div class="d-flex align-items-center">
+              <a class="login-info" data-bs-toggle="modal" href="#exampleModalToggle" role="button"><span class="flaticon-loupe"></span></a>
+              <a class="login-info mx15-xl mx30" href="page-become-seller.html"><span class="d-none d-xl-inline-block">Become a</span> Vendor</a>
+              <a class="login-info mr15-xl mr30" href="page-login.html">Login</a>
+              <a class="ud-btn btn-white add-joining bdrs50 text-thm2" href="page-register.html">Book Now</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <!-- Search Modal -->
+  <div class="search-modal">
+    <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalToggleLabel"></h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i class="fal fa-xmark"></i></button>
+          </div>
+          <div class="modal-body">
+            <div class="popup-search-field search_area">
+              <input type="text" class="form-control border-0" placeholder="What service are you looking for today?">
+              <label><span class="far fa-magnifying-glass"></span></label>
+              <button class="ud-btn btn-thm" type="submit">Search</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-                                @php
-                                
-                               // $groups = DB::select('SELECT * FROM groups ORDER BY set_order ASC');
+  <div class="hiddenbar-body-ovelay"></div>
 
-                               $groups = DB::table('groups')->orderBy('set_order', 'ASC')->get()->toArray();
-
-                                //echo "<pre>";print_r($groups);echo"</pre>";exit;
-                                
-                                $blank_count= 0;
-
-                                @endphp
-                                
-                                @if($groups != '')
-                                @foreach($groups as $groups_data)
-
-                                
-
-                                <li class="nav-item dropdown megamenu">
-                                    <a href="{{url('/product/'.$groups_data->page_url)}}" class="nav-link">{{ $groups_data->name }}</a>
-                                    <i class="fa fa-angle-down dropdown-toggle" data-bs-toggle="dropdown" aria-hidden="true"></i>
-                                    <div class="menu-back-div dropdown-menu megamenu-content" role="menu" style="@php if($blank_count == 0){echo "display:none";} @endphp">
-                                        <div class="d-lg-flex justify-content-center">
-                                            @php                               
-                                               //$categories = DB::select('SELECT * FROM categories WHERE group_id = '.$groups_data->id.' ORDER BY set_order ASC');
-
-                                               $categories = DB::table('categories')->where('group_id', $groups_data->id)->orderBy('set_order', 'ASC')->get()->toArray();
-
-                                            //echo "<pre>";print_r($categories);echo"</pre>";
-                                            
-                                            
-                                            @endphp
-
-                                            @if($categories != '')
-                                            
-                                            @php
-                                                $blank_count+=1;
-                                            @endphp
-                                            @foreach($categories as $categories_data)
-                                            <ul class="d-lg-inline-block">
-                                                <li class="dropdown-header"><a href="{{url('/product/'.$groups_data->page_url.'/'.$categories_data->page_url)}}"> {{ $categories_data->name }}</a></li>
-
-
-                                                @php                               
-                                               //$subcategories = DB::select('SELECT * FROM subcategories WHERE group_id = '.$groups_data->id.' and cat_id = '.$categories_data->id.' ORDER BY set_order ASC');
-                                               $subcategories = DB::table('subcategories')->where('group_id', $groups_data->id)->where('cat_id', $categories_data->id)->orderBy('set_order', 'ASC')->get()->toArray();
-
-                                                 //echo "<pre>";print_r($subcategories);echo"</pre>";
-                                                 @endphp
-
-
-                                                @if($subcategories != '')
-                                                @foreach($subcategories as $subcategories_data)
-                                                <li>
-                                                        <a href="{{url('/product/'.$groups_data->page_url.'/'.$categories_data->page_url.'/'.$subcategories_data->page_url)}}">{{ $subcategories_data->name }}</a>
-                                                </li>
-                                                @endforeach
-                                                @endif
-
-                                                
-                                            </ul>
-                                            @endforeach
-                                            @endif
-
-                                            {{-- <ul class="d-lg-inline-block">
-                                                <li class="dropdown-header">Women Casualwear</li>
-                                                <li><a href="{{url('/product-listing')}}">Evening Gown</a></li>
-                                                <li><a href="{{url('/product-listing')}}">Skirt</a></li>
-                                                <li><a href="{{url('/product-listing')}}">Crop Top</a></li>
-                                                <li><a href="{{url('/product-listing')}}">Indo Western</a></li>
-                                            </ul> --}}
-                                           
-                                        </div>
-                                    </div>
-                                </li>
-                                @endforeach
-                                @endif
-                                <!--
-                                <li class="nav-item dropdown megamenu">
-                                    <a href="javascript:void(0);" class="nav-link">Men's Wear</a>
-                                    <i class="fa fa-angle-down dropdown-toggle" data-bs-toggle="dropdown" aria-hidden="true"></i>
-                                    <div class="menu-back-div dropdown-menu megamenu-content" role="menu">
-                                        <div class="d-lg-flex justify-content-center">
-                                            <ul class="d-lg-inline-block">
-                                                <li class="dropdown-header">Men's Wear</li>
-                                                <li><a href="{{url('/product-listing')}}">Suit</a></li>
-                                                <li><a href="{{url('/product-listing')}}">Indo Western</a></li>
-                                                <li><a href="{{url('/product-listing')}}">Suit Blazer</a></li>
-                                                <li><a href="{{url('/product-listing')}}">Jackets</a></li>
-                                                <li><a href="{{url('/product-listing')}}">Kurta Pajama</a></li>
-                                            </ul>
-                                          
-                                           
-                                        </div>
-                                    </div>
-                                </li>
-
-                                <li class="nav-item dropdown megamenu">
-                                    <a href="javascript:void(0);" class="nav-link">Kid's Wear</a>
-                                    <i class="fa fa-angle-down dropdown-toggle" data-bs-toggle="dropdown" aria-hidden="true"></i>
-                                    <div class="menu-back-div dropdown-menu megamenu-content" role="menu">
-                                        <div class="d-lg-flex justify-content-center">
-                                            <ul class="d-lg-inline-block">
-                                                <li class="dropdown-header">Boys</li>
-                                                <li><a href="{{url('/product-listing')}}">Suit</a></li>
-                                                <li><a href="{{url('/product-listing')}}">Blazers</a></li>
-                                                <li><a href="{{url('/product-listing')}}">Indo Western</a></li>
-                                            </ul>
-                                            <ul class="d-lg-inline-block">
-                                                <li class="dropdown-header">Girls</li>
-                                                <li><a href="{{url('/product-listing')}}">Gown</a></li>
-                                                <li><a href="{{url('/product-listing')}}">Crop Top</a></li>
-                                                <li><a href="{{url('/product-listing')}}">Skirts</a></li>
-                                                <li><a href="{{url('/product-listing')}}">Indo Western</a></li>
-                                            </ul>
-                                           
-                                        </div>
-                                    </div>
-                                </li>-->
-                              
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-auto col-lg-2 text-end pe-0 font-size-0">
-                        <div class="header-search-icon search-form-wrapper">
-                            <a href="javascript:void(0)" class="search-form-icon header-search-form"><i class="feather icon-feather-search"></i></a>
-                            <!-- start search input --> 
-                            <div class="form-wrapper">
-                                <button title="Close" type="button" class="search-close alt-font">×</button>
-                                <form id="search-form" role="search" method="get" class="search-form text-start" action="search-result.html">
-                                    <div class="search-form-box">
-                                        <span class="search-label alt-font text-small text-uppercase text-medium-gray">What are you looking for?</span>
-                                        <input class="search-input alt-font" id="search-form-input5e219ef164995" placeholder="Enter your keywords..." name="s" value="" type="text" autocomplete="off">
-                                        <button type="submit" class="search-button">
-                                            <i class="feather icon-feather-search" aria-hidden="true"></i>
-                                        </button>
-                                    </div>
-                                </form>
-                            </div>
-                            <!-- end search input --> 
-                        </div>
-                        <div class="header-cart-icon dropdown">
-                            <a href="javascript:void(0);"><i class="feather icon-feather-shopping-bag"></i>
-                               <div id="header_cart_count">
-                               <span class="cart-count alt-font bg-extra-dark-gray text-white">{{Cart::count()}}</span>
-                               </div>
-                            </a>
-                            
-                            <ul class="dropdown-menu cart-item-list">
-                                <div id="header_cart">
-                                @if(Cart::count() > 0)
-
-                                @php
-                                    $subtotal =0;
-                                @endphp
-                                @foreach(Cart::content() as $items)
-                                <li class="cart-item align-items-center">
-                                    <a href="javascript:void(0);" onclick="remove_to_cart('{{ $items->rowId }}'); return false;" class="alt-font close">×</a>
-                                    <div class="product-image">
-                                        <a href="{{url('product-detail/' . $items->options->page_url)}}"><img src="{{asset('public/upload/product/large/'.$items->options->image)}}" class="cart-thumb" alt="" /></a>
-                                    </div>
-                                    <div class="product-detail alt-font">
-                                        <a href="{{url('product-detail/' . $items->options->page_url)}}">{{$items->name}}</a>
-
-                                         @php
-
-                                            if($items->options->discount_type != ''){
-                                                if($items->options->discount_type == 0){ //percentage
-                                                    $disc_price_new = $items->price * $items->options->discount /100 ;
-
-                                                    $disc_price = $items->price - $disc_price_new;
-
-                                                    $p_price = $disc_price;
-                                                }elseif($items->options->discount_type == 1){
-                                                    $disc_price = $items->price - $items->options->discount;
-                                                    $p_price = $disc_price;
-                                                }else{
-                                                    $disc_price = '0';
-                                                    $p_price = $items->price;
-                                                }
-
-                                            }else{
-                                                $disc_price = '0';
-                                            }
-
-                                         @endphp
-
-                                        @if($disc_price != '0')
-                                            <span class="item-ammount"><del>&#8377;{{ $items->price }}</del> &#8377;{{$disc_price}}</span> 
-                                        @else
-                                            <span class="item-ammount">&#8377;{{$items->price}} </span> 
-                                        @endif
-
-                                        <span class="item-ammount">Size: {{$items->options->size_name}} </span>
-                                        <span class="item-ammount">Colour: {{$items->options->color_name}} </span>
-
-                                       
-                                    </div>
-                                </li>
-                                @php
-
-                                    if($items->qty >= 1){
-                                        $subtotal += $items->qty * round($p_price);
-                                    }else{
-                                        $subtotal += round($p_price);
-                                    }
-
-                                    
-
-                                @endphp
-                                 @endforeach
-                               <!--  <li class="cart-item align-items-center">
-                                    <a href="javascript:void(0);" class="alt-font close">×</a>
-                                    <div class="product-image">
-                                        <a href="#"><img src="https://via.placeholder.com/150x191" class="cart-thumb" alt="" /></a>
-                                    </div>
-                                    <div class="product-detail alt-font">
-                                        <a href="{{url('single-product')}}">Elegant Peach Semi Organza Printed Saree</a>
-                                        <span class="item-ammount">	&#8377; 1999</span> 
-                                    </div>
-                                </li> -->
-                                <li class="cart-item cart-total">
-                                    <div class="alt-font margin-15px-bottom"><span class="w-50 d-inline-block text-medium text-uppercase">Subtotal:</span><span class="w-50 d-inline-block text-end text-medium font-weight-500">&#8377;{{$subtotal}}</span></div>
-                                    <a href="{{url('/cart')}}" class="btn btn-small btn-dark-gray">view cart</a>
-                                    <a href="{{url('/checkout')}}" class="btn btn-small btn-neon-orange">checkout</a>
-                                </li>
-                                @else
-                                    <p>No Product In Cart</p>
-                                @endif
-                                 </div>
-                            </ul>
-                           
-                        </div>
-                        <div class="header-cart-icon">
-                            @if(Session::get('userdata') =='')
-                            <a href="{{url('/signin')}}"><i class="feather icon-feather-user"></i></a>
-                            @else
-                            <a href="{{url('/my-profile')}}"><i class="feather icon-feather-user"></i></a>
-                            @endif
-                        </div>
-                    </div>
-                </div>
-            </nav>
-        </header>
+  <!-- Mobile Nav  -->
+  <div id="page" class="mobilie_header_nav stylehome1">
+    <div class="mobile-menu">
+      <div class="header bdrb1">
+        <div class="menu_and_widgets">
+          <div class="mobile_menu_bar d-flex justify-content-between align-items-center">
+            <a class="mobile_logo" href="#"><img src="{{asset('public/site/images/header-logo3.svg')}}" alt=""></a>
+            <div class="right-side text-end">
+              <a class="" href="page-login.html">join</a>
+              <a class="menubar ml30" href="#menu"><img src="{{asset('public/site/images/mobile-dark-nav-icon.svg')}}" alt=""></a>
+            </div>
+          </div>
+        </div>
+        <div class="posr"><div class="mobile_menu_close_btn"><span class="far fa-times"></span></div></div>
+      </div>
+    </div>
+    <!-- /.mobile-menu -->
+    <nav id="menu" class="">
+      <ul>
+        <li><span>Home</span>
+          <ul>
+            <li><a href="index.html">Home V1</a></li>
+            <li><a href="index2.html">Home V2</a></li>
+            <li><a href="index3.html">Home V3</a></li>
+            <li><a href="index4.html">Home V4</a></li>
+            <li><a href="index5.html">Home V5</a></li>
+            <li><a href="index6.html">Home V6</a></li>
+            <li><a href="index7.html">Home V7</a></li>
+            <li><a href="index8.html">Home V8</a></li>
+            <li><a href="index9.html">Home V9</a></li>
+            <li><a href="index10.html">Home V10</a></li>
+            <li><a href="index11.html">Home V11</a></li>
+            <li><a href="index12.html">Home V12</a></li>
+            <li><a href="index13.html">Home V13</a></li>
+            <li><a href="index14.html">Home V14</a></li>
+            <li><a href="index15.html">Home V15</a></li>
+            <li><a href="index16.html">Home V16</a></li>
+            <li><a href="index17.html">Home V17</a></li>
+            <li><a href="index18.html">Home V18</a></li>
+            <li><a href="index19.html">Home V19</a></li>
+            <li><a href="index20.html">Home V20</a></li>
+          </ul>
+        </li>
+        <li><span>Browse Jobs</span>
+          <ul>
+            <li><span>Services</span>
+              <ul>
+                <li><a href="page-service-v1.html">Service v1</a></li>
+                <li><a href="page-service-v2.html">Service v2</a></li>
+                <li><a href="page-service-v3.html">Service v3</a></li>
+                <li><a href="page-service-v4.html">Service v4</a></li>
+                <li><a href="page-service-v5.html">Service v5</a></li>
+                <li><a href="page-service-v6.html">Service v6</a></li>
+                <li><a href="page-service-v7.html">Service v7</a></li>
+                <li><a href="page-service-all.html">Service All</a></li>
+                <li><a href="page-service-single.html">Service Single</a></li>
+                <li><a href="page-service-single-v1.html">Single V1</a></li>
+                <li><a href="page-service-single-v2.html">Single V2</a></li>
+              </ul>
+            </li>
+            <li><span>Projects</span>
+              <ul>
+                <li><a href="page-project-v1.html">Project v1</a></li>
+                <li><a href="page-project-list-v1.html">List v1</a></li>
+                <li><a href="page-project-list-v2.html">List v2</a></li>
+                <li><a href="page-project-list-v3.html">List v3</a></li>
+                <li><a href="page-project-single.html">Project Single</a></li>
+                <li><a href="page-project-single-v1.html">Single V1</a></li>
+                <li><a href="page-project-single-v2.html">Single V2</a></li>
+              </ul>
+            </li>
+            <li><span>Job View</span>
+              <ul>
+                <li><a href="page-job-list-v1.html">Job list v1</a></li>
+                <li><a href="page-job-list-v2.html">Job list v2</a></li>
+                <li><a href="page-job-list-v3.html">Job list V3</a></li>
+                <li><a href="page-job-list-single.html">Job Single</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><span>Users</span>
+          <ul>
+            <li><span>Dashboard</span>
+              <ul>
+                <li><a href="page-dashboard.html">Dashboard</a></li>
+                <li><a href="page-dashboard-proposal.html">Proposal</a></li>
+                <li><a href="page-dashboard-save.html">Saved</a></li>
+                <li><a href="page-dashboard-message.html">Message</a></li>
+                <li><a href="page-dashboard-reviews.html">Reviews</a></li>
+                <li><a href="page-dashboard-invoice.html">Invoice</a></li>
+                <li><a href="page-dashboard-payouts.html">Payouts</a></li>
+                <li><a href="page-dashboard-statement.html">Statement</a></li>
+                <li><a href="page-dashboard-manage-service.html">Manage Service</a></li>
+                <li><a href="page-dashboard-add-service.html">Add Services</a></li>
+                <li><a href="page-dashboard-manage-jobs.html">Manage Jobs</a></li>
+                <li><a href="page-dashboard-manage-project.html">Manage Project</a></li>
+                <li><a href="page-dashboard-create-project.html">Create Project</a></li>
+                <li><a href="page-dashboard-profile.html">My Profile</a></li>
+              </ul>
+            </li>
+            <li><span>Employee</span>
+              <ul>
+                <li><a href="page-employee-v1.html">Employee V1</a></li>
+                <li><a href="page-employee-v2.html">Employee V2</a></li>
+                <li><a href="page-employee-single.html">Employee Single</a></li>
+              </ul>
+            </li>
+            <li><span>Freelancer</span>
+              <ul>
+                <li><a href="page-freelancer-v1.html">Freelancer V1</a></li>
+                <li><a href="page-freelancer-v2.html">Freelancer V2</a></li>
+                <li><a href="page-freelancer-v3.html">Freelancer V3</a></li>
+                <li><a href="page-freelancer-list-v1.html">List V1</a></li>
+                <li><a href="page-freelancer-list-v2.html">List V2</a></li>
+                <li><a href="page-freelancer-list-v3.html">List V3</a></li>
+                <li><a href="page-freelancer-single.html">Freelancer Single</a></li>
+                <li><a href="page-freelancer-single-v1.html">Single V1</a></li>
+                <li><a href="page-freelancer-single-v2.html">Single V2</a></li>
+              </ul>
+            </li>
+            <li><a href="page-become-seller.html">Become Seller</a></li>
+          </ul>
+        </li>
+        <li><span>Pages</span>
+          <ul>
+            <li><span>About</span>
+              <ul>
+                <li><a href="page-about.html">About v1</a></li>
+                <li><a href="page-about-v2.html">About v2</a></li>
+              </ul>
+            </li>
+            <li><span>Shop</span>
+              <ul>
+                <li><a href="page-shop.html">List</a></li>
+                <li><a href="page-shop-single.html">Single</a></li>
+                <li><a href="page-shop-cart.html">Cart</a></li>
+                <li><a href="page-shop-checkout.html">Checkout</a></li>
+                <li><a href="page-shop-order.html">Order</a></li>
+              </ul>
+            </li>
+            <li><a href="page-contact.html">Contact</a></li>
+            <li><a href="page-error.html">404</a></li>
+            <li><a href="page-faq.html">Faq</a></li>
+            <li><a href="page-help.html">Help</a></li>
+            <li><a href="page-invoice.html">Invoices</a></li>
+            <li><a href="page-login.html">Login</a></li>
+            <li><a href="page-pricing.html">Pricing</a></li>
+            <li><a href="page-register.html">Register</a></li>
+            <li><a href="page-terms.html">Terms</a></li>
+            <li><a href="page-ui-element.html">UI Elements</a></li>
+          </ul>
+        </li>
+        <li><span>Blog</span>
+          <ul>
+            <li><a href="page-blog-v1.html">List V1</a></li>
+            <li><a href="page-blog-v2.html">List V2</a></li>
+            <li><a href="page-blog-v3.html">List V3</a></li>
+            <li><a href="page-blog-single.html">Single</a></li>
+          </ul>
+        </li>
+        <!-- Only for Mobile View -->
+      </ul>
+    </nav>
+  </div>
+    <div class="body_content">

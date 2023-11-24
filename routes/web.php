@@ -65,7 +65,7 @@ Route::get('/config-cache', function() {
 
 /*------Front routes start ------*/
 
-
+Route::get('/', '\App\Http\Controllers\front\Homecontroller@index');
 
 
 /*------End Front routes  ------*/
