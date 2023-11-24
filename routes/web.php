@@ -67,6 +67,8 @@ Route::get('/config-cache', function() {
 
 Route::get('/', '\App\Http\Controllers\front\Homecontroller@index');
 
+Route::get('/book-services', '\App\Http\Controllers\front\Homecontroller@book_services');
+
 
 /*------End Front routes  ------*/
 
