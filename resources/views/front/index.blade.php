@@ -81,15 +81,14 @@
                 </div>
               </div>
               <div class="row mt20 animate-up-4">
-                <div class="col-xl-9">
-                    <p class="animate-up-2 ff-heading mt30 mb15">Popular Searches</p>
+                <div class="col-xl-12">
+                    <p class="animate-up-2 ff-heading mt30 mb15">Frequently searched</p>
                     <div class="home9-tags d-md-flex align-items-center animate-up-4">
-                      <a class="bdrs60 mb-2 mb-md-0" href="">Designer</a>
-                      <a class="bdrs60 mb-2 mb-md-0" href="">Developer</a>
-                      <a class="bdrs60 mb-2 mb-md-0" href="">Web</a>
-                      <a class="bdrs60 mb-2 mb-md-0" href="">IOS</a>
-                      <a class="bdrs60 mb-2 mb-md-0" href="">PHP</a>
-                      <a class="bdrs60 mb-2 mb-md-0" href="">Senior</a>
+                      <a class="bdrs60 mb-2 mb-md-0" href="">Relocation</a>
+                      <a class="bdrs60 mb-2 mb-md-0" href="">Home Cleaning  </a>
+                      <a class="bdrs60 mb-2 mb-md-0" href="">Women’s Salon</a>
+                      <a class="bdrs60 mb-2 mb-md-0" href="">Lab At Home</a>
+                      
                     </div>
                 </div>
 
@@ -98,7 +97,7 @@
             </div>
           </div>
           <div class="col-xl-5 d-none d-xl-block position-relative">
-            <img src="{{asset('public/site/images/about/about-1.png')}}" alt="" class="animate-up-1 main-img-home2">
+            <img src="{{asset('public/site/images/about/about-1.png')}}" alt="" class="animate-up-1 main-img-home2" width="100%">
             
           </div>
         </div>
@@ -106,50 +105,50 @@
     </section>
 
     <!-- Need something --> 
-    <section class="our-features pb90 pb30-md pt60">
+    <section class="our-features pb150 pb30-md pt150">
       <div class="container wow fadeInUp">
-        <div class="row">
+        <!-- <div class="row">
           <div class="col-lg-12">
             <div class="main-title">
               <h2>Need something done?</h2>
               <p class="text">Most viewed and all-time top-selling services</p>
             </div>
           </div>
-        </div>
+        </div> -->
         <div class="row">
           <div class="col-sm-6 col-lg-3">
-            <div class="iconbox-style1 at-home5 p-0">
+            <div class="iconbox-style1 at-home5 p-23" style="height:300px">
               <div class="icon before-none"><span class="flaticon-cv"></span></div>
               <div class="details">
-                <h4 class="title mt10 mb-3">Post a job</h4>
-                <p class="text">It’s free and easy to post a job. Simply fill <br class="d-none d-xxl-block"> in a title, description.</p>
+                <h4 class="title mt10 mb-3">500+ Services Offered</h4>
+                <p class="text">Explore our best in class services and widest range of home services.</p>
               </div>
             </div>
           </div>
           <div class="col-sm-6 col-lg-3">
-            <div class="iconbox-style1 at-home5 p-0">
+            <div class="iconbox-style1 at-home5 p-23" style="height:300px">
               <div class="icon before-none"><span class="flaticon-web-design"></span></div>
               <div class="details">
-                <h4 class="title mt10 mb-3">Choose freelancers</h4>
-                <p class="text">It’s free and easy to post a job. Simply fill <br class="d-none d-xxl-block"> in a title, description.</p>
+                <h4 class="title mt10 mb-3">100% Quality Assurance</h4>
+                <p class="text">Top quality from verified vendors,with your orders protected from payment to completion.</p>
               </div>
             </div>
           </div>
           <div class="col-sm-6 col-lg-3">
-            <div class="iconbox-style1 at-home5 p-0">
+            <div class="iconbox-style1 at-home5 p-23" style="height:300px">
               <div class="icon before-none"><span class="flaticon-secure"></span></div>
               <div class="details">
-                <h4 class="title mt10 mb-3">Pay safely</h4>
-                <p class="text">It’s free and easy to post a job. Simply fill <br class="d-none d-xxl-block"> in a title, description.</p>
+                <h4 class="title mt10 mb-3">Top-Rated Professionals</h4>
+                <p class="text">Our professionals are reliable & well-trained, with an average rating of 4.78 out of 5!</p>
               </div>
             </div>
           </div>
           <div class="col-sm-6 col-lg-3">
-            <div class="iconbox-style1 at-home5 p-0">
+            <div class="iconbox-style1 at-home5 p-23" style="height:300px">
               <div class="icon before-none"><span class="flaticon-customer-service"></span></div>
               <div class="details">
-                <h4 class="title mt10 mb-3">We’re here to help</h4>
-                <p class="text">It’s free and easy to post a job. Simply fill <br class="d-none d-xxl-block"> in a title, description.</p>
+                <h4 class="title mt10 mb-3">Same-Day Availability</h4>
+                <p class="text">Book in less than 60 seconds, and even select same-day slots.</p>
               </div>
             </div>
           </div>
