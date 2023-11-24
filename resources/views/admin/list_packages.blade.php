@@ -81,7 +81,7 @@
                                             <th>Select</th>
                                             <th>Service</th>
                                             <th>Sub Service</th>
-                                            <th>Packages Catgory</th>
+                                            <th>Package Category</th>
                                             <th>Name</th>
                                             <th>Image</th>
                                             <!-- <th>Page Url</th> -->

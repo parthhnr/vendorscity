@@ -42,6 +42,9 @@ class PackagesController extends Controller
      */
     public function store(Request $request)
     {
+        // echo "<pre>";
+        // print_r($request->post());
+        // echo "</pre>";exit;
         
         $data['service_id']=$request->service_id;
         $data['subservice_id']=$request->subservice_id;
@@ -49,6 +52,8 @@ class PackagesController extends Controller
         $data['name']=$request->name;
         $data['price']=$request->price;
         $data['description']=$request->description;
+        $data['discount'] = $request->discount;
+        $data['discount_type'] = $request->discount_type;
 
         if($request->hasfile('image') != ''){
 
@@ -119,6 +124,8 @@ class PackagesController extends Controller
         $data['name']=$request->name;
         $data['price']=$request->price;
         $data['description']=$request->description;
+        $data['discount'] = $request->discount;
+        $data['discount_type'] = $request->discount_type;
 
         if($request->hasfile('image') != ''){
 
