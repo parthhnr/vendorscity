@@ -1,218 +1,146 @@
- <!-- start footer -->
-        <footer class="footer-fashion-shop footer-dark bg-extra-dark-gray position-relative overlap-gap-section-bottom sm-padding-50px-top footer-inner-pg-pt0">
-            <div class="footer-top padding-five-bottom">
-                <div class="container">
-                    <div class="row row-cols-1 row-cols-md-4 row-cols-sm-3 justify-content-center">
-                        <!-- start footer column -->
-                        <div class="col col-lg-3 col-sm-6 offset-sm-2 offset-md-0 order-lg-0 text-md-center text-lg-start last-paragraph-no-margin margin-25px-bottom">
-                            <a href="{{url('/')}}" class="footer-logo margin-15px-bottom margin-5px-top d-inline-block">
-                                <img src="{{asset('public/site/images/sagar-logo.png')}}" alt=""></a>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</p>
-                        </div>
-                        <!-- end footer column -->
-                        <!-- start footer column -->
-                        <div class="col-6 col-lg offset-xl-1 order-lg-0 md-margin-40px-bottom xs-margin-25px-bottom">
-                            <span class="alt-font font-weight-500 d-block text-white margin-15px-bottom xs-margin-10px-bottom">Categories</span>
-                            <ul>@php
-                                $category_data = DB::table('categories')->get();
-                                foreach($category_data as $data){
-                                    $group_data = DB::table('groups')->where('id',$data->group_id)->first();
-                                @endphp
-                                <li><a href="{{url('/product/'.$group_data->page_url.'/'.$data->page_url)}}">{{ $data->name }}</a></li>
-                                @php
-                                } 
-                                @endphp
-                                <!-- <li><a href="#">For woman</a></li>
-                                <li><a href="#">Accessories</a></li>
-                                <li><a href="#">Collections</a></li> -->
-                            </ul>
-                        </div>
-                        <!-- end footer column -->
-                        <!-- start footer column -->
-                        <div class="col-6 col-lg order-lg-0 md-margin-40px-bottom xs-margin-25px-bottom">
-                            <span class="alt-font font-weight-500 d-block text-white margin-15px-bottom xs-margin-10px-bottom">Quick Links</span>
-                            <ul>                           
-                                <li><a href="{{url('/about-company')}}">About company</a></li>
-                                <li><a href="{{url('/our-services')}}">Our services</a></li>
-                                <li><a href="{{url('/latest-blogs')}}">Latest blogs</a></li>
-                                <li><a href="{{url('/contact-us')}}">Contact us</a></li>
-                            </ul>
-                        </div>
-                        <!-- end footer column -->
-                        <!-- start footer column -->
-                        <div class="col-6 col-lg order-lg-0 md-margin-40px-bottom xs-margin-25px-bottom">
-                            <span class="alt-font font-weight-500 d-block text-white margin-15px-bottom xs-margin-10px-bottom">About Company</span>
-                            <ul>
-                                <li><a href="{{url('/terms-conditions')}}">Terms & Conditions</a></li>
-                                <li><a href="{{url('/privacy-policy')}}">privacy Policy</a></li>
-                                <li><a href="{{url('/what-we-offer')}}">What we offer</a></li>
-                                <li><a href="{{url('/return')}}">Return</a></li>
-                            </ul>
-                        </div>
-                        <!-- end footer column -->
-                        <!-- start footer column -->
-                        <div class="col-6 col-lg order-lg-0 xs-margin-25px-bottom">
-                            <span class="alt-font font-weight-500 d-block text-white margin-15px-bottom xs-margin-10px-bottom">Payments</span>
-                            <ul>
-                                <li><a href="{{url('/free-delivery')}}">Free delivery</a></li>
-                                <li><a href="{{url('/100-days-refund')}}">100 days refund</a></li>
-                                <li><a href="{{url('/multiple-payments')}}">Multiple payments</a></li>
-                                <li><a href="{{url('/sustainable')}}">Sustainable</a></li>
-                            </ul>
-                        </div>
-                        <!-- end footer column --> 
-                        <div class="col col-lg-12 col-sm-12 offset-sm-2 offset-md-0 order-lg-0 text-md-center text-lg-start last-paragraph-no-margin">
-                            <p>&copy; Copyright 2023 Sagar store</p>
-                        </div>
-                    </div>
-                </div>
+ <!-- Our Footer --> 
+    <section class="footer-style1 at-home6 home2-footer-radius pt25 pb-0">
+      <div class="container">
+        <div class="row bb-white-light pb10 mb60">
+          <div class="col-md-7">
+            <div class="d-block text-center text-md-start justify-content-center justify-content-md-start d-md-flex align-items-center mb-3 mb-md-0">
+              <a class="fz17 fw500 text-white mr15-md mr30" href="">Terms of Service</a>
+              <a class="fz17 fw500 text-white mr15-md mr30" href="">Privacy Policy</a>
+              <a class="fz17 fw500 text-white" href="">Site Map</a>
             </div>
-        </footer>
-        <!-- end footer -->
-<!-- start scroll to top -->
-        <a class="scroll-top-arrow" href="javascript:void(0);"><i class="feather icon-feather-arrow-up"></i></a>
-        <!-- end scroll to top -->
-        <!-- javascript -->
-        <script type="text/javascript" src="{{asset('public/site/js/jquery.min.js')}}"></script>
-        <script type="text/javascript" src="{{asset('public/site/js/theme-vendors.min.js')}}"></script>
-        <script type="text/javascript" src="{{asset('public/site/js/main.js')}}"></script>
-
-        <!-- revolution js files -->
-        <script type="text/javascript" src="{{asset('public/site/revolution/js/jquery.themepunch.tools.min.js')}}"></script>
-        <script type="text/javascript" src="{{asset('public/site/revolution/js/jquery.themepunch.revolution.min.js')}}"></script>
-
-        <!-- BUBBLEMORPH ADD-ON FILES -->
-        <script type='text/javascript' src="{{asset('public/site/revolution/revolution-addons/bubblemorph/js/revolution.addon.bubblemorph.min.js')}}"></script>
-
-        @if (Session::get('L_strsucessMessage') != '')
-
-        <script>document.getElementById('message_succsess').innerHTML = "{{ Session::get('L_strsucessMessage') }}";$('#message_succsess').show().delay(0).fadeIn('show');$('#message_succsess').show().delay(3000).fadeOut('show');</script>
-        
-        @endif
-        <script type="text/javascript">
-            var revapi263,
-                    tpj;
-            (function () {
-                if (!/loaded|interactive|complete/.test(document.readyState))
-                    document.addEventListener("DOMContentLoaded", onLoad);
-                else
-                    onLoad();
-                function onLoad() {
-                    if (tpj === undefined) {
-                        tpj = jQuery;
-                        if ("off" == "on")
-                            tpj.noConflict();
-                    }
-                    if (tpj("#rev_slider_35_1").revolution == undefined) {
-                        revslider_showDoubleJqueryError("#rev_slider_35_1");
-                    } else {
-                        var revOffset = tpj(window).width() <= 767 ? '77px' : '128px';
-                        revapi263 = tpj("#rev_slider_35_1").show().revolution({
-                            sliderType: "standard",
-                            jsFileLocation: "revolution/js/",
-                            sliderLayout: "fullwidth",
-                            dottedOverlay: "none",
-                            delay: 9000,
-                            navigation: {
-                                keyboardNavigation: "on",
-                                keyboard_direction: "horizontal",
-                                mouseScrollNavigation: "off",
-                                mouseScrollReverse: "default",
-                                onHoverStop: "off",
-                                touch: {
-                                    touchenabled: "on",
-                                    touchOnDesktop: "on",
-                                    swipe_threshold: 75,
-                                    swipe_min_touches: 1,
-                                    swipe_direction: "horizontal",
-                                    drag_block_vertical: false
-                                },
-                                tabs: {
-                                    enable: true,
-                                    style: 'erinyen',
-                                    direction: 'horizontal',
-                                    h_align: "center",
-                                    v_align: "bottom",
-                                    h_offset: -480,
-                                    v_offset: 80,
-                                    space: 25,
-                                    hide_onleave: false,
-                                    hide_onmobile: false,
-                                    wrapper_padding: 0,
-                                    width: 20,
-                                    height: ['auto'],
-                                    wrapper_color: 'transparent',
-                                    wrapper_opacity: '0',
-                                    tmp: '<span class="alt-font text-extra-dark-gray">param1</span>',
-                                }
-                            },
-                            responsiveLevels: [1240, 1025, 992, 480],
-                            visibilityLevels: [1240, 1024, 778, 480],
-                            gridwidth: [1140, 1024, 778, 480],
-                            gridheight: [870, 640, 910, 868],
-                            lazyType: "none",
-                            shadow: 0,
-                            spinner: "spinner5",
-                            stopLoop: "on",
-                            stopAfterLoops: 0,
-                            stopAtSlide: 1,
-                            shuffle: "off",
-                            autoHeight: "off",
-                            fullScreenAutoWidth: "off",
-                            fullScreenAlignForce: "off",
-                            fullScreenOffsetContainer: "",
-                            fullScreenOffset: revOffset,
-                            disableProgressBar: "on",
-                            hideThumbsOnMobile: "off",
-                            hideSliderAtLimit: 0,
-                            hideCaptionAtLimit: 0,
-                            hideAllCaptionAtLimit: 0,
-                            debugMode: false,
-                            fallbacks: {
-                                simplifyAll: "off",
-                                nextSlideOnWindowFocus: "off",
-                                disableFocusListener: false,
-                            }
-                        });
-                    }
-                    ; /* END OF revapi call */
-
-                    BubbleMorphAddOn(jQuery, revapi263);
-                }
-                ; /* END OF ON LOAD FUNCTION */
-            }()); /* END OF WRAPPING FUNCTION */
-
-                 function remove_to_cart(rowId) {
-
-       var answer = window.confirm("Do you want to remove this product from cart?");
-
-        if (answer) {
-               var url = '{{ url('cart_remove') }}';
-               $.ajax({
-                 url: url,
-                 type: 'post',
-                 data: {
-                   "_token": "{{ csrf_token() }}",
-                   "rowId": rowId
-                 },
-                 success: function(msg) {
-
-                   if (msg != '') {
-                     $("#message_error").html("Product Removed From Cart");
-                     $('#message_error').show().delay(0).fadeIn('show');
-                     $('#message_error').show().delay(2000).fadeOut('show');
-                     $("#mydiv_pc").load(location.href + " #mydiv_pc");
-                     $("#header_cart").load(location.href + " #header_cart");
-                    $("#header_cart_count").load(location.href + " #header_cart_count");
-                     return false;
-                   }
-
-                 }
-
-               });
-           }
-     }
-        </script>
-
-        </body>
+          </div>
+          <div class="col-md-5">
+            <div class="social-widget text-center text-md-end">
+              <div class="social-style1">
+                <a class="text-white me-2 fw500 fz17" href="">Follow us</a>
+                <a href=""><i class="fab fa-facebook-f list-inline-item"></i></a>
+                <a href=""><i class="fab fa-twitter list-inline-item"></i></a>
+                <a href=""><i class="fab fa-instagram list-inline-item"></i></a>
+                <a href=""><i class="fab fa-linkedin-in list-inline-item"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6 col-lg-3">
+            <div class="link-style1 mb-4 mb-sm-5">
+              <h5 class="text-white mb15">About</h5>
+              <div class="link-list">
+                <a href="">Careers</a>
+                <a href="">Press & News</a>
+                <a href="">Partnerships</a>
+                <a href="">Privacy Policy</a>
+                <a href="">Terms of Service</a>
+                <a href="">Investor Relations</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-3">
+            <div class="link-style1 mb-4 mb-sm-5">
+              <h5 class="text-white mb15">Categories</h5>
+              <ul class="ps-0">
+                <li><a href="">Graphics & Design</a></li>
+                <li><a href="">Digital Marketing</a></li>
+                <li><a href="">Writing & Translation</a></li>
+                <li><a href="">Video & Animation</a></li>
+                <li><a href="">Music & Audio</a></li>
+                <li><a href="">Programming & Tech</a></li>
+                <li><a href="">Data</a></li>
+                <li><a href="">Business</a></li>
+                <li><a href="">Lifestyle</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-3">
+            <div class="link-style1 mb-4 mb-sm-5">
+              <h5 class="text-white mb15">Support</h5>
+              <ul class="ps-0">
+                <li><a href="">Help & Support</a></li>
+                <li><a href="">Trust & Safety</a></li>
+                <li><a href="">Selling on Freeio</a></li>
+                <li><a href="">Buying on Freeio</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-3">
+            <div class="footer-widget">
+              <div class="footer-widget mb-4 mb-sm-5">
+                <div class="mailchimp-widget">
+                  <h5 class="title text-white mb20">Subscribe</h5>
+                  <div class="mailchimp-style1">
+                    <input type="email" class="form-control bdrs4" placeholder="Your email address">
+                    <button type="submit">Send</button>
+                  </div>
+                </div>
+              </div>
+              <div class="app-widget mb-4 mb-sm-5">
+                <h5 class="title text-white mb20">Apps</h5>
+                <div class="row mb-4 mb-lg-5">
+                  <div class="col-lg-12">
+                    <a class="app-list d-flex align-items-center mb10" href="">
+                      <i class="fab fa-apple fz17 mr15"></i>
+                      <h6 class="app-title fz15 fw400 mb-0">iOS App</h6>
+                    </a>
+                    <a class="app-list d-flex align-items-center" href="">
+                      <i class="fab fa-google-play fz15 mr15"></i>
+                      <h6 class="app-title fz15 fw400 mb-0">Android App</h6>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container white-bdrt1 py-4">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="text-center text-lg-start">
+              <p class="copyright-text mb-0 text-white-light ff-heading">© Freeio. 2023 CreativeLayers. All rights reserved.</p>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="footer_bottom_right_btns text-center text-lg-end">
+              <ul class="p-0 m-0">
+                <li class="list-inline-item">
+                  <select class="selectpicker show-tick">
+                    <option>US$ USD</option>
+                    <option>Euro</option>
+                    <option>Pound</option>
+                  </select>
+                </li>
+                <li class="list-inline-item">
+                  <select class="selectpicker show-tick">
+                    <option>English</option>
+                    <option>Frenc</option>
+                    <option>Italian</option>
+                    <option>Spanish</option>
+                    <option>Turkey</option>
+                  </select>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <a class="scrollToHome at-home2" href="#"><i class="fas fa-angle-up"></i></a>
+  </div>
+</div>
+<!-- Wrapper End --> 
+<script src="{{asset('public/site/js/jquery-3.6.4.min.js')}}"></script>
+<script src="{{asset('public/site/js/jquery-migrate-3.0.0.min.js')}}"></script>
+<script src="{{asset('public/site/js/popper.min.js')}}"></script>
+<script src="{{asset('public/site/js/bootstrap.min.js')}}"></script>
+<script src="{{asset('public/site/js/bootstrap-select.min.js')}}"></script>
+<script src="{{asset('public/site/js/jquery.mmenu.all.js')}}"></script>
+<script src="{{asset('public/site/js/ace-responsive-menu.js')}}"></script>
+<script src="{{asset('public/site/js/jquery-scrolltofixed-min.js')}}"></script>
+<script src="{{asset('public/site/js/wow.min.js')}}"></script>
+<script src="{{asset('public/site/js/owl.js')}}"></script>
+<script src="{{asset('public/site/js/jquery.counterup.js')}}"></script>
+<script src="{{asset('public/site/js/pricing-table.js')}}"></script>
+<!-- Custom script for all pages -->
+<script src="{{asset('public/site/js/script.js')}}"></script>
+</body>
 </html>

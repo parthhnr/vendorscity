@@ -1,0 +1,13 @@
+@charset "UTF-8";
+ header.nav-homepage-style .ace-responsive-menu a{color: #000;}
+    header.nav-homepage-style .btn-mega{color: #000;}
+    header.nav-homepage-style .sidemenu-btn, header.nav-homepage-style .login-info{color: #000;}
+	.hero-home2{
+		background-image:inherit;
+	}
+.bdrs60{
+	border: 1px solid #ccc;
+}
+.home9-tags a{
+color:#000;
+}
