@@ -166,19 +166,20 @@
 
                                     </div>
                                 </div>
-                                {{-- <div class="form-group" style="display: none">
+                                <div class="form-group">
 
-                                    <label for="name">Booking Service Price</label>
+                                    <label for="name">Booking Service Percentage</label>
 
-                                    <input id="serviceprice" name="serviceprice" type="text" class="form-control"
-                                        placeholder="Enter Booking Service Price" value="{{ $subservice->serviceprice }}"
+                                    <input id="servicepercentage" name="servicepercentage" type="text"
+                                        class="form-control" placeholder="Enter Booking Service Percentage"
+                                        value="{{ $subservice->servicepercentage }}"
                                         onkeypress="return validateNumber(event)" />
 
                                     <p class="form-error-text" id="serviceprice_error"
                                         style="color: red; margin-top: 10px;">
                                     </p>
 
-                                </div> --}}
+                                </div>
 
                                 <div class="col-lg-12">
                                     <div class="form-group">

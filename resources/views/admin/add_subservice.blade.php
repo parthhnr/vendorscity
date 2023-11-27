@@ -150,15 +150,17 @@
                                             style="color: red; margin-top: 10px;"></p>
                                     </div>
                                 </div>
-                                {{-- <div class="form-group" style="display: none">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
 
-                                    <label for="name">Booking Service Price</label>
-                                    <input id="serviceprice" name="serviceprice" type="text" class="form-control"
-                                        placeholder="Booking Service Price" value=""
-                                        onkeypress="return validateNumber(event)" />
-                                    <p class="form-error-text" id="serviceprice_error"
-                                        style="color: red; margin-top: 10px;"></p>
-                                </div> --}}
+                                        <label for="name">Booking Service Percentage</label>
+                                        <input id="servicepercentage" name="servicepercentage" type="text"
+                                            class="form-control" placeholder="Booking Service Percentage" value=""
+                                            onkeypress="return validateNumber(event)" />
+                                        <p class="form-error-text" id="servicepercentage_error"
+                                            style="color: red; margin-top: 10px;"></p>
+                                    </div>
+                                </div>
 
                                 <div class="form-group">
 

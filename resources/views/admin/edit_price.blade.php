@@ -35,16 +35,14 @@
         <!-- /Page Header -->
 
         @if ($message = Session::get('success'))
+            <div class="alert alert-success alert-dismissible fade show">
 
-               <div class="alert alert-success alert-dismissible fade show">
+                <strong>Success!</strong> {{ $message }}
 
-                   <strong>Success!</strong> {{ $message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
 
-                   <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-
-               </div>
-
-           @endif
+            </div>
+        @endif
 
         <div id="validate" class="alert alert-danger alert-dismissible fade show" style="display: none;">
 
@@ -67,7 +65,6 @@
                         <!-- <h4 class="card-title">Basic Info</h4> -->
 
                         <form id="category_form" action="{{ route('price.update', $price->id) }}" method="POST"
-
                             enctype="multipart/form-data">
 
                             @csrf
@@ -77,62 +74,68 @@
                             <div class="row">
 
 
-                                <h5>Based on Booking Services</h5>
+                                {{-- <h5>Based on Booking Services</h5>
 
                                 <div class="col-lg-6">
 
-                                <div class="form-group">
+                                    <div class="form-group">
 
-                                    <label for="based_on_booking_service_label">Label</label>
+                                        <label for="based_on_booking_service_label">Label</label>
 
-                                    <input id="based_on_booking_service_label" name="based_on_booking_service_label" type="text" class="form-control"
+                                        <input id="based_on_booking_service_label" name="based_on_booking_service_label"
+                                            type="text" class="form-control" placeholder="Enter Label"
+                                            value="{{ $price->based_on_booking_service_label }}" />
+                                        <p class="form-error-text" id="based_on_booking_service_label_error"
+                                            style="color: red; margin-top: 10px;"></p>
 
-                                        placeholder="Enter Label" value="{{ $price->based_on_booking_service_label }}" />
-                                        <p class="form-error-text" id="based_on_booking_service_label_error" style="color: red; margin-top: 10px;"></p>
+                                    </div>
+                                </div> --}}
+
+                                {{-- <div class="col-lg-6">
+
+                                    <div class="form-group">
+
+                                        <label for="based_on_booking_service_price">Price</label>
+
+                                        <input id="based_on_booking_service_price" name="based_on_booking_service_price"
+                                            type="text" class="form-control" placeholder="Enter Price"
+                                            value="{{ $price->based_on_booking_service_price }}"
+                                            onkeypress="return validateNumber(event)" />
+                                        <p class="form-error-text" id="based_on_booking_service_price"
+                                            style="color: red; margin-top: 10px;"></p>
+
+                                    </div>
+                                </div> --}}
+
+                                <h5>Based on Listing Criteria</h5>
+
+                                <div class="col-lg-6">
+
+                                    <div class="form-group">
+
+                                        <label for="based_on_listing_criteria_label">Label</label>
+
+                                        <input id="based_on_listing_criteria_label" name="based_on_listing_criteria_label"
+                                            type="text" class="form-control" placeholder="Enter Label"
+                                            value="{{ $price->based_on_listing_criteria_label }}" />
+                                        <p class="form-error-text" id="based_on_booking_service_label_error"
+                                            style="color: red; margin-top: 10px;"></p>
 
                                     </div>
                                 </div>
 
                                 <div class="col-lg-6">
 
-                                <div class="form-group">
+                                    <div class="form-group">
 
-                                    <label for="based_on_booking_service_price">Price</label>
+                                        <label for="based_on_listing_criteria_price">Price</label>
 
-                                    <input id="based_on_booking_service_price" name="based_on_booking_service_price" type="text" class="form-control"
-
-                                        placeholder="Enter Price" value="{{ $price->based_on_booking_service_price }}" onkeypress="return validateNumber(event)"/>
-                                        <p class="form-error-text" id="based_on_booking_service_price" style="color: red; margin-top: 10px;"></p>
-
-                                    </div>
-                                </div>
-
-                                 <h5>Based on Listing Criteria</h5>
-
-                                <div class="col-lg-6">
-
-                                <div class="form-group">
-
-                                    <label for="based_on_listing_criteria_label">Label</label>
-
-                                    <input id="based_on_listing_criteria_label" name="based_on_listing_criteria_label" type="text" class="form-control"
-
-                                        placeholder="Enter Label" value="{{ $price->based_on_listing_criteria_label }}" />
-                                        <p class="form-error-text" id="based_on_booking_service_label_error" style="color: red; margin-top: 10px;"></p>
-
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-6">
-
-                                <div class="form-group">
-
-                                    <label for="based_on_listing_criteria_price">Price</label>
-
-                                    <input id="based_on_listing_criteria_price" name="based_on_listing_criteria_price" type="text" class="form-control"
-
-                                        placeholder="Enter Price" value="{{ $price->based_on_listing_criteria_price }}" onkeypress="return validateNumber(event)"/>
-                                        <p class="form-error-text" id="based_on_listing_criteria_price" style="color: red; margin-top: 10px;"></p>
+                                        <input id="based_on_listing_criteria_price" name="based_on_listing_criteria_price"
+                                            type="text" class="form-control" placeholder="Enter Price"
+                                            value="{{ $price->based_on_listing_criteria_price }}"
+                                            onkeypress="return validateNumber(event)" />
+                                        <p class="form-error-text" id="based_on_listing_criteria_price"
+                                            style="color: red; margin-top: 10px;"></p>
 
                                     </div>
                                 </div>
@@ -147,7 +150,6 @@
 
 
                                 <button class="btn btn-primary mb-1" type="button" disabled id="spinner_button"
-
                                     style="display: none;">
 
                                     <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
@@ -159,7 +161,6 @@
 
 
                                 <button type="button" class="btn btn-primary" id="submit_button"
-
                                     onclick="javascript:category_validation()">Submit</button>
 
                                 <!-- <input type="submit" name="submit" value="Submit" class="btn btn-primary"> -->
@@ -188,7 +189,6 @@
 
 
     <script>
-
         function validateNumber(event) {
 
             var key = window.event ? event.keyCode : event.which;
@@ -232,7 +232,7 @@
             //     return false;
 
             // }
-            
+
 
 
             // var price = jQuery("#price").val();
@@ -260,8 +260,6 @@
             $('#category_form').submit();
 
         }
-
     </script>
 
 @stop
-
