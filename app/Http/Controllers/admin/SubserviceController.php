@@ -51,7 +51,7 @@ class SubserviceController extends Controller
         $subservice->description=$request->description;
         $subservice->charge=$request->charge;
         $subservice->no_of_inquiry=$request->no_of_inquiry;        
-        // $subservice->serviceprice=$request->serviceprice;        
+        $subservice->servicepercentage=$request->servicepercentage;        
        
         $subservice->is_bookable = implode(',', $request->is_bookable);
 
@@ -129,7 +129,7 @@ class SubserviceController extends Controller
         $subservice->description=$request->description;
         $subservice->charge=$request->charge;
         $subservice->no_of_inquiry=$request->no_of_inquiry;
-        // $subservice->serviceprice=$request->serviceprice;
+        $subservice->servicepercentage=$request->servicepercentage;
         
         $subservice->is_bookable = implode(',', $request->is_bookable);       
 

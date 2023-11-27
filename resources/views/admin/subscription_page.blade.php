@@ -20,8 +20,6 @@
 
            </div>
 
-
-
            @if ($message = Session::get('success'))
                <div class="alert alert-success alert-dismissible fade show">
 
@@ -32,9 +30,33 @@
                </div>
            @endif
 
-           <h4>Subscription</h4>
+           @php
+
+               $subscriber_name = DB::table('users')
+                   ->where('id', $id)
+                   ->first();
+
+           @endphp
+
+           <h4>Subscription / {{ $subscriber_name->name }}</h4>
 
            <div class="row">
+               <div class="col-xl-4 col-sm-6 col-12 mt-2">
+                   <div class="card">
+                       <div class="card-body">
+                           <div class="dash-widget-header text-center" style="display:block">
+                               <div class="dash-count">
+                                   <div class="dash-title"><a href=""
+                                           style=" margin-bottom: 25px;display: inline-block;">Total Wallet Amount</a>
+                                   </div>
+                                   <div class="dash-counts">
+                                       <p>{{ $subscriber_name->wallet_amount }}</p>
+                                   </div>
+                               </div>
+                           </div>
+                       </div>
+                   </div>
+               </div>
                <div class="col-xl-4 col-sm-6 col-12 mt-2">
                    <div class="card">
                        <div class="card-body">

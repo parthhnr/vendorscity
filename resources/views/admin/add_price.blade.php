@@ -57,7 +57,6 @@
                         <!-- <h4 class="card-title">Basic Info</h4> -->
 
                         <form id="group_form" action="{{ route('price.store') }}" method="POST"
-
                             enctype="multipart/form-data">
 
                             @csrf
@@ -69,15 +68,18 @@
                                         <label style="width: 100%;">Service Type</label>
                                         <div style="padding: 9px 0;">
                                             <label>
-                                            <input type="radio" name="service_type" value="Based on Booking Services" id="service_type">
-                                            Based on Booking Services
-                                        </label>
-                                        <label>
-                                            <input type="radio" name="service_type" value="Based on Listing Criteria" id="service_type">
-                                            Based on Listing Criteria
-                                        </label>
+                                                <input type="radio" name="service_type" value="Based on Booking Services"
+                                                    id="service_type">
+                                                Based on Booking Services
+                                            </label>
+                                            <label>
+                                                <input type="radio" name="service_type" value="Based on Listing Criteria"
+                                                    id="service_type">
+                                                Based on Listing Criteria
+                                            </label>
                                         </div>
-                                        <p class="form-error-text" id="service_error" style="color: red; margin-top: 10px;"></p>
+                                        <p class="form-error-text" id="service_error" style="color: red; margin-top: 10px;">
+                                        </p>
                                     </div>
                                 </div>
 
@@ -86,9 +88,8 @@
                                     <label for="name">Price</label>
 
                                     <input id="price" name="price" type="text" class="form-control"
-
                                         placeholder="Enter Price" value="" />
-                                        <p class="form-error-text" id="price_error" style="color: red; margin-top: 10px;"></p>
+                                    <p class="form-error-text" id="price_error" style="color: red; margin-top: 10px;"></p>
 
                                 </div>
 
@@ -100,7 +101,7 @@
 
 
 
-                            
+
 
 
                             <div class="text-end mt-4">
@@ -110,7 +111,6 @@
 
 
                                 <button class="btn btn-primary mb-1" type="button" disabled id="spinner_button"
-
                                     style="display: none;">
 
                                     <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
@@ -122,7 +122,6 @@
 
 
                                 <button type="button" class="btn btn-primary" id="submit_button"
-
                                     onclick="javascript:group_validation()">Submit</button>
 
                                 <!-- <input type="submit" name="submit" value="Submit" class="btn btn-primary"> -->
@@ -146,7 +145,6 @@
 @section('footer_js')
 
     <script>
-
         $(function() {
 
             $("#name").keyup(function() {
@@ -162,14 +160,13 @@
             });
 
         });
-
     </script>
 
 
 
     <script>
-
         var radioButtons = document.querySelectorAll('input[type="radio"][name="service_type"]');
+
         function isRadioButtonSelected() {
             for (var i = 0; i < radioButtons.length; i++) {
                 if (radioButtons[i].checked) {
@@ -192,7 +189,7 @@
                 return false;
 
             }
-            
+
 
 
             var price = jQuery("#price").val();
@@ -219,8 +216,6 @@
             $('#group_form').submit();
 
         }
-
     </script>
 
 @stop
-
