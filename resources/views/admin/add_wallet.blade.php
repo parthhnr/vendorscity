@@ -101,7 +101,7 @@
             var isPaymentChecked = jQuery('input[name="payment"]:checked');
 
             if (isPaymentChecked.length === 0) {
-                jQuery('#payment_error').html("Please Select Payment");
+                jQuery('#payment_error').html("Please Select Payment Type");
                 jQuery('#payment_error').show().delay(0).fadeIn('show');
                 jQuery('#payment_error').show().delay(2000).fadeOut('show');
                 $('html, body').animate({

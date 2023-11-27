@@ -90,10 +90,9 @@
                                         <tr>
                                             <th></th>
                                             <th>Price</th>
-                                            <th>Payment type</th>
-
-                                            <th>Status</th>
+                                            <th>Payment Type</th>
                                             <th>Add/Deduct</th>
+                                            <th>Status</th>
                                             <th>Date</th>
                                         </tr>
                                     </thead>
@@ -112,6 +111,16 @@
                                                     @endif
                                                 </td>
 
+
+                                                <td>
+                                                    @if ($data->add_deduct === 0)
+                                                        {{ 'Add' }}
+                                                    @elseif ($data->add_deduct === 1)
+                                                        {{ 'Deduct' }}
+                                                    @else
+                                                        {{ '-' }}
+                                                    @endif
+                                                </td>
                                                 <td>
                                                     @if ($data->status === 0)
                                                         <span
@@ -119,15 +128,6 @@
                                                     @elseif ($data->status === 1)
                                                         <span class="badge badge-pill bg-success-light">
                                                             {{ 'Approved' }}</span>
-                                                    @else
-                                                        {{ '-' }}
-                                                    @endif
-                                                </td>
-                                                <td>
-                                                    @if ($data->add_deduct === 0)
-                                                        {{ 'Add' }}
-                                                    @elseif ($data->add_deduct === 1)
-                                                        {{ 'Deduct' }}
                                                     @else
                                                         {{ '-' }}
                                                     @endif

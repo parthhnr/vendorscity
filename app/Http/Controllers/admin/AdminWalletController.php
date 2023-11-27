@@ -18,8 +18,9 @@ class AdminWalletController extends Controller
     public function index()
     {
         
-        $data['wallet_data'] = Wallet::orderBy('id', 'DESC')->get();    
-        
+        // $data['wallet_data'] = Wallet::orderBy('id', 'DESC')->get();
+        $data['wallet_data'] =Wallet::orderByDesc('id')->get();  
+    
        return view('admin.list_adminwallet',$data);
        
     }
@@ -87,19 +88,34 @@ class AdminWalletController extends Controller
      */
     public function destroy($id)
     {
-        //
+        //echo"<pre>";
+        // print_r($value);
+        // echo"</pre>";exit;
     }
     public  function change_status_wallet(){
 
+        $id = $_POST['id'];
+        $vendorid = $_POST['vendorid'];
+        $value = $_POST['value'];
+        
+        // Update 'wallets' table
+        DB::table('wallets')->where('id', $id)->update(['status' => $value]);
+        
+        // Retrieve data from 'wallets' table, including the 'price' column
+        $walletData = DB::table('wallets')->where('id', $id)->first();
+        // echo"<pre>";
+        // print_r($walletData);
+        // echo"</pre>";exit;
+        
+        // Assuming 'users' table has a column 'wallet_amount', update it
+        DB::table('users')->where('id', $vendorid)->update([
+            'wallet_amount' => DB::raw('wallet_amount ' . ($value == 0 ? '-' : '+') . ' ' . $walletData->price),
+            // Adjust column names as needed
+        ]);
+        
+        echo "1";
 
 
-        $id=$_POST['id'];
-
-        $value=$_POST['value'];       
-
-        DB::table('wallets')->where('id',$id)->update(array('status'=>$value));
-
-        echo"1";
 
     }
 }

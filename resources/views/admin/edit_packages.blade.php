@@ -283,7 +283,7 @@
             }
             var packagecategory_id = jQuery("#packagecategory_id").val();
             if (packagecategory_id == '') {
-                jQuery('#packagecategory_error').html("Please Selcect Package Category");
+                jQuery('#packagecategory_error').html("Please Select Package Category");
                 jQuery('#packagecategory_error').show().delay(0).fadeIn('show');
                 jQuery('#packagecategory_error').show().delay(2000).fadeOut('show');
                 $('html, body').animate({

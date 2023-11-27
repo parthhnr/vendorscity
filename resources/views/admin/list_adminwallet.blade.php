@@ -163,6 +163,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+
                                         @foreach ($wallet_data as $data)
                                             <tr>
 
@@ -189,23 +190,22 @@
                                                         {{ '-' }}
                                                     @endif
                                                 </td>
-
-
-
                                                 <td>
                                                     <div class="form-group">
                                                         <label class="toggle">
                                                             <input type="checkbox" id="is_active_toggle"
                                                                 {{ $data->status == 1 ? 'checked' : '' }}
-                                                                onchange="fun_status('{{ $data->id }}', this.checked ? 1 : 0); return false;">
+                                                                onchange="fun_status('{{ $data->id }}','{{ $data->vendors_id }}', this.checked ? 1 : 0); return false;">
                                                             <span class="slider"></span>
                                                         </label>
                                                     </div>
                                                 </td>
                                                 <td>
                                                     {{-- {{ $data->created_at->toDateString() }} --}}
+                                                    {{-- {{ \Carbon\Carbon::parse($data->created_at)->format('d-m-Y') }} --}}
                                                     {{ $data->created_at->format('d-m-Y') }}
                                                 </td>
+
                                             </tr>
                                         @endforeach
                                     </tbody>
@@ -236,6 +236,8 @@
 
                     <input type="hidden" name="is_active_id" id="is_active_id" value="">
 
+                    <input type="hidden" name="is_active_vendorid" id="is_active_vendorid" value="">
+
                     <input type="hidden" name="is_active_val" id="is_active_val" value="">
 
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
@@ -255,9 +257,10 @@
 <!-- /set orderModal -->
 
 <script>
-    function fun_status(id, value) {
+    function fun_status(id, vendor_id, value) {
 
         $('#is_active_id').val(id);
+        $('#is_active_vendorid').val(vendor_id);
 
         $('#is_active_val').val(value);
 
@@ -268,7 +271,7 @@
     function fun_review_status() {
 
         var id = $('#is_active_id').val();
-
+        var vendorid = $('#is_active_vendorid').val();
         var value = $('#is_active_val').val();
 
         $.ajax({
@@ -282,7 +285,7 @@
                 "_token": "{{ csrf_token() }}",
 
                 "id": id,
-
+                "vendorid": vendorid,
                 "value": value,
 
             },

@@ -226,7 +226,7 @@ Route::get('/admin', function () {
     
 
 
-    
+  
 
 });
 
