@@ -182,22 +182,27 @@
                                                     @endif
                                                 </td>
                                                 <td>
-                                                    @if ($data->add_deduct === 0)
-                                                        {{ 'Add' }}
-                                                    @elseif ($data->add_deduct === 1)
-                                                        {{ 'Deduct' }}
-                                                    @else
-                                                        {{ '-' }}
-                                                    @endif
+
+                                                        @if ($data->add_deduct === 0)
+                                                            {{ 'Add' }}
+                                                        @elseif ($data->add_deduct === 1)
+                                                            {{ 'Deduct' }}
+                                                        @else
+                                                            {{ '-' }}
+                                                        @endif
                                                 </td>
                                                 <td>
                                                     <div class="form-group">
+                                                        @if($data->add_deduct == 0)
                                                         <label class="toggle">
                                                             <input type="checkbox" id="is_active_toggle"
                                                                 {{ $data->status == 1 ? 'checked' : '' }}
                                                                 onchange="fun_status('{{ $data->id }}','{{ $data->vendors_id }}', this.checked ? 1 : 0); return false;">
                                                             <span class="slider"></span>
                                                         </label>
+                                                        @else
+                                                            {{ '-' }}
+                                                        @endif
                                                     </div>
                                                 </td>
                                                 <td>
