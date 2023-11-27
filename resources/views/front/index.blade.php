@@ -2,7 +2,7 @@
 <style type="text/css">
     .funfact_one.at-home2-hero .timer, .funfact_one.at-home2-hero span{color:#000}
 </style>
- <section class="hero-home2 pb100-xs">
+ <!-- <section class="hero-home2 pb100-xs">
       <div class="container">
         <div class="row mb60 mb0-xl">
           <div class="col-xl-7">
@@ -99,6 +99,122 @@
           <div class="col-xl-5 d-none d-xl-block position-relative">
             <img src="{{asset('public/site/images/about/about-1.png')}}" alt="" class="animate-up-1 main-img-home2" width="100%">
             
+          </div>
+        </div>
+      </div>
+    </section> -->
+
+     <section class="hero-home11 pt60 pb60">
+      <div class="container">
+        <div class="row align-items-center justify-content-between">
+          <div class="col-lg-6 col-xl-6 mb30-md">
+            <div class="home11-hero-content">
+              
+              <h2 class="title animate-up-2">The best in class services, right at your doorstep.</h2>
+              <p class="text animate-up-3">The best in class services, right at your doorstep.
+out of your time and cost</p>
+            </div>
+            <div class="advance-search-tab bgc-white p10 bdrs4-sm bdrs60 banner-btn position-relative zi1 animate-up-3 mt30">
+                <div class="row">
+                  <div class="col-md-5 col-lg-6 col-xl-6">
+                    <div class="advance-search-field mb10-sm">
+                      <form class="form-search position-relative">
+                        <div class="box-search">
+                          <span class="icon far fa-magnifying-glass"></span>
+                          <input class="form-control" type="text" name="search" placeholder="What are you looking for?">
+                          <div class="search-suggestions">
+                            <h6 class="fz14 ml30 mt25 mb-3">Popular Search</h6>
+                            <div class="box-suggestions">
+                              <ul class="px-0 m-0 pb-4">
+                                <li>
+                                  <div class="info-product">
+                                    <div class="item_title">mobile app development</div>
+                                  </div>
+                                </li>
+                                <li>
+                                  <div class="info-product">
+                                    <div class="item_title">mobile app builder</div>
+                                  </div>
+                                </li>
+                                <li>
+                                  <div class="info-product">
+                                    <div class="item_title">mobile legends</div>
+                                  </div>
+                                </li>
+                                <li>
+                                  <div class="info-product">
+                                    <div class="item_title">mobile app ui ux design</div>
+                                  </div>
+                                </li>
+                                <li>
+                                  <div class="info-product">
+                                    <div class="item_title">mobile game app development</div>
+                                  </div>
+                                </li>
+                                <li>
+                                  <div class="info-product">
+                                    <div class="item_title">mobile app design</div>
+                                  </div>
+                                </li>
+                              </ul>
+                            </div>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                  <div class="col-md-4 col-lg-4 col-xl-3">
+                    <div class="bselect-style1 bdrl1 bdrn-sm">
+                      <select class="selectpicker" data-width="100%">
+                        <option>Choose Category</option>
+                        <option data-tokens="Graphics&Design">Graphics & Design</option>
+                        <option data-tokens="DigitlMarketing">Digital Marketing</option>
+                        <option data-tokens="Writing&Translation">Writing & Translation</option>
+                        <option data-tokens="Video&Animation">Video & Animation</option>
+                        <option data-tokens="Music&Audio">Music & Audio</option>
+                        <option data-tokens="Programming&Tech">Programming & Tech</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-3 col-lg-2 col-xl-3">
+                    <div class="text-center text-xl-start">
+                      <button class="ud-btn btn-thm w-100 bdrs60" type="button">Search</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row mt20 animate-up-4">
+                <div class="col-xl-12">
+                    <p class="animate-up-2 ff-heading mt30 mb15">Frequently searched</p>
+                    <div class="home9-tags d-md-flex align-items-center animate-up-4">
+                      <a class="bdrs60 mb-2 mb-md-0" href="">Relocation</a>
+                      <a class="bdrs60 mb-2 mb-md-0" href="">Home Cleaning  </a>
+                      <a class="bdrs60 mb-2 mb-md-0" href="">Women’s Salon</a>
+                      <a class="bdrs60 mb-2 mb-md-0" href="">Lab At Home</a>
+                      
+                    </div>
+                </div>
+
+              </div>
+            
+          </div>
+          <div class="col-lg-6">
+            <div class="home11-hero-img text-center text-xxl-end">
+              <img class="bdrs20" src="{{asset('public/site/images/about/about-1.png')}}" alt="">
+              <div class="iconbox-small1 text-start d-flex wow fadeInRight default-box-shadow4 bounce-x animate-up-1">
+                <!-- <span class="icon flaticon-badge"></span> -->
+                <div class="details pl20">
+                  <img class="bdrs20" src="{{asset('public/site/images/customer.png')}}" alt="">
+                </div>
+              </div>
+              <div class="iconbox-small2 text-start d-flex wow fadeInLeft default-box-shadow4 bounce-y animate-up-2">
+                <!-- <span class="icon flaticon-security"></span> -->
+                <div class="details pl20">
+                  <img class="bdrs20" src="{{asset('public/site/images/TopCustomers.png')}}" alt="">
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
