@@ -33,6 +33,8 @@
 <link href="{{asset('public/site/images/apple-touch-icon-114x114.png')}}" sizes="114x114" rel="apple-touch-icon">
 <link href="{{asset('public/site/images/apple-touch-icon-180x180.png')}}" sizes="180x180" rel="apple-touch-icon">
 
+<link rel="stylesheet" href="{{asset('public/site/css/customstyle.css')}}">
+
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
