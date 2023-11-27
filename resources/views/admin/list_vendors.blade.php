@@ -239,6 +239,8 @@
 
                                             <th>Mobile</th>
 
+                                            <th>Wallet Amount</th>
+
                                             <th>Status</th>
 
                                             @if (in_array('8', $edit_perm))
@@ -295,6 +297,7 @@
                                                         {{ $vendors_data[$i]->mobile }}
                                                     @endif
                                                 </td>
+                                                <td>{{ $vendors_data[$i]->wallet_amount }}</td>
 
 
 
