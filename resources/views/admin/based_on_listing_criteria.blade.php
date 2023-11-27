@@ -54,12 +54,53 @@
                                @csrf
                                <div class="row">
 
+                                <div class="form-group">
+                                       <label for="country">Country</label>
+                                       <select class="form-control" id="country" name="country"
+                                           onchange="state_change(this.value);">
+                                           <option value="">Select country</option>
+                                           @foreach ($country_data as $country)
+                                               <option value="{{ $country->id }}">{{ $country->country }}</option>
+                                           @endforeach
+                                       </select>
+                                       <p class="form-error-text" id="country_error" style="color: red; margin-top: 10px;">
+                                       </p>
+                                   </div>
+
+                                   <div class="form-group">
+                                       <label for="state">State</label>
+                                       <span id="state_chang">
+                                           <select class="form-control" id="state" name="state"
+                                               onchange="city_change(this.value);">
+                                               <option value="">Select State</option>
+                                               @foreach ($state_data as $state)
+                                                   <option value="{{ $state->id }}">{{ $state->state }}</option>
+                                               @endforeach
+                                           </select>
+                                       </span>
+                                       <p class="form-error-text" id="state_error" style="color: red; margin-top: 10px;">
+                                       </p>
+                                   </div>
+
+                                   <div class="form-group">
+                                       <label for="city">City</label>
+                                       <span id="city_chang">
+                                           <select class="form-control" id="city" name="city">
+                                               <option value="">Select City</option>
+                                               @foreach ($allcity as $city)
+                                                   <option value="{{ $city->id }}">{{ $city->name }}</option>
+                                               @endforeach
+                                           </select>
+                                       </span>
+                                       <p class="form-error-text" id="city_error" style="color: red; margin-top: 10px;"></p>
+                                   </div>
+
                                    <div class="form-group">
                                        <label for="country">Subscription Name</label>
                                        <input type="text" name="subscription_name" id="subscription_name"
                                            value="{{ $price_data->based_on_listing_criteria_label }}" class="form-control"
                                            readonly>
-                                       <p class="form-error-text" id="country_error" style="color: red; margin-top: 10px;">
+                                       
                                        </p>
                                    </div>
 
@@ -68,8 +109,7 @@
                                        <input type="text" name="total" id="total"
                                            value="{{ $price_data->based_on_listing_criteria_price }}" class="form-control"
                                            readonly>
-                                       <p class="form-error-text" id="country_error" style="color: red; margin-top: 10px;">
-                                       </p>
+                                      
                                    </div>
 
                                </div>
@@ -97,7 +137,74 @@
 
 
        <script>
+
+        function state_change(country_id) {
+               // alert(country_id);
+               var url = '{{ url('state_show_subscription') }}';
+               // alert(url);
+               $.ajax({
+                   url: url,
+                   type: 'post',
+                   data: {
+                       "_token": "{{ csrf_token() }}",
+                       "country_id": country_id
+                   },
+                   success: function(msg) {
+                       document.getElementById('state_chang').innerHTML = msg;
+                   }
+               });
+           }
+
+           function city_change(state_id) {
+               // alert(state_id);
+               var url = '{{ url('city_show') }}';
+               // alert(url);
+               $.ajax({
+                   url: url,
+                   type: 'post',
+                   data: {
+                       "_token": "{{ csrf_token() }}",
+                       "state_id": state_id
+                   },
+                   success: function(msg) {
+                       document.getElementById('city_chang').innerHTML = msg;
+                   }
+               });
+           }
+
            function category_validation() {
+
+               var country = jQuery("#country").val();
+               if (country == '') {
+                   jQuery('#country_error').html("Please Select Country");
+                   jQuery('#country_error').show().delay(0).fadeIn('show');
+                   jQuery('#country_error').show().delay(2000).fadeOut('show');
+                   $('html, body').animate({
+                       scrollTop: $('#country').offset().top - 150
+                   }, 1000);
+                   return false;
+               }
+               var state = jQuery("#state").val();
+               if (state == '') {
+                   jQuery('#state_error').html("Please Select State");
+                   jQuery('#state_error').show().delay(0).fadeIn('show');
+                   jQuery('#state_error').show().delay(2000).fadeOut('show');
+                   $('html, body').animate({
+                       scrollTop: $('#state').offset().top - 150
+                   }, 1000);
+                   return false;
+               }
+               var city = jQuery("#city").val();
+               if (city == '') {
+                   jQuery('#city_error').html("Please Select City");
+                   jQuery('#city_error').show().delay(0).fadeIn('show');
+                   jQuery('#city_error').show().delay(2000).fadeOut('show');
+                   $('html, body').animate({
+                       scrollTop: $('#city').offset().top - 150
+                   }, 1000);
+                   return false;
+               }
+
 
                $('#spinner_button').show();
                $('#submit_button').hide();

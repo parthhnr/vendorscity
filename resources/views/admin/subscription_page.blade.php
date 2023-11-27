@@ -89,7 +89,7 @@
                @endphp
 
                @if ($price_data->based_on_booking_service_price != '')
-                   <div class="col-xl-4 col-sm-6 col-12 mt-2">
+                   <div class="col-xl-4 col-sm-6 col-12 mt-2" style="display:none;">
                        <div class="card">
                            <div class="card-body">
                                <div class="dash-widget-header text-center" style="display:block">
@@ -110,7 +110,7 @@
                @endif
 
                @if ($price_data->based_on_listing_criteria_price != '')
-                   <div class="col-xl-4 col-sm-6 col-12 mt-2">
+                   <div class="col-xl-4 col-sm-6 col-12 mt-2" >
                        <div class="card">
                            <div class="card-body">
 

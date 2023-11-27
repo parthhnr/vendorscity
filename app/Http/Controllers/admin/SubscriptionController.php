@@ -116,6 +116,29 @@ class SubscriptionController extends Controller
 
             $this->insert_attribute($content);
 
+
+            /*-----Start Update Vendor wallet amount-----*/
+
+            $vendors_data = DB::table('users')->where('id', $data['vendor_id'])->first();
+            $vendor_wallet_amount = $vendors_data->wallet_amount - $data['total'];
+            DB::table('users')->where('id', $data['vendor_id'])->update(['wallet_amount' => $vendor_wallet_amount]);
+
+            //echo "<pre>";print_r($vendor_wallet_amount);echo"</pre>";exit;
+
+            /*-----Start Update Vendor wallet amount-----*/
+
+
+            /*------Insert Wallet data start------*/
+            $data_wallet['vendors_id'] = $data['vendor_id'];
+            $data_wallet['price'] = $data['total'];
+            $data_wallet['payment'] = 0;
+            $data_wallet['add_deduct'] = 1;
+            $data_wallet['status'] = 0;
+            $data_wallet['subscription_id'] = $id;
+            DB::table('wallets')->insertGetId($data_wallet);
+
+            /*------Insert Wallet data ENd------*/
+
              return Redirect::route('vendors.subscription', ['id' => $vendor_id])->with('success', 'Subscription Purchased Successfully.');
             // return redirect()->route('vendors.subscription', ['id' => $vendor_id])->with('success', 'Subscription Purchased Successfully.');
 
@@ -207,9 +230,9 @@ class SubscriptionController extends Controller
             $data_new['vendor_id'] = request()->input('vendor_id');
             $data_new['subscription_name'] = request()->input('subscription_name');
             $data_new['subscription_id'] = request()->input('subscription_id');
-            // $data['country'] = request()->input('country');
-            // $data['state'] = request()->input('state');
-            // $data['city'] = request()->input('city');
+            $data_new['country'] = request()->input('country');
+            $data_new['state'] = request()->input('state');
+            $data_new['city'] = request()->input('city');
             // $data['services'] = implode(',', request()->input('services'));
             // $data['sub_service'] = implode(',', request()->input('sub_service'));
             $data_new['total'] = request()->input('total');
@@ -218,6 +241,28 @@ class SubscriptionController extends Controller
             $data_new['added_date'] = $currentDateTime;
 
             $id = DB::table('subscription')->insertGetId($data_new);
+
+            /*-----Start Update Vendor wallet amount-----*/
+
+            $vendors_data = DB::table('users')->where('id', $data_new['vendor_id'])->first();
+            $vendor_wallet_amount = $vendors_data->wallet_amount - $data_new['total'];
+            DB::table('users')->where('id', $data_new['vendor_id'])->update(['wallet_amount' => $vendor_wallet_amount]);
+
+            //echo "<pre>";print_r($vendor_wallet_amount);echo"</pre>";exit;
+
+            /*-----Start Update Vendor wallet amount-----*/
+
+
+            /*------Insert Wallet data start------*/
+            $data_wallet['vendors_id'] = $data_new['vendor_id'];
+            $data_wallet['price'] = $data_new['total'];
+            $data_wallet['payment'] = 0;
+            $data_wallet['add_deduct'] = 1;
+            $data_wallet['status'] = 0;
+            $data_wallet['subscription_id'] = $id;
+            DB::table('wallets')->insertGetId($data_wallet);
+
+            /*------Insert Wallet data ENd------*/
 
             return Redirect::route('vendors.subscription', ['id' => $vendor_id])->with('success', 'Subscription Purchased Successfully.');
 
