@@ -12,7 +12,13 @@ class Homecontroller extends Controller
 {
     public function index(){
 
-        
+        $data['service']=DB::table('services')->orderBy('id','DESC')->get();
+
+    
+       
+
+       
+
         $data['meta_title'] = "";
         $data['meta_keyword'] = "";
         $data['meta_description'] = "";
