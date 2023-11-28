@@ -63,10 +63,10 @@ class SubserviceController extends Controller
             $image = $request->file('image');
             $remove_space = str_replace(' ', '-', $image->getClientOriginalName());
             $data['image'] = time() . $remove_space;
-            $destinationPath = public_path('upload/subservice/large');
+            $destinationPath = public_path('upload/subservice/large/');
             $img = Image::make($image->path());
-            $width=100;
-            $height=100;
+            $width=320;
+            $height=230;
             $img->resize($width,$height,function($constraint){
             })->save($destinationPath.'/'.$data['image']);
               
@@ -139,10 +139,10 @@ class SubserviceController extends Controller
             $image = $request->file('image');
             $remove_space = str_replace(' ', '-', $image->getClientOriginalName());
             $data['image'] = time() . $remove_space;
-            $destinationPath = public_path('upload/subservice/large');
+            $destinationPath = public_path('upload/subservice/large/');
             $img = Image::make($image->path());
-            $width=100;
-            $height=100;
+            $width=320;
+            $height=230;
             $img->resize($width,$height,function($constraint){
             })->save($destinationPath.'/'.$data['image']);
               

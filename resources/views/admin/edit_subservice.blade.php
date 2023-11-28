@@ -107,7 +107,7 @@
                                 <div class="col-lg-6">
                                     <div class="form-group">
 
-                                        <label for="name">Image (1920px x 1100px)</label>
+                                        <label for="name">Image (230px x 320px)</label>
 
                                         <input id="image" name="image" type="file" class="form-control"value="" />
                                         @if ($subservice->image != '')
