@@ -114,6 +114,29 @@
 
                                 </div>
 
+                                <div class="form-group">
+
+                                    <label for="name">Banner (300 x 378)</label>
+
+                                    <input id="image" name="image" type="file" class="form-control"
+                                        value="" />
+                                    @if ($service->image != '')
+                                        <img src="{{ asset('public/upload/service/large/' . $service->image) }}"
+                                            style=" width: 10%;margin-top: 10px;" />
+                                    @endif
+                                    <p class="form-error-text" id="image_error" style="color: red; margin-top: 10px;"></p>
+
+                                </div>
+                                <div class="form-group">
+
+                                    <label>Banner Description</label>
+
+                                    <textarea class="form-control" id="banner_description" name="banner_description" placeholder="Enter Banner Description">{{ $service->banner_description }}</textarea>
+
+                                    <p id="description_error" style="display: none;color: red"></p>
+
+                                </div>
+
                                 {{-- <div class="form-group">
 
                                     <label for="name">Page Url</label>
@@ -227,22 +250,20 @@
 
 @section('footer_js')
 
+    <script src="https://cdn.ckeditor.com/ckeditor5/35.4.0/classic/ckeditor.js"></script>
+
+
+
     <script>
-        $(function() {
+        ClassicEditor
 
-            $("#name").keyup(function() {
+            .create(document.querySelector('#banner_description'))
 
-                var Text = $(this).val();
+            .catch(error => {
 
-                Text = Text.toLowerCase();
-
-                Text = Text.replace(/[^a-zA-Z0-9]+/g, '-');
-
-                $("#page_url").val(Text);
+                console.error(error);
 
             });
-
-        });
     </script>
 
 

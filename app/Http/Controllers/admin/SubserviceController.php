@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Admin\Subservice;
 use App\Models\Admin\Service;
 use Image;
+use DB;
 
 class SubserviceController extends Controller
 {
@@ -54,6 +55,7 @@ class SubserviceController extends Controller
         $subservice->servicepercentage=$request->servicepercentage;        
        
         $subservice->is_bookable = implode(',', $request->is_bookable);
+        $subservice->set_order = 0;
 
 
         
@@ -170,5 +172,22 @@ class SubserviceController extends Controller
         Subservice::whereIn('id',$delete_id)->delete();
 
         return redirect()->route('subservice.index')->with('success','Sub Service Deleted Successfully');
+    }
+    public function set_order_subservice()
+
+    {
+
+        $id = $_POST['id'];
+
+        $val = $_POST['val'];
+
+        // echo $id."-".$val;exit;
+
+        DB::table('subservices')->where('id', $id)->update(array('set_order' => $val));
+
+        echo "1";
+
+        // return redirect()->route('product.index')->with('success','Set Order has been Updated successfully');
+
     }
 }

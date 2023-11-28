@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Admin\City;
 use App\Models\Admin\Service;
 use DB;
+use Image;
 
 class ServiceController extends Controller
 {
@@ -44,6 +45,30 @@ class ServiceController extends Controller
         $service=New Service;
         $service->country = $request->country;
         $service->servicename=$request->servicename;
+        $service->banner_description=$request->banner_description;
+
+        $service->set_order = 0;
+
+        if($request->hasfile('image') != ''){
+
+            $image = $request->file('image');
+            $remove_space = str_replace(' ', '-', $image->getClientOriginalName());
+            $data['image'] = time() . $remove_space;
+            $destinationPath = public_path('upload/service/large/');
+            $img = Image::make($image->path());
+            $width= 378;
+            $height= 300;
+            $img->resize($width,$height,function($constraint){
+            })->save($destinationPath.'/'.$data['image']);
+              
+            $destinationPath = public_path('upload/service/');
+            $image->move($destinationPath,$data['image']);
+            $image = $data['image'];
+        }else{
+            $image = "";
+        }
+        $service->image  = $image;
+        
 
         $service->save();
         
@@ -87,6 +112,25 @@ class ServiceController extends Controller
         $service= Service::find($id);
         $service->country=$request->country;
         $service->servicename=$request->servicename;
+        $service->banner_description=$request->banner_description;
+        if($request->hasfile('image') != ''){
+
+            $image = $request->file('image');
+            $remove_space = str_replace(' ', '-', $image->getClientOriginalName());
+            $data['image'] = time() . $remove_space;
+            $destinationPath = public_path('upload/service/large/');
+            $img = Image::make($image->path());
+            $width= 378;
+            $height= 300;
+            $img->resize($width,$height,function($constraint){
+            })->save($destinationPath.'/'.$data['image']);
+              
+            $destinationPath = public_path('upload/service/');
+            $image->move($destinationPath,$data['image']);
+            $image = $data['image'];
+            $service->image  = $image;
+        }
+        
 
         $service->update();
         
@@ -105,4 +149,22 @@ class ServiceController extends Controller
         Service::whereIn('id',$delete_id)->delete();
         return redirect()->route('service.index')->with('success','Service Deleted Successfully');
     }
+    public function set_order_service()
+
+    {
+
+        $id = $_POST['id'];
+
+        $val = $_POST['val'];
+
+        // echo $id."-".$val;exit;
+
+        DB::table('services')->where('id', $id)->update(array('set_order' => $val));
+
+        echo "1";
+
+        // return redirect()->route('product.index')->with('success','Set Order has been Updated successfully');
+
+    }
+
 }
