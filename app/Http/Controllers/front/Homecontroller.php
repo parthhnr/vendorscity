@@ -13,8 +13,8 @@ class Homecontroller extends Controller
     public function index(){
 
         $data['service']=DB::table('services')->orderBy('id','DESC')->get();
-
-    
+     // $data['service']=DB::table('services')->orderBy('set_order')->get();
+      
        
 
        

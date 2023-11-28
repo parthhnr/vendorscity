@@ -88,14 +88,29 @@
 
                                 </div>
 
-                                {{-- <div class="form-group">
+                                <div class="form-group">
 
-                                    <label for="name">Page Url</label>
+                                    <label for="name">Banner (300 x 378)</label>
 
-                                    <input id="page_url" name="page_url" type="text" class="form-control"
-                                        placeholder="Enter Page Url" value="" />
+                                    <input id="image" name="image" type="file" class="form-control"
+                                        value="" />
+                                    <p class="form-error-text" id="image_error" style="color: red; margin-top: 10px;"></p>
 
-                                </div> --}}
+                                </div>
+
+
+
+                                <div class="form-group">
+
+                                    <label>Banner Description</label>
+
+                                    <textarea class="form-control" id="banner_description" name="banner_description" placeholder="Enter Banner Description"></textarea>
+
+                                    <p id="meta_description_error" style="display: none;color: red"></p>
+
+                                </div>
+
+
 
 
 
@@ -205,22 +220,20 @@
 
 @section('footer_js')
 
+    <script src="https://cdn.ckeditor.com/ckeditor5/35.4.0/classic/ckeditor.js"></script>
+
+
+
     <script>
-        $(function() {
+        ClassicEditor
 
-            $("#servicename").keyup(function() {
+            .create(document.querySelector('#banner_description'))
 
-                var Text = $(this).val();
+            .catch(error => {
 
-                Text = Text.toLowerCase();
-
-                Text = Text.replace(/[^a-zA-Z0-9]+/g, '-');
-
-                $("#page_url").val(Text);
+                console.error(error);
 
             });
-
-        });
     </script>
 
 
@@ -251,6 +264,17 @@
                 return false;
             }
 
+            var image = jQuery("#image").val();
+            if (image == '') {
+                jQuery('#image_error').html("Please Select Banner");
+                jQuery('#image_error').show().delay(0).fadeIn('show');
+                jQuery('#image_error').show().delay(2000).fadeOut('show');
+                $('html, body').animate({
+                    scrollTop: $('#image').offset().top - 150
+                }, 1000);
+                return false;
+            }
+
             $('#spinner_button').show();
 
             $('#submit_button').hide();
@@ -261,5 +285,7 @@
 
         }
     </script>
+
+
 
 @stop

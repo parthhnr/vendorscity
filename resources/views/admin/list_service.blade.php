@@ -186,11 +186,9 @@
 
                                                <th>Service Name</th>
 
-                                               {{-- <th>Name</th> --}}
+                                               <th>Banner</th>
 
-                                               {{-- <th>Page Url</th> --}}
-
-                                               {{-- <th>Set Order</th> --}}
+                                               <th>Set Order</th>
 
                                                <!-- <th>mobile</th> -->
 
@@ -220,7 +218,12 @@
                                                    <td>{!! Helper::countryname($data->country) !!}</td>
 
                                                    <td>{{ $data->servicename }}</td>
+                                                   <td><img src="{{ asset('public/upload/service/large/' . $data->image) }}"
+                                                           alt="" style="height: 50px;width:50px"></td>
 
+                                                   <td class="left"><input type="text" value="{{ $data->set_order }}"
+                                                           onchange="updateorder_popup(this.value, '{{ $data->id }}');"
+                                                           class="form-control" /></td>
 
                                                    @if (in_array('4', $edit_perm))
                                                        <td class="text-right">
@@ -233,8 +236,6 @@
                                                    @endif
                                                </tr>
                                            @endforeach
-
-
 
                                        </tbody>
 
@@ -344,7 +345,7 @@
 
                    <div class="modal-text text-center">
 
-                       <h3>Are you sure you want to Set order of service</h3>
+                       <h3>Are you sure you want to Set order of Service</h3>
 
                        <input type="hidden" name="set_order_val" id="set_order_val" value="">
 

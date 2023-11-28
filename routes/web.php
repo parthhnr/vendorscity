@@ -36,6 +36,7 @@ use App\Http\Controllers\admin\PackageCategoryController;
 use App\Http\Controllers\admin\PackagesController;
 use App\Http\Controllers\admin\WalletController;
 use App\Http\Controllers\admin\AdminWalletController;
+use App\Http\Controllers\admin\FaqController;
 
 
 // Route::get('/', function () {
@@ -68,7 +69,6 @@ Route::get('/config-cache', function() {
 /*------Front routes start ------*/
 
 Route::get('/', '\App\Http\Controllers\front\Homecontroller@index');
-
 Route::get('/book-services', '\App\Http\Controllers\front\Homecontroller@book_services');
 
 
@@ -153,9 +153,11 @@ Route::get('/admin', function () {
 
     Route::resource('admin/service','App\Http\Controllers\admin\ServiceController');  
     Route::get('delete_service',[ServiceController::class,'destroy'])->name('delete_service'); 
+    Route::post('set_order_service', '\App\Http\Controllers\admin\ServiceController@set_order_service');
     
     Route::resource('admin/subservice','App\Http\Controllers\admin\SubserviceController');  
     Route::get('delete_subservice',[SubserviceController::class,'destroy'])->name('delete_subservice');
+    Route::post('set_order_subservice', '\App\Http\Controllers\admin\SubserviceController@set_order_subservice');
 
     Route::resource('admin/vendors','App\Http\Controllers\admin\VendorsController');  
     Route::get('delete_vendors',[VendorsController::class,'destroy'])->name('delete_vendors');
@@ -222,11 +224,9 @@ Route::get('/admin', function () {
     Route::resource('admin/adminwallet', '\App\Http\Controllers\admin\AdminWalletController');
     Route::post('change_status_wallet','App\Http\Controllers\admin\AdminWalletController@change_status_wallet');
 
+    Route::resource('admin/faq', '\App\Http\Controllers\admin\FaqController');
+    Route::get('delete_faq',[FaqController::class,'destroy'])->name('delete_faq');
 
-    
-
-
-  
 
 });
 

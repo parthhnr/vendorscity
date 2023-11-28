@@ -197,13 +197,13 @@
 
                                                <th>Image</th>
 
-                                               {{-- <!-- <th>Set Order</th> --> --}}
-
                                                <th>Inquiry Charge</th>
 
                                                <th>No Of Inquiry</th>
 
                                                <th>Is Bookable</th>
+
+                                               <th>Set Order</th>
 
                                                @if (in_array('5', $edit_perm))
                                                    <th class="text-right">Actions</th>
@@ -276,6 +276,9 @@
                                                            Unknown Value
                                                        @endif
                                                    </td>
+                                                   <td class="left"><input type="text" value="{{ $data->set_order }}"
+                                                           onchange="updateorder_popup(this.value, '{{ $data->id }}');"
+                                                           class="form-control" /></td>
 
 
 
@@ -399,7 +402,7 @@
 
                    <div class="modal-text text-center">
 
-                       <h3>Are you sure you want to Set order of subservice</h3>
+                       <h3>Are you sure you want to Set order of Sub Service</h3>
 
                        <input type="hidden" name="set_order_val" id="set_order_val" value="">
 
