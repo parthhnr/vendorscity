@@ -71,8 +71,8 @@
 
                                 @endphp
                                 <div class="home1_style">
-                                    <div id="mega-menu">
-                                        <a class="btn-mega fw500" href="#"><span
+                                    <div id="mega-menu" class="mega-menu-custom">
+                                        <a class="btn-mega fw500 text-white" href="#"><span
                                                 class="pl30 pl10-xl pr5 fz15 vam flaticon-menu"></span> Categories</a>
                                         @if ($service_data != '')
                                             <ul class="menu ps-0">
