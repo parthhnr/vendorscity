@@ -54,13 +54,23 @@
             @php
 
                 $vendor_data = Auth::user();
-                $total_amount = DB::table('wallets')
+                $approve_amount = DB::table('wallets')
                     ->where('vendors_id', $vendor_data->id)
+                    ->where('add_deduct', 0)
                     ->where('status', 1)
                     ->sum('price');
 
+                $deduct_amount = DB::table('wallets')
+                    ->where('vendors_id', $vendor_data->id)
+                    ->where('status', 0)
+                    ->where('add_deduct', 1)
+                    ->sum('price');
+
+                    $total_amount = $approve_amount - $deduct_amount;
+
             @endphp
 
+           
             <div class="col-xl-4 col-sm-6 col-12 mt-2">
                 <div class="card">
                     <div class="card-body">
@@ -122,6 +132,7 @@
                                                     @endif
                                                 </td>
                                                 <td>
+                                                    @if($data->add_deduct == 0)
                                                     @if ($data->status === 0)
                                                         <span
                                                             class="badge badge-pill bg-danger-light">{{ 'Not Approved' }}</span>
@@ -130,6 +141,10 @@
                                                             {{ 'Approved' }}</span>
                                                     @else
                                                         {{ '-' }}
+                                                    @endif
+                                                    @else
+                                                        {{ '-' }}
+
                                                     @endif
                                                 </td>
                                                 <td>
