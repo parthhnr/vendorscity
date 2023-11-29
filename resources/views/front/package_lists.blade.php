@@ -307,7 +307,8 @@
 
               
             </div>
-            <div class="row">
+            {!! $package_data->appends($_GET)->render("pagination::bootstrap-4") !!}
+           <!--  <div class="row">
               <div class="mbp_pagination mt30 text-center">
                 <ul class="page_navigation">
                   <li class="page-item">
@@ -329,7 +330,7 @@
                 </ul>
                 <p class="mt10 mb-0 pagination_page_count text-center">1 – 20 of 300+ property available</p>
               </div>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
