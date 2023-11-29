@@ -39,6 +39,12 @@ use App\Http\Controllers\admin\AdminWalletController;
 use App\Http\Controllers\admin\FaqController;
 
 
+
+use App\Http\Controllers\front\FrontloginregisterController;
+
+
+
+
 // Route::get('/', function () {
 //     return view('welcome');
 // });
@@ -71,8 +77,11 @@ Route::get('/config-cache', function() {
 Route::get('/', '\App\Http\Controllers\front\Homecontroller@index');
 Route::get('/book-services', '\App\Http\Controllers\front\Homecontroller@book_services');
 Route::get('/become-vendor', '\App\Http\Controllers\front\Homecontroller@become_vendor');
+Route::resource('Sign_Up', '\App\Http\Controllers\front\FrontloginregisterController');
+
 Route::get('/package-lists/{page_url}', '\App\Http\Controllers\front\Packagecontroller@package_lists');
 Route::get('/package-detail/{page_url}', '\App\Http\Controllers\front\Packagecontroller@package_detail');
+
 
 
 /*------End Front routes  ------*/
