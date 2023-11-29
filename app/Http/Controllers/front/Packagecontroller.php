@@ -20,8 +20,10 @@ class Packagecontroller extends Controller
         $subservices_data = DB::table('subservices')->where('page_url', $page_url)->first();
 
         if($subservices_data != ''){
-            $data['package_data'] = DB::table('packages')->where('subservice_id', $subservices_data->id)->orderBy('id', 'desc')->get();
-            $data['package_count'] = count($data['package_data']);
+             $pagination = DB::table('packages')->where('subservice_id', $subservices_data->id)->orderBy('id', 'desc')->paginate(2);
+
+             $data['package_data'] = $pagination;
+            $data['package_count'] = $pagination->total();
         }else{
             $data['package_data'] = '';
             $data['package_count'] = 0;
