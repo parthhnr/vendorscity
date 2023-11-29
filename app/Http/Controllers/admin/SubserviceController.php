@@ -49,6 +49,7 @@ class SubserviceController extends Controller
         $subservice= New Subservice;
         $subservice->serviceid=$request->serviceid;
         $subservice->subservicename=$request->subservicename;        
+        $subservice->page_url=$request->page_url;        
         $subservice->description=$request->description;
         $subservice->charge=$request->charge;
         $subservice->no_of_inquiry=$request->no_of_inquiry;        
@@ -127,7 +128,8 @@ class SubserviceController extends Controller
         
         $subservice=Subservice::find($id);
         $subservice->serviceid=$request->serviceid;
-        $subservice->subservicename=$request->subservicename;        
+        $subservice->subservicename=$request->subservicename; 
+        $subservice->page_url=$request->page_url;        
         $subservice->description=$request->description;
         $subservice->charge=$request->charge;
         $subservice->no_of_inquiry=$request->no_of_inquiry;

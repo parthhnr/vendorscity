@@ -50,7 +50,9 @@ class PackagesController extends Controller
         $data['subservice_id']=$request->subservice_id;
         $data['packagecategory_id']=$request->packagecategory_id;
         $data['name']=$request->name;
+        $data['page_url']=$request->page_url;
         $data['price']=$request->price;
+        $data['short_description']=$request->short_description;
         $data['description']=$request->description;
         $data['discount'] = $request->discount;
         $data['discount_type'] = $request->discount_type;
@@ -62,8 +64,8 @@ class PackagesController extends Controller
             $data['image'] = time() . $remove_space;
             $destinationPath = public_path('upload/packages/large');
             $img = Image::make($image->path());
-            $width=100;
-            $height=100;
+            $width=332;
+            $height=256;
             $img->resize($width,$height,function($constraint){
             })->save($destinationPath.'/'.$data['image']);
               
@@ -122,7 +124,9 @@ class PackagesController extends Controller
         $data['subservice_id']=$request->subservice_id;
         $data['packagecategory_id']=$request->packagecategory_id;
         $data['name']=$request->name;
+        $data['page_url']=$request->page_url;
         $data['price']=$request->price;
+        $data['short_description']=$request->short_description;
         $data['description']=$request->description;
         $data['discount'] = $request->discount;
         $data['discount_type'] = $request->discount_type;
@@ -134,8 +138,8 @@ class PackagesController extends Controller
             $data['image'] = time() . $remove_space;
             $destinationPath = public_path('upload/packages/large');
             $img = Image::make($image->path());
-            $width=100;
-            $height=100;
+            $width=332;
+            $height=256;
             $img->resize($width,$height,function($constraint){
             })->save($destinationPath.'/'.$data['image']);
               

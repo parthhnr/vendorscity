@@ -79,6 +79,10 @@ Route::get('/book-services', '\App\Http\Controllers\front\Homecontroller@book_se
 Route::get('/become-vendor', '\App\Http\Controllers\front\Homecontroller@become_vendor');
 Route::resource('Sign_Up', '\App\Http\Controllers\front\FrontloginregisterController');
 
+Route::get('/package-lists/{page_url}', '\App\Http\Controllers\front\Packagecontroller@package_lists');
+Route::get('/package-detail/{page_url}', '\App\Http\Controllers\front\Packagecontroller@package_detail');
+
+
 
 /*------End Front routes  ------*/
 
