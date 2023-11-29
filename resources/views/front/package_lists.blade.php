@@ -1,5 +1,5 @@
 @include('front.includes.header')
-  <section class="breadcumb-section pt-0">
+  <section class="breadcumb-section pt-0 container">
       <div class="cta-service-v3 cta-banner mx-auto maxw1700 pt120 pb120 bdrs16 position-relative overflow-hidden d-flex align-items-center mx20-lg px30-lg">
         <img class="left-top-img wow zoomIn" src="{{asset('public/site/images/vector-img/left-top.png')}}" alt="">
         <img class="right-bottom-img wow zoomIn" src="{{asset('public/site/images/vector-img/right-bottom.png')}}" alt="">
