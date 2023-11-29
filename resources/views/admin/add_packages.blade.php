@@ -68,7 +68,7 @@
                                         </p>
                                     </div>
                                 </div>
-                                <div class="col-lg-6">
+                                <div class="col-lg-12">
                                     <div class="form-group">
                                         <label for="state">Package Category</label>
                                         <span id="packagecategory_chang">
@@ -93,6 +93,15 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
+                                        <label for="page_url">Page Url</label>
+                                        <input id="page_url" name="page_url" type="text" class="form-control"
+                                            placeholder="Enter  Page Url" value="" />
+                                        <p class="form-error-text" id="page_url_error" style="color: red; margin-top: 10px;">
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
                                         <label for="name">Price</label>
                                         <input id="price" name="price" type="text" class="form-control"
                                             placeholder="Enter Price" onkeypress="return validateNumber(event)"
@@ -104,7 +113,7 @@
 
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label for="name">Image (100px x 100px)</label>
+                                        <label for="name">Image (332px x 256px)</label>
                                         <input id="image" name="image" type="file" class="form-control"
                                             placeholder="Enter" value="" />
                                         <p class="form-error-text" id="image_error" style="color: red; margin-top: 10px;">
@@ -202,6 +211,23 @@
     </script>
 
     <script>
+
+        $(function() {
+
+            $("#name").keyup(function() {
+
+                var Text = $(this).val();
+
+                Text = Text.toLowerCase();
+
+                Text = Text.replace(/[^a-zA-Z0-9]+/g, '-');
+
+                $("#page_url").val(Text);
+
+            });
+
+        });
+
         function category_validation() {
             var service_id = jQuery("#service_id").val();
             if (service_id == '') {
@@ -233,6 +259,17 @@
                 }, 1000);
                 return false;
             }
+            var page_url = jQuery("#page_url").val();
+            if (page_url == '') {
+                jQuery('#page_url_error').html("Please Enter Page Url");
+                jQuery('#page_url_error').show().delay(0).fadeIn('show');
+                jQuery('#page_url_error').show().delay(2000).fadeOut('show');
+                $('html, body').animate({
+                    scrollTop: $('#page_url').offset().top - 150
+                }, 1000);
+                return false;
+            }
+
             var name = jQuery("#name").val();
             if (name == '') {
                 jQuery('#name_error').html("Please Enter Name");
@@ -243,6 +280,7 @@
                 }, 1000);
                 return false;
             }
+
             var price = jQuery("#price").val();
             if (price == '') {
                 jQuery('#price_error').html("Please Enter Price");

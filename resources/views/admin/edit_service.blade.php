@@ -86,7 +86,7 @@
                                     </select>
 
                                 </div> --}}
-
+                                <div class="col-lg-12">
                                 <div class="form-group">
                                     <label for="country">Country</label>
                                     <select class="form-control" id="country" name="country"
@@ -100,9 +100,10 @@
                                     </select>
                                     <p class="form-error-text" id="country_error" style="color: red; margin-top: 10px;"></p>
                                 </div>
+                            </div>
 
 
-
+                            <div class="col-lg-6">
                                 <div class="form-group">
 
                                     <label for="name">Service Name</label>
@@ -113,6 +114,65 @@
                                     <p class="form-error-text" id="service_error" style="color: red; margin-top: 10px;"></p>
 
                                 </div>
+                            </div>
+
+                            <div class="col-lg-6">
+                                <div class="form-group">
+
+                                    <label for="name">Page Url</label>
+
+                                    <input id="page_url" name="page_url" type="text" class="form-control"
+
+                                        placeholder="Enter Page Url" value="{{ $service->page_url }}" />
+
+                                    <p class="form-error-text" id="page_url_error" style="color: red; margin-top: 10px;"></p>
+
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6">
+                                <div class="form-group">
+
+                                    <label for="title1">Banner Title 1</label>
+
+                                    <input id="title1" name="title1" type="text" class="form-control"
+
+                                        placeholder="Enter Banner Title 1" value="{{ $service->title1 }}" />
+
+                                    <p class="form-error-text" id="title1_error" style="color: red; margin-top: 10px;"></p>
+
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6">
+                                <div class="form-group">
+
+                                    <label for="title2">Banner Title 2</label>
+
+                                    <input id="title2" name="title2" type="text" class="form-control"
+
+                                        placeholder="Enter Banner Title 2" value="{{ $service->title2 }}" />
+
+                                    <p class="form-error-text" id="title2_error" style="color: red; margin-top: 10px;"></p>
+
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6">
+                                <div class="form-group">
+
+                                    <label for="banner_url">Banner Url</label>
+
+                                    <input id="banner_url" name="banner_url" type="text" class="form-control"
+
+                                        placeholder="Enter Banner Url" value="{{ $service->banner_url }}" />
+
+                                    <p class="form-error-text" id="banner_url_error" style="color: red; margin-top: 10px;"></p>
+
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6">
 
                                 <div class="form-group">
 
@@ -127,7 +187,8 @@
                                     <p class="form-error-text" id="image_error" style="color: red; margin-top: 10px;"></p>
 
                                 </div>
-                                <div class="form-group">
+                            </div>
+                               <!--  <div class="form-group">
 
                                     <label>Banner Description</label>
 
@@ -135,16 +196,9 @@
 
                                     <p id="description_error" style="display: none;color: red"></p>
 
-                                </div>
+                                </div> -->
 
-                                {{-- <div class="form-group">
-
-                                    <label for="name">Page Url</label>
-
-                                    <input id="page_url" name="page_url" type="text" class="form-control"
-                                        placeholder="Enter Page Url" value="{{ $service->page_url }}" />
-
-                                </div> --}}
+                                
 
                             </div>
 
@@ -269,6 +323,23 @@
 
 
     <script>
+
+        $(function() {
+
+            $("#servicename").keyup(function() {
+
+                var Text = $(this).val();
+
+                Text = Text.toLowerCase();
+
+                Text = Text.replace(/[^a-zA-Z0-9]+/g, '-');
+
+                $("#page_url").val(Text);
+
+            });
+
+        });
+
         function service_validation() {
 
             var country = jQuery("#country").val();
@@ -291,6 +362,17 @@
                 jQuery('#service_error').show().delay(2000).fadeOut('show');
                 $('html, body').animate({
                     scrollTop: $('#servicename').offset().top - 150
+                }, 1000);
+                return false;
+            }
+
+            var page_url = jQuery("#page_url").val();
+            if (page_url == '') {
+                jQuery('#page_url_error').html("Please Enter Page Url");
+                jQuery('#page_url_error').show().delay(0).fadeIn('show');
+                jQuery('#page_url_error').show().delay(2000).fadeOut('show');
+                $('html, body').animate({
+                    scrollTop: $('#page_url').offset().top - 150
                 }, 1000);
                 return false;
             }

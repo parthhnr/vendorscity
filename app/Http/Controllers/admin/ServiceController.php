@@ -45,7 +45,11 @@ class ServiceController extends Controller
         $service=New Service;
         $service->country = $request->country;
         $service->servicename=$request->servicename;
-        $service->banner_description=$request->banner_description;
+        $service->page_url=$request->page_url;
+        $service->title1=$request->title1;
+        $service->title2=$request->title2;
+        $service->banner_url=$request->banner_url;
+        //$service->banner_description=$request->banner_description;
 
         $service->set_order = 0;
 
@@ -112,7 +116,11 @@ class ServiceController extends Controller
         $service= Service::find($id);
         $service->country=$request->country;
         $service->servicename=$request->servicename;
-        $service->banner_description=$request->banner_description;
+        $service->page_url=$request->page_url;
+        $service->title1=$request->title1;
+        $service->title2=$request->title2;
+        $service->banner_url=$request->banner_url;
+        //$service->banner_description=$request->banner_description;
         if($request->hasfile('image') != ''){
 
             $image = $request->file('image');
