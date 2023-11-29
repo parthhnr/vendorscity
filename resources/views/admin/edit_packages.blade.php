@@ -160,6 +160,11 @@
                                 </div>
 
                                 <div class="form-group">
+                                    <label for="name"> Short Description</label>
+                                    <textarea class="form-control" name="short_description" id="short_description" >{{ $packages->short_description }}</textarea>
+                                </div>
+
+                                <div class="form-group">
                                     <label for="name"> Description</label>
                                     <textarea name="description" id="description" cols="30" rows="10">{{ $packages->description }}</textarea>
                                 </div>

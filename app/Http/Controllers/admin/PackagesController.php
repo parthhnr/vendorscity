@@ -52,6 +52,7 @@ class PackagesController extends Controller
         $data['name']=$request->name;
         $data['page_url']=$request->page_url;
         $data['price']=$request->price;
+        $data['short_description']=$request->short_description;
         $data['description']=$request->description;
         $data['discount'] = $request->discount;
         $data['discount_type'] = $request->discount_type;
@@ -125,6 +126,7 @@ class PackagesController extends Controller
         $data['name']=$request->name;
         $data['page_url']=$request->page_url;
         $data['price']=$request->price;
+        $data['short_description']=$request->short_description;
         $data['description']=$request->description;
         $data['discount'] = $request->discount;
         $data['discount_type'] = $request->discount_type;
