@@ -229,6 +229,14 @@ Route::get('/admin', function () {
     Route::get('delete_faq',[FaqController::class,'destroy'])->name('delete_faq');
 
 
+   
+
+   
+    Route::post('vendors_check_mail', '\App\Http\Controllers\front\Homecontroller@vendors_check_mail'); 
+
+    Route::post('/vendors_data', '\App\Http\Controllers\front\Homecontroller@vendors_data');
+
+
 });
 
     Route::get('/logout', [\App\Http\Controllers\Auth\AuthenticatedSessionController::class, 'destroy'])
