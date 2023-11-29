@@ -638,6 +638,9 @@
                                     role="button"><span class="flaticon-loupe"></span></a>
                                 <a class="login-info mx10-lg mx30" href="{{ url('/become-vendor') }}"><span
                                         class="d-none d-xl-inline-block">Become a</span> Vendor</a>
+
+                                <a class="login-info mr10-lg mr30" href="{{ url('Sign_Up') }}">Registration</a>
+
                                 <a class="login-info mr10-lg mr30" href="#">Login</a>
                                 <a class="ud-btn btn-thm2 add-joining" href="#">Book Now</a>
                             </div>
