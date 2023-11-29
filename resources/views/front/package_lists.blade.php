@@ -282,9 +282,9 @@
                   <div class="list-content">
                     <h5 class="list-title"><a href="{{url('package-detail/' . $package_data_new->page_url)}}">{{$package_data_new->name}} </a></h5>
 
-                    @if($package_data_new->description)
+                    @if($package_data_new->short_description)
                     <div class="review-meta d-flex align-items-center">
-                      <!-- <p>{{$package_data_new->description}}</p> -->
+                      <p>{{$package_data_new->short_description}}</p>
                     </div>
                     @endif
                     <hr class="my-2">
