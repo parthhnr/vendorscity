@@ -522,10 +522,11 @@
 
 
                                     </li>
-                                    <li> <a class="list-item " href="#">Vendor Database</a></li>
-                                    <li> <a class="list-item " href="{{ url('/book-services') }}">Book Services</a>
+                                    <li class="visible_list"> <a class="list-item " href="#">Vendor Database</a></li>
+                                    <li class="visible_list"> <a class="list-item " href="{{ url('/book-services') }}">Book Services</a>
                                     </li>
-                                    <li> <a class="list-item " href="#">Get Free Quote</a></li>
+                                    <li class="visible_list"> <a class="list-item " href="#">Get Free Quote</a></li>
+                                    <li > <a class="list-item " href="#"></a></li>
                                 </ul>
                             </div>
                         </div>
