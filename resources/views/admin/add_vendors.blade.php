@@ -344,25 +344,7 @@
     <script>
         function category_validation() {
 
-            // var role_id = jQuery("#role_id").val();
 
-            // if (role_id == '') {
-
-            //     jQuery('#validate').html("Please Select User Category");
-
-            //     jQuery('#validate').show().delay(0).fadeIn('show');
-
-            //     jQuery('#validate').show().delay(2000).fadeOut('show');
-
-            //     $('html, body').animate({
-
-            //         scrollTop: $('#validate').offset().top - 150
-
-            //     }, 1000);
-
-            //     return false;
-
-            // }
 
 
 
@@ -406,17 +388,17 @@
 
             }
 
-           var url = '{{ url('vendor_check_mail') }}';
+            var url = '{{ url('vendor_check_mail') }}';
 
-           $.ajax({
-               url: url,
-               type: 'post',
-               data: {
-                   "_token": "{{ csrf_token() }}",
-                   "email": email
-               },
-               success: function(msg) {
-                   if(msg == 1){
+            $.ajax({
+                url: url,
+                type: 'post',
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                    "email": email
+                },
+                success: function(msg) {
+                    if (msg == 1) {
                         jQuery('#email_error').html("Email Address Already Exists");
                         jQuery('#email_error').show().delay(0).fadeIn('show');
                         jQuery('#email_error').show().delay(2000).fadeOut('show');
@@ -425,7 +407,7 @@
                         }, 1000);
                         return false;
 
-                   }else{
+                    } else {
 
                         var password = jQuery("#password").val();
 
@@ -492,15 +474,15 @@
 
                         $('#category_form').submit();
 
-                   }
-               }
-           });
+                    }
+                }
+            });
 
 
 
 
 
-            
+
 
         }
     </script>
