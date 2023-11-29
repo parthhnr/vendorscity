@@ -65,7 +65,7 @@
 
                             <div class="row">
 
-                                <div class="col-lg-6">
+                                <div class="col-lg-12">
 
                                     <div class="form-group">
 
@@ -99,6 +99,18 @@
                                         <input id="subservicename" name="subservicename" type="text" class="form-control"
                                             placeholder="Enter Sub Service" value="{{ $subservice->subservicename }}" />
                                         <p class="form-error-text" id="subservice_error"
+                                            style="color: red; margin-top: 10px;"></p>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+
+                                        <label for="page_url">Page Url</label>
+                                        <input id="page_url" name="page_url" type="text" class="form-control"
+                                            placeholder="Enter Page Url" value="{{ $subservice->page_url }}" />
+
+                                        <p class="form-error-text" id="page_url_error"
                                             style="color: red; margin-top: 10px;"></p>
                                     </div>
                                 </div>
@@ -239,7 +251,7 @@
     <script>
         $(function() {
 
-            $("#name").keyup(function() {
+            $("#subservicename").keyup(function() {
 
                 var Text = $(this).val();
 
@@ -300,6 +312,17 @@
                 jQuery('#subservice_error').show().delay(2000).fadeOut('show');
                 $('html, body').animate({
                     scrollTop: $('#subservicename').offset().top - 150
+                }, 1000);
+                return false;
+            }
+
+            var page_url = jQuery("#page_url").val();
+            if (page_url == '') {
+                jQuery('#page_url_error').html("Please Enter Page Url");
+                jQuery('#page_url_error').show().delay(0).fadeIn('show');
+                jQuery('#page_url_error').show().delay(2000).fadeOut('show');
+                $('html, body').animate({
+                    scrollTop: $('#page_url').offset().top - 150
                 }, 1000);
                 return false;
             }

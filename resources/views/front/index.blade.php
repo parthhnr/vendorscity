@@ -368,6 +368,19 @@ your specific needs</h2>
 
 
         @foreach ($service as $service_data)
+
+        @php
+            $subservice_data = DB::table('subservices')
+                ->where('serviceid', $service_data->id)
+                ->orderBy('id', 'DESC')
+                ->get();
+
+        @endphp
+
+        @php
+           // echo"<pre>";print_r($service_data);echo"</pre>";
+        @endphp
+        @if ($subservice_data != '' && count($subservice_data) > 0)
             <div class="container">
                 <div class="row align-items-center wow fadeInUp" data-wow-delay="00ms">
                     <div class="col-lg-9">
@@ -382,13 +395,7 @@ your specific needs</h2>
                         </div>
                     </div>
                 </div>
-                @php
-                    $subservice_data = DB::table('subservices')
-                        ->where('serviceid', $service_data->id)
-                        ->orderBy('id', 'DESC')
-                        ->get();
-
-                @endphp
+                
                 @if ($subservice_data != '')
                     <div class="row wow fadeInUp" data-wow-delay="300ms">
                         @foreach ($subservice_data as $subservice)
@@ -402,15 +409,11 @@ your specific needs</h2>
                                     </div>
                                     <div class="list-content">
                                         <div class="list-meta">
-                                            <a class="d-flex align-items-center" href="">
-                                                {{-- <span class="position-relative mr15">
-                                                    <img class="rounded-circle"
-                                                        src="{{ asset('public/site/images/team/fl-m-1.png') }}"
-                                                        alt="Freelancer Photo">
-                                                </span> --}}
+                                            <a class="d-flex align-items-center" href="{{url('package-lists/' . $subservice->page_url)}}">
+                                               
                                                 <span>
                                                     <h5 class="fz14 mb-1">{{ $subservice->subservicename }}</h5>
-                                                    {{-- <p class="fz14 mb-0">by Ali Tufan</p> --}}
+                                                   
                                                 </span>
                                             </a>
                                         </div>
@@ -418,104 +421,48 @@ your specific needs</h2>
                                 </div>
                             </div>
                         @endforeach
-                        {{-- <div class="col-sm-6 col-xl-3">
-                <div class="listing-style1 bdrs12 default-box-shadow1">
-                    <div class="list-thumb">
-                        <img class="w-100" src="{{ asset('public/site/images/listings/pro-2.jpg') }}"
-                            alt="">
-                    </div>
-                    <div class="list-content">
-                        <div class="list-meta">
-                            <a class="d-flex align-items-center" href="">
-                                <span class="position-relative mr15">
-                                    <img class="rounded-circle"
-                                        src="{{ asset('public/site/images/team/fl-m-2.png') }}"
-                                        alt="Freelancer Photo">
-                                </span>
-                                <span>
-                                    <h5 class="fz14 mb-1">Product Photography</h5>
-                                    <p class="fz14 mb-0">by Ali Tufan</p>
-                                </span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div> --}}
-                        {{-- <div class="col-sm-6 col-xl-3">
-                <div class="listing-style1 bdrs12 default-box-shadow1">
-                    <div class="list-thumb">
-                        <img class="w-100" src="{{ asset('public/site/images/listings/pro-3.jpg') }}"
-                            alt="">
-                    </div>
-                    <div class="list-content">
-                        <div class="list-meta">
-                            <a class="d-flex align-items-center" href="">
-                                <span class="position-relative mr15">
-                                    <img class="rounded-circle"
-                                        src="{{ asset('public/site/images/team/fl-m-3.png') }}"
-                                        alt="Freelancer Photo">
-                                </span>
-                                <span>
-                                    <h5 class="fz14 mb-1">UI Design</h5>
-                                    <p class="fz14 mb-0">by Ali Tufan</p>
-                                </span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div> --}}
-                        {{-- <div class="col-sm-6 col-xl-3">
-                <div class="listing-style1 bdrs12 default-box-shadow1">
-                    <div class="list-thumb">
-                        <img class="w-100" src="{{ asset('public/site/images/listings/pro-4.jpg') }}"
-                            alt="">
-                    </div>
-                    <div class="list-content">
-                        <div class="list-meta">
-                            <a class="d-flex align-items-center" href="">
-                                <span class="position-relative mr15">
-                                    <img class="rounded-circle"
-                                        src="{{ asset('public/site/images/team/fl-m-4.png') }}"
-                                        alt="Freelancer Photo">
-                                </span>
-                                <span>
-                                    <h5 class="fz14 mb-1">App Design</h5>
-                                    <p class="fz14 mb-0">by Ali Tufan</p>
-                                </span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div> --}}
+                        
                     </div>
                 @endif
 
+                @if($service_data->title1 != '' || $service_data->banner_url != '' || $service_data->title2 != '' || $service_data->image != '' )
                 <section class="our-about bgc-thm2 container pb0 pt0 mb30">
-      <div class="container">
-        <div class="row align-items-center">
-          
-          <div class="col-xl-5 offset-xl-1">
-            <div class="position-relative wow fadeInLeft" data-wow-delay="300ms">
-                <h4 class="">Moving Experts</h4>
-              <h2 class=" mb35">Experience<br class="d-none d-lg-block"> stress free<br class="d-none d-lg-block">moving</h2>
-             
-              <a href="#" class="ud-btn btn-thm">Best Deals</a>
-            </div>
-          </div>
-          <div class="col-xl-6">
-            <div class="position-relative mb30-lg">
-              
-              <div class="about-img wow fadeInRight services_banner_image" data-wow-delay="300ms" >
-                <img class="" src="{{ asset('public/site/images/banner.png')}}" alt="">
-              </div>
-             
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+                  <div class="container">
+                    <div class="row align-items-center">
+                      
+                      <div class="col-xl-5 offset-xl-1">
+                        <div class="position-relative wow fadeInLeft" data-wow-delay="300ms">
+                            @if($service_data->title1 != '')
+                            <h4 class="">{{$service_data->title1}}</h4>
+                            @endif
+
+                            @if($service_data->title2 != '')
+                                <h2 class=" mb35">{{$service_data->title2}}</h2>
+                            @endif
+                            
+                            @if($service_data->banner_url != '')
+                                <a href="{{$service_data->banner_url}}" class="ud-btn btn-thm">Best Deals</a>
+                            @endif
+                        </div>
+                      </div>
+                      <div class="col-xl-6">
+                        <div class="position-relative mb30-lg">
+                          
+                          <div class="about-img wow fadeInRight services_banner_image" data-wow-delay="300ms" >
+                            @if($service_data->image != '')
+                                <img class="" src="{{ asset('public/upload/service/large/' . $service_data->image) }}" alt="">
+                             @endif
+                          </div>
+                         
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+                @endif
 
             </div>
+            @endif
         @endforeach
 
     </section>
