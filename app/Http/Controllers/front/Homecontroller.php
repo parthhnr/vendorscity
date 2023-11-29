@@ -38,6 +38,17 @@ class Homecontroller extends Controller
         return view('front.book_services',$data);
     }
 
+    public function become_vendor(){
+
+        
+        $data['meta_title'] = "";
+        $data['meta_keyword'] = "";
+        $data['meta_description'] = "";
+
+        // echo "<pre>";print_r($data);echo "</pre>";exit;
+        return view('front.become_vendor',$data);
+    }           
+
     
     
 }
