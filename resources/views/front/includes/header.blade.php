@@ -621,7 +621,7 @@
 
 
                                     </li>
-                                    <li class="visible_list"> <a class="list-item " href="#">Vendor Database</a>
+                                    <li class="visible_list"> <a class="list-item " href="{{ url('/vendor-database') }}">Vendor Database</a>
                                     </li>
                                     <li class="visible_list"> <a class="list-item "
                                             href="{{ url('/book-services') }}">Book Services</a>

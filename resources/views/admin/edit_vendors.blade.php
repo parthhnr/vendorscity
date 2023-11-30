@@ -356,6 +356,13 @@
 
                                     </div>
                                 </div>
+								
+								<div class="col-md-12">
+									<div class="form-group">
+										<label for="name"> Short Description</label>
+										<textarea class="form-control" name="short_description" id="short_description" >{{ $vendors->short_description }}</textarea>
+									</div>
+								</div>
 
                             </div>
 
