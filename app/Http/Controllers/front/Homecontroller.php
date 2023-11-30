@@ -71,6 +71,7 @@ class Homecontroller extends Controller
         $data['socialmedai']=$_POST['socialmedai'];
         $data['password']=Hash::make ($_POST['password']);        
         $data['email']=$_POST['email'];
+        $data['short_description']=$_POST['short_description'];
         if($_POST['mobile'] !='')
         {
             $data['mobile']=$_POST['mobile'];
@@ -160,8 +161,8 @@ class Homecontroller extends Controller
         }
 
     }
-    // return redirect()->to('/')->with('success', 'Vendor Data Added Successfully');
-    return redirect()->to('/')->with('L_strsucessMessage','Vendor Data Added Successfully.');
+    return redirect()->to('/')->with('L_strsucessMessage', 'Vendor Data Added Successfully');
+    // return redirect()->to('front.index')->with('L_strsucessMessage','Vendor Data Added Successfully.');
         
     }
     function insert_attribute($content)

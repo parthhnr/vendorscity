@@ -205,6 +205,11 @@
                                 placeholder="Enter Mobile No." onkeypress="return validateNumber(event)">
                             <p class="form-error-text" id="mobile_error" style="color: red; margin-top: 10px;"></p>
                         </div>
+                        <div class="mb15">
+                            <label class="form-label fw500 dark-color">Short Discription</label>
+                            <textarea name="short_description" id="sort_discription" rows="5"></textarea>
+                        </div>
+
 
 
                         <div class=" mb20">

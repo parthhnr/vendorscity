@@ -40,6 +40,7 @@ use App\Http\Controllers\admin\FaqController;
 
 
 
+
 use App\Http\Controllers\front\FrontloginregisterController;
 use App\Http\Controllers\front\FrontvendorController;
 
@@ -78,7 +79,14 @@ Route::get('/config-cache', function() {
 Route::get('/', '\App\Http\Controllers\front\Homecontroller@index');
 Route::get('/book-services', '\App\Http\Controllers\front\Homecontroller@book_services');
 Route::get('/become-vendor', '\App\Http\Controllers\front\Homecontroller@become_vendor');
-Route::resource('Sign_Up', '\App\Http\Controllers\front\FrontloginregisterController');
+Route::resource('Sign-Up', '\App\Http\Controllers\front\FrontloginregisterController');
+Route::post('registration_mail_check', '\App\Http\Controllers\front\FrontloginregisterController@registration_mail_check'); 
+
+
+
+
+
+
 
 Route::match(['get', 'post'], 'vendor-database', [FrontvendorController::class, 'vendor_database'])->name('vendor_database');
 
@@ -86,6 +94,9 @@ Route::get('/package-lists/{page_url}', '\App\Http\Controllers\front\Packagecont
 Route::get('/package-detail/{page_url}', '\App\Http\Controllers\front\Packagecontroller@package_detail');
 
 Route::post('vendors_check_mail', '\App\Http\Controllers\front\Homecontroller@vendors_check_mail'); 
+Route::post('/vendors_data', '\App\Http\Controllers\front\Homecontroller@vendors_data');
+
+Route::match(['get', 'post'], 'vendor-database', [FrontvendorController::class, 'vendor_database'])->name('vendor_database');
 
 
 /*------End Front routes  ------*/
@@ -244,12 +255,7 @@ Route::get('/admin', function () {
     Route::get('delete_faq',[FaqController::class,'destroy'])->name('delete_faq');
 
 
-   
-
-   
     
-
-    Route::post('/vendors_data', '\App\Http\Controllers\front\Homecontroller@vendors_data');
 
 
 });

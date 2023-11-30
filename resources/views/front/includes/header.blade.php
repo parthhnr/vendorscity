@@ -148,6 +148,7 @@
     <div class="wrapper ovh">
         <div id="message_succsess" class="successmain alert-message topalert"
             style="text-align: center;display: none; position: fixed;"></div>
+
         <div class="preloader"></div>
 
         <!-- Main Header Nav -->
@@ -621,7 +622,11 @@
 
 
                                     </li>
+
+                                   
+
                                     <li class="visible_list"> <a class="list-item " href="{{ url('/vendor-database') }}">Vendor Database</a>
+
                                     </li>
                                     <li class="visible_list"> <a class="list-item "
                                             href="{{ url('/book-services') }}">Book Services</a>
@@ -638,10 +643,19 @@
                                     role="button"><span class="flaticon-loupe"></span></a>
                                 <a class="login-info mx10-lg mx30" href="{{ url('/become-vendor') }}"><span
                                         class="d-none d-xl-inline-block">Become a</span> Vendor</a>
+                                @php
+                                    $userData = Session::get('user');
+                                    // echo '<pre>';
+                                    // print_r($userData);
+                                    // echo '</pre>';
+                                @endphp
+                                @if ($userData['userid'] == '')
+                                    <a class="login-info mr10-lg mr30" href="{{ url('Sign-Up') }}">Registration</a>
 
-                                <a class="login-info mr10-lg mr30" href="{{ url('Sign_Up') }}">Registration</a>
+                                    <a class="login-info mr10-lg mr30" href="#">Login</a>
+                                @endif
 
-                                <a class="login-info mr10-lg mr30" href="#">Login</a>
+
                                 <a class="ud-btn btn-thm2 add-joining" href="#">Book Now</a>
                             </div>
                         </div>
