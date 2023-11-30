@@ -276,7 +276,8 @@
 
         }
 
-        var url = '{{ url('vendors_check_mail') }}';
+        var url = "{{ url('vendors_check_mail') }}";
+
 
         $.ajax({
             url: url,
