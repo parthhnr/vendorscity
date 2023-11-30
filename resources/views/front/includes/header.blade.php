@@ -623,9 +623,10 @@
 
                                     </li>
 
-                                   
 
-                                    <li class="visible_list"> <a class="list-item " href="{{ url('/vendor-database') }}">Vendor Database</a>
+
+                                    <li class="visible_list"> <a class="list-item "
+                                            href="{{ url('/vendor-database') }}">Vendor Database</a>
 
                                     </li>
                                     <li class="visible_list"> <a class="list-item "
@@ -645,14 +646,14 @@
                                         class="d-none d-xl-inline-block">Become a</span> Vendor</a>
                                 @php
                                     $userData = Session::get('user');
-                                    // echo '<pre>';
-                                    // print_r($userData);
-                                    // echo '</pre>';
+                                    // $userData = Session::get('user');
                                 @endphp
-                                @if ($userData['userid'] == '')
-                                    <a class="login-info mr10-lg mr30" href="{{ url('Sign-Up') }}">Registration</a>
-
-                                    <a class="login-info mr10-lg mr30" href="#">Login</a>
+                                @if ($userData == '')
+                                    {{-- <a class="login-info mr10-lg mr30" href="{{ url('Sign-Up') }}">Registration</a> --}}
+                                    <a class="login-info mr10-lg mr30" href="{{ route('Sign-Up.create') }}">Log
+                                        in</a>
+                                @else
+                                    <a class="login-info mr10-lg mr30" href="{{ url('user_signout') }}">Log out</a>
                                 @endif
 
 

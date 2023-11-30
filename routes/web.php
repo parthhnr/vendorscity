@@ -80,6 +80,11 @@ Route::get('/', '\App\Http\Controllers\front\Homecontroller@index');
 Route::get('/book-services', '\App\Http\Controllers\front\Homecontroller@book_services');
 Route::get('/become-vendor', '\App\Http\Controllers\front\Homecontroller@become_vendor');
 Route::resource('Sign-Up', '\App\Http\Controllers\front\FrontloginregisterController');
+Route::get('user_signout', 'App\Http\Controllers\front\FrontloginregisterController@user_signout');
+Route::post('check_login', 'App\Http\Controllers\front\FrontloginregisterController@check_login');
+
+Route::post('user_login','App\Http\Controllers\front\FrontloginregisterController@user_login')->name('user_login');
+
 Route::post('registration_mail_check', '\App\Http\Controllers\front\FrontloginregisterController@registration_mail_check'); 
 
 

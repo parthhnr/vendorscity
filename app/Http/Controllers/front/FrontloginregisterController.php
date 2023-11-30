@@ -28,7 +28,7 @@ class FrontloginregisterController extends Controller
      */
     public function create()
     {
-        //
+        return view('front.front_login');
     }
 
     /**
@@ -107,7 +107,7 @@ class FrontloginregisterController extends Controller
      */
     public function destroy($id)
     {
-        //
+        echo"test";exit;
     }
     function registration_mail_check(){
 
@@ -128,4 +128,52 @@ class FrontloginregisterController extends Controller
 
             echo $result;
     }
+
+    public function check_login(Request $request)
+    {
+        $email = $request->email;
+        $password = $request->password;
+        
+        $user = DB::table('frontloginregisters')->where('email', $email)->first();
+    
+        if ($user && Hash::check($password, $user->password)) {
+            
+            echo 1;
+            
+        } else {
+            
+            echo 0;
+        }
+    }
+
+    public function user_signout()
+    {
+        Session::flush();
+        return redirect()->route('Sign-Up.create');
+        
+    }
+    public function user_login(Request $request)
+    {
+        $data['email'] = $request->email;
+        $data['password'] = $request->password;
+    
+        // Check if the user exists based on the email
+        $checklogin = DB::table('frontloginregisters')->where('email', $data['email'])->first();
+    
+        if ($checklogin && Hash::check($data['password'], $checklogin->password)) {
+            // Login successful
+            $newuserdata = [
+                'userid' => $checklogin->id,
+                'name' => $checklogin->name,
+                'email' => $checklogin->email,
+                'logged_in' => true,
+            ];
+    
+            Session::put('user', $newuserdata);
+    
+            return redirect()->to('/')->with('L_strsucessMessage', 'Log in Successfully');
+        }
+    }
+    
+    
 }
