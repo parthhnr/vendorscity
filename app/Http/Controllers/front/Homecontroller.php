@@ -181,6 +181,8 @@ class Homecontroller extends Controller
 
     function vendors_check_mail(){
 
+        // echo "test";exit;
+
         $email = $_POST['email']; 
 
         $result = DB::table('users')

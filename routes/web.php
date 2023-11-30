@@ -82,6 +82,7 @@ Route::resource('Sign_Up', '\App\Http\Controllers\front\FrontloginregisterContro
 Route::get('/package-lists/{page_url}', '\App\Http\Controllers\front\Packagecontroller@package_lists');
 Route::get('/package-detail/{page_url}', '\App\Http\Controllers\front\Packagecontroller@package_detail');
 
+Route::post('vendors_check_mail', '\App\Http\Controllers\front\Homecontroller@vendors_check_mail'); 
 
 
 /*------End Front routes  ------*/
@@ -243,7 +244,7 @@ Route::get('/admin', function () {
    
 
    
-    Route::post('vendors_check_mail', '\App\Http\Controllers\front\Homecontroller@vendors_check_mail'); 
+    
 
     Route::post('/vendors_data', '\App\Http\Controllers\front\Homecontroller@vendors_data');
 
