@@ -17,10 +17,7 @@ class Homecontroller extends Controller
 
         $data['service']=DB::table('services')->orderBy('set_order','ASC')->get();
      // $data['service']=DB::table('services')->orderBy('set_order')->get();
-      
-       
-
-       
+        $data['faq']=DB::table('faqs')->orderBy('id','DESC')->get();   
 
         $data['meta_title'] = "";
         $data['meta_keyword'] = "";

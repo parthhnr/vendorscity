@@ -65,6 +65,7 @@ class VendorsController extends Controller
         $data['socialmedai']=$_POST['socialmedai'];
         $data['password']=Hash::make ($_POST['password']);        
         $data['email']=$_POST['email'];
+        $data['short_description']=$_POST['short_description'];
         if($_POST['mobile'] !='')
         {
             $data['mobile']=$_POST['mobile'];
@@ -234,6 +235,7 @@ class VendorsController extends Controller
         $data['staff']=$_POST['staff'];
         $data['remarks']=$_POST['remarks'];
         $data['socialmedai']=$_POST['socialmedai'];
+        $data['short_description']=$_POST['short_description'];
         // $data['password']=Hash::make ($_POST['password']);        
         $data['email']=$_POST['email'];
         if($_POST['mobile'] !='')

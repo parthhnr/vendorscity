@@ -88,6 +88,8 @@ Route::post('registration_mail_check', '\App\Http\Controllers\front\Frontloginre
 
 
 
+Route::match(['get', 'post'], 'vendor-database', [FrontvendorController::class, 'vendor_database'])->name('vendor_database');
+
 Route::get('/package-lists/{page_url}', '\App\Http\Controllers\front\Packagecontroller@package_lists');
 Route::get('/package-detail/{page_url}', '\App\Http\Controllers\front\Packagecontroller@package_detail');
 

@@ -72,13 +72,12 @@
                         <div class="col-md-4 col-lg-4 col-xl-3">
                             <div class="bselect-style1 bdrl1 bdrn-sm">
                                 <select class="selectpicker" data-width="100%">
-                                    <option>Choose Category</option>
-                                    <option data-tokens="Graphics&Design">Graphics & Design</option>
-                                    <option data-tokens="DigitlMarketing">Digital Marketing</option>
-                                    <option data-tokens="Writing&Translation">Writing & Translation</option>
-                                    <option data-tokens="Video&Animation">Video & Animation</option>
-                                    <option data-tokens="Music&Audio">Music & Audio</option>
-                                    <option data-tokens="Programming&Tech">Programming & Tech</option>
+                                    <option>Choose Services</option>
+                                    @if ($service != '')
+                                        @foreach ($service as $service_data)
+                                            <option data-tokens="{{$service_data->servicename}}" value="{{$service_data->id}}">{{$service_data->servicename}}</option>
+                                        @endforeach
+                                    @endif
                                 </select>
                             </div>
                         </div>
@@ -715,6 +714,8 @@ Thank you VendorsCity.”</h4>
     </section>
 
     <!-- Faq Area -->
+
+    @if ($faq != '' && count($faq) > 0)
     <section class="our-faq pb90">
       <div class="container">
         <div class="row">
@@ -730,46 +731,34 @@ Thank you VendorsCity.”</h4>
             <div class="ui-content">
               <div class="accordion-style1 faq-page mb-4 mb-lg-5">
                 <div class="accordion" id="accordionExample">
-                  <div class="accordion-item active">
-                    <h2 class="accordion-header" id="headingOne">
-                      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">What methods of payments are supported?</button>
+                @php
+                    $i=0;
+                @endphp
+
+                @foreach($faq as $faq_data)
+                  <div class="accordion-item @php if($i == 0){echo 'active';}@endphp">
+                    <h2 class="accordion-header" id="headingOne_{{$faq_data->id}}">
+                      <button class="accordion-button @php if($i != 0){echo 'collapsed';}@endphp" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne_{{$faq_data->id}}" aria-expanded="true" aria-controls="collapseOne">{{$faq_data->question}}</button>
                     </h2>
-                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
-                      <div class="accordion-body">Cras vitae ac nunc orci. Purus amet tortor non at phasellus ultricies hendrerit. Eget a, sit morbi nunc sit id massa. Metus, scelerisque volutpat nec sit vel donec. Sagittis, id volutpat erat vel.</div>
+                    <div id="collapseOne_{{$faq_data->id}}" class="accordion-collapse collapse @php if($i == 0){echo 'show';}@endphp" aria-labelledby="headingOne_{{$faq_data->id}}" data-parent="#accordionExample">
+                      <div class="accordion-body">{!! html_entity_decode($faq_data->answer) !!}</div>
                     </div>
                   </div>
-                  <div class="accordion-item">
-                    <h2 class="accordion-header" id="headingTwo">
-                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">Can I cancel at anytime?</button>
-                    </h2>
-                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-                      <div class="accordion-body">Cras vitae ac nunc orci. Purus amet tortor non at phasellus ultricies hendrerit. Eget a, sit morbi nunc sit id massa. Metus, scelerisque volutpat nec sit vel donec. Sagittis, id volutpat erat vel.</div>
-                    </div>
-                  </div>
-                  <div class="accordion-item">
-                    <h2 class="accordion-header" id="headingThree">
-                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">How do I get a receipt for my purchase?</button>
-                    </h2>
-                    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
-                      <div class="accordion-body">Cras vitae ac nunc orci. Purus amet tortor non at phasellus ultricies hendrerit. Eget a, sit morbi nunc sit id massa. Metus, scelerisque volutpat nec sit vel donec. Sagittis, id volutpat erat vel.</div>
-                    </div>
-                  </div>
-                  <div class="accordion-item">
-                    <h2 class="accordion-header" id="headingFour">
-                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">Which license do I need?</button>
-                    </h2>
-                    <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
-                      <div class="accordion-body">Cras vitae ac nunc orci. Purus amet tortor non at phasellus ultricies hendrerit. Eget a, sit morbi nunc sit id massa. Metus, scelerisque volutpat nec sit vel donec. Sagittis, id volutpat erat vel.</div>
-                    </div>
-                  </div>
-                  <div class="accordion-item">
+
+                  @php
+                    $i++;
+                  @endphp
+
+                  @endforeach
+
+                  <!-- <div class="accordion-item">
                     <h2 class="accordion-header" id="headingFive">
                       <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">How do I get access to a theme I purchased?</button>
                     </h2>
                     <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-parent="#accordionExample">
                       <div class="accordion-body">Cras vitae ac nunc orci. Purus amet tortor non at phasellus ultricies hendrerit. Eget a, sit morbi nunc sit id massa. Metus, scelerisque volutpat nec sit vel donec. Sagittis, id volutpat erat vel.</div>
                     </div>
-                  </div>
+                  </div> -->
                 </div>
               </div>
             </div>
@@ -782,6 +771,8 @@ Thank you VendorsCity.”</h4>
         </div>
       </div>
     </section>
+
+    @endif
 
     <section class="our-about bgc-thm2 container pb0 pt0 mb30">
       <div class="container">
