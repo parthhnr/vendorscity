@@ -63,3 +63,5 @@ color:#000;
 .we_do_heading{font-size: 64px;line-height: 59px;}
 .we_cut_out_paragraph{font-size: 23px;}
 .know_more_btn{justify-content: center;display: flex;}
+header.nav-innerpage-style .ace-responsive-menu .visible_list a.list-item:hover{color:#0040E6}
+header.nav-innerpage-style .ace-responsive-menu .visible_list a.list-item:before{background-color: #0040E6;}

@@ -59,7 +59,8 @@ class Homecontroller extends Controller
        
         $data['role_id']=$_POST['hidden_role_id'];
         $data['name']=$_POST['name'];
-        $data['user_name']=$_POST['user_name'];       
+        $data['user_name']=$_POST['user_name'];     
+        $data['short_description']=$_POST['short_description'];  
         $data['companywebsite']=$_POST['companywebsite'];
         $data['city']=$_POST['city'];
         $data['crole']=$_POST['crole'];
