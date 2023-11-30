@@ -17,8 +17,8 @@
                     <div class="log-reg-form search-modal form-style1 bgc-white p50 p30-sm default-box-shadow1 bdrs12">
                         <div class="mb30">
                             <h4>Let's create your account!</h4>
-                            <p class="text mt20">Already have an account? <a href="page-login.html" class="text-thm">Log
-                                    In!</a></p>
+                            <p class="text mt20">Already have an account? <a href="{{ route('Sign-Up.create') }}"
+                                    class="text-thm">Log In!</a></p>
                         </div>
                         <div class="mb25">
                             <label class="form-label fw500 dark-color">Name</label>
