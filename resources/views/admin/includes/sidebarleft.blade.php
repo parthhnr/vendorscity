@@ -123,6 +123,13 @@
                             <i class="fa fa-file"></i><span>Packages</span></a>
                     </li>
                 @endif
+                @if (in_array('16', $permission1))
+                    <li class="{{ request()->segment(2) == 'frontuser' ? 'active' : '' }}"><a
+                            href="{{ route('frontuser.index') }}"
+                            class="{{ request()->segment(2) == 'frontuser' ? 'active' : '' }}">
+                            <i class="fa fa-file"></i><span>Front User</span></a>
+                    </li>
+                @endif
                 @if (in_array('14', $permission1))
                     <li class="{{ request()->segment(2) == 'adminwallet' ? 'active' : '' }}"><a
                             href="{{ route('adminwallet.index') }}"

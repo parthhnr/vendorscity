@@ -37,6 +37,7 @@ use App\Http\Controllers\admin\PackagesController;
 use App\Http\Controllers\admin\WalletController;
 use App\Http\Controllers\admin\AdminWalletController;
 use App\Http\Controllers\admin\FaqController;
+use App\Http\Controllers\admin\FrontuserController;
 
 
 
@@ -85,7 +86,30 @@ Route::post('check_login', 'App\Http\Controllers\front\FrontloginregisterControl
 
 Route::post('user_login','App\Http\Controllers\front\FrontloginregisterController@user_login')->name('user_login');
 
-Route::post('registration_mail_check', '\App\Http\Controllers\front\FrontloginregisterController@registration_mail_check'); 
+Route::post('registration_mail_check', '\App\Http\Controllers\front\FrontloginregisterController@registration_mail_check');
+
+
+Route::get('forget-password','\App\Http\Controllers\front\FrontloginregisterController@lost_password'); 
+Route::post('email-check-login','\App\Http\Controllers\front\FrontloginregisterController@emailCheck'); 
+Route::post('resetpassword','\App\Http\Controllers\front\FrontloginregisterController@get_password')->name('reset-password');
+Route::get('reset-password/{uid}','\App\Http\Controllers\front\FrontloginregisterController@reset_password')->name('reset_password');
+
+
+
+
+Route::post('set_password/{uid}','\App\Http\Controllers\front\FrontloginregisterController@set_password')->name('set_password');
+
+    
+
+
+
+
+
+
+
+
+ 
+
 
 
 
@@ -100,6 +124,8 @@ Route::get('/package-detail/{page_url}', '\App\Http\Controllers\front\Packagecon
 
 Route::post('vendors_check_mail', '\App\Http\Controllers\front\Homecontroller@vendors_check_mail'); 
 Route::post('/vendors_data', '\App\Http\Controllers\front\Homecontroller@vendors_data');
+
+
 
 Route::match(['get', 'post'], 'vendor-database', [FrontvendorController::class, 'vendor_database'])->name('vendor_database');
 
@@ -259,6 +285,11 @@ Route::get('/admin', function () {
     Route::resource('admin/faq', '\App\Http\Controllers\admin\FaqController');
     Route::get('delete_faq',[FaqController::class,'destroy'])->name('delete_faq');
 
+    Route::resource('/admin/frontuser', '\App\Http\Controllers\admin\FrontuserController');
+    Route::post('change_status_frontuser','App\Http\Controllers\admin\FrontuserController@change_status_frontuser');
+
+    Route::get('export-all', [App\Http\Controllers\admin\FrontuserController::class, 'downloadXls'])->name('export-excel');
+    
 
     
 
