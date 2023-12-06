@@ -32,66 +32,69 @@
             <div class="col-lg-3">
                 <div class="list-sidebar-style1 d-none d-lg-block">
                     <div class="accordion" id="accordionExample">
-
                         <div class="card mb20 pb5">
                             <div class="card-header active" id="heading2">
                                 <h4>
                                     <button class="btn btn-link ps-0" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#collapse2" aria-expanded="true" aria-controls="collapse2">Sub
-                                        Service</button>
+                                        data-bs-target="#collapse2" aria-expanded="true"
+                                        aria-controls="collapse2">Category</button>
                                 </h4>
                             </div>
                             <div id="collapse2" class="collapse show" aria-labelledby="heading2"
                                 data-parent="#accordionExample">
                                 <div class="card-body card-body px-0 pt-0">
-                                    @foreach ($subservice_data as $subservices)
-                                        <div class="checkbox-style1">
-                                            <a href="{{ url('package-lists/' . $subservices->page_url) }}">
-                                                <label class="custom_checkbox">{{ $subservices->subservicename }}
-                                                </label>
-                                            </a>
-                                        </div>
-                                    @endforeach
-                                    <a class="text-thm" href="#">+Show more</a>
+                                    <div class="checkbox-style1 mb15">
+                                        <label class="custom_checkbox">Category 1
+                                            <input type="checkbox">
+                                            <span class="checkmark"></span>
+                                            <!-- <span class="right-tags">(1,945)</span> -->
+                                        </label>
+                                        <label class="custom_checkbox">Category 2
+                                            <input type="checkbox" checked="checked">
+                                            <span class="checkmark"></span>
+                                            <!-- <span class="right-tags">(8,136)</span> -->
+                                        </label>
+                                        <label class="custom_checkbox">Category 3
+                                            <input type="checkbox">
+                                            <span class="checkmark"></span>
+                                            <!-- <span class="right-tags">(917)</span> -->
+                                        </label>
+                                        <label class="custom_checkbox">Category 4
+                                            <input type="checkbox">
+                                            <span class="checkmark"></span>
+                                            <!-- <span class="right-tags">(240)</span> -->
+                                        </label>
+
+                                    </div>
+                                    <a class="text-thm" href="">+Show more</a>
                                 </div>
                             </div>
                         </div>
-                        <form id="search_mini_form" name="search_mini_form" method="get">
-                            <div class="card mb20 pb0">
-                                <div class="card-header active" id="heading1">
-                                    <h4>
-                                        <button class="btn btn-link ps-0" type="submit" data-bs-toggle="collapse"
-                                            data-bs-target="#collapse1" aria-expanded="true" aria-controls="collapse1"
-                                            onclick="sort_price_filter()">Budget</button>
-                                    </h4>
-                                </div>
-
-                                <div id="collapse1" class="collapse show" aria-labelledby="heading1"
-                                    data-parent="#accordionExample">
-                                    <div class="card-body card-body px-0 pt-0">
-                                        <!-- Range Slider Desktop Version -->
-                                        <div class="range-slider-style1">
-                                            <div class="range-wrapper">
-                                                <div class="slider-range mb10 mt15"></div>
-                                                <div class="text-center">
-                                                    <input type="text" class="amount" placeholder="$20">
-                                                    <span class="fa-sharp fa-solid fa-minus mx-2 dark-color"></span>
-                                                    <input type="text" class="amount2"
-                                                        placeholder="${{ $max_price }}">
-                                                    <input type="hidden" name="max_price" id="max_price"
-                                                        value="{{ $max_price }}">
-                                                    <input type="hidden" name="filter_price_start"
-                                                        id="filter_price_start" value="{{ $filter_price_start }}">
-                                                    <input type="hidden" name="filter_price_end" id="filter_price_end"
-                                                        value="{{ $filter_price_end }}">
-                                                    <input type="hidden" name="sort_by" id="sort_by">
-                                                </div>
+                        <div class="card mb20 pb0">
+                            <div class="card-header active" id="heading1">
+                                <h4>
+                                    <button class="btn btn-link ps-0" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapse1" aria-expanded="true"
+                                        aria-controls="collapse1">Budget</button>
+                                </h4>
+                            </div>
+                            <div id="collapse1" class="collapse show" aria-labelledby="heading1"
+                                data-parent="#accordionExample">
+                                <div class="card-body card-body px-0 pt-0">
+                                    <!-- Range Slider Desktop Version -->
+                                    <div class="range-slider-style1">
+                                        <div class="range-wrapper">
+                                            <div class="slider-range mb10 mt15"></div>
+                                            <div class="text-center">
+                                                <input type="text" class="amount" placeholder="$20"><span
+                                                    class="fa-sharp fa-solid fa-minus mx-2 dark-color"></span>
+                                                <input type="text" class="amount2" placeholder="$70987">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </form>
+                        </div>
                         <div class="card mb20 pb5">
                             <div class="card-header active" id="heading2">
                                 <h4>
@@ -280,42 +283,29 @@
                 </div>
                 <div class="row">
                     @php
-                        // echo '<pre>';
-                        // print_r($package_data);
-                        // echo '</pre>';
+                        echo '<pre>';
+                        print_r($package_data);
+                        echo '</pre>';
                     @endphp
 
                     @if ($package_data != '' && count($package_data) > 0)
 
                         @foreach ($package_data as $package_data_new)
-                            @php
-                                // echo '<pre>';
-                                // print_r($package_data_new);
-                                // echo '</pre>';
-
-                                $subservice = DB::table('subservices')
-                                    ->where('id', $package_data_new->subservice_id)
-                                    ->first();
-
-                            @endphp
                             <div class="col-sm-6 col-xl-4">
                                 <div class="listing-style1">
                                     <div class="list-thumb">
                                         @if ($package_data_new->image)
-                                            <a href="{{ url('package-detail/' . $package_data_new->page_url) }}">
-                                                <img class="w-100"
-                                                    src="{{ asset('public/upload/packages/large/' . $package_data_new->image) }}"
-                                                    alt="">
-                                            </a>
+                                            <img class="w-100"
+                                                src="{{ asset('public/upload/packages/large/' . $package_data_new->image) }}"
+                                                alt="">
                                         @endif
                                         <a href="" class="listing-fav fz12"><span
                                                 class="far fa-heart"></span></a>
                                     </div>
                                     <div class="list-content">
-                                        <h5 class="list-title">
-                                            <a href="{{ url('package-detail/' . $package_data_new->page_url) }}">{{ $package_data_new->name }}
-                                            </a>
-                                        </h5>
+                                        <h5 class="list-title"><a
+                                                href="{{ url('package-detail/' . $package_data_new->page_url) }}">{{ $package_data_new->name }}
+                                            </a></h5>
 
                                         @if ($package_data_new->short_description)
                                             <div class="review-meta d-flex align-items-center">
@@ -323,52 +313,14 @@
                                             </div>
                                         @endif
                                         <hr class="my-2">
-                                        @php
-                                            $disc_price = $package_data_new->price; // Set a default value
-
-                                            if ($package_data_new->discount_type != '') {
-                                                if ($package_data_new->discount_type == 0) {
-                                                    $disc_price_new = ($package_data_new->price * $package_data_new->discount) / 100;
-                                                    $disc_price = $package_data_new->price - $disc_price_new;
-                                                } elseif ($package_data_new->discount_type == 1) {
-                                                    $disc_price = $package_data_new->price - $package_data_new->discount;
-                                                } else {
-                                                    $package_data_new->price;
-                                                }
-                                            } else {
-                                                $package_data_new->price;
-                                            }
-
-                                        @endphp
                                         <div class="list-meta d-flex justify-content-between align-items-center mt15">
                                             <a href="{{ url('package-detail/' . $package_data_new->page_url) }}">
-                                                @if ($package_data_new->discount_type != '2')
-                                                    <span class="fz14">AED {{ $disc_price }}
-                                                        <del>{{ $package_data_new->price }}</del></span>
-                                                @else
-                                                    <span class="fz14">AED {{ $package_data_new->price }}</span>
-                                                @endif
-
+                                                <span class="fz14">AED {{ $package_data_new->price }}</span>
                                             </a>
-
                                             <div class="budget">
-                                                @if (in_array('0', explode(',', $subservice->is_bookable)))
-                                                    <a class="ud-btn btn-thm add-joining"
-                                                        href="javascript:void(0)">Add To
-                                                        Cart</a>
-                                                @endif
-                                                @if (in_array('1', explode(',', $subservice->is_bookable)))
-                                                    <a class="ud-btn btn-thm add-joining"
-                                                        href="javascript:void(0)">Inquiry</a>
-                                                @elseif (in_array('0', explode(',', $subservice->is_bookable)) && in_array('1', explode(',', $subservice->is_bookable)))
-                                                    <a class="ud-btn btn-thm add-joining"
-                                                        href="javascript:void(0)">Add To
-                                                        Cart</a>
-                                                    <a class="ud-btn btn-thm add-joining"
-                                                        href="javascript:void(0)">Inquiry</a>
-                                                @endif
+                                                <a class="ud-btn btn-thm add-joining" href="javascript:void(0)">Add To
+                                                    Cart</a>
                                             </div>
-
                                         </div>
                                     </div>
                                 </div>
@@ -410,18 +362,3 @@
     </div>
 </section>
 @include('front.includes.footer')
-
-<script>
-    function sort_price_filter() {
-        var lowAmount = $("#amount_start").val();
-        var highAmount = $("#amount_end").val();
-        var max_price = $("#max_price").val();
-
-        $("#filter_price_start").val(lowAmount);
-        $("#filter_price_end").val(highAmount);
-        $("#max_price").val(max_price);
-
-        // $("#categoryFilter").submit();
-        document.search_mini_form.submit();
-    }
-</script>

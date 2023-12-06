@@ -289,10 +289,6 @@
 
                         @foreach ($package_data as $package_data_new)
                             @php
-                                // echo '<pre>';
-                                // print_r($package_data_new);
-                                // echo '</pre>';
-
                                 $subservice = DB::table('subservices')
                                     ->where('id', $package_data_new->subservice_id)
                                     ->first();
@@ -323,32 +319,9 @@
                                             </div>
                                         @endif
                                         <hr class="my-2">
-                                        @php
-                                            $disc_price = $package_data_new->price; // Set a default value
-
-                                            if ($package_data_new->discount_type != '') {
-                                                if ($package_data_new->discount_type == 0) {
-                                                    $disc_price_new = ($package_data_new->price * $package_data_new->discount) / 100;
-                                                    $disc_price = $package_data_new->price - $disc_price_new;
-                                                } elseif ($package_data_new->discount_type == 1) {
-                                                    $disc_price = $package_data_new->price - $package_data_new->discount;
-                                                } else {
-                                                    $package_data_new->price;
-                                                }
-                                            } else {
-                                                $package_data_new->price;
-                                            }
-
-                                        @endphp
                                         <div class="list-meta d-flex justify-content-between align-items-center mt15">
                                             <a href="{{ url('package-detail/' . $package_data_new->page_url) }}">
-                                                @if ($package_data_new->discount_type != '2')
-                                                    <span class="fz14">AED {{ $disc_price }}
-                                                        <del>{{ $package_data_new->price }}</del></span>
-                                                @else
-                                                    <span class="fz14">AED {{ $package_data_new->price }}</span>
-                                                @endif
-
+                                                <span class="fz14">AED {{ $package_data_new->price }}</span>
                                             </a>
 
                                             <div class="budget">
