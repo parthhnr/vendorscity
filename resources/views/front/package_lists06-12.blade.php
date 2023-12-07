@@ -61,8 +61,8 @@
                                 <div class="card-header active" id="heading1">
                                     <h4>
                                         <button class="btn btn-link ps-0" type="submit" data-bs-toggle="collapse"
-                                            data-bs-target="#collapse1" aria-expanded="true"
-                                            aria-controls="collapse1">Budget</button>
+                                            data-bs-target="#collapse1" aria-expanded="true" aria-controls="collapse1"
+                                            onclick="sort_price_filter()">Budget</button>
                                     </h4>
                                 </div>
 
@@ -74,10 +74,9 @@
                                             <div class="range-wrapper">
                                                 <div class="slider-range mb10 mt15"></div>
                                                 <div class="text-center">
-                                                    <input type="text" class="amount" id="amount"
-                                                        placeholder="$0">
+                                                    <input type="text" class="amount" placeholder="$20">
                                                     <span class="fa-sharp fa-solid fa-minus mx-2 dark-color"></span>
-                                                    <input type="text" class="amount2" id="amount2"
+                                                    <input type="text" class="amount2"
                                                         placeholder="${{ $max_price }}">
                                                     <input type="hidden" name="max_price" id="max_price"
                                                         value="{{ $max_price }}">
@@ -290,6 +289,9 @@
 
                         @foreach ($package_data as $package_data_new)
                             @php
+                                // echo '<pre>';
+                                // print_r($package_data_new);
+                                // echo '</pre>';
 
                                 $subservice = DB::table('subservices')
                                     ->where('id', $package_data_new->subservice_id)
@@ -410,9 +412,9 @@
 @include('front.includes.footer')
 
 <script>
-    $(".slider-range").on("slide", function(event, ui) {
-        var lowAmount = $("#amount").val();
-        var highAmount = $("#amount2").val();
+    function sort_price_filter() {
+        var lowAmount = $("#amount_start").val();
+        var highAmount = $("#amount_end").val();
         var max_price = $("#max_price").val();
 
         $("#filter_price_start").val(lowAmount);
@@ -421,5 +423,5 @@
 
         // $("#categoryFilter").submit();
         document.search_mini_form.submit();
-    });
+    }
 </script>
