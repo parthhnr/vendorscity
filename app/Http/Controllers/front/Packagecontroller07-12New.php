@@ -38,17 +38,10 @@ class Packagecontroller extends Controller
                      
                  }
              }
-            //   $pagination = $query->orderBy('id', 'DESC')->paginate(2)->withQueryString();
+            // $pagination = $query->orderBy('id', 'DESC')->paginate(2)->withQueryString();
              
-            // $data['package_data'] = $pagination;
+            $data['package_data'] = $query;
             // $data['package_pagination'] = $pagination;
-            // $data['package_count'] = $pagination->total();
-            // $data['subservice_data'] = DB::table('subservices')->get();
-
-
-            $pagination = $query->orderBy('id', 'DESC')->get();             
-            $data['package_data'] = $pagination;
-            $data['package_pagination'] = $pagination;
             // $data['package_count'] = $pagination->total();
             $data['subservice_data'] = DB::table('subservices')->get();
  
@@ -82,33 +75,10 @@ class Packagecontroller extends Controller
             $data['package_detail'] ="";
         }
 
-        // echo "<pre>";print_r($data);echo "</pre>";exit;     
+        //echo "<pre>";print_r($data);echo "</pre>";exit;     
 
         return view('front.package_detail',$data);
     }
-
-    public function enquiry(Request $request,$id){
-
-        $data['package_id'] =$id;
-        return view('front.enquiry',$data);
-
-    }
-    public function package_inquiry(Request $request){
-
-        // echo "<pre>";print_r($request->post());echo "</pre>";exit;
-        // $page_url = DB::table('packages')->where('id',$request->pakage_id)->value('page_url');
-        
-
-
-        $data['name']=$request->name;
-        $data['pakage_id']=$request->pakage_id;
-        $data['email']=$request->email;
-        $data['mobile']=$request->mobile;
-
-        DB::table('packages_enquiry',)->insert($data);
-
-        return redirect()->route('enquiry', ['id' => $data['pakage_id']])->with('L_strsucessMessage', 'Enquiry Form Submitted Successfully');
-
-    }
+    
     
 }

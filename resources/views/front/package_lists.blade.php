@@ -66,6 +66,20 @@
                                     </h4>
                                 </div>
 
+                                @php
+                                    if (isset($_GET['filter_price_start'])) {
+                                        $startPrice = $_GET['filter_price_start'];
+                                    } else {
+                                        $startPrice = '1';
+                                    }
+
+                                    if (isset($_GET['filter_price_end'])) {
+                                        $endPrice = $_GET['filter_price_end'];
+                                    } else {
+                                        $endPrice = $max_price;
+                                    }
+                                @endphp
+
                                 <div id="collapse1" class="collapse show" aria-labelledby="heading1"
                                     data-parent="#accordionExample">
                                     <div class="card-body card-body px-0 pt-0">
@@ -75,10 +89,12 @@
                                                 <div class="slider-range mb10 mt15"></div>
                                                 <div class="text-center">
                                                     <input type="text" class="amount" id="amount"
-                                                        placeholder="$0">
+                                                        placeholder="${{ $startPrice }}">
                                                     <span class="fa-sharp fa-solid fa-minus mx-2 dark-color"></span>
                                                     <input type="text" class="amount2" id="amount2"
-                                                        placeholder="${{ $max_price }}">
+                                                        placeholder="${{ $endPrice }}">
+
+
                                                     <input type="hidden" name="max_price" id="max_price"
                                                         value="{{ $max_price }}">
                                                     <input type="hidden" name="filter_price_start"
@@ -252,7 +268,7 @@
                 <div class="row align-items-center mb20">
                     <div class="col-md-6">
                         <div class="text-center text-md-start">
-                            <p class="text mb-0 mb10-sm"><span class="fw500">{{ $package_count }}</span> services
+                            <p class="text mb-0 mb10-sm"><span class="fw500">{{-- $package_count --}}</span> services
                                 available</p>
                         </div>
                     </div>
@@ -351,19 +367,18 @@
 
                                             <div class="budget">
                                                 @if (in_array('0', explode(',', $subservice->is_bookable)))
-                                                    <a class="ud-btn btn-thm add-joining"
-                                                        href="javascript:void(0)">Add To
-                                                        Cart</a>
+                                                    <a class="ud-btn btn-thm add-joining" href="#">Add
+                                                        To Cart</a>
                                                 @endif
                                                 @if (in_array('1', explode(',', $subservice->is_bookable)))
                                                     <a class="ud-btn btn-thm add-joining"
-                                                        href="javascript:void(0)">Inquiry</a>
+                                                        href="{{ route('enquiry', ['id' => $package_data_new->id]) }}">Inquiry</a>
                                                 @elseif (in_array('0', explode(',', $subservice->is_bookable)) && in_array('1', explode(',', $subservice->is_bookable)))
                                                     <a class="ud-btn btn-thm add-joining"
                                                         href="javascript:void(0)">Add To
                                                         Cart</a>
                                                     <a class="ud-btn btn-thm add-joining"
-                                                        href="javascript:void(0)">Inquiry</a>
+                                                        href="{{ route('enquiry', ['id' => $package_data_new->id]) }}">Inquiry</a>
                                                 @endif
                                             </div>
 
@@ -379,7 +394,7 @@
 
 
                 </div>
-                {!! $package_data->appends($_GET)->render('pagination::bootstrap-4') !!}
+                {{-- {!! $package_pagination->appends($_GET)->render('pagination::bootstrap-4') !!} --}}
                 <!--  <div class="row">
               <div class="mbp_pagination mt30 text-center">
                 <ul class="page_navigation">
