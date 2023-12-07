@@ -99,6 +99,8 @@ Route::get('reset-password/{uid}','\App\Http\Controllers\front\Frontloginregiste
 
 Route::post('set_password/{uid}','\App\Http\Controllers\front\FrontloginregisterController@set_password')->name('set_password');
 
+
+
     
 
 
@@ -119,15 +121,21 @@ Route::post('set_password/{uid}','\App\Http\Controllers\front\Frontloginregister
 
 Route::match(['get', 'post'], 'vendor-database', [FrontvendorController::class, 'vendor_database'])->name('vendor_database');
 
-Route::get('/package-lists/{page_url}', '\App\Http\Controllers\front\Packagecontroller@package_lists');
+Route::get('/package-lists/{page_url}', '\App\Http\Controllers\front\Packagecontroller@package_lists')->name('package-lists');
 Route::get('/package-detail/{page_url}', '\App\Http\Controllers\front\Packagecontroller@package_detail');
+Route::get('enquiry/{id}', '\App\Http\Controllers\front\Packagecontroller@enquiry')->name('enquiry');
+
+Route::post('package_inquiry', '\App\Http\Controllers\front\Packagecontroller@package_inquiry')->name('package_inquiry');
+
+
+
 
 Route::post('vendors_check_mail', '\App\Http\Controllers\front\Homecontroller@vendors_check_mail'); 
 Route::post('/vendors_data', '\App\Http\Controllers\front\Homecontroller@vendors_data');
 
 
 
-Route::match(['get', 'post'], 'vendor-database', [FrontvendorController::class, 'vendor_database'])->name('vendor_database');
+// Route::match(['get', 'post'], 'vendor-database', [FrontvendorController::class, 'vendor_database'])->name('vendor_database');
 
 
 /*------End Front routes  ------*/

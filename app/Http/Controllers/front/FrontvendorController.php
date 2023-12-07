@@ -16,12 +16,13 @@ class FrontvendorController extends Controller
         $data['meta_title'] = "";
         $data['meta_keyword'] = "";
         $data['meta_description'] = "";
-        $pagination =DB::table('users')->where('vendor',1)->where('is_active',0)->orderBy('id','DESC')->paginate(1);
+        // $pagination =DB::table('users')->where('vendor',1)->where('is_active',0)->orderBy('id','DESC')->paginate(1);
+        $data['allvendor'] =DB::table('users')->where('vendor',1)->where('is_active',0)->orderBy('id','DESC')->get();
 
-        $data['allvendor'] = $pagination;
-        $data['allvendor_count'] = $pagination->total();
+        // $data['allvendor'] = $pagination;
+        // $data['allvendor_count'] = $pagination->total();
 
-        //echo "<pre>";print_r($data);echo "</pre>";exit;
+        // echo "<pre>";print_r($data['allvendor']);echo "</pre>";exit;
 
         return view('front.vendor_database',$data);
     }
