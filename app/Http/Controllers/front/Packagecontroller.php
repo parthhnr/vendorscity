@@ -25,15 +25,35 @@ class Packagecontroller extends Controller
             $data['package_data'] = $pagination;
             $data['package_count'] = $pagination->total();
             $data['subservice_data'] = DB::table('subservices')->get();
+
+           
             
-            $data['max_price'] = DB::table('packages')->max('price');
+            if($request->get('filter_price_start') !== null && $request->get('filter_price_end') !== null)
+       {
+           $filter_price_start = $request->get('filter_price_start');
+           $filter_price_end = $request->get('filter_price_end');         
+
+           if ($filter_price_start > 0 && $filter_price_end > 0) 
+           {
+            
+                $query = $pagination->whereBetween('price',[$filter_price_start,$filter_price_end]);
+               
+           }
+       }
+            
+            $data['max_price'] = DB::table('packages')->max('price'); 
             $data['filter_price_start'] = $request->get('filter_price_start');
             $data['filter_price_end'] = $request->get('filter_price_end');
+
+           
+            
         }else{
             $data['package_data'] = '';
             $data['package_count'] = 0;        
         } 
-
+        // echo"<pre>";
+        // print_r($data['max_price']);
+        // echo"</pre>";exit;
         return view('front.package_lists',$data);
     }
 
