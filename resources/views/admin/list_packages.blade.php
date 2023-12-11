@@ -84,6 +84,7 @@
                                             <th>Package Category</th>
                                             <th>Name</th>
                                             <th>Image</th>
+                                            <th>Add Images</th>
                                             <!-- <th>Page Url</th> -->
                                             @if (in_array('12', $edit_perm))
                                                 <th class="text-right">Actions</th>
@@ -107,7 +108,12 @@
                                                 <td>{{ $data->name }}</td>
                                                 <td><img src="{{ url('public/upload/packages/large/' . $data->image) }}"
                                                         width="50px" height="50px"></td>
-
+                                                <td>
+                                                    <a class="btn btn-primary me-1"
+                                                        href="{{ route('editimage', ['id' => $data->id]) }}">
+                                                        Add Image
+                                                    </a>
+                                                </td>
 
                                                 @if (in_array('12', $edit_perm))
                                                     <td class="text-right">

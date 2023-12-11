@@ -172,6 +172,17 @@ class Helper{
             echo "-";
         }
     }
+
+    public static function packages_enquiry(int $id){
+
+        $result = DB::table('packages')->where('id',$id)->first();                                                     
+        
+        if($result !='' && isset($result)){
+            return $result->name;
+        }else{
+            echo "-";
+        }
+    }
     
 	
 } 

@@ -212,4 +212,117 @@ class PackagesController extends Controller
         
         echo $html;
     }
+    function editimage(Request $request,$id){
+
+        // echo $id;exit;
+        $data['id'] = $id;
+        $data['packagesimages'] = DB::table('packages_image')
+        ->select('*')
+        ->where('pid', '=',$id)
+        ->get()
+        ->toArray();
+
+
+
+        //echo "<pre>";print_r($data);echo"</pre>";exit;
+
+        return view('admin.edit_images',$data);
+
+    }
+    function editimage_store(Request $request) {
+
+        for ($i = 0; $i < count($_FILES['attachment1']['name']); $i++) {
+
+            if ($_FILES['attachment1']['name'][$i] != '') {
+
+                $image = $_FILES['attachment1']['tmp_name'][$i];
+
+                $originalName = $_FILES['attachment1']['name'][$i]; // Get the original file name
+
+    
+
+                // Generate a unique filename based on the original name
+
+                $filename = time() . '-' . str_replace(' ', '-', $originalName);
+
+    
+
+                // Resize and save the image
+
+                Image::make($image)
+
+                    ->resize(619, 829)
+
+                    ->save(public_path('upload/packages_slider_img/large/' . $filename));
+
+
+                Image::make($image)
+
+                    ->resize(112, 150)
+
+                    ->save(public_path('upload/packages_slider_img/small/' . $filename));
+
+
+                Image::make($image)                   
+
+                    ->save(public_path('upload/packages_slider_img/' . $filename));                
+
+
+
+    
+
+                $data1['image'] = $filename;
+
+            } else {
+
+                $data1['image'] = "";
+
+            }
+
+    
+
+            $data1['pid'] = $request->id;
+
+    
+
+            $this->upload_product_image($data1);
+
+        }
+
+    
+
+        return redirect()->to('editimage/' . $request->id)->with('success', 'Packages Image has been added successfully');
+
+    }
+
+    function upload_product_image($content){
+
+
+
+        //echo "<pre>";print_r($content);echo"</pre>";exit;
+
+
+
+        $data['pid'] = $content['pid'];
+
+        $data['image'] = $content['image'];
+
+        // $data['baseimage'] = 0;
+
+        // $data['baseimageHover'] =0;
+
+        DB::table('packages_image')->insertGetId($data);
+
+    }
+    public function packages_removeimage(Request $request){
+
+        $packages = $request->pid;
+
+        $id = $request->id;
+
+        $result = DB::table('packages_image')->where('pid', '=',$packages)->where('id', '=',$id)->delete();
+
+        return redirect()->route('editimage',$packages)->with('success','Packages Image has been deleted successfully');
+
+    }
 }

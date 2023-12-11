@@ -3,18 +3,15 @@
 @php
     // echo"<pre>";print_r($package_detail);echo"</pre>";
 @endphp
-<style type="text/css">
-    .package_detail_banner .cta-service-single {
-        background-image: inherit;
-        background-color: #eee;
-    }
-</style>
-<section class="breadcumb-section pt-0 container package_detail_banner">
+<section class="breadcumb-section pt-0 container">
     <div
         class="cta-service-single cta-banner mx-auto maxw1700 pt120 pt60-sm pb120 pb60-sm bdrs16 position-relative overflow-hidden d-flex align-items-center mx20-lg px30-lg">
-
-        <img class="service-v1-vector d-none d-xl-block"
-            src="{{ asset('public/site/images/Packing-Boxes-removebg-preview.png') }}" alt="">
+        <img class="left-top-img wow zoomIn" src="{{ asset('public/site/images/vector-img/left-top.png') }}"
+            alt="">
+        <img class="right-bottom-img wow zoomIn" src="{{ asset('public/site/images/vector-img/right-bottom.png') }}"
+            alt="">
+        <img class="service-v1-vector bounce-y d-none d-xl-block"
+            src="{{ asset('public/site/images/vector-img/vector-service-v1.png') }}" alt="">
         <div class="container">
             <div class="row wow fadeInUp">
                 <div class="col-xl-7">
@@ -47,26 +44,20 @@
             <div class="col-lg-8">
                 <div class="column">
 
-
-                    @php
-                        $packages_images = DB::table('packages_image')
-                            ->where('pid', $package_detail->id)
-                            ->get();
-                        // echo '<pre>';
-                        // print_r($packages_images);
-                        // echo '</pre>';
-                    @endphp
-                    @if ($packages_images != '' && count($packages_images) > 0)
+                    @if ($package_detail->image != '')
                         <div class="service-single-sldier vam_nav_style slider-1-grid owl-carousel owl-theme mb60">
-                            @foreach ($packages_images as $packages_image)
-                                <div class="item">
-                                    <div class="thumb p50 p30-sm">
-                                        <img src="{{ asset('public/upload/packages_slider_img/large/' . $packages_image->image) }}"
-                                            alt="" class="w-100">
-                                    </div>
+                            <div class="item">
+                                <div class="thumb p50 p30-sm">
+                                    <img src="{{ asset('public/upload/packages/' . $package_detail->image) }}"
+                                        alt="" class="w-100">
                                 </div>
-                            @endforeach
-
+                            </div>
+                            <div class="item">
+                                <div class="thumb p50 p30-sm">
+                                    <img src="{{ asset('public/upload/packages/' . $package_detail->image) }}"
+                                        alt="" class="w-100">
+                                </div>
+                            </div>
                             <!-- <div class="item">
                   <div class="thumb p50 p30-sm"><img src="{{ asset('public/site/images/listings/service-details-1.jpg') }}" alt="" class="w-100"></div>
                 </div>
@@ -75,22 +66,6 @@
                 </div> -->
                         </div>
                     @endif
-                    @php
-                        $inave = 1;
-                    @endphp
-                    @if ($packages_images != '' && count($packages_images) > 0)
-                        @foreach ($packages_images as $packages_image)
-                            <style>
-                                .service-single-sldier button.owl-dot:nth-child({{$inave}}) {
-                                    background-image: url("{{ asset('public/upload/packages_slider_img/small/' . $packages_image->image) }}");
-                                }
-                            </style>
-                        @php
-                            $inave++;
-                        @endphp
-                        @endforeach
-                    @endif
-
                     <div class="service-about">
                         @if ($package_detail->description)
                             <p class="text mb30">{!! html_entity_decode($package_detail->description) !!}</p>

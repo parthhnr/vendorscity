@@ -51,8 +51,6 @@ class Packagecontroller extends Controller
             $data['package_pagination'] = $pagination;
             // $data['package_count'] = $pagination->total();
             $data['subservice_data'] = DB::table('subservices')->get();
-
-            
  
             $data['max_price'] = DB::table('packages')->max('price'); 
             $data['filter_price_start'] = $request->get('filter_price_start');
@@ -77,10 +75,6 @@ class Packagecontroller extends Controller
         $data['meta_description'] = "";
 
         $packages_data = DB::table('packages')->where('page_url', $page_url)->first();
-
-        // echo"<pre>";
-        // print_r($packages_data);
-        // echo"</pre>";
 
         if($packages_data != ''){
             $data['package_detail'] =$packages_data;

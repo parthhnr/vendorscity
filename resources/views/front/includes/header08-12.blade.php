@@ -700,11 +700,11 @@
                 <div class="header bdrb1">
                     <div class="menu_and_widgets">
                         <div class="mobile_menu_bar d-flex justify-content-between align-items-center">
-                            <a class="mobile_logo" href="{{ url('/') }}"><img src="{{ asset('public/site/images/VC-LONG-COLOR.png') }}"
+                            <a class="mobile_logo" href="#"><img src="images/header-logo3.svg"
                                     alt=""></a>
                             <div class="right-side text-end">
-                                <!-- <a class="" href="page-login.html">join</a> -->
-                                <a class="menubar ml30" href="#menu"><img src="{{ asset('public/site/images/mobile-dark-nav-icon.svg')}}"
+                                <a class="" href="page-login.html">join</a>
+                                <a class="menubar ml30" href="#menu"><img src="images/mobile-dark-nav-icon.svg"
                                         alt=""></a>
                             </div>
                         </div>
@@ -717,28 +717,36 @@
             <!-- /.mobile-menu -->
             <nav id="menu" class="">
                 <ul>
-                    @if ($service_data != '')
-
-
-                        <li><span>Categories</span>
+                    <li><span>Home</span>
                         <ul>
-                            @foreach ($service_data as $service)
-
-                            @php
-
-                                $subservice_data = DB::table('subservices')
-                                    ->where('serviceid', $service->id)
-                                    ->orderBy('id', 'DESC')
-                                    ->get();
-
-                            @endphp
-                            <li><span>{{ $service->servicename }}</span>
-                                @if ($subservice_data != '' && count($subservice_data) > 0)
+                            <li><a href="index.html">Home V1</a></li>
+                            <li><a href="index2.html">Home V2</a></li>
+                            <li><a href="index3.html">Home V3</a></li>
+                            <li><a href="index4.html">Home V4</a></li>
+                            <li><a href="index5.html">Home V5</a></li>
+                            <li><a href="index6.html">Home V6</a></li>
+                            <li><a href="index7.html">Home V7</a></li>
+                            <li><a href="index8.html">Home V8</a></li>
+                            <li><a href="index9.html">Home V9</a></li>
+                            <li><a href="index10.html">Home V10</a></li>
+                            <li><a href="index11.html">Home V11</a></li>
+                            <li><a href="index12.html">Home V12</a></li>
+                            <li><a href="index13.html">Home V13</a></li>
+                            <li><a href="index14.html">Home V14</a></li>
+                            <li><a href="index15.html">Home V15</a></li>
+                            <li><a href="index16.html">Home V16</a></li>
+                            <li><a href="index17.html">Home V17</a></li>
+                            <li><a href="index18.html">Home V18</a></li>
+                            <li><a href="index19.html">Home V19</a></li>
+                            <li><a href="index20.html">Home V20</a></li>
+                        </ul>
+                    </li>
+                    <li><span>Browse Jobs</span>
+                        <ul>
+                            <li><span>Services</span>
                                 <ul>
-                                     @foreach ($subservice_data as $subservice)
-                                        <li><a href="{{ url('package-lists/' . $subservice->page_url) }}">{{ $subservice->subservicename }}</a></li>
-                                    @endforeach
-                                    <!-- <li><a href="page-service-v2.html">Service v2</a></li>
+                                    <li><a href="page-service-v1.html">Service v1</a></li>
+                                    <li><a href="page-service-v2.html">Service v2</a></li>
                                     <li><a href="page-service-v3.html">Service v3</a></li>
                                     <li><a href="page-service-v4.html">Service v4</a></li>
                                     <li><a href="page-service-v5.html">Service v5</a></li>
@@ -747,34 +755,31 @@
                                     <li><a href="page-service-all.html">Service All</a></li>
                                     <li><a href="page-service-single.html">Service Single</a></li>
                                     <li><a href="page-service-single-v1.html">Single V1</a></li>
-                                    <li><a href="page-service-single-v2.html">Single V2</a></li> -->
+                                    <li><a href="page-service-single-v2.html">Single V2</a></li>
                                 </ul>
-                                @endif
                             </li>
-                            @endforeach
-                           
+                            <li><span>Projects</span>
+                                <ul>
+                                    <li><a href="page-project-v1.html">Project v1</a></li>
+                                    <li><a href="page-project-list-v1.html">List v1</a></li>
+                                    <li><a href="page-project-list-v2.html">List v2</a></li>
+                                    <li><a href="page-project-list-v3.html">List v3</a></li>
+                                    <li><a href="page-project-single.html">Project Single</a></li>
+                                    <li><a href="page-project-single-v1.html">Single V1</a></li>
+                                    <li><a href="page-project-single-v2.html">Single V2</a></li>
+                                </ul>
+                            </li>
+                            <li><span>Job View</span>
+                                <ul>
+                                    <li><a href="page-job-list-v1.html">Job list v1</a></li>
+                                    <li><a href="page-job-list-v2.html">Job list v2</a></li>
+                                    <li><a href="page-job-list-v3.html">Job list V3</a></li>
+                                    <li><a href="page-job-list-single.html">Job Single</a></li>
+                                </ul>
+                            </li>
                         </ul>
                     </li>
-                    
-                    @endif
-                    <li><a class="list-item" href="{{ url('/') }}"><span>Home</span></a></li>
-                    <li><a class="list-item" href="{{ url('/vendor-database') }}"><span>Vendor Database</span></a></li>
-                    <li><a class="list-item" href="{{ url('/book-services') }}"><span>Book Services</span></a></li>
-                    <li><a class="list-item" href="{{ url('/become-vendor') }}"><span>Become a Vendor</a></li>
-
-                    @php
-                        $userData = Session::get('user');
-                        // $userData = Session::get('user');
-                    @endphp
-
-                    @if ($userData == '')          
-                        <li><a class="list-item" href="{{ route('Sign-Up.create') }}"><span>Log in</span></a></li>
-                    @else
-                        <li><a class="list-item" href="{{ url('user_signout') }}"><span>Log out</span></a></li>
-                    @endif
-                    <li><a class="list-item" href="#"><span>Book Now</span></a></li>
-                    
-                   <!--  <li><span>Users</span>
+                    <li><span>Users</span>
                         <ul>
                             <li><span>Dashboard</span>
                                 <ul>
@@ -853,7 +858,7 @@
                             <li><a href="page-blog-v3.html">List V3</a></li>
                             <li><a href="page-blog-single.html">Single</a></li>
                         </ul>
-                    </li> -->
+                    </li>
                     <!-- Only for Mobile View -->
                 </ul>
             </nav>

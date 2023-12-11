@@ -33,9 +33,9 @@
            <!-- /Page Header -->
 
            <!--  <div id="validate" class="alert alert-danger alert-dismissible fade show" style="display: none;">
-                   <span id="login_error"></span>
-                   <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-               </div> -->
+                                   <span id="login_error"></span>
+                                   <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                               </div> -->
 
 
            <div class="row">
@@ -54,7 +54,7 @@
                                @csrf
                                <div class="row">
 
-                                <div class="form-group">
+                                   <div class="form-group">
                                        <label for="country">Country</label>
                                        <select class="form-control" id="country" name="country"
                                            onchange="state_change(this.value);">
@@ -100,7 +100,7 @@
                                        <input type="text" name="subscription_name" id="subscription_name"
                                            value="{{ $price_data->based_on_listing_criteria_label }}" class="form-control"
                                            readonly>
-                                       
+
                                        </p>
                                    </div>
 
@@ -109,7 +109,7 @@
                                        <input type="text" name="total" id="total"
                                            value="{{ $price_data->based_on_listing_criteria_price }}" class="form-control"
                                            readonly>
-                                      
+
                                    </div>
 
                                </div>
@@ -137,8 +137,7 @@
 
 
        <script>
-
-        function state_change(country_id) {
+           function state_change(country_id) {
                // alert(country_id);
                var url = '{{ url('state_show_subscription') }}';
                // alert(url);

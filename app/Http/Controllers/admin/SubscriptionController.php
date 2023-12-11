@@ -153,6 +153,8 @@ class SubscriptionController extends Controller
         $data['allsub_services'] = DB::table('subservices')->select('*')->get();
         $data['id'] = $vendor_id;
 
+       
+
         return view('admin.base_on_service_lead',$data);
     }
 
@@ -399,10 +401,6 @@ class SubscriptionController extends Controller
                 $html .='</table>';
             $html .='</div>';
         $html .='</div><input type="hidden" name="total" id="total" value="'.$total.'">';
-
-
-
-       
 
         $html .= '</div>';
     }else{

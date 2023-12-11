@@ -30,12 +30,20 @@
                </div>
            @endif
 
-           <div id="validate" class="alert alert-danger alert-dismissible fade show" style="display: none;">
+           {{-- <div id="validate" class="alert alert-danger alert-dismissible fade show" style="display: none;">
                <span id="login_error"></span>
                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-           </div>
+           </div> --}}
+           <p class="form-error-text" id="validate" style="color: red; margin-top: 10px;"></p>
 
-
+           @php
+               $wallet_amount = DB::table('users')
+                   ->where('id', $id)
+                   ->first();
+               //    echo '<pre>';
+               //    print_r($amount);
+               //    echo '</pre>';
+           @endphp
            <div class="row">
                <div class="col-md-12">
                    <div class="card">
@@ -49,6 +57,7 @@
                                <input type="hidden" name="action" id="subscription_id" value="add">
 
                                <input type="hidden" name="vendor_id" id="subscription_id" value="{{ $id }}">
+
 
                                @csrf
                                <div class="row">
@@ -117,6 +126,7 @@
                                        </span>
                                        <p class="form-error-text" id="sub_service_error"
                                            style="color: red; margin-top: 10px;"></p>
+
                                    </div>
 
                                    <div class="col-lg-12" id="subservice_table_change_div">
@@ -132,9 +142,10 @@
                                            aria-hidden="true"></span>
                                        Loading...
                                    </button>
+                                   {{-- @if ($wallet_amount->wallet_amount != 0) --}}
                                    <button type="button" class="btn btn-primary"
                                        onclick="javascript:category_validation()"id="submit_button">Buy Now</button>
-                                   <!-- <input type="submit" name="submit" value="Submit" class="btn btn-primary"> -->
+                                   {{-- @endif --}}
                                </div>
                            </form>
                        </div>
@@ -239,6 +250,19 @@
 
        <script>
            function category_validation() {
+
+               var walletAmount = {!! json_encode($wallet_amount->wallet_amount) !!};
+               if (walletAmount == 0) {
+                   // Display an error message for zero wallet amount
+                   jQuery('#validate').html("Your Wallet amount is zero");
+                   jQuery('#validate').show().delay(2000).fadeOut('show');
+                   $('html, body').animate({
+                       scrollTop: $('#validate').offset().top - 150
+                   }, 1000);
+                   return false;
+               }
+
+
                var country = jQuery("#country").val();
                if (country == '') {
                    jQuery('#country_error').html("Please Select Country");
@@ -292,7 +316,19 @@
                    return false;
                }
 
-               //alert(selectedValues);
+
+               var totalPrice = parseFloat($("#total").val());
+
+               if (totalPrice >= walletAmount) {
+                   jQuery('#validate').html("Wallet amount should be greater than total price");
+                   jQuery('#validate').show().delay(0).fadeIn('show');
+                   jQuery('#validate').show().delay(2000).fadeOut('show');
+                   $('html, body').animate({
+                       scrollTop: $('#validate').offset().top - 150
+                   }, 1000);
+                   return false;
+               }
+
 
 
                $('#spinner_button').show();

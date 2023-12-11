@@ -20,6 +20,11 @@
                             <input id="name" name="name" type="text" class="form-control"
                                 placeholder="Enter Name">
                             <input name="pakage_id" type="hidden" class="form-control" value="{{ $package_id }}">
+                            <input name="service_id" type="hidden" class="form-control" value="{{ $service_id }}">
+                            <input name="subservice_id" type="hidden" class="form-control"
+                                value="{{ $subservice_id }}">
+                            <input name="packagecategory_id" type="hidden" class="form-control"
+                                value="{{ $packagecategory_id }}">
                             <p class="form-error-text" id="name_error" style="color: red; margin-top: 10px;">
                             </p>
                         </div>
