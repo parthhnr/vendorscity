@@ -153,8 +153,6 @@ class SubscriptionController extends Controller
         $data['allsub_services'] = DB::table('subservices')->select('*')->get();
         $data['id'] = $vendor_id;
 
-       
-
         return view('admin.base_on_service_lead',$data);
     }
 

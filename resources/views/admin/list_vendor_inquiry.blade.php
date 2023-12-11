@@ -48,7 +48,7 @@
 
                    <div class="col">
 
-                       <h3 class="page-title">Accepted Leads</h3>
+                       <h3 class="page-title">Inquiry</h3>
 
                        <ul class="breadcrumb">
 
@@ -56,7 +56,7 @@
 
                            </li>
 
-                           <li class="breadcrumb-item active">Accepted Leads</li>
+                           <li class="breadcrumb-item active">Inquiry</li>
 
                        </ul>
 
@@ -171,16 +171,43 @@
 
                                @php
                                     $userId = Auth::id();
-                                    
-                                    $packages_enquiry = DB::table('packages_enquiry')
-                                                           ->select('*')
-                                                           ->where('accept_vendor_id', '=', $userId)
-                                                           ->where('is_accept', '=', 1)
-                                                           ->orderBy('id', 'desc')
-                                                           ->get();
+                                    $currentDate = now();
 
+                                    $vendor_subscription = DB::table('subscription')
+                                               ->select('*')
+                                               ->where('vendor_id', '=', $userId)
+                                               ->where('enddate', '>=', $currentDate)
+                                               ->orderBy('id', 'desc')
+                                               ->get();
+
+                                    $resultArray = [];
+
+                                    foreach($vendor_subscription as $vendor_subscription_data){
+
+                                        $vendor_subscription_att = DB::table('subscription_subservice_attribute')
+                                               ->select('*')
+                                               ->where('subscription_id', '=', $vendor_subscription_data->id)
+                                               ->get();
+
+                                        
+
+
+
+                                        foreach($vendor_subscription_att as $vendor_subscription_att_data){
+
+                                            $resultArray[] = [
+                                                'service_id' => $vendor_subscription_att_data->service_id,
+                                                'subservice_id' => $vendor_subscription_att_data->subservice_id,
+                                            ];
+                                        }
+
+                                        
+                                    }
 
                                     //echo"<pre>";print_r($resultArray);echo"</pre>";
+
+
+                                    
                                     
 
                                @endphp
@@ -197,6 +224,8 @@
                                                
                                                <th>Service</th>
                                                <th>Sub Service</th>
+
+                                               <th>Action</th>
                                                <!-- <th>Price</th>
                                                <th>Inquiry Date</th> -->
                                            </tr>
@@ -205,13 +234,35 @@
 
                                        <tbody>
 
-                                        @if($packages_enquiry != '')
+                                        @if($vendor_subscription != '')
 
-                                        @php
-                                            $i=1;
-                                        @endphp
+                                         
 
-                                          @foreach ($packages_enquiry as $packages_enquiry_data)
+                                           @foreach ($resultArray as $resultArray_data)
+
+                                           @php
+
+                                                $packages_enquiry = DB::table('packages_enquiry')
+                                                           ->select('*')
+                                                           ->where('service_id', '=', $resultArray_data['service_id'])
+                                                           ->where('subservice_id', '=', $resultArray_data['subservice_id'])
+                                                           ->where('is_accept', '=', 0)
+                                                           ->orderBy('id', 'desc')
+                                                           ->get();
+
+                                                
+
+                                           @endphp
+
+                                           @php
+                                                $i=1;
+                                               @endphp
+
+                                            @foreach ($packages_enquiry as $packages_enquiry_data)
+
+                                            @php
+                                            //echo"<pre>";print_r($packages_enquiry_data->name);echo"</pre>";
+                                            @endphp
                                                <tr>
 
                                                    <td>{{$i}}</td>
@@ -228,11 +279,15 @@
                                                        @endif
                                                     
                                                     </td>
+                                                    <td><a class="btn btn-primary" href="javascript:void('0');" onclick="delete_category('{{$packages_enquiry_data->id}}','{{$userId}}');">
+                            Accept
+                        </a></td>
                                                  
                                                </tr>
-                                              @php
-                                            $i++;
-                                        @endphp
+                                               @php
+                                                $i++;
+                                               @endphp
+                                               @endforeach
                                                
                                            @endforeach
 
@@ -275,17 +330,17 @@
 
                <div class="modal-body">
 
-                   <div class="modal-icon text-center mb-3">
+                  <!--  <div class="modal-icon text-center mb-3">
 
                        <i class="fas fa-trash-alt text-danger"></i>
 
-                   </div>
+                   </div> -->
 
                    <div class="modal-text text-center">
 
-                       <!-- <h3>Delete Expense Category</h3> -->
+                       <h3>Are you sure want to Accept</h3>
 
-                       <p>Are you sure want to delete?</p>
+                       <p></p>
 
                    </div>
 
@@ -293,9 +348,9 @@
 
                <div class="modal-footer text-center">
 
-                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
 
-                   <button type="button" class="btn btn-primary" onclick="form_sub();">Delete</button>
+                   <button type="button" class="btn btn-primary" onclick="form_sub();">Yes</button>
 
                </div>
 
@@ -372,34 +427,28 @@
    </div>
 
    <!-- /set orderModal -->
-
+   <form id="form_new" action="{{ route('accept_vendor_inquiry') }}" enctype="multipart/form-data">
+        @csrf
+        <input type="hidden" name="inquiry_id" id="inquiry_id" value="">
+        <input type="hidden" name="vendor_id" id="vendor_id" value="">
+   </form>
 
 
    <script>
 
-       function delete_category() {
+       function delete_category(id,vendor_id) {
+            $('#inquiry_id').val(id);
 
-           // alert('test');
+            $('#vendor_id').val(vendor_id);
 
-           var checked = $("#form input:checked").length > 0;
-
-           if (!checked) {
-
-               $('#select_one_record').modal('show');
-
-           } else {
-
-               $('#delete_model').modal('show');
-
-           }
-
+            $('#delete_model').modal('show');
        }
 
 
 
        function form_sub() {
 
-           $('#form').submit();
+           $('#form_new').submit();
 
        }
 

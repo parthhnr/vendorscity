@@ -6,21 +6,35 @@
 
            $userId = Auth::id();
 
+           
+
            $get_user_data = Helper::get_user_data($userId);
+
+           
 
            $get_permission_data = Helper::get_permission_data($get_user_data->role_id);
 
+           
+
            $edit_perm = [];
 
+           
+
            if ($get_permission_data->editperm != '') {
+
                $edit_perm = $get_permission_data->editperm;
 
                $edit_perm = explode(',', $edit_perm);
+
            }
+
+           
 
        @endphp
 
-
+       <style type="text/css">
+           .modal-dialog{max-width: 50%}
+       </style>
 
        <div class="content container-fluid">
 
@@ -65,16 +79,19 @@
 
 
            <!-- @if ($message = Session::get('success'))
+
     <div class="alert alert-success">
 
-                                                         <p>{{ $message }}</p>
+                                     <p>{{ $message }}</p>
 
-                                                        </div>
+                                    </div>
+
     @endif -->
 
 
 
            @if ($message = Session::get('success'))
+
                <div class="alert alert-success alert-dismissible fade show">
 
                    <strong>Success!</strong> {{ $message }}
@@ -82,6 +99,7 @@
                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
 
                </div>
+
            @endif
 
 
@@ -179,63 +197,59 @@
                                        <thead class="thead-light">
 
                                            <tr>
-                                               <th>Sr No</th>
+                                                <th>Sr No</th>
                                                <th>Subscription Name</th>
                                                <th>Total</th>
                                                <th>Start Date</th>
                                                <th>End Date</th>
                                                <th>Status</th>
+                                               <th>Detail</th>
                                                <th>Action</th>
                                            </tr>
 
                                        </thead>
 
                                        <tbody>
-                                           @php
-                                               $i = 1;
-                                               //echo "<pre>";print_r($all_data);echo "</pre>";
-                                           @endphp
+                                            @php
+                                                $i=1;
+                                                //echo "<pre>";print_r($all_data);echo "</pre>";
+                                            @endphp
 
                                            @foreach ($all_data as $data)
+
                                                <tr>
 
-                                                   <td>{{ $i }}</td>
-                                                   <td> {{ $data->subscription_name }} </td>
-                                                   <td>{{ $data->total }} </td>
-                                                   <td> {{ date('d-m-Y', strtotime($data->startdate)) }} </td>
-                                                   <td>{{ date('d-m-Y', strtotime($data->enddate)) }}</td>
+                                                   <td>{{$i}}</td>
+                                                   <td> {{$data->subscription_name}} </td>
+                                                   <td>{{$data->total}}  </td>
+                                                   <td> {{date("d-m-Y", strtotime($data->startdate))}} </td>
+                                                   <td>{{date("d-m-Y", strtotime($data->enddate))}}</td>
                                                    <td>
-                                                       @if ($data->status == 'inactive')
-                                                           <span class="badge badge-pill bg-danger-light">Inactive</span>
-                                                       @endif
-                                                       @if ($data->status == 'active')
-                                                           <span class="badge badge-pill bg-success-light">Active</span>
-                                                       @endif
+                                                        @if($data->status == 'inactive')
+                                                            <span class="badge badge-pill bg-danger-light">Inactive</span>
+                                                        @endif
+                                                         @if($data->status == 'active')
+                                                            <span class="badge badge-pill bg-success-light">Active</span>
+                                                        @endif
 
-                                                   </td>
-                                                   <td class="text-end">
-                                                       <div class="dropdown dropdown-action">
-                                                           <a href="#" class="action-icon dropdown-toggle"
-                                                               data-bs-toggle="dropdown" aria-expanded="false"><i
-                                                                   class="fas fa-ellipsis-h"></i></a>
-                                                           <div class="dropdown-menu dropdown-menu-right">
-
-                                                               <a class="dropdown-item"
-                                                                   href="{{ route('subscription-details.show', $data->id) }}"><i
-                                                                       class="far fa-eye me-2"></i>View Detail</a>
-
-                                                               <a class="dropdown-item"
-                                                                   href="{{ route('vendor-invoice', ['id' => $data->id]) }}"><i
-                                                                       data-feather="clipboard"
-                                                                       class="me-2"></i>Invoice</a>
-
-                                                           </div>
-                                                       </div>
-                                                   </td>
+                                                    </td>
+                                                    <td><a class="btn btn-primary" href="javascript:void('0');" onclick="delete_category('{{$data->id}}');">View Services</a></td>
+                                                    <td class="text-end">
+                                                        <div class="dropdown dropdown-action">
+                                                            <a href="#" class="action-icon dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-ellipsis-h"></i></a>
+                                                            <div class="dropdown-menu dropdown-menu-right">
+                                                                
+                                                                <a class="dropdown-item" href="{{route('subscription-details.show', $data->id)}}"><i class="far fa-eye me-2"></i>View Detail</a>
+                                                                
+                                                                <a class="dropdown-item" href="{{ route('vendor-invoice', ['id' => $data->id]) }}"><i data-feather="clipboard" class="me-2"></i>Invoice</a>
+                                                                
+                                                            </div>
+                                                        </div>
+                                                    </td>
                                                </tr>
                                                @php
-                                                   $i++;
-                                               @endphp
+                                                $i++;
+                                            @endphp
                                            @endforeach
 
 
@@ -263,8 +277,9 @@
 
 
    <!-- Delete  Modal -->
-
-   <div class="modal custom-modal fade" id="delete_model" role="dialog">
+   @if($all_data != '')
+   @foreach ($all_data as $data)
+   <div class="modal custom-modal fade" id="delete_model_{{$data->id}}" role="dialog">
 
        <div class="modal-dialog modal-dialog-centered">
 
@@ -272,35 +287,91 @@
 
                <div class="modal-body">
 
-                   <div class="modal-icon text-center mb-3">
-
-                       <i class="fas fa-trash-alt text-danger"></i>
-
-                   </div>
 
                    <div class="modal-text text-center">
 
                        <!-- <h3>Delete Expense Category</h3> -->
 
-                       <p>Are you sure want to delete?</p>
+                       @php
+                            
+
+                             $result = DB::table('subscription_subservice_attribute')
+            ->select('*')
+            ->where('subscription_id', '=', $data->id)
+            ->get();
+
+                        //$servicename = Helper::servicename($result->service_id);
+
+                            //echo"<pre>";print_r($servicename);echo"</pre>";
+                       @endphp
+                       @if($result != '')
+                       <div class="row">
+                            <div class="col-md-12">
+                                <div class="table-responsive">
+                                    <table class="invoice-table table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>Services</th>
+                                                <th>Sub Services</th>
+                                                <th class="text-end">Price</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @php
+                                                $total = 0;
+                                            @endphp
+                                            @foreach($result as $result_data)
+                                            <tr>
+                                                <td>{!! Helper::servicename($result_data->service_id) !!}</td>
+                                                <td>{!! Helper::subservicename($result_data->subservice_id) !!}</td>
+                                                <td>{{$result_data->charge}}</td>
+                                            </tr>
+                                            @php
+                                                $total += $result_data->charge;
+                                            @endphp
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+
+                                    <div class="col-md-6 col-xl-4 ms-auto">
+                                        <div class="table-responsive">
+                                            <table class="invoice-table-two table">
+                                                <tbody>
+                                                    <tr>
+                                                        <th>Total :</th>
+                                                        <td><span>{{$total}}</span></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                       </div>
+                       @else
+                        <p>No Data Found</p>
+                       @endif
 
                    </div>
 
                </div>
 
-               <div class="modal-footer text-center">
+               <!-- <div class="modal-footer text-center">
 
                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
 
                    <button type="button" class="btn btn-primary" onclick="form_sub();">Delete</button>
 
-               </div>
+               </div> -->
 
            </div>
 
        </div>
 
    </div>
+   @endforeach
+   @endif
 
    <!-- /Delete Modal -->
 
@@ -336,23 +407,16 @@
 
 
 
+
    <script>
-       function delete_category() {
 
-           // alert('test');
+       function delete_category(id) {
 
-           var checked = $("#form input:checked").length > 0;
+           
 
-           if (!checked) {
+               $('#delete_model_'+id).modal('show');
 
-               $('#select_one_record').modal('show');
-
-           } else {
-
-               $('#delete_model').modal('show');
-
-           }
-
+           
        }
 
 
@@ -362,4 +426,6 @@
            $('#form').submit();
 
        }
+
    </script>
+

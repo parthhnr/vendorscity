@@ -155,7 +155,7 @@ class VendorsController extends Controller
         }
 
     }
-    return redirect()->route('vendors.index')->with('success', 'Vendor Added Successfully');
+    return redirect()->route('vendorinquiry.index')->with('success', 'Vendor Added Successfully');
     }
     function insert_attribute($content)
     {

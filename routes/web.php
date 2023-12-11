@@ -31,12 +31,15 @@ use App\Http\Controllers\admin\SubscriptionController;
 use App\Http\Controllers\admin\Subscriptiondetails_controller;
 use App\Http\Controllers\admin\Leadscontroller;
 use App\Http\Controllers\admin\AcceptLeadscontroller;
+use App\Http\Controllers\admin\Vendorinquirycontroller;
 use App\Http\Controllers\admin\CmsController;
 use App\Http\Controllers\admin\PackageCategoryController;
 use App\Http\Controllers\admin\PackagesController;
 use App\Http\Controllers\admin\WalletController;
 use App\Http\Controllers\admin\AdminWalletController;
 use App\Http\Controllers\admin\FaqController;
+use App\Http\Controllers\admin\FrontuserController;
+use App\Http\Controllers\admin\EnquiryController;
 
 
 
@@ -85,7 +88,32 @@ Route::post('check_login', 'App\Http\Controllers\front\FrontloginregisterControl
 
 Route::post('user_login','App\Http\Controllers\front\FrontloginregisterController@user_login')->name('user_login');
 
-Route::post('registration_mail_check', '\App\Http\Controllers\front\FrontloginregisterController@registration_mail_check'); 
+Route::post('registration_mail_check', '\App\Http\Controllers\front\FrontloginregisterController@registration_mail_check');
+
+
+Route::get('forget-password','\App\Http\Controllers\front\FrontloginregisterController@lost_password'); 
+Route::post('email-check-login','\App\Http\Controllers\front\FrontloginregisterController@emailCheck'); 
+Route::post('resetpassword','\App\Http\Controllers\front\FrontloginregisterController@get_password')->name('reset-password');
+Route::get('reset-password/{uid}','\App\Http\Controllers\front\FrontloginregisterController@reset_password')->name('reset_password');
+
+
+
+
+Route::post('set_password/{uid}','\App\Http\Controllers\front\FrontloginregisterController@set_password')->name('set_password');
+
+
+
+    
+
+
+
+
+
+
+
+
+ 
+
 
 
 
@@ -95,13 +123,21 @@ Route::post('registration_mail_check', '\App\Http\Controllers\front\Frontloginre
 
 Route::match(['get', 'post'], 'vendor-database', [FrontvendorController::class, 'vendor_database'])->name('vendor_database');
 
-Route::get('/package-lists/{page_url}', '\App\Http\Controllers\front\Packagecontroller@package_lists');
+Route::get('/package-lists/{page_url}', '\App\Http\Controllers\front\Packagecontroller@package_lists')->name('package-lists');
 Route::get('/package-detail/{page_url}', '\App\Http\Controllers\front\Packagecontroller@package_detail');
+Route::get('enquiry/{id}', '\App\Http\Controllers\front\Packagecontroller@enquiry')->name('enquiry');
+
+Route::post('package_inquiry', '\App\Http\Controllers\front\Packagecontroller@package_inquiry')->name('package_inquiry');
+
+
+
 
 Route::post('vendors_check_mail', '\App\Http\Controllers\front\Homecontroller@vendors_check_mail'); 
 Route::post('/vendors_data', '\App\Http\Controllers\front\Homecontroller@vendors_data');
 
-Route::match(['get', 'post'], 'vendor-database', [FrontvendorController::class, 'vendor_database'])->name('vendor_database');
+
+
+// Route::match(['get', 'post'], 'vendor-database', [FrontvendorController::class, 'vendor_database'])->name('vendor_database');
 
 
 /*------End Front routes  ------*/
@@ -236,6 +272,11 @@ Route::get('/admin', function () {
 
     Route::resource('admin/leads','App\Http\Controllers\admin\Leadscontroller'); 
     Route::resource('admin/acceptleads','App\Http\Controllers\admin\AcceptLeadscontroller'); 
+    Route::resource('admin/vendorinquiry','App\Http\Controllers\admin\Vendorinquirycontroller');
+
+    Route::get('accept_vendor_inquiry', 'App\Http\Controllers\admin\Vendorinquirycontroller@accept_vendor_inquiry')->name('accept_vendor_inquiry');
+
+    
 
 
     Route::resource('admin/cms','App\Http\Controllers\admin\CmsController'); 
@@ -250,6 +291,9 @@ Route::get('/admin', function () {
     Route::post('subservice_show', 'App\Http\Controllers\admin\PackagesController@subservice_show');
     Route::post('packagecategory_show', 'App\Http\Controllers\admin\PackagesController@packagecategory_show');
     Route::get('delete_packages',[PackagesController::class,'destroy'])->name('delete_packages');
+    Route::get('editimage/{id}', [PackagesController::class, 'editimage'])->name('editimage');
+    Route::post('editimage_store', [PackagesController::class, 'editimage_store'])->name('editimage_store');
+    Route::get('packages_removeimage/{pid}/{id}', [PackagesController::class, 'packages_removeimage'])->name('packages_removeimage');
 
     Route::resource('wallet', '\App\Http\Controllers\admin\WalletController');
 
@@ -259,7 +303,12 @@ Route::get('/admin', function () {
     Route::resource('admin/faq', '\App\Http\Controllers\admin\FaqController');
     Route::get('delete_faq',[FaqController::class,'destroy'])->name('delete_faq');
 
+    Route::resource('/admin/frontuser', '\App\Http\Controllers\admin\FrontuserController');
+    Route::post('change_status_frontuser','App\Http\Controllers\admin\FrontuserController@change_status_frontuser');
 
+    Route::get('export-all', [App\Http\Controllers\admin\FrontuserController::class, 'downloadXls'])->name('export-excel');
+    
+    Route::resource('/enquiry', '\App\Http\Controllers\admin\EnquiryController');
     
 
 
