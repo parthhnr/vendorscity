@@ -111,7 +111,7 @@
 
                 </div>
 
-                @if (in_array('16', $edit_perm))
+                @if (in_array('4', $edit_perm))
                     <div class="col-auto">
 
                         <a class="btn btn-primary me-1" href="{{ route('export-excel') }}">
@@ -232,7 +232,10 @@
                                     <tbody>
                                         @php
                                             $i = 1;
-
+                                            // echo '<pre>';
+                                            // print_r($frontuser_data);
+                                            // echo '</pre>';
+                                            // exit();
                                         @endphp
                                         @foreach ($frontuser_data as $data)
                                             <tr>

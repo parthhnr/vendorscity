@@ -8,7 +8,16 @@
        @php
            $vendor_data = Auth::user();
        @endphp
+       {{-- @php
+           echo '<pre>';
+           print_r($vendor_data);
+           echo '</pre>';
+           exit();
+       @endphp --}}
 
+
+       <!-- Page Wrapper -->
+       <!-- <div class="page-wrapper"> -->
        <div class="content container-fluid">
 
            @if ($message = Session::get('success'))
@@ -455,7 +464,7 @@
 
        </body>
 
-       </html>
+       </html> -->
        {{-- 
        <div class="col">
 

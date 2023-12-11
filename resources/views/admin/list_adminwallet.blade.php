@@ -154,6 +154,7 @@
                                 <table class="table table-center table-hover datatable">
                                     <thead class="thead-light">
                                         <tr>
+                                            <th>Sr No</th>
                                             <th>Name</th>
                                             <th>Price</th>
                                             <th>Payment Type</th>
@@ -164,8 +165,18 @@
                                     </thead>
                                     <tbody>
 
+                                        @php
+
+                                        $i=1;
+                                        @endphp
+
                                         @foreach ($wallet_data as $data)
                                             <tr>
+                                                <td>
+
+                                                    {{ $i }}
+
+                                                </td>
 
                                                 <td>{!! Helper::vendorsname($data->vendors_id) !!}</td>
 
@@ -212,6 +223,10 @@
                                                 </td>
 
                                             </tr>
+                                            @php
+
+                                        $i++;
+                                        @endphp
                                         @endforeach
                                     </tbody>
                                 </table>

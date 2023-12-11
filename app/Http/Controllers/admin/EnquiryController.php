@@ -16,9 +16,6 @@ class EnquiryController extends Controller
     public function index()
     {
         $data['packages_data']= DB::table('packages_enquiry')->orderBy('id','DESC')->get();
-        // echo"<pre>";
-        // print_r($data['packages_data']);
-        // echo"</pre>";exit;
         
         return view('admin.list_packagesenquiry',$data);
     }

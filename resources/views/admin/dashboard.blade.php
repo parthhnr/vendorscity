@@ -35,7 +35,7 @@
                </div>
 
            </div>
-           {{-- @php
+           <!--  @php
 
                // Now you can access user data
 
@@ -43,9 +43,9 @@
                print_r(Auth::user()->vendor);
                echo '</pre>';
 
-           @endphp  --}}
+           @endphp -->
            <h4>Welcome To VendorsCity</h4>
-           {{-- <h4>Welcome To {{Auth::user()->name}}</h4>  --}}
+           <!-- <h4>Welcome To {{Auth::user()->name}}</h4> -->
 
        </div>
 

@@ -66,7 +66,7 @@ class Subscriptiondetails_controller extends Controller
             ->first();
 
         $data['all_data']=$result;
-
+        $data['id'] = $id;
         return view('admin.view_subscription_detail',$data);
 
         //echo "<pre>";print_r($result);echo "</pre>";exit;

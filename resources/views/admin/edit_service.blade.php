@@ -176,7 +176,7 @@
 
                                 <div class="form-group">
 
-                                    <label for="name">Banner (300 x 378)</label>
+                                    <label for="name">Banner (443 x 305)</label>
 
                                     <input id="image" name="image" type="file" class="form-control"
                                         value="" />

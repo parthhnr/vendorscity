@@ -251,14 +251,14 @@ class PackagesController extends Controller
 
                 Image::make($image)
 
-                    ->resize(619, 829)
+                    ->resize(829, 538)
 
                     ->save(public_path('upload/packages_slider_img/large/' . $filename));
 
 
                 Image::make($image)
 
-                    ->resize(112, 150)
+                    ->resize(150, 112)
 
                     ->save(public_path('upload/packages_slider_img/small/' . $filename));
 
