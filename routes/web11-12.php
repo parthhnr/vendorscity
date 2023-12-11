@@ -31,7 +31,6 @@ use App\Http\Controllers\admin\SubscriptionController;
 use App\Http\Controllers\admin\Subscriptiondetails_controller;
 use App\Http\Controllers\admin\Leadscontroller;
 use App\Http\Controllers\admin\AcceptLeadscontroller;
-use App\Http\Controllers\admin\Vendorinquirycontroller;
 use App\Http\Controllers\admin\CmsController;
 use App\Http\Controllers\admin\PackageCategoryController;
 use App\Http\Controllers\admin\PackagesController;
@@ -272,11 +271,6 @@ Route::get('/admin', function () {
 
     Route::resource('admin/leads','App\Http\Controllers\admin\Leadscontroller'); 
     Route::resource('admin/acceptleads','App\Http\Controllers\admin\AcceptLeadscontroller'); 
-    Route::resource('admin/vendorinquiry','App\Http\Controllers\admin\Vendorinquirycontroller');
-
-    Route::get('accept_vendor_inquiry', 'App\Http\Controllers\admin\Vendorinquirycontroller@accept_vendor_inquiry')->name('accept_vendor_inquiry');
-
-    
 
 
     Route::resource('admin/cms','App\Http\Controllers\admin\CmsController'); 
