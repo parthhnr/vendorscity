@@ -14,15 +14,15 @@
 
                 <div class="col-sm-12">
 
-                    <h3 class="page-title">Price</h3>
+                    <h3 class="page-title">Vendor Listing Price</h3>
 
                     <ul class="breadcrumb">
 
                         <li class="breadcrumb-item"><a href="{{ url('/admin') }}">Dashboard</a></li>
 
-                        <li class="breadcrumb-item"><a href="{{ route('price.index') }}">Price</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('price.index') }}">Vendor Listing Price</a></li>
 
-                        <li class="breadcrumb-item active">Add Price</li>
+                        <li class="breadcrumb-item active">Add Vendor Listing Price</li>
 
                     </ul>
 
@@ -85,7 +85,7 @@
 
                                 <div class="form-group">
 
-                                    <label for="name">Price</label>
+                                    <label for="name">Vendor Listing Price</label>
 
                                     <input id="price" name="price" type="text" class="form-control"
                                         placeholder="Enter Price" value="" />

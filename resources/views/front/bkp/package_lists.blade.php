@@ -1,31 +1,17 @@
 @include('front.includes.header')
 <style type="text/css">
-    .package_list_banner {
-        background-image: inherit;
-        background-color: #eee;
-        padding-left: 30px;
-    }
-
-    .package_list_banner h2 {
-        font-size: 50px;
-        width: 56%;
-        line-height: normal;
-    }
-
-    .vendor_banner_sec h2 {
-        font-size: 50px;
-        width: 80%;
-    }
-
-    .vendor_banner_sec img {
-        width: 60%;
-    }
-
-    .vendor_banner_sec .about-img {
-        text-align: center;
+    .package_list_banner{background-image:inherit;background-color: #eee;padding-left: 30px;}
+    .package_list_banner h2{font-size: 50px;
+    width: 56%;
+    line-height: normal;}
+    @media only screen and (max-width: 600px) {
+        .package_list_banner h2 {
+            font-size: 45px;
+            width: 100%;
+        }
     }
 </style>
-<!-- <section class="breadcumb-section pt-0 container">
+<section class="breadcumb-section pt-0 container">
     <div
         class="cta-service-v3 cta-banner mx-auto maxw1700 pt120 pb120 bdrs16 position-relative overflow-hidden d-flex align-items-center mx20-lg px30-lg package_list_banner">
         
@@ -36,43 +22,18 @@
                 <div class="col-xl-5">
                     <div class="position-relative">
                         <h2 class="">Explore the best deals on moving</h2>
-                       
+                        <!-- <p class="text mb30 text-white">Give your visitor a smooth online experience with a solid UX design</p> -->
+                        <!-- <div class="d-flex align-items-center">
+
+                            <h6 class="mb-0 text-white">Use Code MoveitMoveit
+                            </h6>
+                        </div> -->
                         <div class="list-style2 light-style">
                         <ul class="mb30">
                             <li><i class="far fa-check fa-check-custom"></i>Use Code MoveitMoveit</li>
                         </ul>
                     </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section> -->
-
-<section class="our-about bgc-thm2 container pb0 pt0 mb30 mt50 vendor_banner_sec">
-    <div class="container">
-        <div class="row align-items-center">
-
-            <div class="col-xl-5 offset-xl-1">
-                <div class="position-relative wow fadeInLeft" data-wow-delay="300ms">
-                    <h2 class=" mb35">Explore the best deals on moving</h2>
-
-                </div>
-                <div class="list-style2 light-style">
-                    <ul class="mb30">
-                        <li><i class="far fa-check fa-check-custom"></i>Use Code MoveitMoveit</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-xl-6">
-                <div class="position-relative mb30-lg">
-
-                    <div class="about-img wow fadeInRight" data-wow-delay="300ms">
-                        <img class=""
-                            src="{{ asset('public/site/images/regasvendor_new1-removebg-preview.png') }}"
-                            alt="">
-                    </div>
-
                 </div>
             </div>
         </div>
@@ -105,36 +66,7 @@
                                             </a>
                                         </div>
                                     @endforeach
-
-                                </div>
-                            </div>
-                        </div>
-                        @php
-                            $package_catgory = DB::table('package_categories')
-                                ->where('subservice_id', $subservices->id)
-                                ->get();
-
-                        @endphp
-                        <div class="card mb20 pb5">
-                            <div class="card-header active" id="heading2">
-                                <h4>
-                                    <button class="btn btn-link ps-0" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#collapse2" aria-expanded="true" aria-controls="collapse2">
-                                        Packages Category</button>
-                                </h4>
-                            </div>
-                            <div id="collapse2" class="collapse show" aria-labelledby="heading2"
-                                data-parent="#accordionExample">
-                                <div class="card-body card-body px-0 pt-0">
-                                    @foreach ($package_catgory as $package_catgory_data)
-                                        <div class="checkbox-style1">
-                                            <a href="">
-                                                <label class="custom_checkbox">{{ $package_catgory_data->name }}
-                                                </label>
-                                            </a>
-                                        </div>
-                                    @endforeach
-
+                                    <a class="text-thm" href="#">+Show more</a>
                                 </div>
                             </div>
                         </div>
@@ -171,18 +103,18 @@
                                                 <div class="slider-range mb10 mt15"></div>
                                                 <div class="text-center">
                                                     <input type="text" class="amount" id="amount"
-                                                        placeholder="AED {{ $startPrice }}">
+                                                        placeholder="${{ $startPrice }}">
                                                     <span class="fa-sharp fa-solid fa-minus mx-2 dark-color"></span>
                                                     <input type="text" class="amount2" id="amount2"
-                                                        placeholder="AED {{ $endPrice }}">
+                                                        placeholder="${{ $endPrice }}">
 
 
                                                     <input type="hidden" name="max_price" id="max_price"
                                                         value="{{ $max_price }}">
                                                     <input type="hidden" name="filter_price_start"
                                                         id="filter_price_start" value="{{ $filter_price_start }}">
-                                                    <input type="hidden" name="filter_price_end"
-                                                        id="filter_price_end" value="{{ $filter_price_end }}">
+                                                    <input type="hidden" name="filter_price_end" id="filter_price_end"
+                                                        value="{{ $filter_price_end }}">
                                                     <input type="hidden" name="sort_by" id="sort_by">
                                                 </div>
                                             </div>

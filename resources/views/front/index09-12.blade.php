@@ -5,73 +5,12 @@
         color: #000
     }
 </style>
-<style type="text/css">
-    
-    .home11-hero-img .iconbox-small1 {
-        padding: 10px;
-    bottom: 90px;
-    left: -90px;
-    }
-
-    .home_slider_padding{padding-bottom: 80px}
-    .home_slider_padding .home11-hero-content .title{line-height: 49px;}
-    .home_slider_padding p{margin-bottom: 0 !important}
-    .iconbox-small1{background-color: #eee;}
-    .home11-hero-img .iconbox-small2{padding: 0 15px 0 0;right: 0;}
-    .iconbox-small2{background-color: #eee;}
-    .subservice_image_sec .list-thumb{padding: 10px;}
-    .subservice_image_sec .list-thumb img{    border-radius: 20px;}
-    .services_banner_image img{width: 100%}
-    .services_banner_text h2{font-size: 54px;width: 80%;}
-
-    a:hover{color: #0040E6}
-
-    @media only screen and (max-width: 600px) {
-
-        .home_slider_padding .home11-hero-content .title{line-height: normal;}
-        .home11-hero-content .title {font-size: 27px;}
-        .hero-home11{padding-top: 20px !important;}
-        .home_slider_padding{padding-bottom: 0px;}
-        .home11-hero-img .iconbox-small2{top: 56%;}
-        .home11-hero-img .iconbox-small1{bottom: 7px;left: 0;}
-        .home_slider_padding{padding-bottom: 0}
-        .home11-hero-img img{width: 100%}
-        .section2{padding-top: 20px !important}
-        .section3 .heading2{font-size: 35px;line-height: normal;padding-top: 20px;}
-        .funfact_one_borderleft{border-left:inherit;margin-bottom: 13px !important;}
-        .sectionmarque1{margin: 16px 0 !important;}
-        .services_banner_text h2 {font-size: 40px;width: 100%;line-height: normal;margin-bottom: 10px !important;}
-        .mm-navbar {
-            position: relative;
-        }
-        .section2 .custom_box {
-            height: auto;
-        }
-        .custom_slider_width .owl-item {
-            width: auto !important;
-            text-align: center;
-        }
-        .our-about .mb30-lg {
-            margin-bottom: 0px !important;
-        }
-        .our-about {
-            padding-top: 20px !important;
-        }
-        .we_do_heading {
-            font-size: 47px;
-            line-height: 53px;
-        }
-        .bgc-thm3 {
-            padding: 30px 0;
-        }
-    }
-</style>
 
 
-<section class="hero-home11 pt60 pb0">
+<section class="hero-home11 pt60 pb60">
     <div class="container">
         <div class="row align-items-center justify-content-between">
-            <div class="col-lg-6 col-xl-6 mb30-md home_slider_padding">
+            <div class="col-lg-6 col-xl-6 mb30-md">
                 <div class="home11-hero-content">
 
                     <h2 class="title animate-up-2">The best in class services, right at your doorstep.</h2>
@@ -83,7 +22,7 @@
                     </p>
                 </div>
                 <div
-                    class="advance-search-tab bgc-white p10 bdrs4-sm bdrs60 banner-btn position-relative zi1 animate-up-3 mt10">
+                    class="advance-search-tab bgc-white p10 bdrs4-sm bdrs60 banner-btn position-relative zi1 animate-up-3 mt30">
                     <div class="row">
                         <div class="col-md-5 col-lg-6 col-xl-6">
                             <div class="advance-search-field mb10-sm">
@@ -157,7 +96,7 @@
 
                 <div class="row mt20 animate-up-4">
                     <div class="col-xl-12">
-                        <p class="animate-up-2 ff-heading mt0 mb15">Frequently searched</p>
+                        <p class="animate-up-2 ff-heading mt30 mb15">Frequently searched</p>
                         <div class="home9-tags d-md-flex align-items-center animate-up-4">
                             <a class="bdrs60 mb-2 mb-md-0" href="">Relocation</a>
                             <a class="bdrs60 mb-2 mb-md-0" href="">Home Cleaning </a>
@@ -441,7 +380,7 @@
 
 </section>
 
-<section class="bgc-thm2 container pb0 pt0 mb30 mt50 sectionmarque1">
+<section class="our-about bgc-thm2 container pb0 pt0 mb30 mt50">
     <div class="container">
         <div class="row align-items-center custom_marquee">
 
@@ -503,7 +442,7 @@
                     @if ($subservice_data != '')
                         <div class="row wow fadeInUp" data-wow-delay="300ms">
                             @foreach ($subservice_data as $subservice)
-                                <div class="col-sm-6 col-xl-3 subservice_image_sec">
+                                <div class="col-sm-6 col-xl-3">
 
                                     <div class="listing-style1 bdrs12 default-box-shadow1">
                                         <div class="list-thumb">
@@ -541,7 +480,7 @@
                             <div class="container">
                                 <div class="row align-items-center">
 
-                                    <div class="col-xl-5 offset-xl-1 services_banner_text">
+                                    <div class="col-xl-5 offset-xl-1">
                                         <div class="position-relative wow fadeInLeft" data-wow-delay="300ms">
                                             @if ($service_data->title1 != '')
                                                 <h4 class="">{{ $service_data->title1 }}</h4>
@@ -629,7 +568,7 @@
                 <div class="position-relative mb30-lg">
 
                     <div class="about-img wow fadeInRight" data-wow-delay="300ms">
-                        <img class="w100" src="{{ asset('public/site/images/HomepageStep1.png') }}"
+                        <img class="w100" src="{{ asset('public/site/images/findrequiredservices.png') }}"
                             alt="">
                     </div>
 
@@ -677,7 +616,7 @@
                 <div class="position-relative mb30-lg">
 
                     <div class="about-img wow fadeInRight" data-wow-delay="300ms">
-                        <img class="w100" src="{{ asset('public/site/images/HomepageStep2.png') }}" alt="">
+                        <img class="w100" src="{{ asset('public/site/images/step2.png') }}" alt="">
                     </div>
 
                 </div>
@@ -710,7 +649,7 @@
                 <div class="position-relative mb30-lg">
 
                     <div class="about-img wow fadeInRight" data-wow-delay="300ms">
-                        <img class="w100" src="{{ asset('public/site/images/HomepageStep3.png') }}" alt="">
+                        <img class="w100" src="{{ asset('public/site/images/step3.png') }}" alt="">
                     </div>
 
                 </div>
@@ -942,7 +881,7 @@
     </div>
 </section>
 
-<section class="bgc-thm2 container pb0 pt0 mb30">
+<section class="our-about bgc-thm2 container pb0 pt0 mb30">
     <div class="container">
         <div class="row align-items-center custom_marquee">
 

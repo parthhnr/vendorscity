@@ -24,7 +24,7 @@
     .services_banner_image img{width: 100%}
     .services_banner_text h2{font-size: 54px;width: 80%;}
 
-    a:hover{color: #0040E6}
+
 
     @media only screen and (max-width: 600px) {
 

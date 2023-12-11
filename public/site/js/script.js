@@ -203,12 +203,12 @@
         var filter_price_end = $("#filter_price_end").val();
 
         if (filter_price_start == "" || filter_price_end == "") {
-            var filter_price_start = 0;
+            var filter_price_start = 1;
             var filter_price_end = $("#max_price").val();
         }
         $(".slider-range").slider({
             range: true,
-            min: 0,
+            min: 1,
             max: $("#max_price").val(),
             values: [filter_price_start, filter_price_end],
             slide: function (event, ui) {

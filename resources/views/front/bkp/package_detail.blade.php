@@ -46,27 +46,20 @@
         <div class="row wrap">
             <div class="col-lg-8">
                 <div class="column">
-
-
-                    @php
-                        $packages_images = DB::table('packages_image')
-                            ->where('pid', $package_detail->id)
-                            ->get();
-                        // echo '<pre>';
-                        // print_r($packages_images);
-                        // echo '</pre>';
-                    @endphp
-                    @if ($packages_images != '' && count($packages_images) > 0)
+                    @if ($package_detail->image != '')
                         <div class="service-single-sldier vam_nav_style slider-1-grid owl-carousel owl-theme mb60">
-                            @foreach ($packages_images as $packages_image)
-                                <div class="item">
-                                    <div class="thumb p50 p30-sm">
-                                        <img src="{{ asset('public/upload/packages_slider_img/large/' . $packages_image->image) }}"
-                                            alt="" class="w-100">
-                                    </div>
+                            <div class="item">
+                                <div class="thumb p50 p30-sm">
+                                    <img src="{{ asset('public/upload/packages/' . $package_detail->image) }}"
+                                        alt="" class="w-100">
                                 </div>
-                            @endforeach
-
+                            </div>
+                            <div class="item">
+                                <div class="thumb p50 p30-sm">
+                                    <img src="{{ asset('public/upload/packages/' . $package_detail->image) }}"
+                                        alt="" class="w-100">
+                                </div>
+                            </div>
                             <!-- <div class="item">
                   <div class="thumb p50 p30-sm"><img src="{{ asset('public/site/images/listings/service-details-1.jpg') }}" alt="" class="w-100"></div>
                 </div>
@@ -75,22 +68,6 @@
                 </div> -->
                         </div>
                     @endif
-                    @php
-                        $inave = 1;
-                    @endphp
-                    @if ($packages_images != '' && count($packages_images) > 0)
-                        @foreach ($packages_images as $packages_image)
-                            <style>
-                                .service-single-sldier button.owl-dot:nth-child({{$inave}}) {
-                                    background-image: url("{{ asset('public/upload/packages_slider_img/small/' . $packages_image->image) }}");
-                                }
-                            </style>
-                        @php
-                            $inave++;
-                        @endphp
-                        @endforeach
-                    @endif
-
                     <div class="service-about">
                         @if ($package_detail->description)
                             <p class="text mb30">{!! html_entity_decode($package_detail->description) !!}</p>
