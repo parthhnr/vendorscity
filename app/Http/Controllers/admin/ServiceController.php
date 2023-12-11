@@ -60,8 +60,8 @@ class ServiceController extends Controller
             $data['image'] = time() . $remove_space;
             $destinationPath = public_path('upload/service/large/');
             $img = Image::make($image->path());
-            $width= 378;
-            $height= 300;
+            $width= 443;
+            $height= 305;
             $img->resize($width,$height,function($constraint){
             })->save($destinationPath.'/'.$data['image']);
               
@@ -128,8 +128,8 @@ class ServiceController extends Controller
             $data['image'] = time() . $remove_space;
             $destinationPath = public_path('upload/service/large/');
             $img = Image::make($image->path());
-            $width= 378;
-            $height= 300;
+            $width= 443;
+            $height= 305;
             $img->resize($width,$height,function($constraint){
             })->save($destinationPath.'/'.$data['image']);
               

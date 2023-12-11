@@ -18,9 +18,8 @@ class AdminWalletController extends Controller
     public function index()
     {
         
-        // $data['wallet_data'] = Wallet::orderBy('id', 'DESC')->get();
-        $data['wallet_data'] =Wallet::orderByDesc('id')->get();  
-    
+        $data['wallet_data'] = Wallet::orderBy('id', 'DESC')->get();  
+        
        return view('admin.list_adminwallet',$data);
        
     }
@@ -103,9 +102,6 @@ class AdminWalletController extends Controller
         
         // Retrieve data from 'wallets' table, including the 'price' column
         $walletData = DB::table('wallets')->where('id', $id)->first();
-        // echo"<pre>";
-        // print_r($walletData);
-        // echo"</pre>";exit;
         
         // Assuming 'users' table has a column 'wallet_amount', update it
         DB::table('users')->where('id', $vendorid)->update([

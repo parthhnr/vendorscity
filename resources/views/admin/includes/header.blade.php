@@ -6,18 +6,18 @@
 
 <div class="header-left">
 
-    @if (Auth::user()->vendor != 1)
-        <a href="{{ url('/admin') }}" class="logo">
+    @if(Auth::user()->vendor != 1)
+    <a href="{{ url('/admin') }}" class="logo">
 
-            <img src="{{ asset('public/admin/assets/img/logo.png') }}" alt="Logo">
+        <img src="{{ asset('public/admin/assets/img/logo.png') }}" alt="Logo">
 
-        </a>
+    </a>
     @else
-        <a href="{{ url('/vendors') }}" class="logo">
+    <a href="{{ url('/vendors') }}" class="logo">
 
-            <img src="{{ asset('public/admin/assets/img/logo.png') }}" alt="Logo">
+        <img src="{{ asset('public/admin/assets/img/logo.png') }}" alt="Logo">
 
-        </a>
+    </a>
     @endif
 
     <!-- <a href="{{ url('/admin') }}" class="logo logo-small">

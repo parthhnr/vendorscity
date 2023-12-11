@@ -133,7 +133,7 @@
                     $('#category_form').submit();
 
                 } else if (returndata == 2) {
-
+                    // Code for status not equal to 1
                     $('#contact_error_login').html("Account is not active.");
                     $('#contact_error_login').show().delay(2000).fadeOut('show');
                     return false;

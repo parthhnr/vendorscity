@@ -118,10 +118,10 @@ class VendorsProfileController extends Controller
             $image = $request->file('image');
             $remove_space = str_replace(' ', '-', $image->getClientOriginalName());
             $data['image'] = time() . $remove_space;
-            $destinationPath = public_path('upload/vendors/small/');
+            $destinationPath = public_path('upload/vendors/small');
             $img = Image::make($image->path());
-            $width=300;
-            $height=300;
+            $width=100;
+            $height=100;
             $img->resize($width,$height,function($constraint){
             })->save($destinationPath.'/'.$data['image']);
               
@@ -294,7 +294,7 @@ class VendorsProfileController extends Controller
 
         $result = DB::table('vendors_attribute')->where('pid', '=',$service)->where('id', '=',$id)->delete();
 
-        return redirect()->route('vendorsprofile.edit',$service)->with('success','Vendors Attributes Deleted Successfully');
+        return redirect()->route('vendorsprofile.edit',$service)->with('success',' Deleted Successfully');
 
     }
 }

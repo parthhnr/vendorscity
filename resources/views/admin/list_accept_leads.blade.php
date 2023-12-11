@@ -169,6 +169,22 @@
 
                                @csrf
 
+                               @php
+                                    $userId = Auth::id();
+                                    
+                                    $packages_enquiry = DB::table('packages_enquiry')
+                                                           ->select('*')
+                                                           ->where('accept_vendor_id', '=', $userId)
+                                                           ->where('is_accept', '=', 1)
+                                                           ->orderBy('id', 'desc')
+                                                           ->get();
+
+
+                                    //echo"<pre>";print_r($resultArray);echo"</pre>";
+                                    
+
+                               @endphp
+
                                <div class="table-responsive">
 
                                    <table class="table table-center table-hover datatable">
@@ -178,46 +194,52 @@
                                            <tr>
                                                <th>Sr No</th>
                                                <th>Name</th>
-                                               <th>Email</th>
+                                               
                                                <th>Service</th>
                                                <th>Sub Service</th>
-                                               <th>Price</th>
-                                               <th>Inquiry Date</th>
+                                               <!-- <th>Price</th>
+                                               <th>Inquiry Date</th> -->
                                            </tr>
 
                                        </thead>
 
                                        <tbody>
 
+                                        @if($packages_enquiry != '')
+
                                         @php
-                                                $i=1;
-                                               @endphp
+                                            $i=1;
+                                        @endphp
 
-                                           @foreach ($all_data as $data)
-
+                                          @foreach ($packages_enquiry as $packages_enquiry_data)
                                                <tr>
 
                                                    <td>{{$i}}</td>
-                                                   <td>{{ $data->name }}</td>
-                                                   <td>{{ $data->email }}</td>
+                                                   <td>{{ $packages_enquiry_data->name }}</td>
+                                                  
                                                    <td>
-                                                       @if ($data->service_id != '')
-                                                           {!! Helper::servicename(strval($data->service_id)) !!}
+                                                       @if ($packages_enquiry_data->service_id != '')
+                                                           {!! Helper::servicename(strval($packages_enquiry_data->service_id)) !!}
                                                        @endif
                                                    </td>
                                                    <td>
-                                                        @if ($data->subservice_id != '')
-                                                           {!! Helper::subservicename(strval($data->subservice_id)) !!}
+                                                        @if ($packages_enquiry_data->subservice_id != '')
+                                                           {!! Helper::subservicename(strval($packages_enquiry_data->subservice_id)) !!}
                                                        @endif
                                                     
                                                     </td>
-                                                   <td>{{ $data->price }}</td>
-                                                   <td>{{ date("d-m-Y", strtotime($data->inquiry_date)) }}</td>
+                                                 
                                                </tr>
-                                               @php
-                                                $i++;
-                                               @endphp
+                                              @php
+                                            $i++;
+                                        @endphp
+                                               
                                            @endforeach
+
+                                           @else
+
+                                            <p>No Data Found</p>
+                                           @endif
 
 
 

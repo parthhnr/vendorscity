@@ -202,7 +202,11 @@
 
                 </li>
 
-
+                <li class="{{ request()->segment(2) == 'vendorinquiry' ? 'active' : '' }}"><a
+                        href="{{ route('vendorinquiry.index') }}"
+                        class="{{ request()->segment(1) == 'vendorinquiry' ? 'active' : '' }}">
+                        <i class="fa fa-file"></i><span>Inquiry</span></a>
+                </li>
 
                 <li class="{{ request()->segment(2) == 'acceptleads' ? 'active' : '' }}"><a
                         href="{{ route('acceptleads.index') }}"

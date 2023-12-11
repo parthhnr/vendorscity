@@ -402,6 +402,10 @@ class SubscriptionController extends Controller
             $html .='</div>';
         $html .='</div><input type="hidden" name="total" id="total" value="'.$total.'">';
 
+
+
+       
+
         $html .= '</div>';
     }else{
         $html = "";

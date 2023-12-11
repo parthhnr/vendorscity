@@ -120,7 +120,7 @@
 
                             <div class="table-responsive">
 
-                                <table class="table table-center table-hover datatable">
+                                <table class="table table-center table-hover">
 
                                     <thead class="thead-light">
 

@@ -88,7 +88,7 @@
                                     <thead class="thead-light">
 
                                         <tr>
-
+                                            <th>Sr No</th>
                                             <th>Name</th>
                                             <th>Email</th>
 
@@ -112,10 +112,19 @@
 
                                     <tbody>
 
+                                        @php
+
+                                        $i=1;
+                                        @endphp
+
                                         @foreach ($packages_data as $data)
                                             <tr>
 
+                                                <td>
 
+                                                    {{ $i }}
+
+                                                </td>
                                                 <td>
 
                                                     {{ $data->name }}
@@ -150,6 +159,11 @@
 
 
                                             </tr>
+
+                                            @php
+
+                                        $i++;
+                                        @endphp
                                         @endforeach
 
 
@@ -173,3 +187,6 @@
     </div>
 
 @stop
+<script type="text/javascript">
+
+</script>
