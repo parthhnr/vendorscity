@@ -62,9 +62,7 @@ class Packagecontroller extends Controller
             $data['package_data'] = '';
             $data['package_count'] = 0;        
         } 
-        // echo"<pre>";
-        // print_r($data);
-        // echo"</pre>";exit;
+       
         return view('front.package_lists',$data);
     }
 
@@ -90,11 +88,23 @@ class Packagecontroller extends Controller
     public function enquiry(Request $request,$id){
         
         $service= DB::table('packages')->where('id',$id)->first();  
-    
+        
         $data['package_id'] =$id;
         $data['service_id'] = $service->service_id; 
         $data['subservice_id'] = $service->subservice_id; 
         $data['packagecategory_id'] = $service->packagecategory_id; 
+        
+        // $data['form_fields_data'] = DB::table('form_fields')
+        // ->join('form_attributes', 'form_fields.id', '=', 'form_attributes.form_id')
+        // ->select('form_fields.*', 'form_attributes.*')
+        // ->get();
+
+
+
+        // echo "<pre>";print_r($data['form_fields_data']);echo "</pre>";
+
+
+
         return view('front.enquiry',$data);
 
     }

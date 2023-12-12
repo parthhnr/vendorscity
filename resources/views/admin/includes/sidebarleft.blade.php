@@ -138,13 +138,21 @@
                     </li>
                 @endif
                 @if (in_array('17', $permission1))
-                    <li class="{{ request()->segment(2) == 'enquiry' ? 'active' : '' }}"><a
+                    <li class="{{ request()->segment(1) == 'enquiry' ? 'active' : '' }}"><a
                             href="{{ route('enquiry.index') }}"
-                            class="{{ request()->segment(2) == 'enquiry' ? 'active' : '' }}">
+                            class="{{ request()->segment(1) == 'enquiry' ? 'active' : '' }}">
                             <i class="fa fa-file"></i><span>Packages Enquiry</span></a>
                     </li>
                 @endif
 
+                @if (in_array('18', $permission1))
+                    <li class="{{ request()->segment(2) == 'form_field' ? 'active' : '' }}"><a
+                            href="{{ route('form_field.index') }}"
+                            class="{{ request()->segment(2) == 'form_field' ? 'active' : '' }}">
+                            <i class="fa fa-file"></i><span>Form Field</span></a>
+                    </li>
+                @endif
+                
                 @if (in_array('17', $permission1))
                 <li class="{{ request()->segment(2) == 'order' ? 'active' : '' }}">
 
@@ -152,6 +160,9 @@
 
                 </li>
                 @endif
+
+
+
 
                 <!--
                 @if (in_array('13', $permission1))

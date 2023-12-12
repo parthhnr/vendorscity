@@ -17,12 +17,12 @@
                     <div class="col-xl-6 mx-auto">
                         <div
                             class="log-reg-form search-modal form-style1 bgc-white p50 p30-sm default-box-shadow1 bdrs12">
-                            <div class="mb30">
-                                {{-- <h4>We're glad to see you again!</h4> --}}
+                            {{-- <div class="mb30">
+                                <h4>We're glad to see you again!</h4>
                                 <p class="text">Don't have an account? <a href="{{ url('Sign-Up') }}"
                                         class="text-thm">Sign
                                         Up!</a></p>
-                            </div>
+                            </div> --}}
                             <div class="mb20">
                                 <label class="form-label fw600 dark-color">Email Address</label>
                                 <input type="text" id="email" name="email" class="form-control"
@@ -60,6 +60,13 @@
                                 <button type="button" class="ud-btn btn-thm" onclick="javascript:category_validation()"
                                     id="submit_button">Submit</button>
 
+                            </div>
+
+                            <div class="mb30">
+                                {{-- <h4>We're glad to see you again!</h4> --}}
+                                <p class="text">Don't have an account? <a href="{{ url('Sign-Up') }}"
+                                        class="text-thm">Sign
+                                        Up!</a></p>
                             </div>
 
 

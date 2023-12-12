@@ -40,7 +40,9 @@ use App\Http\Controllers\admin\AdminWalletController;
 use App\Http\Controllers\admin\FaqController;
 use App\Http\Controllers\admin\FrontuserController;
 use App\Http\Controllers\admin\EnquiryController;
-use App\Http\Controllers\admin\Ordercontroller;
+
+use App\Http\Controllers\admin\Form_fieldController;
+
 
 
 
@@ -300,6 +302,10 @@ Route::get('/admin', function () {
     Route::get('export-all', [App\Http\Controllers\admin\FrontuserController::class, 'downloadXls'])->name('export-excel');
     
     Route::resource('/enquiry', '\App\Http\Controllers\admin\EnquiryController');
+
+    Route::resource('/admin/form_field', '\App\Http\Controllers\admin\Form_fieldController');
+    Route::get('/admin/delete_form_field', [Form_fieldController::class, 'delete_form_field'])->name('delete_form_field');
+    Route::get('remove_attribute/{form_id}/{id}', [Form_fieldController::class, 'remove_attribute'])->name('remove_attribute');
     
 
 

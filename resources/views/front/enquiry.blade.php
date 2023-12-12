@@ -9,6 +9,12 @@
                 </div>
             </div>
         </div>
+        {{-- @php
+            echo '<pre>';
+            print_r($form_fields_data);
+            echo '</pre>';
+            exit();
+        @endphp --}}
         <form id="category_form" action="{{ route('package_inquiry') }}" method="POST">
             @csrf
             <div class="row wow fadeInRight" data-wow-delay="300ms">
