@@ -151,6 +151,13 @@ class PackagesController extends Controller
             $height=256;
             $img->resize($width,$height,function($constraint){
             })->save($destinationPath.'/'.$data['image']);
+
+            $destinationPath = public_path('upload/packages/small');
+            $img = Image::make($image->path());
+            $width=60;
+            $height=74;
+            $img->resize($width,$height,function($constraint){
+            })->save($destinationPath.'/'.$data['image']);
               
             $destinationPath = public_path('upload/packages');
             $image->move($destinationPath,$data['image']);
