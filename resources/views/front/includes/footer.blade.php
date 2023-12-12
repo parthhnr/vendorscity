@@ -195,6 +195,36 @@
                });
            }
      }
+
+     function add_to_cart(package_id) {
+
+var qty = 1;
+
+$.ajax({
+
+    type : 'POST',
+    url  : '{{ url('add_to_cart ') }}',
+    data : {
+
+            "_token": "{{ csrf_token() }}",
+            'qty': qty,
+            'package_id': package_id,
+            
+    },
+
+    success :function(msg){
+        if(msg != 0){
+            // $("#header_cart").load(location.href + " #header_cart");
+            // $("#header_cart_count").load(location.href + " #header_cart_count");
+            $("#message_succsess").html("Package Added To Cart");
+            $('#message_succsess').show().delay(0).fadeIn('show');
+            $('#message_succsess').show().delay(2000).fadeOut('show');
+            return false;
+        }
+    }
+});
+
+}
 </script>
 
 </body>

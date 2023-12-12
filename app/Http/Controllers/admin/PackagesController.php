@@ -226,8 +226,10 @@ class PackagesController extends Controller
         // echo $id;exit;
         $data['id'] = $id;
         $data['packagesimages'] = DB::table('packages_image')
+        
         ->select('*')
         ->where('pid', '=',$id)
+        ->orderBy('id','DESC')
         ->get()
         ->toArray();
 

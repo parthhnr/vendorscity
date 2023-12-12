@@ -40,13 +40,16 @@ use App\Http\Controllers\admin\AdminWalletController;
 use App\Http\Controllers\admin\FaqController;
 use App\Http\Controllers\admin\FrontuserController;
 use App\Http\Controllers\admin\EnquiryController;
+
 use App\Http\Controllers\admin\Form_fieldController;
+
 
 
 
 
 use App\Http\Controllers\front\FrontloginregisterController;
 use App\Http\Controllers\front\FrontvendorController;
+use App\Http\Controllers\front\checkoutcontroller;
 
 
 
@@ -121,6 +124,9 @@ Route::post('/vendors_data', '\App\Http\Controllers\front\Homecontroller@vendors
 Route::get('/cart', '\App\Http\Controllers\front\Cartcontroller@cart');
 Route::post('add_to_cart','\App\Http\Controllers\front\Cartcontroller@add_to_cart');
 Route::post('cart_remove', '\App\Http\Controllers\front\Cartcontroller@cart_remove');
+Route::get('/checkout', '\App\Http\Controllers\front\checkoutcontroller@checkout');
+Route::post('/order_place', '\App\Http\Controllers\front\checkoutcontroller@order_place')->name('order_place');
+Route::get('thankyou', [checkoutcontroller::class, 'thankyou'])->name("thankyou");
 
 
 
@@ -301,6 +307,11 @@ Route::get('/admin', function () {
     Route::get('/admin/delete_form_field', [Form_fieldController::class, 'delete_form_field'])->name('delete_form_field');
     Route::get('remove_attribute/{form_id}/{id}', [Form_fieldController::class, 'remove_attribute'])->name('remove_attribute');
     
+
+
+    Route::resource('admin/order','App\Http\Controllers\admin\Ordercontroller');  
+    Route::get('delete_order',[Ordercontroller::class,'destroy'])->name('delete_order');
+    Route::get('admin/order/detail/{order_id}', [Ordercontroller::class, 'detail'])->name('detail');
 
 
 });

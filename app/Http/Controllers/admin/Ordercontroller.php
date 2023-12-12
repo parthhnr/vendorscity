@@ -36,9 +36,9 @@ class Ordercontroller extends Controller
         //$data['subscribe_data'] = Subscribe::orderBy('id','DESC')->get();    
 
         $query = DB::table('ci_orders')
-        ->leftJoin('front_users', 'ci_orders.user_id', '=', 'front_users.id')
-        ->leftJoin('ci_shipping_address', 'ci_orders.order_id', '=', 'ci_shipping_address.order_id')
-        ->select('front_users.email as user_email', 'front_users.name as user_name', 'front_users.mobile as user_mobile',  'ci_orders.*', 'ci_shipping_address.*');
+        ->leftJoin('frontloginregisters', 'ci_orders.user_id', '=', 'frontloginregisters.id')
+        //->leftJoin('ci_shipping_address', 'ci_orders.order_id', '=', 'ci_shipping_address.order_id')
+        ->select('frontloginregisters.email as user_email', 'frontloginregisters.name as user_name', 'frontloginregisters.mobile as user_mobile',  'ci_orders.*');
 
     if (!empty($order_id)) {
         $query->where('ci_orders.order_id', $order_id);
@@ -65,11 +65,17 @@ class Ordercontroller extends Controller
         $additionalCost = 0;
 
         foreach ($itemList as $item) {
-            $product = DB::table('products')
-                ->where('id', $item->product_id)
+            $product = DB::table('packages')
+                ->where('id', $item->package_id)
                 ->first();
 
-            $total += $item->product_item_price * $item->product_quantity;
+            if($item->product_discount_amount != 0 && $item->product_discount_amount != ''){
+                $product_item_price = $item->product_discount_amount;
+            }else{
+                $product_item_price = $item->package_item_price;
+            }
+
+            $total += $product_item_price * $item->package_quantity;
         }
 
         $order->items = $itemList;
@@ -91,9 +97,9 @@ class Ordercontroller extends Controller
         $data['error'] = '';
 
         $query = DB::table('ci_orders')
-        ->leftJoin('front_users', 'ci_orders.user_id', '=', 'front_users.id')
-        ->leftJoin('ci_shipping_address', 'ci_orders.order_id', '=', 'ci_shipping_address.order_id')
-        ->select('front_users.email as user_email', 'front_users.name as user_name', 'front_users.mobile as user_mobile',  'ci_orders.*', 'ci_shipping_address.*');
+        ->leftJoin('frontloginregisters', 'ci_orders.user_id', '=', 'frontloginregisters.id')
+       // ->leftJoin('ci_shipping_address', 'ci_orders.order_id', '=', 'ci_shipping_address.order_id')
+        ->select('frontloginregisters.email as user_email', 'frontloginregisters.name as user_name', 'frontloginregisters.mobile as user_mobile',  'ci_orders.*');
 
     if (!empty($order_id)) {
         $query->where('ci_orders.order_id', $order_id);
@@ -120,11 +126,17 @@ class Ordercontroller extends Controller
         $additionalCost = 0;
 
         foreach ($itemList as $item) {
-            $product = DB::table('products')
-                ->where('id', $item->product_id)
+            $product = DB::table('packages')
+                ->where('id', $item->package_id)
                 ->first();
 
-            $total += $item->product_item_price * $item->product_quantity;
+            if($item->product_discount_amount != 0 && $item->product_discount_amount != ''){
+                $product_item_price = $item->product_discount_amount;
+            }else{
+                $product_item_price = $item->package_item_price;
+            }
+
+            $total += $product_item_price * $item->package_quantity;
         }
 
         $order->items = $itemList;

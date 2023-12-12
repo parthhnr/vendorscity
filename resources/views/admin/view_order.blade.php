@@ -32,26 +32,17 @@
                     <!-- Invoice Item -->
                     <div class="invoice-item" style="margin-top:20px;">
                         <div class="row">
+                            
                             <div class="col-md-6">
-                                <div class="invoice-info">
-                                    <strong class="customer-text">Shipping To</strong>
-                                    <p class="invoice-details invoice-details-two">
-                                        {{$order->first_name}} {{$order->last_name}} <br>
-                                        {{$order->address1}}, {{$order->address2}},<br>
-                                        {{$order->city}},{{ Helper::state_name($order->state)}}, {{ Helper::countryname($order->country)}}<br>
-                                    </p>
-                                </div>
-                            </div>
-                            <!-- <div class="col-md-6">
                                 <div class="invoice-info invoice-info2">
-                                    <strong class="customer-text">Invoice To</strong>
+                                    <!-- <strong class="customer-text">Invoice To</strong>
                                     <p class="invoice-details">
                                         Walter Roberson <br>
                                         299 Star Trek Drive, Panama City, <br>
                                         Florida, 32405, USA <br>
-                                    </p>
+                                    </p>-->
                                 </div>
-                            </div> -->
+                            </div> 
                             <div class="col-md-6">
                                 <div class="invoice-info invoice-info2">
                                     <strong class="customer-text">Payment Method</strong>
@@ -95,16 +86,15 @@
                             <table class="invoice-table table table-bordered">
                                 <thead>
                                     <tr>
-                                        <th class="text-center">First Name</th>
-                                        <th class="text-center">Last Name</th>
+                                        <th class="text-center">Name</th>
+                                        
                                         <th class="text-center">Email ID</th>
                                         <th class="text-center">Mobile No</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td class="text-center">{{$order->user_name}}</td>
-                                        <td class="text-center">{{$order->last_name}}</td>
+                                        <td class="text-center">{{$order->user_name}}</td>  
                                         <td class="text-center">{{$order->user_email}}</td>
                                         <td class="text-center">{{$order->user_mobile}}</td>
                                     </tr>
@@ -123,12 +113,9 @@
                                     <table class="invoice-table table table-bordered">
                                         <thead>
                                             <tr>
-                                                <th class="text-center">Product Image</th>
-                                                <th class="text-center">Product Name</th>
-                                                <th class="text-center">Product Code</th>
-                                                <th class="text-center">Product Size</th>
+                                                <th class="text-center">Package Image</th>
+                                                <th class="text-center">Package Name</th>
                                                 
-                                                <th class="text-center">Product Color</th>
                                                 <th class="text-center">Price</th>
                                                 <th class="text-center">Quantity</th>
                                                 <th class="text-center">Totals</th>
@@ -144,79 +131,75 @@
                                             @endphp
                                             <tr>
                                                 <td class="text-center">
-                                                    @if($item->base_image != '')
-                                                        <img src="{{ url('public/upload/product/small/' . $item->base_image) }}" width="50px" height="50px">
+                                                    @if($item->image != '')
+                                                        <img src="{{ url('public/upload/packages/large/' . $item->image) }}" width="50px" height="50px">
                                                     @else
-                                                        <img src="{{ url('public/upload/product/small/no-image.png') }}" width="50px" height="50px">
+                                                        <img src="{{ url('public/upload/packages/large/no-image.png') }}" width="50px" height="50px">
                                                     @endif
                                                 </td>
-                                                <td class="text-center">{{$item->order_item_name}}</td>
-                                                <td class="text-center">{{$item->product_code}}</td>
-                                                <td class="text-center">{{$item->size_name}}</td>
-                                                
-                                                <td class="text-center">{{$item->colour_name}}</td>
-                                                <td class="text-center">&#8377;{{$item->product_discount_amount}}</td>
-                                                <td class="text-center">{{$item->product_quantity}}</td>
+                                                <td class="text-center">{{$item->package_item_name}}</td>
+
                                                 @php
 
-                                                    $total = $item->product_discount_amount * $item->product_quantity;
+                                                    if($item->product_discount_amount != 0 && $item->product_discount_amount != ''){
+                                                        $product_item_price = $item->product_discount_amount;
+                                                    }else{
+                                                        $product_item_price = $item->package_item_price;
+                                                    }
+                                                @endphp
+                                               
+                                                <td class="text-center">{{ $order->order_currency}}  {{$product_item_price}}</td>
+                                                <td class="text-center">{{$item->package_quantity}}</td>
+                                                @php
+
+                                                    $total = $product_item_price * $item->package_quantity;
                                                     $sub_total += $total;
                                                 @endphp
-                                                <td class="text-center">&#8377;{{$total}}</td>
+                                                <td class="text-end">{{ $order->order_currency}} {{$total}}</td>
                                             </tr>
                                             @endforeach
-                                            <tr>
-                                                <td style="border-right-style: hidden;" class="thick-line"></td>
-                                                <td style="border-right-style: hidden;"></td>
-                                                <td style="border-right-style: hidden;" class="thick-line"></td>
-                                                <td style="border-right-style: hidden;" class="thick-line"></td>
-                                                <td class="thick-line"></td>
-                                                <td colspan="2" class="thick-line text-center">
-                                                    <strong>Subtotal</strong></td>
-                                                <td colspan="2" class="thick-line  text-center">&#8377;{{ $sub_total }}
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td style="border-top-style: hidden;border-right-style: hidden;" class="thick-line"></td>
-                                                <td style="border-top-style: hidden;border-right-style: hidden;"></td>
-                                                <td style="border-top-style: hidden;border-right-style: hidden;"></td>
-                                                <td style="border-top-style: hidden;border-right-style: hidden;" class="thick-line"></td>
-                                                <td style="border-top-style: hidden;" class="thick-line"></td>
-                                                <td colspan="2" class="no-line text-center">
-                                                    <strong>Discount</strong></td>
-                                                <td colspan="2" class="no-line text-center">&#8377;{{$order->coupondiscount}}
-                                                </td>
-                                                
-                                            </tr>
-
-                                            <tr>
-                                                <td style="border-top-style: hidden;border-right-style: hidden;" class="thick-line"></td>
-                                                <td style="border-top-style: hidden;border-right-style: hidden;"></td>
-                                                <td style="border-top-style: hidden;border-right-style: hidden;"></td>
-                                                <td style="border-top-style: hidden;border-right-style: hidden;" class="thick-line"></td>
-                                                <td style="border-top-style: hidden;" class="thick-line"></td>
-                                                <td colspan="2" class="no-line text-center">
-                                                    <strong>Shipping</strong></td>
-                                                <td colspan="2" class="no-line text-center">&#8377;{{$order->shippingcost}}
-                                                </td>
-                                                
-                                            </tr>
-
-                                            <tr>
-                                                <td style="border-top-style: hidden;border-right-style: hidden;" class="thick-line"></td>
-                                                <td style="border-top-style: hidden;border-right-style: hidden;"></td>
-                                                <td style="border-top-style: hidden;border-right-style: hidden;"></td>
-                                                <td style="border-top-style: hidden;border-right-style: hidden;" class="thick-line"></td>
-                                                <td style="border-top-style: hidden;" class="thick-line"></td>
-                                                <td colspan="2" class="no-line text-center">
-                                                    <strong>Total</strong></td>
-                                                <td colspan="2" class="no-line text-center">&#8377;{{$order->order_total}}
-                                                </td>
-                                                
-                                            </tr>
+                                           
 
 
                                         
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-xl-4 ms-auto">
+                                <div class="table-responsive">
+                                    <table class="invoice-table-two table">
+                                        <tbody>
+                                        <tr>
+                                            <th>Subtotal:</th>
+                                            <td><span>{{ $order->order_currency}} {{ $sub_total }}</span></td>
+                                        </tr>
+                                        @if($order->coupondiscount != "" && $order->coupondiscount !=0 )
+                                        <tr>
+                                            <th>Discount:</th>
+                                            <td><span>{{ $order->order_currency}} {{ $order->coupondiscount }}</span></td>
+                                        </tr>
+                                        @endif
+
+                                        @if($order->shippingcost != "" && $order->shippingcost !=0 )
+                                        <tr>
+                                            <th>Shipping:</th>
+                                            <td><span>{{ $order->order_currency}} {{ $order->shippingcost }}</span></td>
+                                        </tr>
+                                        @endif
+
+                                        @if($order->vatcharge != "" && $order->vatcharge !=0 )
+                                        <tr>
+                                            <th>VAT 5% :</th>
+                                            <td><span>{{ $order->order_currency}} {{ $order->vatcharge }}</span></td>
+                                        </tr>
+                                        @endif
+
+                                        <tr>
+                                            <th>Total Amount:</th>
+                                            <td><span>{{ $order->order_currency}} {{ $order->order_total }}</span></td>
+                                        </tr>
                                         </tbody>
                                     </table>
                                 </div>
