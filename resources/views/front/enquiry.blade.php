@@ -9,12 +9,11 @@
                 </div>
             </div>
         </div>
-        {{-- @php
-            echo '<pre>';
-            print_r($form_fields_data);
-            echo '</pre>';
-            exit();
-        @endphp --}}
+        @php
+            // echo '<pre>';
+            // print_r($formFields);
+            // echo '</pre>';
+        @endphp
         <form id="category_form" action="{{ route('package_inquiry') }}" method="POST">
             @csrf
             <div class="row wow fadeInRight" data-wow-delay="300ms">
@@ -50,11 +49,74 @@
                             </p>
                         </div>
 
+                        <div class="row">
+                            @for ($i = 0; $i < count($result1); $i++)
+                                @for ($k = 0; $k < count($formFields); $k++)
+                                    @php
+                                        $form_additionalData = DB::table('form_attributes')
+                                            ->select('*')
+                                            ->where('form_id', '=', $result1[$i]->id)
+                                            ->get()
+                                            ->toArray();
+                                    @endphp
+                                    @if ($result1[$i]->lable_name == $formFields[$k]->lable_name)
+                                        @if ($result1[$i]->type == '1')
+                                            <div class="mb15">
+                                                <label
+                                                    class="form-label fw500 dark-color">{{ $formFields[$k]->lable_name }}</label>
+                                                <input name="form_field_id[]" type="hidden" class="m-0"
+                                                    id="form_field_id[]" value=" {{ $formFields[$k]->id }}">
+                                                <input name="formfield_value[]" type="text" class="form-control"
+                                                    id="formfield_value[]"
+                                                    placeholder="{{ $formFields[$k]->lable_name }}" class="">
+                                            </div>
+                                        @endif
+                                        @if ($result1[$i]->type == '2')
+                                            <div class="form-group mb-3">
+                                                <label class="form-label fw500 dark-color"
+                                                    for="country">{{ $formFields[$k]->lable_name }}</label>
+                                                <input name="form_field_id[]" type="hidden" class="m-0"
+                                                    id="form_field_id[]" value="{{ $formFields[$k]->id }}">
+                                                <select class="form-control" id="formfield_value[]"
+                                                    name="formfield_value[]">
+                                                    <option value="">Select {{ $formFields[$k]->lable_name }}
+                                                    </option>
+                                                    @foreach ($form_additionalData as $form_additional)
+                                                        <option value="{{ $form_additional->form_option }}">
+                                                            {{ $form_additional->form_option }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        @endif
+                                        @if ($result1[$i]->type == '3')
+                                            <br>
+                                            <input name="form_field_radio_id[]" type="hidden" class="m-0"
+                                                id="form_field_id[]" value="{{ $formFields[$k]->id }}">
+                                            <label
+                                                class="form-label fw500 dark-color">{{ $formFields[$k]->lable_name }}</label>
+                                            @foreach ($form_additionalData as $form_additional)
+                                                <input name="formfield_radio_{{ $formFields[$k]->id }}" type="radio"
+                                                    class="m-0" id="formfield_value[]" placeholder=""
+                                                    value="{{ $form_additional->form_option }}">
+
+                                                <label>{{ $form_additional->form_option }}</label>
+                                            @endforeach
+                                        @endif
+                                    @endif
+                                @endfor
+                            @endfor
+                        </div>
+
+
+
+
+
                         <div class="d-grid mb20">
                             <button class="btn btn-primary mb-1" type="button" disabled id="spinner_button"
                                 style="display: none;">
 
-                                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                <span class="spinner-border spinner-border-sm" role="status"
+                                    aria-hidden="true"></span>
 
                                 Loading...
 

@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Symfony\Component\Mime\Email;
 use DB;
+use App\Models\admin\Form_filed;
+
 
 class Packagecontroller extends Controller
 {
@@ -87,21 +89,32 @@ class Packagecontroller extends Controller
 
     public function enquiry(Request $request,$id){
         
-        $service= DB::table('packages')->where('id',$id)->first();  
+        $service= DB::table('packages')->where('id',$id)->first();
+        
+        
+        $form_field_data= DB::table('services')->where('id',$service->service_id)->first(); 
+        
+        $tags = explode(',', $form_field_data->form_fields);
+        $data['result1'] = DB::table('form_fileds')->whereIn('id',$tags)->get()->toArray();
+        $data['formFields'] = DB::table('form_fileds')->get()->toArray();
+
+        // echo "<pre>";print_r($result1);echo "</pre>";exit;
         
         $data['package_id'] =$id;
         $data['service_id'] = $service->service_id; 
+
+
+
         $data['subservice_id'] = $service->subservice_id; 
         $data['packagecategory_id'] = $service->packagecategory_id; 
         
-        // $data['form_fields_data'] = DB::table('form_fields')
-        // ->join('form_attributes', 'form_fields.id', '=', 'form_attributes.form_id')
-        // ->select('form_fields.*', 'form_attributes.*')
-        // ->get();
+        // $data['form_fields_data'] = DB::table('form_fileds')
+        //                                 ->join('form_attributes', 'form_fileds.id', '=', 'form_attributes.form_id')
+        //                                 ->select('form_fileds.*', 'form_attributes.*')
+        //                                 ->get();
+        
 
-
-
-        // echo "<pre>";print_r($data['form_fields_data']);echo "</pre>";
+        // echo "<pre>";print_r($data['form_fields_data']);echo "</pre>";exit;
 
 
 
@@ -110,6 +123,7 @@ class Packagecontroller extends Controller
     }
     public function package_inquiry(Request $request){
 
+        // echo "<pre>";print_r($request->post());echo "</pre>";exit;
         $data['name']=$request->name;
         $data['pakage_id']=$request->pakage_id;
         $data['service_id']=$request->service_id;
@@ -118,7 +132,46 @@ class Packagecontroller extends Controller
         $data['email']=$request->email;
         $data['mobile']=$request->mobile;
 
-        DB::table('packages_enquiry',)->insert($data);
+        $package_inquiry=DB::table('packages_enquiry',)->insertGetId($data);
+        
+         if ($request->form_field_id != '' && count($request->form_field_id) > 0) {
+           
+                foreach($request->form_field_id as $key => $values) {
+
+                    if ($request->form_field_id[$key] != '') {
+                        
+                        $data1['package_inquiry_id'] = $package_inquiry;
+
+                         $data1['form_field_id'] = $request->form_field_id[$key];
+                         $data1['formfield_value'] = $request->formfield_value[$key];
+                        
+                         DB::table('more_formfields_details')->insert($data1);
+                    }
+                }    
+            }
+        
+            if ($request->form_field_radio_id != '' && count($request->form_field_radio_id) > 0) {
+           
+                foreach($request->form_field_radio_id as $key1 => $values1) {
+
+                    $radioVal = $request->form_field_radio_id[$key1];
+
+                    if ($request->form_field_radio_id[$key1] != '') {
+
+                        $data2['package_inquiry_id'] = $package_inquiry;
+                        
+                         $data2['form_field_id'] = $request->form_field_radio_id[$key1];
+                         $data2['formfield_value'] = $request['formfield_radio_'.$radioVal];
+                        
+
+                         DB::table('more_formfields_details')->insert($data2);
+                    }
+                }    
+            }
+
+            
+
+
 
         return redirect()->route('enquiry', ['id' => $data['pakage_id']])->with('L_strsucessMessage', 'Enquiry Form Submitted Successfully');
 

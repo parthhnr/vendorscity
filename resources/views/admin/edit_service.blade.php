@@ -87,182 +87,135 @@
 
                                 </div> --}}
                                 <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label for="country">Country</label>
+                                        <select class="form-control" id="country" name="country"
+                                            onchange="state_change(this.value);">
+                                            <option value="">Select Country</option>
+                                            @foreach ($country_data as $country)
+                                                <option value="{{ $country->id }}"
+                                                    {{ $country->id == $service->country ? 'selected' : '' }}>
+                                                    {{ $country->country }}</option>
+                                            @endforeach
+                                        </select>
+                                        <p class="form-error-text" id="country_error" style="color: red; margin-top: 10px;">
+                                        </p>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+
+                                        <label for="name">Service Name</label>
+
+                                        <input id="servicename" name="servicename" type="text" class="form-control"
+                                            placeholder="Enter Service Name" value="{{ $service->servicename }}" />
+
+                                        <p class="form-error-text" id="service_error" style="color: red; margin-top: 10px;">
+                                        </p>
+
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+
+                                        <label for="name">Page Url</label>
+
+                                        <input id="page_url" name="page_url" type="text" class="form-control"
+                                            placeholder="Enter Page Url" value="{{ $service->page_url }}" />
+
+                                        <p class="form-error-text" id="page_url_error"
+                                            style="color: red; margin-top: 10px;"></p>
+
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+
+                                        <label for="title1">Banner Title 1</label>
+
+                                        <input id="title1" name="title1" type="text" class="form-control"
+                                            placeholder="Enter Banner Title 1" value="{{ $service->title1 }}" />
+
+                                        <p class="form-error-text" id="title1_error" style="color: red; margin-top: 10px;">
+                                        </p>
+
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+
+                                        <label for="title2">Banner Title 2</label>
+
+                                        <input id="title2" name="title2" type="text" class="form-control"
+                                            placeholder="Enter Banner Title 2" value="{{ $service->title2 }}" />
+
+                                        <p class="form-error-text" id="title2_error" style="color: red; margin-top: 10px;">
+                                        </p>
+
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+
+                                        <label for="banner_url">Banner Url</label>
+
+                                        <input id="banner_url" name="banner_url" type="text" class="form-control"
+                                            placeholder="Enter Banner Url" value="{{ $service->banner_url }}" />
+
+                                        <p class="form-error-text" id="banner_url_error"
+                                            style="color: red; margin-top: 10px;"></p>
+
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+
+                                    <div class="form-group">
+
+                                        <label for="name">Banner (443 x 305)</label>
+
+                                        <input id="image" name="image" type="file" class="form-control"
+                                            value="" />
+                                        @if ($service->image != '')
+                                            <img src="{{ asset('public/upload/service/large/' . $service->image) }}"
+                                                style=" width: 10%;margin-top: 10px;" />
+                                        @endif
+                                        <p class="form-error-text" id="image_error"
+                                            style="color: red; margin-top: 10px;"></p>
+
+                                    </div>
+                                </div>
+
                                 <div class="form-group">
-                                    <label for="country">Country</label>
-                                    <select class="form-control" id="country" name="country"
-                                        onchange="state_change(this.value);">
-                                        <option value="">Select Country</option>
-                                        @foreach ($country_data as $country)
-                                            <option value="{{ $country->id }}"
-                                                {{ $country->id == $service->country ? 'selected' : '' }}>
-                                                {{ $country->country }}</option>
-                                        @endforeach
+                                    <label for="city">Form Fields</label>
+                                    <select class="form-control" id="form_fields" name="form_fields[]"
+                                        multiple="multiple">
+                                        <option value="">Select Form Fields</option>
+                                        @if ($form_field_data != '' && count($form_field_data) > 0)
+                                            @php $mucraft = explode(',',$service->form_fields); @endphp
+                                            @foreach ($form_field_data as $form_field)
+                                                <option value="{{ $form_field->id }}"
+                                                    {{ in_array($form_field->id, $mucraft) ? 'selected' : '' }}>
+                                                    {{ $form_field->lable_name }}
+                                                </option>
+                                            @endforeach
+                                        @endif
                                     </select>
-                                    <p class="form-error-text" id="country_error" style="color: red; margin-top: 10px;"></p>
+                                    <p class="form-error-text" id="form_fields_error"
+                                        style="color: red; margin-top: 10px;"></p>
                                 </div>
-                            </div>
 
 
-                            <div class="col-lg-6">
-                                <div class="form-group">
-
-                                    <label for="name">Service Name</label>
-
-                                    <input id="servicename" name="servicename" type="text" class="form-control"
-                                        placeholder="Enter Service Name" value="{{ $service->servicename }}" />
-
-                                    <p class="form-error-text" id="service_error" style="color: red; margin-top: 10px;"></p>
-
-                                </div>
-                            </div>
-
-                            <div class="col-lg-6">
-                                <div class="form-group">
-
-                                    <label for="name">Page Url</label>
-
-                                    <input id="page_url" name="page_url" type="text" class="form-control"
-
-                                        placeholder="Enter Page Url" value="{{ $service->page_url }}" />
-
-                                    <p class="form-error-text" id="page_url_error" style="color: red; margin-top: 10px;"></p>
-
-                                </div>
-                            </div>
-
-                            <div class="col-lg-6">
-                                <div class="form-group">
-
-                                    <label for="title1">Banner Title 1</label>
-
-                                    <input id="title1" name="title1" type="text" class="form-control"
-
-                                        placeholder="Enter Banner Title 1" value="{{ $service->title1 }}" />
-
-                                    <p class="form-error-text" id="title1_error" style="color: red; margin-top: 10px;"></p>
-
-                                </div>
-                            </div>
-
-                            <div class="col-lg-6">
-                                <div class="form-group">
-
-                                    <label for="title2">Banner Title 2</label>
-
-                                    <input id="title2" name="title2" type="text" class="form-control"
-
-                                        placeholder="Enter Banner Title 2" value="{{ $service->title2 }}" />
-
-                                    <p class="form-error-text" id="title2_error" style="color: red; margin-top: 10px;"></p>
-
-                                </div>
-                            </div>
-
-                            <div class="col-lg-6">
-                                <div class="form-group">
-
-                                    <label for="banner_url">Banner Url</label>
-
-                                    <input id="banner_url" name="banner_url" type="text" class="form-control"
-
-                                        placeholder="Enter Banner Url" value="{{ $service->banner_url }}" />
-
-                                    <p class="form-error-text" id="banner_url_error" style="color: red; margin-top: 10px;"></p>
-
-                                </div>
-                            </div>
-
-                            <div class="col-lg-6">
-
-                                <div class="form-group">
-
-                                    <label for="name">Banner (443 x 305)</label>
-
-                                    <input id="image" name="image" type="file" class="form-control"
-                                        value="" />
-                                    @if ($service->image != '')
-                                        <img src="{{ asset('public/upload/service/large/' . $service->image) }}"
-                                            style=" width: 10%;margin-top: 10px;" />
-                                    @endif
-                                    <p class="form-error-text" id="image_error" style="color: red; margin-top: 10px;"></p>
-
-                                </div>
-                            </div>
-                               <!--  <div class="form-group">
-
-                                    <label>Banner Description</label>
-
-                                    <textarea class="form-control" id="banner_description" name="banner_description" placeholder="Enter Banner Description">{{ $service->banner_description }}</textarea>
-
-                                    <p id="description_error" style="display: none;color: red"></p>
-
-                                </div> -->
-
-                                
-
-                            </div>
-
-
-
-                            {{-- <div class="col-md-12">
-
-                                <div class="form-group">
-
-                                    <label>Meta Title</label>
-
-                                    <input type="text" class="form-control" id="meta_title" name="meta_title"
-                                        placeholder="Enter Meta Title" value="{{ $service->meta_title }}">
-
-                                    <p id="meta_title_error" style="display: none;color: red"></p>
-
-                                    @error('meta_title')
-                                        <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
-                                    @enderror
-
-                                </div>
 
 
 
                             </div>
-
-                            <div class="col-md-12">
-
-                                <div class="form-group">
-
-                                    <label>Meta Keywords</label>
-
-                                    <input type="text" class="form-control" id="meta_keywords" name="meta_keywords"
-                                        placeholder="Enter Meta Keywords" value="{{ $service->meta_keywords }}">
-
-                                    <p id="meta_keywords_error" style="display: none;color: red"></p>
-
-                                    @error('meta_keywords')
-                                        <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
-                                    @enderror
-
-                                </div>
-
-
-
-                            </div> --}}
-
-
-
-                            {{-- <div class="col-md-12">
-
-                                <div class="form-group">
-
-                                    <label>Meta Description</label>
-
-                                    <textarea class="form-control" id="meta_description" name="meta_description" placeholder="Enter Meta Description">{{ $service->meta_description }}</textarea>
-
-                                    <p id="meta_description_error" style="display: none;color: red"></p>
-
-                                </div>
-
-                            </div> --}}
-
-
 
                             <div class="text-end mt-4">
 
@@ -271,7 +224,8 @@
                                 <button class="btn btn-primary mb-1" type="button" disabled id="spinner_button"
                                     style="display: none;">
 
-                                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                    <span class="spinner-border spinner-border-sm" role="status"
+                                        aria-hidden="true"></span>
 
                                     Loading...
 
@@ -318,12 +272,15 @@
                 console.error(error);
 
             });
+
+        $("#form_fields").select2({
+            placeholder: "Select a Form Fields" // Replace with your desired placeholder text
+        });
     </script>
 
 
 
     <script>
-
         $(function() {
 
             $("#servicename").keyup(function() {

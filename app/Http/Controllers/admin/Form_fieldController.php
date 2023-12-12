@@ -161,7 +161,6 @@ class Form_fieldController extends Controller
         }
         return redirect()->route('form_field.index')->with('success','Form Field Updated successfully.');
     }
-
     public function remove_attribute(Request $request)
     {
         // echo $request->id."-".$request->pid;exit;

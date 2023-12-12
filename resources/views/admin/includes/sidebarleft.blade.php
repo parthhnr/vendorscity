@@ -162,6 +162,13 @@
                 @endif
 
 
+                @if (in_array('19', $permission1))
+                    <li class="{{ request()->segment(2) == 'order' ? 'active' : '' }}">
+                        <a href="{{ route('order.index') }}"><i data-feather="clipboard"></i><span>Order</span></a>
+
+                    </li>
+                @endif
+
 
 
                 <!--

@@ -31,6 +31,14 @@ class ServiceController extends Controller
     public function create()
     {   
         $data['country_data'] = DB::table('countries')->select('*')->orderBy('id','DESC')->get();
+
+        $data['form_field_data'] = DB::table('form_fileds')->get();
+
+        // echo"<pre>";
+        // print_r($data['form_field_data']);
+        // echo"</pre>";
+        // exit;
+
         return view('admin.add_service',$data);
     }
 
@@ -42,6 +50,11 @@ class ServiceController extends Controller
      */
     public function store(Request $request)
     {
+        // echo"<pre>";
+        // print_r($request->post());
+        // echo"</pre>";
+        // exit;
+
         $service=New Service;
         $service->country = $request->country;
         $service->servicename=$request->servicename;
@@ -49,7 +62,10 @@ class ServiceController extends Controller
         $service->title1=$request->title1;
         $service->title2=$request->title2;
         $service->banner_url=$request->banner_url;
-        //$service->banner_description=$request->banner_description;
+        
+        if(isset($request->form_fields)){
+            $service->form_fields = implode(",",$request->form_fields);
+        }
 
         $service->set_order = 0;
 
@@ -100,6 +116,8 @@ class ServiceController extends Controller
     public function edit(Service $service)
     {
         $data['country_data'] = DB::table('countries')->select('*')->orderBy('id','DESC')->get();
+
+        $data['form_field_data'] = DB::table('form_fileds')->get();
         
         return view('admin.edit_service',compact('service'),$data);
     }
@@ -113,6 +131,7 @@ class ServiceController extends Controller
      */
     public function update(Request $request, $id)
     {
+         
         $service= Service::find($id);
         $service->country=$request->country;
         $service->servicename=$request->servicename;
@@ -120,6 +139,10 @@ class ServiceController extends Controller
         $service->title1=$request->title1;
         $service->title2=$request->title2;
         $service->banner_url=$request->banner_url;
+        if(isset($request->form_fields)){
+            $service->form_fields = implode(",",$request->form_fields);
+        }
+
         //$service->banner_description=$request->banner_description;
         if($request->hasfile('image') != ''){
 
@@ -139,7 +162,10 @@ class ServiceController extends Controller
             $service->image  = $image;
         }
         
-
+        // echo"<pre>";
+        // print_r($service);
+        // echo"</pre>";
+        // exit;
         $service->update();
         
         return redirect()->route('service.index')->with('success', 'Service  Updated Successfully');

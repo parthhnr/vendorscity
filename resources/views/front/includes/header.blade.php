@@ -152,7 +152,8 @@
             style="display:none;text-align: center;
             position: fixed;"></div>
 
-             <div id="message_error" class="valierror alert-message topalert" style="display:none;text-align: center;
+        <div id="message_error" class="valierror alert-message topalert"
+            style="display:none;text-align: center;
  position: fixed;"></div>
 
         <div class="preloader"></div>
