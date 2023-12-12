@@ -149,6 +149,9 @@
         <div id="message_succsess" class="successmain alert-message topalert"
             style="text-align: center;display: none; position: fixed;"></div>
 
+             <div id="message_error" class="valierror alert-message topalert" style="display:none;text-align: center;
+ position: fixed;"></div>
+
         <div class="preloader"></div>
 
         <!-- Main Header Nav -->
