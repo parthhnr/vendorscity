@@ -15,6 +15,7 @@
     <section class="shop-checkout pt-0">
       <div class="container">
         @if(Cart::count() > 0)
+         <div id="mydiv_pc">
         <div class="row wow fadeInUp" data-wow-delay="300ms">
         <div class="col-lg-8">
           <div class="shopping_cart_table table-responsive">
@@ -146,6 +147,7 @@
           </div>
         </div>
         </div>
+    </div>
         @else
 
         <p>No Product Found in Cart</p>

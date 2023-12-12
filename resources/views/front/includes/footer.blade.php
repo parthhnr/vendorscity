@@ -184,7 +184,7 @@
                      $("#message_error").html("Package Removed From Cart");
                      $('#message_error').show().delay(0).fadeIn('show');
                      $('#message_error').show().delay(2000).fadeOut('show');
-                    //  $("#mydiv_pc").load(location.href + " #mydiv_pc");
+                     $("#mydiv_pc").load(location.href + " #mydiv_pc");
                     //  $("#header_cart").load(location.href + " #header_cart");
                     // $("#header_cart_count").load(location.href + " #header_cart_count");
                      return false;

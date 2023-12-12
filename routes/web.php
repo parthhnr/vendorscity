@@ -101,25 +101,7 @@ Route::get('reset-password/{uid}','\App\Http\Controllers\front\Frontloginregiste
 
 Route::post('set_password/{uid}','\App\Http\Controllers\front\FrontloginregisterController@set_password')->name('set_password');
 
-
-
-    
-
-
-
-
-
-
-
-
- 
-
-
-
-
-
-
-
+        
 
 Route::match(['get', 'post'], 'vendor-database', [FrontvendorController::class, 'vendor_database'])->name('vendor_database');
 
