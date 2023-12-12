@@ -135,6 +135,10 @@ Route::post('package_inquiry', '\App\Http\Controllers\front\Packagecontroller@pa
 Route::post('vendors_check_mail', '\App\Http\Controllers\front\Homecontroller@vendors_check_mail'); 
 Route::post('/vendors_data', '\App\Http\Controllers\front\Homecontroller@vendors_data');
 
+Route::get('/cart', '\App\Http\Controllers\front\Cartcontroller@cart');
+Route::post('add_to_cart','\App\Http\Controllers\front\Cartcontroller@add_to_cart');
+Route::post('cart_remove', '\App\Http\Controllers\front\Cartcontroller@cart_remove');
+
 
 
 // Route::match(['get', 'post'], 'vendor-database', [FrontvendorController::class, 'vendor_database'])->name('vendor_database');

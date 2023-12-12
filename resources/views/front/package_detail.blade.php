@@ -411,19 +411,14 @@
                                             <hr class="opacity-100 mb20">
                                             <div class="d-grid">
                                                 @if (in_array('0', explode(',', $subservices->is_bookable)))
-                                                    <a class="ud-btn btn-thm mb-2" href="javascript:void(0)">
+                                                    <a class="ud-btn btn-thm mb-2" href="javascript:void(0)" onclick="add_to_cart('{{ $package_detail->id }}'); return false;">
                                                         <i class="fal fa-arrow-right-long"></i>Add To Cart</a>
                                                 @endif
                                                 @if (in_array('1', explode(',', $subservices->is_bookable)))
                                                     <a class="ud-btn btn-thm mb-2"
                                                         href="{{ route('enquiry', ['id' => $package_detail->id]) }}">
                                                         <i class="fal fa-arrow-right-long"></i>Inquiry</a>
-                                                @elseif (in_array('0', explode(',', $subservices->is_bookable)) && in_array('1', explode(',', $subservices->is_bookable)))
-                                                    <a class="ud-btn btn-thm mb-2" href="javascript:void(0)">
-                                                        <i class="fal fa-arrow-right-long"></i>Add To Cart</a>
-                                                    <a class="ud-btn btn-thm mb-2"
-                                                        href="{{ route('enquiry', ['id' => $package_detail->id]) }}">
-                                                        <i class="fal fa-arrow-right-long"></i>Inquiry</a>
+                                                
                                                 @endif
 
                                             </div>
@@ -678,3 +673,37 @@
     </div>
 </section>
 @include('front.includes.footer')
+<script type="text/javascript">
+    
+
+    function add_to_cart(package_id) {
+
+        var qty = 1;
+
+        $.ajax({
+
+            type : 'POST',
+            url  : '{{ url('add_to_cart ') }}',
+            data : {
+
+                    "_token": "{{ csrf_token() }}",
+                    'qty': qty,
+                    'package_id': package_id,
+                    
+            },
+
+            success :function(msg){
+                if(msg != 0){
+                    // $("#header_cart").load(location.href + " #header_cart");
+                    // $("#header_cart_count").load(location.href + " #header_cart_count");
+                    $("#message_succsess").html("Package Added To Cart");
+                    $('#message_succsess').show().delay(0).fadeIn('show');
+                    $('#message_succsess').show().delay(2000).fadeOut('show');
+                    return false;
+                }
+            }
+        });
+
+    }
+
+</script>
