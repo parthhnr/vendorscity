@@ -141,7 +141,7 @@
               <p class="text bdrb1 pb10">Subtotal <span class="float-end">AED {{$subtotal}}</span></p>
               <p class="text">Total <span class="float-end">AED {{$subtotal}}</span></p>
               <div class="d-grid mt40">
-                <a class="ud-btn btn-thm" href="page-shop-checkout.html">Proceed to Checkout<i class="fal fa-arrow-right-long"></i></a>
+                <a class="ud-btn btn-thm" href="{{url('/checkout')}}">Proceed to Checkout<i class="fal fa-arrow-right-long"></i></a>
               </div>
             </div>
           </div>

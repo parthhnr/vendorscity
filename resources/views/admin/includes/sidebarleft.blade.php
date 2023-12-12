@@ -144,6 +144,15 @@
                             <i class="fa fa-file"></i><span>Packages Enquiry</span></a>
                     </li>
                 @endif
+
+                @if (in_array('17', $permission1))
+                <li class="{{ request()->segment(2) == 'order' ? 'active' : '' }}">
+
+                    <a href="{{ route('order.index') }}"><i data-feather="clipboard"></i><span>Order</span></a>
+
+                </li>
+                @endif
+
                 <!--
                 @if (in_array('13', $permission1))
 <li

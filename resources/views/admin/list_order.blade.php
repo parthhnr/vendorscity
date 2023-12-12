@@ -204,17 +204,19 @@
 
                                         <tr>
                                             <!-- <th>select</th> -->
+
+                                            <th style="display: none">Sr no</th>
                                             <th>Order Id</th>
                                             <th>Order Date</th>
                                             <th>User Name</th>
                                             <th>Amount</th>
                                             <th>Payment Mode</th>
                                             <th>Payment Status</th>
-                                            <th>Order Status</th>
+                                            {{-- <th>Order Status</th>
                                             <th>Create Shipment</th>
                                             <th>Schedule Pickup </th>
                                             <th>Label</th>
-                                            <th>Track Order</th>
+                                            <th>Track Order</th> --}}
                                             <th>Action</th>
 
                                            
@@ -244,6 +246,7 @@
                                             <tr>
 
                                                 <!-- <td></td> -->
+                                                <td style="display: none">{{ $i }}</td>
                                                 <td>{{$orders->order_id}}</td>
                                                 <td>
                                                     @php
@@ -261,7 +264,7 @@
                                                     @endif
                                                 </td>
                                                 <td>{{$orders->payment_status}}</td>
-                                                <td>
+                                                {{--<td>
                                                     @if ($orders->order_status === 'P')
                                                         Pending
                                                     @elseif ($orders->order_status === 'K')
@@ -278,10 +281,10 @@
                                                         Canceled
                                                     @endif
                                                 </td>
+                                                 <td></td>
                                                 <td></td>
                                                 <td></td>
-                                                <td></td>
-                                                <td></td>
+                                                <td></td> --}}
                                                 <td class="text-right">
                                                     <a class="btn btn-primary" href="{{ route('detail', [$orders->order_id]) }}"><i class="far fa-eye me-2"></i>Details</a>
                                                 </td>
@@ -323,7 +326,7 @@
 
     </div>
 
-@stop
+
 
 
 
@@ -429,5 +432,8 @@
 
     }
 
+    
+
 </script>
 
+@stop

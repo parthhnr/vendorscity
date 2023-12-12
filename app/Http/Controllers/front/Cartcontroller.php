@@ -41,6 +41,27 @@ class Cartcontroller extends Controller
             $subservices_data = DB::table('subservices')->where('id',$package_data->subservice_id)->first();
             $packagecategory_data = DB::table('package_categories')->where('id',$package_data->packagecategory_id)->first();
 
+            $price = $package_data->price;
+
+            if($package_data->discount > 0){
+
+                if($package_data->discount_type == 0){
+    
+                    $disc_price_new = $price * $package_data->discount /100 ;
+    
+                    $disc_price = $price - $disc_price_new;
+                }elseif($package_data->discount_type == 1){
+                    $disc_price = $price - $package_data->discount;
+                }else{
+                    $disc_price = $price;
+                }
+    
+            }else{
+                $disc_price = 0;
+            }
+
+            $cartdiscount = $disc_price;
+
             //echo "<pre>";print_r($service_data);echo "</pre>";exit;
 
             Cart::add([
@@ -56,6 +77,7 @@ class Cartcontroller extends Controller
                 'packagecategory_id' => $package_data->service_id,
                 'packagecategory_name' => $packagecategory_data->name,
                 'page_url' => $package_data->page_url,
+                'product_discount_amount' => $cartdiscount,
                 'image' => $image,
                 'discount' => $package_data->discount,
                 'discount_type' => $package_data->discount_type,

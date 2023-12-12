@@ -449,19 +449,13 @@
 
                                             <div class="budget">
                                                 @if (in_array('0', explode(',', $subservice->is_bookable)))
-                                                    <a class="ud-btn btn-thm add-joining" href="#">Add
+                                                    <a class="ud-btn btn-thm add-joining" href="#" onclick="add_to_cart('{{ $package_data_new->id }}'); return false;">Add
                                                         To Cart</a>
                                                 @endif
                                                 @if (in_array('1', explode(',', $subservice->is_bookable)))
                                                     <a class="ud-btn btn-thm add-joining"
                                                         href="{{ route('enquiry', ['id' => $package_data_new->id]) }}">Inquiry</a>
-                                                @elseif (in_array('0', explode(',', $subservice->is_bookable)) && in_array('1', explode(',', $subservice->is_bookable)))
-                                                    <a class="ud-btn btn-thm add-joining"
-                                                        href="javascript:void(0)">Add To
-                                                        Cart</a>
-                                                    <a class="ud-btn btn-thm add-joining"
-                                                        href="{{ route('enquiry', ['id' => $package_data_new->id]) }}">Inquiry</a>
-                                                @endif
+                                                @endif 
                                             </div>
 
                                         </div>

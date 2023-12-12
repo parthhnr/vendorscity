@@ -55,7 +55,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label>Image (Size : 619px X 829px )</label>
+                                        <label>Image (Size : 839px X 548px )</label>
                                         <input type="file" class="form-control" id="attachment1" name="attachment1[]"
                                             multiple>
                                         <p id="image_error" style="display: none;color: red"></p>
