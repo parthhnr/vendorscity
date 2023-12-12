@@ -1,0 +1,285 @@
+   @extends('admin.includes.Template')
+   @section('content')
+
+       @php
+
+           $userId = Auth::id();
+
+           $get_user_data = Helper::get_user_data($userId);
+
+           $get_permission_data = Helper::get_permission_data($get_user_data->role_id);
+
+           $edit_perm = [];
+
+           if ($get_permission_data->editperm != '') {
+               $edit_perm = $get_permission_data->editperm;
+
+               $edit_perm = explode(',', $edit_perm);
+           }
+
+       @endphp
+
+       <div class="content container-fluid">
+
+           <!-- Page Header -->
+           <div class="page-header">
+               <div class="row align-items-center">
+                   <div class="col">
+                       <h3 class="page-title">Form Field</h3>
+                       <ul class="breadcrumb">
+                           <li class="breadcrumb-item"><a href="{{ url('/admin') }}">Dashboard</a>
+                           </li>
+                           <li class="breadcrumb-item active">Form Field</li>
+                       </ul>
+                   </div>
+                   @if (in_array('18', $edit_perm))
+                       <div class="col-auto">
+
+                           <a class="btn btn-primary me-1" href="{{ route('form_field.create') }}">
+                               <i class="fas fa-plus"></i> Add Form Field
+                           </a>
+                           {{-- <a class="btn btn-primary filter-btn" href="javascript:void(0);" id="filter_search">
+                           <i class="fas fa-filter"></i> Filter
+                       </a> --}}
+                           <a class="btn btn-danger me-1" href="javascript:void('0');" onclick="delete_form_field();">
+                               <i class="fas fa-trash"></i> Delete
+                           </a>
+                       </div>
+                   @endif
+               </div>
+           </div>
+           <!-- /Page Header -->
+
+
+
+           @if ($message = Session::get('success'))
+               <div class="alert alert-success alert-dismissible fade show">
+                   <strong>Success!</strong> {{ $message }}
+                   <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+               </div>
+           @endif
+
+           <div class="alert alert-success alert-dismissible fade show success_show" style="display: none;">
+               <strong>Success! </strong><span id="success_message"></span>
+               <!-- <button type="button" class="btn-close" data-bs-dismiss="alert"></button> -->
+           </div>
+           @php
+               if (($lable_name != '' && isset($lable_name)) || $type != '') {
+                   $displayCard = 'display:block';
+               } else {
+                   $displayCard = 'display:none';
+               }
+           @endphp
+           <!-- Search Filter -->
+           <div id="filter_inputs" class="card filter-card" style="@php echo $displayCard; @endphp">
+               <div class="card-body pb-0">
+                   <form action="{{-- route('form_field.filter') --}}" method="POST" enctype="multipart/form-data">
+                       @csrf
+                       <div class="row">
+                           <div class="col-sm-6 col-md-3">
+                               <div class="form-group">
+                                   <label>Label Name</label>
+                                   <input type="text" class="form-control" name="lable_name"
+                                       value="@if (isset($lable_name)) {{ $lable_name }} @endif">
+                               </div>
+                           </div>
+                           <div class="col-sm-6 col-md-3">
+                               <div class="form-group">
+                                   <label>Type</label>
+
+
+                                   <select id="type" name="type" class="select form-control">
+                                       <option value="">Select Type</option>
+                                       <option value="1" @if ($type == 1) {{ 'selected' }} @endif>
+                                           Input</option>
+                                       <option value="2" @if ($type == 2) {{ 'selected' }} @endif>
+                                           Dropdown</option>
+                                       <option value="3" @if ($type == 3) {{ 'selected' }} @endif>
+                                           Radio</option>
+                                       <!-- <option value="4" @if ($type == 4) {{ 'selected' }} @endif>Checkbox</option> -->
+                                       <option value="5" @if ($type == 5) {{ 'selected' }} @endif>
+                                           Text area</option>
+                                   </select>
+                               </div>
+                           </div>
+                           <div class="col-sm-6 col-md-3">
+                               <input class="btn btn-primary me-1 " type="submit" value="Search" style="margin-top: 22px;">
+                               <a href="{{ route('form_field.index') }}" class="btn btn-primary"
+                                   style="margin-top: 22px;" />Reset</a>
+                           </div>
+                       </div>
+                   </form>
+               </div>
+           </div>
+           <!-- /Search Filter -->
+
+           <div class="row">
+               <div class="col-sm-12">
+
+                   <div class="card card-table">
+                       <div class="card-body">
+                           <form id="form" action="{{ route('delete_form_field') }}" enctype="multipart/form-data">
+                               <INPUT TYPE="hidden" NAME="hidPgRefRan" VALUE="<?php echo rand(); ?>">
+                               @csrf
+                               <div class="table-responsive">
+                                   <table class="table table-center table-hover datatable">
+                                       <thead class="thead-light">
+                                           <tr>
+                                               <th>Select</th>
+                                               <th>Lable Name</th>
+                                               <th>Type</th>
+                                               @if (in_array('18', $edit_perm))
+                                                   <th class="text-right">Actions</th>
+                                               @endif
+                                           </tr>
+                                       </thead>
+                                       <tbody>
+                                           @if (count($form_data) > 0)
+                                               @foreach ($form_data as $data)
+                                                   <tr>
+                                                       <td>
+                                                           <input name="selected[]" id="selected[]"
+                                                               value="{{ $data->id }}" type="checkbox"
+                                                               class="minimal-red"
+                                                               style="height: 20px;width: 20px;border-radius: 0px;color: red;">
+                                                       </td>
+
+                                                       <td>
+                                                           {{ $data->lable_name }}
+                                                       </td>
+
+                                                       <td>
+                                                           @if ($data->type == '1')
+                                                               {{ 'Input' }}
+                                                           @elseif($data->type == '2')
+                                                               {{ 'Dropdown' }}
+                                                           @elseif($data->type == '3')
+                                                               {{ 'Radio' }}
+                                                           @elseif($data->type == '4')
+                                                               {{ 'Checkbox' }}
+                                                           @elseif($data->type == '5')
+                                                               {{ 'Text area' }}
+                                                           @endif
+                                                       </td>
+                                                       @if (in_array('18', $edit_perm))
+                                                           <td class="text-right">
+                                                               <a class="btn btn-primary"
+                                                                   href="{{ route('form_field.edit', $data->id) }}"><i
+                                                                       class="far fa-edit"></i></a>
+                                                           </td>
+                                                       @endif
+                                                   </tr>
+                                               @endforeach
+                                           @else
+                                               <tr>
+                                                   <td colspan="6" class="text-center">{{ 'No Form Fields Found' }}</td>
+                                               </tr>
+                                           @endif
+                                       </tbody>
+                                   </table>
+                                   {{-- <span style="float: right;" class="mt-3"> {!! $form_data->appends(Request::except('page'))->links() !!} </span> --}}
+                               </div>
+                           </form>
+                       </div>
+                   </div>
+               </div>
+           </div>
+       </div>
+
+       <!-- Delete  Modal -->
+
+       <div class="modal custom-modal fade" id="delete_model" role="dialog">
+
+           <div class="modal-dialog modal-dialog-centered">
+
+               <div class="modal-content">
+
+                   <div class="modal-body">
+
+                       <div class="modal-icon text-center mb-3">
+
+                           <i class="fas fa-trash-alt text-danger"></i>
+
+                       </div>
+
+                       <div class="modal-text text-center">
+
+                           <!-- <h3>Delete Expense Category</h3> -->
+
+                           <p>Are you sure want to delete?</p>
+
+                       </div>
+
+                   </div>
+
+                   <div class="modal-footer text-center">
+
+                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+
+                       <button type="button" class="btn btn-primary" onclick="form_sub();">Delete</button>
+
+                   </div>
+
+               </div>
+
+           </div>
+
+       </div>
+
+       <!-- /Delete Modal -->
+       <!-- Select one record Category Modal -->
+
+       <div class="modal custom-modal fade" id="select_one_record" role="dialog">
+
+           <div class="modal-dialog modal-dialog-centered">
+
+               <div class="modal-content">
+
+                   <div class="modal-body">
+
+                       <div class="modal-text text-center">
+
+                           <h3>Please select at least one record to delete</h3>
+
+                           <!-- <p>Are you sure want to delete?</p> -->
+
+                       </div>
+
+                   </div>
+
+               </div>
+
+           </div>
+
+       </div>
+
+       <!-- /Select one record Category Modal -->
+
+   @stop
+   <script>
+       function delete_form_field() {
+
+           // alert('test');
+
+           var checked = $("#form input:checked").length > 0;
+
+           if (!checked) {
+
+               $('#select_one_record').modal('show');
+
+           } else {
+
+               $('#delete_model').modal('show');
+
+           }
+
+       }
+
+
+
+       function form_sub() {
+
+           $('#form').submit();
+
+       }
+   </script>
