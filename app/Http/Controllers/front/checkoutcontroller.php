@@ -119,6 +119,8 @@ class checkoutcontroller extends Controller
                 'discount_type'         => $arrRowDeailts->options->discount_type,
                 'product_discount_amount'         => round($arrRowDeailts->options->product_discount_amount),
                 'cdate'                 => date('Y-m-d'),
+                'subservice_booking_percentage'                 => $arrRowDeailts->options->subservice_booking_percentage,
+
                 );
 
             DB::table('ci_order_item')->insertGetId($arrData);

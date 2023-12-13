@@ -145,7 +145,7 @@
                     </li>
                 @endif
 
-                @if (in_array('18', $permission1))
+                @if (in_array('z', $permission1))
                     <li class="{{ request()->segment(2) == 'form_field' ? 'active' : '' }}"><a
                             href="{{ route('form_field.index') }}"
                             class="{{ request()->segment(2) == 'form_field' ? 'active' : '' }}">
@@ -153,15 +153,7 @@
                     </li>
                 @endif
                 
-                @if (in_array('17', $permission1))
-                <li class="{{ request()->segment(2) == 'order' ? 'active' : '' }}">
-
-                    <a href="{{ route('order.index') }}"><i data-feather="clipboard"></i><span>Order</span></a>
-
-                </li>
-                @endif
-
-
+                    
                 @if (in_array('19', $permission1))
                     <li class="{{ request()->segment(2) == 'order' ? 'active' : '' }}">
                         <a href="{{ route('order.index') }}"><i data-feather="clipboard"></i><span>Order</span></a>

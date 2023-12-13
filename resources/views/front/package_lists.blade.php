@@ -452,14 +452,17 @@
 
                                                     <a class="ud-btn btn-thm add-joining" href="#" onclick="add_to_cart('{{ $package_data_new->id }}'); return false;">Get Multiple Quote</a>
                                                 @endif
+
                                                 @if (in_array('1', explode(',', $subservice->is_bookable)))
                                                     <a class="ud-btn btn-thm add-joining"
                                                         href="{{ route('enquiry', ['id' => $package_data_new->id]) }}">Instant
                                                         Booking</a>
                                                 @endif 
-=
+
                                             </div>
 
+                                        </div>
+                                        <div class="list-meta d-flex justify-content-between align-items-center mt15">
                                         </div>
                                     </div>
                                 </div>
