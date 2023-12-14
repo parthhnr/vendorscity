@@ -96,16 +96,19 @@
                                            Dropdown</option>
                                        <option value="3" @if ($type == 3) {{ 'selected' }} @endif>
                                            Radio</option>
-                                       <!-- <option value="4" @if ($type == 4) {{ 'selected' }} @endif>Checkbox</option> -->
+                                       <option value="4" @if ($type == 4) {{ 'selected' }} @endif>
+                                           Checkbox</option>
                                        <option value="5" @if ($type == 5) {{ 'selected' }} @endif>
                                            Text area</option>
+                                       <option value="6" @if ($type == 6) {{ 'selected' }} @endif>
+                                           Date</option>
                                    </select>
                                </div>
                            </div>
                            <div class="col-sm-6 col-md-3">
                                <input class="btn btn-primary me-1 " type="submit" value="Search" style="margin-top: 22px;">
                                <a href="{{ route('form_field.index') }}" class="btn btn-primary"
-                                   style="margin-top: 22px;" />Reset</a>
+                                   style="margin-top: 22px;">Reset</a>
                            </div>
                        </div>
                    </form>
@@ -159,6 +162,8 @@
                                                                {{ 'Checkbox' }}
                                                            @elseif($data->type == '5')
                                                                {{ 'Text area' }}
+                                                           @elseif($data->type == '6')
+                                                               {{ 'Date' }}
                                                            @endif
                                                        </td>
                                                        @if (in_array('18', $edit_perm))

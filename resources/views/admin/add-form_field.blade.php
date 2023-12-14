@@ -47,8 +47,9 @@
                                         <option value="1">Input</option>
                                         <option value="2">Dropdown</option>
                                         <option value="3">Radio</option>
-                                        <!-- <option value="4">Checkbox</option> -->
+                                        <option value="4">Checkbox</option>
                                         <option value="5">Text area</option>
+                                        <option value="6">Date</option>
                                     </select>
                                     <p class="form-error-text" id="type_error" style="color: red; margin-top: 10px;">
                                     </p>

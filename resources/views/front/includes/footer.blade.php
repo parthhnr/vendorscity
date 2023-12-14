@@ -53,8 +53,8 @@
                     <ul class="ps-0">
                         <li><a href="">Help & Support</a></li>
                         <li><a href="">Trust & Safety</a></li>
-                        <li><a href="">Selling on Freeio</a></li>
-                        <li><a href="">Buying on Freeio</a></li>
+                        <li><a href="">Selling on Vendorscity</a></li>
+                        <li><a href="">Buying on Vendorscity</a></li>
                     </ul>
                 </div>
             </div>
@@ -92,7 +92,8 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="text-center text-lg-start">
-                    <p class="copyright-text mb-2 mb-md0 text-dark-light ff-heading">© Freeio. 2023 CreativeLayers. All
+                    <p class="copyright-text mb-2 mb-md0 text-dark-light ff-heading">© Vendorscity. 2023 CreativeLayers.
+                        All
                         rights reserved.</p>
                 </div>
             </div>
@@ -165,66 +166,66 @@
 <script src="{{ asset('public/site/js/script.js') }}"></script>
 
 <script type="text/javascript">
-     function remove_to_cart(rowId) {
+    function remove_to_cart(rowId) {
 
-       var answer = window.confirm("Do you want to remove this Package from cart?");
+        var answer = window.confirm("Do you want to remove this Package from cart?");
 
         if (answer) {
-               var url = '{{ url('cart_remove') }}';
-               $.ajax({
-                 url: url,
-                 type: 'post',
-                 data: {
-                   "_token": "{{ csrf_token() }}",
-                   "rowId": rowId
-                 },
-                 success: function(msg) {
+            var url = '{{ url('cart_remove') }}';
+            $.ajax({
+                url: url,
+                type: 'post',
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                    "rowId": rowId
+                },
+                success: function(msg) {
 
-                   if (msg != '') {
-                     $("#message_error").html("Package Removed From Cart");
-                     $('#message_error').show().delay(0).fadeIn('show');
-                     $('#message_error').show().delay(2000).fadeOut('show');
-                     $("#mydiv_pc").load(location.href + " #mydiv_pc");
-                    //  $("#header_cart").load(location.href + " #header_cart");
-                    // $("#header_cart_count").load(location.href + " #header_cart_count");
-                     return false;
-                   }
+                    if (msg != '') {
+                        $("#message_error").html("Package Removed From Cart");
+                        $('#message_error').show().delay(0).fadeIn('show');
+                        $('#message_error').show().delay(2000).fadeOut('show');
+                        $("#mydiv_pc").load(location.href + " #mydiv_pc");
+                        //  $("#header_cart").load(location.href + " #header_cart");
+                        // $("#header_cart_count").load(location.href + " #header_cart_count");
+                        return false;
+                    }
 
-                 }
+                }
 
-               });
-           }
-     }
-
-     function add_to_cart(package_id) {
-
-var qty = 1;
-
-$.ajax({
-
-    type : 'POST',
-    url  : '{{ url('add_to_cart ') }}',
-    data : {
-
-            "_token": "{{ csrf_token() }}",
-            'qty': qty,
-            'package_id': package_id,
-            
-    },
-
-    success :function(msg){
-        if(msg != 0){
-            // $("#header_cart").load(location.href + " #header_cart");
-            // $("#header_cart_count").load(location.href + " #header_cart_count");
-            $("#message_succsess").html("Package Added To Cart");
-            $('#message_succsess').show().delay(0).fadeIn('show');
-            $('#message_succsess').show().delay(2000).fadeOut('show');
-            return false;
+            });
         }
     }
-});
 
-}
+    function add_to_cart(package_id) {
+
+        var qty = 1;
+
+        $.ajax({
+
+            type: 'POST',
+            url: '{{ url('add_to_cart ') }}',
+            data: {
+
+                "_token": "{{ csrf_token() }}",
+                'qty': qty,
+                'package_id': package_id,
+
+            },
+
+            success: function(msg) {
+                if (msg != 0) {
+                    // $("#header_cart").load(location.href + " #header_cart");
+                    // $("#header_cart_count").load(location.href + " #header_cart_count");
+                    $("#message_succsess").html("Package Added To Cart");
+                    $('#message_succsess').show().delay(0).fadeIn('show');
+                    $('#message_succsess').show().delay(2000).fadeOut('show');
+                    return false;
+                }
+            }
+        });
+
+    }
 </script>
 
 </body>
