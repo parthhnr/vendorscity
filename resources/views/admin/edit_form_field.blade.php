@@ -58,9 +58,12 @@
                                             Dropdown</option>
                                         <option value="3" @if ($form_filed->type == 3) {{ 'selected' }} @endif>
                                             Radio</option>
-                                        <!-- <option value="4" @if ($form_filed->type == 4) {{ 'selected' }} @endif>Checkbox</option> -->
+                                        <option value="4" @if ($form_filed->type == 4) {{ 'selected' }} @endif>
+                                            Checkbox</option>
                                         <option value="5" @if ($form_filed->type == 5) {{ 'selected' }} @endif>
                                             Text area</option>
+                                        <option value="6" @if ($form_filed->type == 6) {{ 'selected' }} @endif>
+                                            Date</option>
                                     </select>
                                     <p class="form-error-text" id="type_error" style="color: red; margin-top: 10px;">
                                     </p>

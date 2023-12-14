@@ -1,4 +1,7 @@
 @include('front.includes.header')
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css">
+
 <section class="our-register">
     <div class="container">
         <div class="row">
@@ -50,6 +53,7 @@
                         </div>
 
                         <div class="row">
+
                             @for ($i = 0; $i < count($result1); $i++)
                                 @for ($k = 0; $k < count($formFields); $k++)
                                     @php
@@ -76,9 +80,10 @@
                                                 <label class="form-label fw500 dark-color"
                                                     for="country">{{ $formFields[$k]->lable_name }}</label>
                                                 <input name="form_field_id[]" type="hidden" class="m-0"
-                                                    id="form_field_id[]" value="{{ $formFields[$k]->id }}">
-                                                <select class="form-control" id="formfield_value[]"
-                                                    name="formfield_value[]">
+                                                    id="form_field_id_{{ $formFields[$k]->id }}"
+                                                    value="{{ $formFields[$k]->id }}">
+                                                <select class="form-control" class="multiple-dropdown"
+                                                    id="formfield_value[]" name="formfield_value[]" multiple>
                                                     <option value="">Select {{ $formFields[$k]->lable_name }}
                                                     </option>
                                                     @foreach ($form_additionalData as $form_additional)
@@ -169,6 +174,8 @@
 </section>
 @include('front.includes.footer')
 
+{{-- <script src="http://localhost/vendorscity/vendorscity/public/admin/assets/plugins/select2/js/select2.min.js"></script> --}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 
 <script>
     function category_validation() {
@@ -290,3 +297,26 @@
 
     }
 </script>
+
+{{-- <script>
+    @for ($i = 0; $i < count($result1); $i++)
+        @for ($k = 0; $k < count($formFields); $k++)
+            @php
+                $form_additionalData = DB::table('form_attributes')
+                    ->select('*')
+                    ->where('form_id', '=', $result1[$i]->id)
+                    ->get()
+                    ->toArray();
+            @endphp
+
+            @if ($result1[$i]->lable_name == $formFields[$k]->lable_name)
+                @if ($result1[$i]->type == '2')
+
+                    $(".multiple-dropdown").select2({
+                        placeholder: "{{ $formFields[$k]->lable_name }}"
+                    });
+                @endif
+            @endif
+        @endfor
+    @endfor
+</script> --}}

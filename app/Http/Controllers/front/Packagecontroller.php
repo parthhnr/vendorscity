@@ -98,7 +98,7 @@ class Packagecontroller extends Controller
         $data['result1'] = DB::table('form_fileds')->whereIn('id',$tags)->get()->toArray();
         $data['formFields'] = DB::table('form_fileds')->get()->toArray();
 
-        // echo "<pre>";print_r($result1);echo "</pre>";exit;
+        // echo "<pre>";print_r($data['result1']);echo "</pre>";exit;
         
         $data['package_id'] =$id;
         $data['service_id'] = $service->service_id; 
@@ -165,6 +165,39 @@ class Packagecontroller extends Controller
                         
 
                          DB::table('more_formfields_details')->insert($data2);
+                    }
+                }    
+            }
+            
+            if ($request->form_field_checkbox_id != '' && count($request->form_field_checkbox_id) > 0) {
+           
+                foreach($request->form_field_checkbox_id as $key1 => $values1) {                    
+                   
+                    $ckeckboxVal = $request->form_field_checkbox_id[$key1];                    
+                    
+                    if ($request->form_field_checkbox_id[$key1] != '') {
+
+                        $data3['package_inquiry_id'] = $package_inquiry;
+                        
+                         $data3['form_field_id'] = $request->form_field_checkbox_id[$key1];
+                         $data3['formfield_value'] = $request['formfield_checkbox_'.$ckeckboxVal];
+                         
+                         
+
+                        // $data3['formfield_value'] = $request['formfield_checkbox_'.$key1];
+                       if($data3['formfield_value'] !=''){
+
+                        $data3['formfield_value'] = implode(",", $data3['formfield_value']);
+                        
+                       }else{
+                        $data3['formfield_value'] = null;
+                       }
+                        
+
+
+                        // echo "<pre>";print_r($data123);echo "</pre>";exit;
+
+                         DB::table('more_formfields_details')->insert($data3);
                     }
                 }    
             }
