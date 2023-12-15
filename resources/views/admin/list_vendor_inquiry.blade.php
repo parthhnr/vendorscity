@@ -6,29 +6,17 @@
 
            $userId = Auth::id();
 
-           
-
            $get_user_data = Helper::get_user_data($userId);
-
-           
 
            $get_permission_data = Helper::get_permission_data($get_user_data->role_id);
 
-           
-
            $edit_perm = [];
 
-           
-
            if ($get_permission_data->editperm != '') {
-
                $edit_perm = $get_permission_data->editperm;
 
                $edit_perm = explode(',', $edit_perm);
-
            }
-
-           
 
        @endphp
 
@@ -66,11 +54,10 @@
 
            </div>
 
-          
+
 
 
            @if ($message = Session::get('success'))
-
                <div class="alert alert-success alert-dismissible fade show">
 
                    <strong>Success!</strong> {{ $message }}
@@ -78,7 +65,6 @@
                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
 
                </div>
-
            @endif
 
 
@@ -145,19 +131,9 @@
 
            <!-- /Search Filter -->
 
-
-
-
-
-
-
-
-
            <div class="row">
 
                <div class="col-sm-12">
-
-
 
                    <div class="card card-table">
 
@@ -170,45 +146,48 @@
                                @csrf
 
                                @php
-                                    $userId = Auth::id();
-                                    $currentDate = now();
+                                   $userId = Auth::id();
+                                   $currentDate = now();
 
-                                    $vendor_subscription = DB::table('subscription')
-                                               ->select('*')
-                                               ->where('vendor_id', '=', $userId)
-                                               ->where('enddate', '>=', $currentDate)
-                                               ->orderBy('id', 'desc')
-                                               ->get();
+                                   $vendor_subscription = DB::table('subscription')
+                                       ->select('*')
+                                       ->where('vendor_id', '=', $userId)
+                                       ->where('enddate', '>=', $currentDate)
+                                       ->orderBy('id', 'desc')
+                                       ->get();
 
-                                    $resultArray = [];
+                                   $resultArray = [];
 
-                                    foreach($vendor_subscription as $vendor_subscription_data){
+                                   foreach ($vendor_subscription as $vendor_subscription_data) {
+                                       $vendor_subscription_att = DB::table('subscription_subservice_attribute')
+                                           ->select('*')
+                                           ->where('subscription_id', '=', $vendor_subscription_data->id)
+                                           ->get();
 
-                                        $vendor_subscription_att = DB::table('subscription_subservice_attribute')
-                                               ->select('*')
-                                               ->where('subscription_id', '=', $vendor_subscription_data->id)
-                                               ->get();
+                                       foreach ($vendor_subscription_att as $vendor_subscription_att_data) {
+                                           $resultArray[] = [
+                                               'service_id' => $vendor_subscription_att_data->service_id,
+                                               'subservice_id' => $vendor_subscription_att_data->subservice_id,
+                                           ];
+                                       }
+                                   }
 
-                                        
+                                   $uniqueArray = [];
 
+                                   foreach ($resultArray as $entry) {
+                                       // Create a unique key for each combination
+                                       $key = $entry['service_id'] . '_' . $entry['subservice_id'];
 
+                                       // Check if the combination already exists in the unique array
+                                       if (!isset($uniqueArray[$key])) {
+                                           // If not, add it to the unique array
+                                           $uniqueArray[$key] = $entry;
+                                       }
+                                   }
 
-                                        foreach($vendor_subscription_att as $vendor_subscription_att_data){
+                                   $resultArray = array_values($uniqueArray);
 
-                                            $resultArray[] = [
-                                                'service_id' => $vendor_subscription_att_data->service_id,
-                                                'subservice_id' => $vendor_subscription_att_data->subservice_id,
-                                            ];
-                                        }
-
-                                        
-                                    }
-
-                                    //echo"<pre>";print_r($resultArray);echo"</pre>";
-
-
-                                    
-                                    
+                                   // echo"<pre>";print_r($resultArray);echo"</pre>";
 
                                @endphp
 
@@ -221,79 +200,80 @@
                                            <tr>
                                                <th>Sr No</th>
                                                <th>Name</th>
-                                               
                                                <th>Service</th>
                                                <th>Sub Service</th>
-
                                                <th>Action</th>
-                                               <!-- <th>Price</th>
-                                               <th>Inquiry Date</th> -->
                                            </tr>
 
                                        </thead>
 
                                        <tbody>
 
-                                        @if($vendor_subscription != '')
+                                           @if ($vendor_subscription != '')
 
-                                         
 
-                                           @foreach ($resultArray as $resultArray_data)
 
-                                           @php
+                                               @foreach ($resultArray as $resultArray_data)
+                                                   @php
 
-                                                $packages_enquiry = DB::table('packages_enquiry')
+                                                       $packages_enquiry = DB::table('packages_enquiry')
                                                            ->select('*')
                                                            ->where('service_id', '=', $resultArray_data['service_id'])
                                                            ->where('subservice_id', '=', $resultArray_data['subservice_id'])
-                                                           ->where('is_accept', '=', 0)
+                                                           ->where('count', '<', 5)
                                                            ->orderBy('id', 'desc')
                                                            ->get();
 
-                                                
+                                                   @endphp
 
-                                           @endphp
+                                                   @php
+                                                       $i = 1;
+                                                   @endphp
 
-                                           @php
-                                                $i=1;
-                                               @endphp
 
-                                            @foreach ($packages_enquiry as $packages_enquiry_data)
+                                                   @foreach ($packages_enquiry as $packages_enquiry_data)
+                                                       @php
+                                                           $vendor_data = Auth::user();
+                                                           $vendors_data = DB::table('package_inquiry_accepted')
+                                                               ->where('packages_inquiry_id', $packages_enquiry_data->id)
+                                                               ->where('vendor_id', $vendor_data->id)
+                                                               ->first();
+                                                           //    echo '<pre>';
+                                                           //    print_r($vendors_data);
+                                                           //    echo '</pre>';
+                                                       @endphp
+                                                       @if ($vendors_data == '')
+                                                           <tr>
 
-                                            @php
-                                            //echo"<pre>";print_r($packages_enquiry_data->name);echo"</pre>";
-                                            @endphp
-                                               <tr>
+                                                               <td>{{ $i }}</td>
+                                                               <td>{{ $packages_enquiry_data->name }}</td>
 
-                                                   <td>{{$i}}</td>
-                                                   <td>{{ $packages_enquiry_data->name }}</td>
-                                                  
-                                                   <td>
-                                                       @if ($packages_enquiry_data->service_id != '')
-                                                           {!! Helper::servicename(strval($packages_enquiry_data->service_id)) !!}
+                                                               <td>
+                                                                   @if ($packages_enquiry_data->service_id != '')
+                                                                       {!! Helper::servicename(strval($packages_enquiry_data->service_id)) !!}
+                                                                   @endif
+                                                               </td>
+                                                               <td>
+                                                                   @if ($packages_enquiry_data->subservice_id != '')
+                                                                       {!! Helper::subservicename(strval($packages_enquiry_data->subservice_id)) !!}
+                                                                   @endif
+
+                                                               </td>
+                                                               <td><a class="btn btn-primary" href="javascript:void('0');"
+                                                                       onclick="delete_category('{{ $packages_enquiry_data->id }}','{{ $userId }}');">
+                                                                       Accept
+                                                                   </a></td>
+
+                                                           </tr>
+
+                                                           @php
+                                                               $i++;
+                                                           @endphp
                                                        @endif
-                                                   </td>
-                                                   <td>
-                                                        @if ($packages_enquiry_data->subservice_id != '')
-                                                           {!! Helper::subservicename(strval($packages_enquiry_data->subservice_id)) !!}
-                                                       @endif
-                                                    
-                                                    </td>
-                                                    <td><a class="btn btn-primary" href="javascript:void('0');" onclick="delete_category('{{$packages_enquiry_data->id}}','{{$userId}}');">
-                            Accept
-                        </a></td>
-                                                 
-                                               </tr>
-                                               @php
-                                                $i++;
-                                               @endphp
+                                                   @endforeach
                                                @endforeach
-                                               
-                                           @endforeach
-
                                            @else
-
-                                            <p>No Data Found</p>
+                                               <p>No Data Found</p>
                                            @endif
 
 
@@ -330,7 +310,7 @@
 
                <div class="modal-body">
 
-                  <!--  <div class="modal-icon text-center mb-3">
+                   <!--  <div class="modal-icon text-center mb-3">
 
                        <i class="fas fa-trash-alt text-danger"></i>
 
@@ -428,20 +408,19 @@
 
    <!-- /set orderModal -->
    <form id="form_new" action="{{ route('accept_vendor_inquiry') }}" enctype="multipart/form-data">
-        @csrf
-        <input type="hidden" name="inquiry_id" id="inquiry_id" value="">
-        <input type="hidden" name="vendor_id" id="vendor_id" value="">
+       @csrf
+       <input type="hidden" name="inquiry_id" id="inquiry_id" value="">
+       <input type="hidden" name="vendor_id" id="vendor_id" value="">
    </form>
 
 
    <script>
+       function delete_category(id, vendor_id) {
+           $('#inquiry_id').val(id);
 
-       function delete_category(id,vendor_id) {
-            $('#inquiry_id').val(id);
+           $('#vendor_id').val(vendor_id);
 
-            $('#vendor_id').val(vendor_id);
-
-            $('#delete_model').modal('show');
+           $('#delete_model').modal('show');
        }
 
 
@@ -451,8 +430,4 @@
            $('#form_new').submit();
 
        }
-
-
-
    </script>
-
