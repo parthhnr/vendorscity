@@ -123,7 +123,9 @@ class Packagecontroller extends Controller
     }
     public function package_inquiry(Request $request){
 
-        // echo "<pre>";print_r($request->post());echo "</pre>";exit;
+        echo "<pre>";print_r($request->post());echo "</pre>";exit;
+
+        
         $data['name']=$request->name;
         $data['pakage_id']=$request->pakage_id;
         $data['service_id']=$request->service_id;
@@ -131,6 +133,8 @@ class Packagecontroller extends Controller
         $data['packagecategory_id']=$request->packagecategory_id;
         $data['email']=$request->email;
         $data['mobile']=$request->mobile;
+        $data['added_date'] = date('Y-m-d');
+
 
         $package_inquiry=DB::table('packages_enquiry',)->insertGetId($data);
         
