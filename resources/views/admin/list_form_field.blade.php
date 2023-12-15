@@ -164,6 +164,8 @@
                                                                {{ 'Text area' }}
                                                            @elseif($data->type == '6')
                                                                {{ 'Date' }}
+                                                           @elseif($data->type == '7')
+                                                               {{ 'Set Order' }}
                                                            @endif
                                                        </td>
                                                        @if (in_array('18', $edit_perm))

@@ -2,8 +2,10 @@
 
    @section('content')
 
- <style type="text/css">
-           .modal-dialog{max-width: 50%}
+       <style type="text/css">
+           .modal-dialog {
+               max-width: 50%
+           }
        </style>
 
        <div class="content container-fluid">
@@ -179,7 +181,9 @@
                                                    <td>{{ date('d-m-Y', strtotime($subs_data->startdate)) }}</td>
                                                    <td>{{ date('d-m-Y', strtotime($subs_data->enddate)) }}</td>
                                                    <td> <span class="badge badge-pill bg-success-light">Active</span></td>
-                                                    <td><a class="btn btn-primary" href="javascript:void('0');" onclick="delete_category('{{$subs_data->id}}');">View Services</a></td>
+                                                   <td><a class="btn btn-primary" href="javascript:void('0');"
+                                                           onclick="delete_category('{{ $subs_data->id }}');">View
+                                                           Services</a></td>
                                                </tr>
                                            @endforeach
 
@@ -202,87 +206,87 @@
    @stop
 
    <!-- Delete  Modal -->
-   @if($result_new != '')
-   @foreach ($result_new as $data)
-   <div class="modal custom-modal fade" id="delete_model_{{$data->id}}" role="dialog">
+   @if ($result_new != '')
+       @foreach ($result_new as $data)
+           <div class="modal custom-modal fade" id="delete_model_{{ $data->id }}" role="dialog">
 
-       <div class="modal-dialog modal-dialog-centered">
+               <div class="modal-dialog modal-dialog-centered">
 
-           <div class="modal-content">
+                   <div class="modal-content">
 
-               <div class="modal-body">
+                       <div class="modal-body">
 
 
-                   <div class="modal-text text-center">
+                           <div class="modal-text text-center">
 
-                       <!-- <h3>Delete Expense Category</h3> -->
+                               <!-- <h3>Delete Expense Category</h3> -->
 
-                       @php
-                            
+                               @php
 
-                             $result = DB::table('subscription_subservice_attribute')
-            ->select('*')
-            ->where('subscription_id', '=', $data->id)
-            ->get();
+                                   $result = DB::table('subscription_subservice_attribute')
+                                       ->select('*')
+                                       ->where('subscription_id', '=', $data->id)
+                                       ->get();
 
-                        //$servicename = Helper::servicename($result->service_id);
+                                   //$servicename = Helper::servicename($result->service_id);
 
-                            //echo"<pre>";print_r($servicename);echo"</pre>";
-                       @endphp
-                       @if($result != '')
-                       <div class="row">
-                            <div class="col-md-12">
-                                <div class="table-responsive">
-                                    <table class="invoice-table table table-bordered">
-                                        <thead>
-                                            <tr>
-                                                <th>Services</th>
-                                                <th>Sub Services</th>
-                                                <th class="text-end">Price</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @php
-                                                $total = 0;
-                                            @endphp
-                                            @foreach($result as $result_data)
-                                            <tr>
-                                                <td>{!! Helper::servicename($result_data->service_id) !!}</td>
-                                                <td>{!! Helper::subservicename($result_data->subservice_id) !!}</td>
-                                                <td>{{$result_data->charge}}</td>
-                                            </tr>
-                                            @php
-                                                $total += $result_data->charge;
-                                            @endphp
-                                            @endforeach
-                                        </tbody>
-                                    </table>
+                                   //echo"<pre>";print_r($servicename);echo"</pre>";
 
-                                    <div class="col-md-6 col-xl-4 ms-auto">
-                                        <div class="table-responsive">
-                                            <table class="invoice-table-two table">
-                                                <tbody>
-                                                    <tr>
-                                                        <th>Total :</th>
-                                                        <td><span>{{$total}}</span></td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                               @endphp
+                               @if ($result != '')
+                                   <div class="row">
+                                       <div class="col-md-12">
+                                           <div class="table-responsive">
+                                               <table class="invoice-table table table-bordered">
+                                                   <thead>
+                                                       <tr>
+                                                           <th>Services</th>
+                                                           <th>Sub Services</th>
+                                                           <th class="text-end">Price</th>
+                                                       </tr>
+                                                   </thead>
+                                                   <tbody>
+                                                       @php
+                                                           $total = 0;
+                                                       @endphp
+                                                       @foreach ($result as $result_data)
+                                                           <tr>
+                                                               <td>{!! Helper::servicename($result_data->service_id) !!}</td>
+                                                               <td>{!! Helper::subservicename($result_data->subservice_id) !!}</td>
+                                                               <td>{{ $result_data->charge }}</td>
+                                                           </tr>
+                                                           @php
+                                                               $total += $result_data->charge;
+                                                           @endphp
+                                                       @endforeach
+                                                   </tbody>
+                                               </table>
+
+                                               <div class="col-md-6 col-xl-4 ms-auto">
+                                                   <div class="table-responsive">
+                                                       <table class="invoice-table-two table">
+                                                           <tbody>
+                                                               <tr>
+                                                                   <th>Total :</th>
+                                                                   <td><span>{{ $total }}</span></td>
+                                                               </tr>
+                                                           </tbody>
+                                                       </table>
+                                                   </div>
+                                               </div>
+                                           </div>
+                                       </div>
+
+                                   </div>
+                               @else
+                                   <p>No Data Found</p>
+                               @endif
+
+                           </div>
 
                        </div>
-                       @else
-                        <p>No Data Found</p>
-                       @endif
 
-                   </div>
-
-               </div>
-
-               <!-- <div class="modal-footer text-center">
+                       <!-- <div class="modal-footer text-center">
 
                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
 
@@ -290,25 +294,20 @@
 
                </div> -->
 
+                   </div>
+
+               </div>
+
            </div>
-
-       </div>
-
-   </div>
-   @endforeach
+       @endforeach
    @endif
-<script>
-
+   <script>
        function delete_category(id) {
 
-           
 
-               $('#delete_model_'+id).modal('show');
 
-           
+           $('#delete_model_' + id).modal('show');
+
+
        }
-
-
-
-
    </script>

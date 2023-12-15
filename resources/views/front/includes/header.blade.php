@@ -36,6 +36,11 @@
     <link href="{{ asset('public/site/images/apple-touch-icon-114x114.png') }}" sizes="114x114" rel="apple-touch-icon">
     <link href="{{ asset('public/site/images/apple-touch-icon-180x180.png') }}" sizes="180x180" rel="apple-touch-icon">
 
+
+    <!-- Select2 CSS -->
+
+    <link rel="stylesheet" href="{{ asset('public/site/css/select2/css/select2.min.css') }}">
+
     <link rel="stylesheet" href="{{ asset('public/site/css/customstyle.css') }}">
     <style>
         .valierror {

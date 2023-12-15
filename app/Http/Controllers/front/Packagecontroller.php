@@ -202,6 +202,39 @@ class Packagecontroller extends Controller
                 }    
             }
 
+            if ($request->form_field_mul_dropdown_id != '' && count($request->form_field_mul_dropdown_id) > 0) {
+           
+                foreach($request->form_field_mul_dropdown_id as $key1 => $values1) {                    
+                   
+                    $Multiple_drop_down_Val = $request->form_field_mul_dropdown_id[$key1];                    
+                    
+                    if ($request->form_field_mul_dropdown_id[$key1] != '') {
+
+                        $data4['package_inquiry_id'] = $package_inquiry;
+                        
+                         $data4['form_field_id'] = $request->form_field_mul_dropdown_id[$key1];
+                         $data4['formfield_value'] = $request['formfield_mul_dropdown_'.$Multiple_drop_down_Val];
+                         
+                         
+
+                        // $data3['formfield_value'] = $request['formfield_checkbox_'.$key1];
+                       if($data4['formfield_value'] !=''){
+
+                        $data4['formfield_value'] = implode(",", $data4['formfield_value']);
+                        
+                       }else{
+                        $data4['formfield_value'] = null;
+                       }
+                        
+
+
+                        // echo "<pre>";print_r($data123);echo "</pre>";exit;
+
+                         DB::table('more_formfields_details')->insert($data4);
+                    }
+                }    
+            }
+
             
 
 
