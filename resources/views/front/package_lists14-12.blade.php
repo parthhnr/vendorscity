@@ -462,6 +462,8 @@
                                             </div>
 
                                         </div>
+                                        <div class="list-meta d-flex justify-content-between align-items-center mt15">
+                                        </div>
                                     </div>
                                 </div>
                             </div>

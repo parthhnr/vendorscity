@@ -20,7 +20,11 @@
 
     @endphp
 
-
+    <style>
+        #delete_model_1 .modal-dialog {
+            max-width: 50% !important;
+        }
+    </style>
 
     <div class="content container-fluid">
 
@@ -101,6 +105,7 @@
                                             {{-- <th>Package Category</th> --}}
 
                                             <th>Packages Enquiry</th>
+                                            <th>Detail</th>
 
 
 
@@ -114,7 +119,7 @@
 
                                         @php
 
-                                        $i=1;
+                                            $i = 1;
                                         @endphp
 
                                         @foreach ($packages_data as $data)
@@ -155,15 +160,15 @@
                                                     {!! Helper::packages_enquiry($data->pakage_id) !!}
                                                 </td>
 
-
-
-
+                                                <td><a class="btn btn-primary" href="javascript:void('0');"
+                                                        onclick="delete_category('{{ $data->id }}');">View
+                                                        Package Enquiry</a></td>
                                             </tr>
 
                                             @php
 
-                                        $i++;
-                                        @endphp
+                                                $i++;
+                                            @endphp
                                         @endforeach
 
 
@@ -186,7 +191,88 @@
 
     </div>
 
-@stop
-<script type="text/javascript">
+    <!-- Delete  Modal -->
+    @if ($packages_data != '')
+        @foreach ($packages_data as $data)
+            <div class="modal custom-modal fade" id="delete_model_{{ $data->id }}" role="dialog">
 
+                <div class="modal-dialog modal-dialog-centered">
+
+                    <div class="modal-content">
+
+                        <div class="modal-body">
+
+
+                            <div class="modal-text text-center">
+
+                                <!-- <h3>Delete Expense Category</h3> -->
+
+                                @php
+
+                                    $result = DB::table('more_formfields_details')
+                                        ->select('*')
+                                        ->where('package_inquiry_id', '=', $data->id)
+                                        ->get();
+
+                                    //$servicename = Helper::servicename($result->service_id);
+
+                                    // echo '<pre>';
+                                    // print_r($result);
+                                    // echo '</pre>';
+                                    // exit();
+
+                                @endphp
+                                @if ($result != '')
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="table-responsive">
+                                                <table class="invoice-table table table-bordered">
+                                                    <thead>
+                                                        @foreach ($result as $result_data)
+                                                            <tr>
+                                                                <th>{!! Helper::form_fields($result_data->form_field_id) !!}</th>
+                                                            </tr>
+
+                                                    </thead>
+                                                    <tbody>
+
+
+                                                        <tr>
+                                                            <td>{{ $result_data->formfield_value }}</td>
+                                                        </tr>
+                                @endforeach
+                                </tbody>
+                                </table>
+
+
+                            </div>
+                        </div>
+
+                    </div>
+                @else
+                    <p>No Data Found</p>
+        @endif
+
+        </div>
+        </div>
+        </div>
+
+        </div>
+
+        </div>
+    @endforeach
+    @endif
+
+@stop
+
+
+<script>
+    function delete_category(id) {
+
+        // alert(id);
+
+        $('#delete_model_' + id).modal('show');
+
+
+    }
 </script>

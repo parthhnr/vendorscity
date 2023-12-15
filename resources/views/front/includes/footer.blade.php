@@ -165,6 +165,10 @@
 <!-- Custom script for all pages -->
 <script src="{{ asset('public/site/js/script.js') }}"></script>
 
+<!-- Select2 JS -->
+
+<script src="{{ asset('public/site/js/select2.min.js') }}"></script>
+
 <script type="text/javascript">
     function remove_to_cart(rowId) {
 

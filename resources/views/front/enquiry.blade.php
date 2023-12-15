@@ -21,9 +21,9 @@
                     <div class="log-reg-form search-modal form-style1 bgc-white p50 p30-sm default-box-shadow1 bdrs12">
 
                         <div class="mb25">
-                            <label class="form-label fw500 dark-color">Name</label>
+                            <label class="form-label fw500 dark-color">Full Name:</label>
                             <input id="name" name="name" type="text" class="form-control"
-                                placeholder="Enter Name">
+                                placeholder="Enter Full Name:">
                             <input name="pakage_id" type="hidden" class="form-control" value="{{ $package_id }}">
                             <input name="service_id" type="hidden" class="form-control" value="{{ $service_id }}">
                             <input name="subservice_id" type="hidden" class="form-control"
@@ -33,31 +33,38 @@
                             <p class="form-error-text" id="name_error" style="color: red; margin-top: 10px;">
                             </p>
                         </div>
+                        <div class="mb15">
+                            <label class="form-label fw500 dark-color">Phone Number:</label>
+                            <input id="mobile" name="mobile" type="text" class="form-control"
+                                placeholder="Enter Phone Number:" onkeypress="return validateNumber(event)">
+                            <p class="form-error-text" id="mobile_error" style="color: red; margin-top: 10px;">
+                            </p>
+                        </div>
+
                         <div class="mb25">
-                            <label class="form-label fw500 dark-color">Email</label>
+                            <label class="form-label fw500 dark-color">Email ID:</label>
                             <input id="email" name="email" type="text" class="form-control"
-                                placeholder="Enter Email">
+                                placeholder="Enter Email ID:">
                             <p class="form-error-text" id="email_error" style="color: red; margin-top: 10px;">
                             </p>
                         </div>
 
-                        <div class="mb15">
-                            <label class="form-label fw500 dark-color">Mobile</label>
-                            <input id="mobile" name="mobile" type="text" class="form-control"
-                                placeholder="Enter Mobile Number" onkeypress="return validateNumber(event)">
-                            <p class="form-error-text" id="mobile_error" style="color: red; margin-top: 10px;">
-                            </p>
-                        </div>
+
 
                         <div class="row">
                             @for ($i = 0; $i < count($result1); $i++)
                                 @for ($k = 0; $k < count($formFields); $k++)
                                     @php
+
                                         $form_additionalData = DB::table('form_attributes')
                                             ->select('*')
                                             ->where('form_id', '=', $result1[$i]->id)
                                             ->get()
                                             ->toArray();
+                                        // echo '<pre>';
+                                        // print_r($form_additionalData);
+                                        // echo '</pre>';
+                                        // exit();
                                     @endphp
                                     @if ($result1[$i]->lable_name == $formFields[$k]->lable_name)
                                         @if ($result1[$i]->type == '1')
@@ -71,7 +78,7 @@
                                                     placeholder="{{ $formFields[$k]->lable_name }}" class="">
                                             </div>
                                         @endif
-                                        @if ($result1[$i]->type == '2')
+                                        @if ($result1[$i]->type == '2' && $result1[$i]->lable_name != 'Do you require any additional service?')
                                             <div class="form-group mb-3">
                                                 <label class="form-label fw500 dark-color"
                                                     for="country">{{ $formFields[$k]->lable_name }}</label>
@@ -138,6 +145,39 @@
                                                     placeholder="{{ $formFields[$k]->lable_name }}" class="">
                                             </div>
                                         @endif
+
+                                        @if ($result1[$i]->type == '2' && $result1[$i]->lable_name == 'Do you require any additional service?')
+                                            <div class="form-group mb-3">
+                                                <label class="form-label fw500 dark-color"
+                                                    for="country">{{ $formFields[$k]->lable_name }}</label>
+
+
+                                                <input name="form_field_mul_dropdown_id[]" type="hidden"
+                                                    class="m-0" id="form_field_id[]"
+                                                    value="{{ $formFields[$k]->id }}">
+                                                <select class="form-control multiple" id="formfield_value[]"
+                                                    name="formfield_mul_dropdown_{{ $formFields[$k]->id }}[]"
+                                                    multiple="multiple">
+                                                    <option value="">Select {{ $formFields[$k]->lable_name }}
+                                                    </option>
+                                                    @foreach ($form_additionalData as $form_additional)
+                                                        <option value="{{ $form_additional->form_option }}">
+                                                            {{ $form_additional->form_option }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        @endif
+                                        @if ($result1[$i]->type == '7')
+                                            <div class="mb15">
+                                                <label
+                                                    class="form-label fw500 dark-color">{{ $formFields[$k]->lable_name }}</label>
+                                                <input name="form_field_id[]" type="hidden" class="m-0"
+                                                    id="form_field_id[]" value=" {{ $formFields[$k]->id }}">
+                                                <input name="formfield_value[]" type="text" class="form-control"
+                                                    id="formfield_value[]"
+                                                    placeholder="{{ $formFields[$k]->lable_name }}" class="">
+                                            </div>
+                                        @endif
                                     @endif
                                 @endfor
                             @endfor
@@ -176,7 +216,7 @@
         var name = jQuery("#name").val();
 
         if (name == '') {
-            jQuery('#name_error').html("Please Enter Name");
+            jQuery('#name_error').html("Please Enter Full Name");
             jQuery('#name_error').show().delay(0).fadeIn('show');
             jQuery('#name_error').show().delay(2000).fadeOut('show');
             $('html, body').animate({
@@ -185,10 +225,35 @@
             return false;
         }
 
+        var mobile = jQuery("#mobile").val();
+        if (mobile == '') {
+
+            jQuery('#mobile_error').html("Please Enter Phone Number");
+            jQuery('#mobile_error').show().delay(0).fadeIn('show');
+            jQuery('#mobile_error').show().delay(2000).fadeOut('show');
+            $('html, body').animate({
+                scrollTop: $('#mobile').offset().top - 150
+            }, 1000);
+            return false;
+
+        }
+        var filter = /^\d{10}$/;
+        if (!filter.test(mobile)) {
+
+            jQuery('#mobile_error').html("Please Enter Valid Phone Number");
+            jQuery('#mobile_error').show().delay(0).fadeIn('show');
+            jQuery('#mobile_error').show().delay(2000).fadeOut('show');
+            $('html, body').animate({
+                scrollTop: $('#mobile').offset().top - 150
+            }, 1000);
+            return false;
+
+        }
+
         var email = jQuery("#email").val();
 
         if (email == '') {
-            jQuery('#email_error').html("Please Enter Email");
+            jQuery('#email_error').html("Please Enter Email ID:");
             jQuery('#email_error').show().delay(0).fadeIn('show');
             jQuery('#email_error').show().delay(2000).fadeOut('show');
             $('html, body').animate({
@@ -200,7 +265,7 @@
         var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
         if (!filter.test(email)) {
 
-            jQuery('#email_error').html("Please Enter Valid Email");
+            jQuery('#email_error').html("Please Enter Valid Email ID:");
             jQuery('#email_error').show().delay(0).fadeIn('show');
             jQuery('#email_error').show().delay(2000).fadeOut('show');
             $('html, body').animate({
@@ -234,30 +299,7 @@
 
 
 
-        var mobile = jQuery("#mobile").val();
-        if (mobile == '') {
 
-            jQuery('#mobile_error').html("Please Enter Mobile");
-            jQuery('#mobile_error').show().delay(0).fadeIn('show');
-            jQuery('#mobile_error').show().delay(2000).fadeOut('show');
-            $('html, body').animate({
-                scrollTop: $('#mobile').offset().top - 150
-            }, 1000);
-            return false;
-
-        }
-        var filter = /^\d{10}$/;
-        if (!filter.test(mobile)) {
-
-            jQuery('#mobile_error').html("Please Enter Valid Mobile");
-            jQuery('#mobile_error').show().delay(0).fadeIn('show');
-            jQuery('#mobile_error').show().delay(2000).fadeOut('show');
-            $('html, body').animate({
-                scrollTop: $('#mobile').offset().top - 150
-            }, 1000);
-            return false;
-
-        }
 
         $('#spinner_button').show();
 
@@ -289,4 +331,10 @@
         }
 
     }
+</script>
+
+<script>
+    $(".multiple").select2({
+        placeholder: "Select a Form Fields" // Replace with your desired placeholder text
+    });
 </script>

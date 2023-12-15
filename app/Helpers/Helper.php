@@ -183,6 +183,16 @@ class Helper{
             echo "-";
         }
     }
+    public static function form_fields(int $id){
+
+        $result = DB::table('form_fileds')->where('id',$id)->first();                                                     
+        
+        if($result !='' && isset($result)){
+            return $result->lable_name;
+        }else{
+            echo "-";
+        }
+    }
     
 	
 } 
