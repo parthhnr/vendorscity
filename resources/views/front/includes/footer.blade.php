@@ -224,6 +224,9 @@
                     $("#message_succsess").html("Package Added To Cart");
                     $('#message_succsess').show().delay(0).fadeIn('show');
                     $('#message_succsess').show().delay(2000).fadeOut('show');
+                    setTimeout(function() {
+                        window.location.href = "{{ route('cart') }}";
+                    }, 2000);
                     return false;
                 }
             }

@@ -51,7 +51,7 @@
                     @php
                         $packages_images = DB::table('packages_image')
                             ->where('pid', $package_detail->id)
-                            ->orderBy('id','DESC')
+                            ->orderBy('id', 'DESC')
                             ->get();
                         // echo '<pre>';
                         // print_r($packages_images);
@@ -82,13 +82,13 @@
                     @if ($packages_images != '' && count($packages_images) > 0)
                         @foreach ($packages_images as $packages_image)
                             <style>
-                                .service-single-sldier button.owl-dot:nth-child({{$inave}}) {
+                                .service-single-sldier button.owl-dot:nth-child({{ $inave }}) {
                                     background-image: url("{{ asset('public/upload/packages_slider_img/small/' . $packages_image->image) }}");
                                 }
                             </style>
-                        @php
-                            $inave++;
-                        @endphp
+                            @php
+                                $inave++;
+                            @endphp
                         @endforeach
                     @endif
 
@@ -412,14 +412,16 @@
                                             <hr class="opacity-100 mb20">
                                             <div class="d-grid">
                                                 @if (in_array('0', explode(',', $subservices->is_bookable)))
-                                                    <a class="ud-btn btn-thm mb-2" href="javascript:void(0)" onclick="add_to_cart('{{ $package_detail->id }}'); return false;">
-                                                        <i class="fal fa-arrow-right-long"></i>Add To Cart</a>
+                                                    <a class="ud-btn btn-thm mb-2" href="{{ route('cart') }}"
+                                                        onclick="add_to_cart('{{ $package_detail->id }}'); return false;">
+                                                        <i class="fal fa-arrow-right-long"></i>Instant
+                                                        Booking</a>
                                                 @endif
                                                 @if (in_array('1', explode(',', $subservices->is_bookable)))
                                                     <a class="ud-btn btn-thm mb-2"
                                                         href="{{ route('enquiry', ['id' => $package_detail->id]) }}">
-                                                        <i class="fal fa-arrow-right-long"></i>Inquiry</a>
-                                                
+                                                        <i class="fal fa-arrow-right-long"></i>Get
+                                                        Multiple Quote</a>
                                                 @endif
 
                                             </div>
@@ -674,9 +676,3 @@
     </div>
 </section>
 @include('front.includes.footer')
-<script type="text/javascript">
-    
-
-    
-
-</script>

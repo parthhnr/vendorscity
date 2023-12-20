@@ -40,6 +40,10 @@ class FrontloginregisterController extends Controller
      */
     public function create()
     {
+        // return view('front.front_login');
+    }
+    public function Sign_in()
+    {
         return view('front.front_login');
     }
 
@@ -165,7 +169,7 @@ class FrontloginregisterController extends Controller
     public function user_signout()
     {
         Session::flush();
-        return redirect()->route('Sign-Up.create');
+        return redirect()->route('Sign-in');
         
     }
     public function user_login(Request $request)

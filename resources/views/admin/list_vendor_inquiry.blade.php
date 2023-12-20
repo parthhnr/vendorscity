@@ -20,6 +20,11 @@
 
        @endphp
 
+       <style>
+           #delete_model_1 .modal-dialog {
+               max-width: 50% !important;
+           }
+       </style>
 
 
        <div class="content container-fluid">
@@ -155,6 +160,10 @@
                                        ->where('enddate', '>=', $currentDate)
                                        ->orderBy('id', 'desc')
                                        ->get();
+                                   //    echo '<pre>';
+                                   //    print_r($vendor_subscription);
+                                   //    echo '</pre>';
+                                   //    exit();
 
                                    $resultArray = [];
 
@@ -202,6 +211,7 @@
                                                <th>Name</th>
                                                <th>Service</th>
                                                <th>Sub Service</th>
+                                               <th>Packages Enquiry</th>
                                                <th>Action</th>
                                            </tr>
 
@@ -259,6 +269,12 @@
                                                                    @endif
 
                                                                </td>
+                                                               <td>
+                                                                   <a class="btn btn-primary" href="javascript:void('0');"
+                                                                       onclick="Enquiry('{{ $packages_enquiry_data->id }}');">View
+                                                                       Details
+                                                                   </a>
+                                                               </td>
                                                                <td><a class="btn btn-primary" href="javascript:void('0');"
                                                                        onclick="delete_category('{{ $packages_enquiry_data->id }}','{{ $userId }}');">
                                                                        Accept
@@ -297,6 +313,79 @@
        </div>
 
    @stop
+
+   @if ($packages_enquiry != '')
+
+
+       @foreach ($packages_enquiry as $packages_enquirys)
+           <div class="modal custom-modal fade" id="delete_model_{{ $packages_enquirys->id }}" role="dialog">
+
+               <div class="modal-dialog modal-dialog-centered">
+
+                   <div class="modal-content">
+
+                       <div class="modal-body">
+
+
+                           <div class="modal-text text-center">
+
+                               <!-- <h3>Delete Expense Category</h3> -->
+
+                               @php
+
+                                   $result = DB::table('more_formfields_details')
+                                       ->select('*')
+                                       ->where('package_inquiry_id', '=', $packages_enquirys->id)
+                                       ->get();
+
+                                   //    echo '<pre>';
+                                   //    print_r($result);
+                                   //    echo '</pre>';
+                                   //
+
+                                   //$servicename = Helper::servicename($result->service_id);
+
+                               @endphp
+                               @if ($result != '' && count($result) > 0)
+                                   <div class="row">
+                                       <div class="col-md-12">
+                                           <div class="table-responsive">
+                                               <table class="invoice-table table table-bordered">
+                                                   <thead>
+                                                       @foreach ($result as $result_data)
+                                                           <tr>
+                                                               <th>{!! Helper::form_fields($result_data->form_field_id) !!}</th>
+                                                           </tr>
+
+                                                   </thead>
+                                                   <tbody>
+
+
+                                                       <tr>
+                                                           <td>{{ $result_data->formfield_value }}</td>
+                                                       </tr>
+                               @endforeach
+                               </tbody>
+                               </table>
+
+
+                           </div>
+                       </div>
+
+                   </div>
+               @else
+                   <p>No Data Found</p>
+       @endif
+
+       </div>
+       </div>
+       </div>
+
+       </div>
+
+       </div>
+   @endforeach
+   @endif
 
 
 
@@ -428,6 +517,17 @@
        function form_sub() {
 
            $('#form_new').submit();
+
+       }
+   </script>
+
+   <script>
+       function Enquiry(id) {
+
+           // alert(id);
+
+           $('#delete_model_' + id).modal('show');
+
 
        }
    </script>

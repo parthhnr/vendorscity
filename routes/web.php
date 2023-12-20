@@ -88,7 +88,8 @@ Route::get('/', '\App\Http\Controllers\front\Homecontroller@index');
 Route::get('/book-services', '\App\Http\Controllers\front\Homecontroller@book_services');
 Route::get('/become-vendor', '\App\Http\Controllers\front\Homecontroller@become_vendor');
 Route::resource('Sign-Up', '\App\Http\Controllers\front\FrontloginregisterController');
-Route::get('user_signout', 'App\Http\Controllers\front\FrontloginregisterController@user_signout');
+Route::get('Sign-in', '\App\Http\Controllers\front\FrontloginregisterController@Sign_in')->name('Sign-in');
+Route::get('user_signout', 'App\Http\Controllers\front\FrontloginregisterController@user_signout')->name('user_signout');
 Route::post('check_login', 'App\Http\Controllers\front\FrontloginregisterController@check_login');
 
 Route::post('user_login','App\Http\Controllers\front\FrontloginregisterController@user_login')->name('user_login');
@@ -122,7 +123,7 @@ Route::post('package_inquiry', '\App\Http\Controllers\front\Packagecontroller@pa
 Route::post('vendors_check_mail', '\App\Http\Controllers\front\Homecontroller@vendors_check_mail'); 
 Route::post('/vendors_data', '\App\Http\Controllers\front\Homecontroller@vendors_data');
 
-Route::get('/cart', '\App\Http\Controllers\front\Cartcontroller@cart');
+Route::get('/cart', '\App\Http\Controllers\front\Cartcontroller@cart')->name('cart');
 Route::post('add_to_cart','\App\Http\Controllers\front\Cartcontroller@add_to_cart');
 Route::post('cart_remove', '\App\Http\Controllers\front\Cartcontroller@cart_remove');
 Route::get('/checkout', '\App\Http\Controllers\front\checkoutcontroller@checkout');
@@ -130,9 +131,9 @@ Route::post('/order_place', '\App\Http\Controllers\front\checkoutcontroller@orde
 Route::get('thankyou', [checkoutcontroller::class, 'thankyou'])->name("thankyou");
 
 
-Route::get('/checkout', '\App\Http\Controllers\front\checkoutcontroller@checkout');
-Route::post('/order_place', '\App\Http\Controllers\front\checkoutcontroller@order_place')->name('order_place');
-Route::get('thankyou', [checkoutcontroller::class, 'thankyou'])->name("thankyou");
+// Route::get('/checkout', '\App\Http\Controllers\front\checkoutcontroller@checkout');
+// Route::post('/order_place', '\App\Http\Controllers\front\checkoutcontroller@order_place')->name('order_place');
+// Route::get('thankyou', [checkoutcontroller::class, 'thankyou'])->name("thankyou");
 
 
 
@@ -312,6 +313,7 @@ Route::get('/admin', function () {
     Route::resource('/admin/form_field', '\App\Http\Controllers\admin\Form_fieldController');
     Route::get('/admin/delete_form_field', [Form_fieldController::class, 'delete_form_field'])->name('delete_form_field');
     Route::get('remove_attribute/{form_id}/{id}', [Form_fieldController::class, 'remove_attribute'])->name('remove_attribute');
+    Route::post('set_order_form_fields', '\App\Http\Controllers\admin\Form_fieldController@set_order_form_fields');
     
     Route::resource('admin/order','App\Http\Controllers\admin\Ordercontroller');  
     Route::get('delete_order',[Ordercontroller::class,'destroy'])->name('delete_order');
@@ -320,6 +322,8 @@ Route::get('/admin', function () {
     Route::resource('admin/order','App\Http\Controllers\admin\Ordercontroller');  
     Route::get('delete_order',[Ordercontroller::class,'destroy'])->name('delete_order');
     Route::get('admin/order/detail/{order_id}', [Ordercontroller::class, 'detail'])->name('detail');
+
+   
 
 
 });

@@ -92,13 +92,12 @@ class Packagecontroller extends Controller
         $service= DB::table('packages')->where('id',$id)->first();
         
         
-        $form_field_data= DB::table('services')->where('id',$service->service_id)->first(); 
-        
+        $form_field_data= DB::table('services')->where('id',$service->service_id)->first();        
         $tags = explode(',', $form_field_data->form_fields);
-        $data['result1'] = DB::table('form_fileds')->whereIn('id',$tags)->get()->toArray();
+        $data['result1'] = DB::table('form_fileds')->whereIn('id',$tags)->orderBy('set_order')->get()->toArray();
         $data['formFields'] = DB::table('form_fileds')->get()->toArray();
 
-        // echo "<pre>";print_r($data['result1']);echo "</pre>";exit;
+       
         
         $data['package_id'] =$id;
         $data['service_id'] = $service->service_id; 
@@ -123,7 +122,7 @@ class Packagecontroller extends Controller
     }
     public function package_inquiry(Request $request){
 
-        echo "<pre>";print_r($request->post());echo "</pre>";exit;
+        // echo "<pre>";print_r($request->post());echo "</pre>";exit;
 
         
         $data['name']=$request->name;

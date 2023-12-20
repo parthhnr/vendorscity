@@ -131,6 +131,7 @@
                                                <th>Select</th>
                                                <th>Lable Name</th>
                                                <th>Type</th>
+                                               <th>Set Order</th>
                                                @if (in_array('18', $edit_perm))
                                                    <th class="text-right">Actions</th>
                                                @endif
@@ -168,6 +169,12 @@
                                                                {{ 'Set Order' }}
                                                            @endif
                                                        </td>
+                                                       <td class="left"><input type="text"
+                                                               value="{{ $data->set_order }}"
+                                                               onchange="updateorder_popup(this.value, '{{ $data->id }}');"
+                                                               class="form-control" />
+                                                       </td>
+
                                                        @if (in_array('18', $edit_perm))
                                                            <td class="text-right">
                                                                <a class="btn btn-primary"
@@ -262,6 +269,40 @@
 
        <!-- /Select one record Category Modal -->
 
+       <!-- set order Modal -->
+
+       <div class="modal custom-modal fade" id="set_order_model" role="dialog">
+
+           <div class="modal-dialog modal-dialog-centered">
+
+               <div class="modal-content">
+
+                   <div class="modal-body">
+
+                       <div class="modal-text text-center">
+
+                           <h3>Are you sure you want to Set order of Form Fields</h3>
+
+                           <input type="hidden" name="set_order_val" id="set_order_val" value="">
+
+                           <input type="hidden" name="set_order_id" id="set_order_id" value="">
+
+                           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+
+                           <button type="button" class="btn btn-primary" onclick="updateorder();">Yes</button>
+
+                       </div>
+
+                   </div>
+
+               </div>
+
+           </div>
+
+       </div>
+
+       <!-- /set orderModal -->
+
    @stop
    <script>
        function delete_form_field() {
@@ -287,6 +328,68 @@
        function form_sub() {
 
            $('#form').submit();
+
+       }
+
+       function updateorder_popup(val, id) {
+
+           $('#set_order_val').val(val);
+
+           $('#set_order_id').val(id);
+
+           $('#set_order_model').modal('show');
+
+       }
+
+       function updateorder() {
+
+           var id = $('#set_order_id').val();
+
+           var val = $('#set_order_val').val();
+
+           $.ajax({
+
+               type: "POST",
+
+               url: "{{ url('set_order_form_fields') }}",
+
+               data: {
+
+                   "_token": "{{ csrf_token() }}",
+
+                   "id": id,
+
+                   "val": val
+
+               },
+
+               success: function(returnedData) {
+
+                   // alert(returnedData);
+
+                   if (returnedData == 1) {
+
+                       //alert('yes');
+
+                       $('#success_message').text("Set Order has been Updated successfully");
+
+                       //$('.success_show').show();
+
+                       $('.success_show').show().delay(0).fadeIn('show');
+
+                       $('.success_show').show().delay(5000).fadeOut('show');
+
+
+
+                       $('#set_order_model').modal('hide');
+
+                   }
+
+               }
+
+           });
+
+
 
        }
    </script>
