@@ -191,4 +191,24 @@ class Form_fieldController extends Controller
     {
         //
     }
+
+    public function set_order_form_fields()
+
+    {
+
+       
+
+        $id = $_POST['id'];
+
+        $val = $_POST['val'];
+
+        // echo $id."-".$val;exit;
+
+        DB::table('form_fileds')->where('id', $id)->update(array('set_order' => $val));
+
+        echo "1";
+
+        // return redirect()->route('product.index')->with('success','Set Order has been Updated successfully');
+
+    }
 }

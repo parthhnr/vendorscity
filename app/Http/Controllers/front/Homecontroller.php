@@ -16,6 +16,7 @@ class Homecontroller extends Controller
     public function index(){
 
         $data['service']=DB::table('services')->orderBy('set_order','ASC')->get();
+
      // $data['service']=DB::table('services')->orderBy('set_order')->get();
         $data['faq']=DB::table('faqs')->orderBy('id','DESC')->get();   
 
@@ -23,7 +24,7 @@ class Homecontroller extends Controller
         $data['meta_keyword'] = "";
         $data['meta_description'] = "";
 
-        // echo "<pre>";print_r($data);echo "</pre>";exit;
+        // echo "<pre>";print_r($data['service']);echo "</pre>";exit;
     	return view('front.index',$data);
     }
 

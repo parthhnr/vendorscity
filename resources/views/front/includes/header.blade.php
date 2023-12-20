@@ -178,7 +178,7 @@
                                 </div>
                                 @php
                                     $service_data = DB::table('services')
-                                        ->orderBy('id', 'DESC')
+                                        ->orderBy('set_order')
                                         ->get();
 
                                 @endphp
@@ -666,10 +666,10 @@
                                 @endphp
                                 @if ($userData == '')
                                     {{-- <a class="login-info mr10-lg mr30" href="{{ url('Sign-Up') }}">Registration</a> --}}
-                                    <a class="login-info mr10-lg mr30" href="{{ route('Sign-Up.create') }}">Log
+                                    <a class="login-info mr10-lg mr30" href="{{ route('Sign-in') }}">Log
                                         in</a>
                                 @else
-                                    <a class="login-info mr10-lg mr30" href="{{ url('user_signout') }}">Log out</a>
+                                    <a class="login-info mr10-lg mr30" href="{{ route('user_signout') }}">Log out</a>
                                 @endif
 
 

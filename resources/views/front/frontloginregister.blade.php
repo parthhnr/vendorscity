@@ -78,7 +78,7 @@
 
                         <div class="mb30">
 
-                            <p class="text mt20">Already have an account? <a href="{{ route('Sign-Up.create') }}"
+                            <p class="text mt20">Already have an account? <a href="{{ route('Sign-in') }}"
                                     class="text-thm">Log In!</a></p>
                         </div>
 

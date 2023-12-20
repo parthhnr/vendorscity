@@ -449,15 +449,18 @@
 
                                             <div class="budget">
                                                 @if (in_array('0', explode(',', $subservice->is_bookable)))
-
-                                                    <a class="ud-btn btn-thm add-joining" href="#" onclick="add_to_cart('{{ $package_data_new->id }}'); return false;">Get Multiple Quote</a>
+                                                    <a class="ud-btn btn-thm add-joining" href="{{ route('cart') }}"
+                                                        onclick="add_to_cart('{{ $package_data_new->id }}'); return false;">
+                                                        Instant
+                                                        Booking
+                                                    </a>
                                                 @endif
 
                                                 @if (in_array('1', explode(',', $subservice->is_bookable)))
                                                     <a class="ud-btn btn-thm add-joining"
-                                                        href="{{ route('enquiry', ['id' => $package_data_new->id]) }}">Instant
-                                                        Booking</a>
-                                                @endif 
+                                                        href="{{ route('enquiry', ['id' => $package_data_new->id]) }}">Get
+                                                        Multiple Quote</a>
+                                                @endif
 
                                             </div>
 
