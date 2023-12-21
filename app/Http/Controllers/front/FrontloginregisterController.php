@@ -42,8 +42,17 @@ class FrontloginregisterController extends Controller
     {
         // return view('front.front_login');
     }
-    public function Sign_in()
+    public function Sign_in(Request $request)
     {
+        $lastReferringUrl = $request->server('HTTP_REFERER');
+    
+        $explodedUrls = explode('/', $lastReferringUrl);
+        $endUrl = end($explodedUrls);
+        
+        if ($endUrl != 'register') {
+            Session::put('redirect_url', $request->server('HTTP_REFERER'));
+        }
+
         return view('front.front_login');
     }
 
@@ -74,9 +83,16 @@ class FrontloginregisterController extends Controller
             'mobile'  => $frontloginregister->mobile,       
             'logged_in' => true
         );
-        $check = Session::put('user', $newuserdata);      
+        $check = Session::put('user', $newuserdata);
+        $redirectUrl = Session::get('redirect_url');
 
-        return redirect()->to('/')->with('L_strsucessMessage', 'Registration  Successfully'); 
+        if (!empty($redirectUrl)) {
+            return redirect()->to($redirectUrl)->with('L_strsucessMessage','Registration Successfully.');
+            }else{
+            return redirect()->to('/')->with('L_strsucessMessage','Registration Successfully.');
+            }      
+
+       
 
     }
 
@@ -190,9 +206,17 @@ class FrontloginregisterController extends Controller
             ];
     
             Session::put('user', $newuserdata);
+            $redirectUrl = Session::get('redirect_url');
+
+            if (!empty($redirectUrl)) {
+                return redirect()->to($redirectUrl)->with('L_strsucessMessage','Log in Successfully.');
+                }else{
+                return redirect()->to('/')->with('L_strsucessMessage','Log in Successfully.');
+                }
     
-            return redirect()->to('/')->with('L_strsucessMessage', 'Log in Successfully');
+           
         }
+        
     }
     public function lost_password(){
 

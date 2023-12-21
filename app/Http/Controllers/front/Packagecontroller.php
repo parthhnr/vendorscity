@@ -100,17 +100,11 @@ class Packagecontroller extends Controller
        
         
         $data['package_id'] =$id;
-        $data['service_id'] = $service->service_id; 
-
-
-
+        $data['service_id'] = $service->service_id;
         $data['subservice_id'] = $service->subservice_id; 
         $data['packagecategory_id'] = $service->packagecategory_id; 
         
-        // $data['form_fields_data'] = DB::table('form_fileds')
-        //                                 ->join('form_attributes', 'form_fileds.id', '=', 'form_attributes.form_id')
-        //                                 ->select('form_fileds.*', 'form_attributes.*')
-        //                                 ->get();
+        
         
 
         // echo "<pre>";print_r($data['form_fields_data']);echo "</pre>";exit;
@@ -122,8 +116,130 @@ class Packagecontroller extends Controller
     }
     public function package_inquiry(Request $request){
 
-        // echo "<pre>";print_r($request->post());echo "</pre>";exit;
-
+        $currentDate = now();
+        $subscription_vendor_data= DB::table('subscription')->where('services',$request->service_id)
+                                             ->whereRaw('FIND_IN_SET(?, sub_service)', [$request->subservice_id])
+                                             ->where('enddate', '>=', $currentDate)
+                                             ->get();
+ 
+         //echo "<pre>";print_r($subscription_vendor_data);echo "</pre>";exit;
+ 
+         $vendor_id_array = array();
+         
+         if($subscription_vendor_data != '' && !empty($subscription_vendor_data)){
+             
+             foreach($subscription_vendor_data as $subscription_vendor_val){
+                 $vendor_id_array[] = $subscription_vendor_val->vendor_id;
+                 
+             }
+         }
+ 
+         foreach($vendor_id_array as $vendor_id_array_data){
+ 
+             $vendor_data= DB::table('users')->where('id',$vendor_id_array_data)->first();
+ 
+            //   echo "<pre>";print_r($vendor_data);echo "</pre>";exit;
+              
+             if($vendor_data && $vendor_data->is_active == 0){
+                // echo "<pre>";print_r($vendor_data->email);echo "</pre>";exit;
+                 $data = '<!doctype html> 
+                 <html>
+                 <head>
+                     <meta charset="utf-8">
+                     <title>Enquiry Details</title>
+                     <style>
+                         .logo {
+                             text-align: center;
+                             width: 100%;
+                         }
+                         .wrapper {
+                             width: 100%;
+                             max-width:500px;
+                             margin:auto;
+                             font-size:14px;
+                             line-height:24px;
+                             font-family:Helvetica Neue, Helvetica, Helvetica, Arial, sans-serif;
+                             color:#555;
+                         }
+                         .wrapper div {
+                             height: auto;
+                             float: left;
+                             margin-bottom: 15px;
+                             width:100%;
+                         }
+                         .text-center {
+                             text-align: center;
+                         }
+                         .email-wrapper {
+                             padding:5px;
+                             border:1px solid #ccc;
+                             width:100%;
+                         }
+             
+                         .big {
+                             text-align: center;
+                             font-size: 26px;
+                             color: #e31e24;
+                             font-weight: bold;
+                             margin-bottom: 0 !important;
+                             text-transform: uppercase;
+                             line-height: 34px;
+                         }
+             
+                         .welcome {
+                             font-size: 17px;
+                             font-weight: bold;
+                         }
+                         .footer {
+                             text-align: center;
+                             color: #999;
+                             font-size: 13px;
+                         }
+             
+                     </style>
+                 </head>
+                 <body>
+                     <div class="wrapper" >
+                         <div class="logo" style="float: inherit;">
+                         <img src="'.asset("public/site/images/VC-LONG-COLOR.png").'" style="width: 30%;float: inherit;" >
+                         </div>
+                         <div class="email-wrapper" >
+                             <table style="border-collapse:collapse;" width="100%" border="0" cellspacing="0" cellpadding="10">          
+                                 <tr>
+                                     <td>
+                                         <table width="100%" border="2" cellspacing="0" cellpadding="5">   
+                                             <tr>
+                                                 <td ><br>Dear '.$vendor_data->name.',</td>
+                                             </tr>
+                                             <tr>
+                                                 <td > 
+                                                 You recently requested a password reset. To change your password,<br>
+                                                 click <a href="">here</a> or paste the following link into your browser:
+                                                The link will expire in 24 hours, so be sure to use it right away.
+                                                 </td> 
+                                             </tr>
+                                             <tr>
+                                                 <td><br><br>Regards,<br>VendorsCity Team </td>
+                                             </tr>
+                                         </table>
+                                     </td>
+                                 </tr>
+                             </table>
+                         </div>
+                     </div>
+                 </body>
+             </html>';
+             $subject = "Enquiry Details";
+             $to = $vendor_data->email;
+             Mail::send([], [], function($message) use($data, $to, $subject) {
+                 $message->to($to,'VendorsCity');
+                 $message->subject($subject);
+                 $message->from('mayudin.hnrtechnologies@gmail.com','VendorsCity');
+                 $message->html($data);
+             });
+         }
+         
+ }
         
         $data['name']=$request->name;
         $data['pakage_id']=$request->pakage_id;

@@ -154,9 +154,7 @@ class CountryController extends Controller
 
         $country = Country::find($id);
 
-        $country->country     = $request->country;
-
-       
+        $country->country     = $request->country;       
 
         $country->save();
 

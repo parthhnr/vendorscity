@@ -174,7 +174,7 @@
                                 <form class="form-search position-relative">
                                     <div class="box-search">
                                         <span class="icon far fa-magnifying-glass"></span>
-                                        <input class="form-control" type="text" name="search"
+                                        <input class="form-control" type="text" name="search" id="search"
                                             placeholder="What are you looking for?">
                                         <div class="search-suggestions">
                                             <h6 class="fz14 ml30 mt25 mb-3">Popular Search</h6>
@@ -231,13 +231,18 @@
                                 </select>
                             </div>
                         </div>
+
                         <div class="col-md-3 col-lg-2 col-xl-3">
                             <div class="text-center text-xl-start">
-                                <button class="ud-btn btn-thm w-100 bdrs60" type="button">Search</button>
+                                <button class="ud-btn btn-thm w-100 bdrs60" type="submit">Search</button>
                             </div>
                         </div>
                     </div>
                 </div>
+
+                <tbody>
+
+                </tbody>
 
                 <div class="row mt20 animate-up-4">
                     <div class="col-xl-12">
@@ -1053,3 +1058,28 @@
 </section>
 
 @include('front.includes.footer')
+
+<script>
+    $('#search').on('keyup', function() {
+        var value = $(this).val();
+
+        var url = '{{ url('search') }}';
+
+        // alert(url);
+
+        $.ajax({
+            url: url,
+            type: 'post',
+            data: {
+                "_token": "{{ csrf_token() }}",
+                "search": value,
+
+            },
+            success: function(msg) {
+                // alert(msg);
+                // $('tbody').html(msg);
+
+            }
+        });
+    });
+</script>
