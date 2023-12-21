@@ -85,6 +85,8 @@ Route::get('/config-cache', function() {
 /*------Front routes start ------*/
 
 Route::get('/', '\App\Http\Controllers\front\Homecontroller@index');
+Route::post('search', '\App\Http\Controllers\front\Homecontroller@search')->name('search');
+
 Route::get('/book-services', '\App\Http\Controllers\front\Homecontroller@book_services');
 Route::get('/become-vendor', '\App\Http\Controllers\front\Homecontroller@become_vendor');
 Route::resource('Sign-Up', '\App\Http\Controllers\front\FrontloginregisterController');

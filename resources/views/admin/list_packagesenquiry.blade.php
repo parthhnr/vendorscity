@@ -238,7 +238,11 @@
 
 
                                                         <tr>
-                                                            <td>{{ $result_data->formfield_value }}</td>
+                                                            @if ($result_data->formfield_value != '')
+                                                                <td>{{ $result_data->formfield_value }}</td>
+                                                            @else
+                                                                <td>{{ '-' }}</td>
+                                                            @endif
                                                         </tr>
                                 @endforeach
                                 </tbody>

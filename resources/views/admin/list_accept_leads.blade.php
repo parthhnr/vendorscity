@@ -167,6 +167,8 @@
                                            <tr>
                                                <th>Sr No</th>
                                                <th>Name</th>
+                                               <th>Email</th>
+                                               <th>Mobile</th>
                                                <th>Service</th>
                                                <th>Sub Service</th>
 
@@ -189,12 +191,17 @@
                                                            ->select('*')
                                                            ->where('id', '=', $package_inquiry_accepted_data->packages_inquiry_id)
                                                            ->first();
-
+                                                       //    echo '<pre>';
+                                                       //    print_r($packages_enquiry_data);
+                                                       //    echo '</pre>';
+                                                       //    exit();
                                                    @endphp
                                                    <tr>
 
                                                        <td>{{ $i }}</td>
                                                        <td>{{ $packages_enquiry_data->name }}</td>
+                                                       <td>{{ $packages_enquiry_data->email }}</td>
+                                                       <td>{{ $packages_enquiry_data->mobile }}</td>
 
                                                        <td>
                                                            @if ($packages_enquiry_data->service_id != '')
