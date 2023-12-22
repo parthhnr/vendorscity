@@ -199,21 +199,46 @@
                                                    <tr>
 
                                                        <td>{{ $i }}</td>
-                                                       <td>{{ $packages_enquiry_data->name }}</td>
-                                                       <td>{{ $packages_enquiry_data->email }}</td>
-                                                       <td>{{ $packages_enquiry_data->mobile }}</td>
+                                                       @if ($packages_enquiry_data != null)
+                                                           <td>{{ $packages_enquiry_data->name }}</td>
+                                                       @else
+                                                           <td>{{ '-' }}</td>
+                                                       @endif
+
+                                                       @if ($packages_enquiry_data != null)
+                                                           <td>{{ $packages_enquiry_data->email }}</td>
+                                                       @else
+                                                           <td>{{ '-' }}</td>
+                                                       @endif
+
+                                                       @if ($packages_enquiry_data != null)
+                                                           <td>{{ $packages_enquiry_data->mobile }}</td>
+                                                       @else
+                                                           <td>{{ '-' }}</td>
+                                                       @endif
+
+
+
+
 
                                                        <td>
-                                                           @if ($packages_enquiry_data->service_id != '')
+                                                           @if ($packages_enquiry_data != null && $packages_enquiry_data->service_id != null)
                                                                {!! Helper::servicename(strval($packages_enquiry_data->service_id)) !!}
+                                                           @else
+                                                               {{ '-' }}
                                                            @endif
                                                        </td>
-                                                       <td>
-                                                           @if ($packages_enquiry_data->subservice_id != '')
-                                                               {!! Helper::subservicename(strval($packages_enquiry_data->subservice_id)) !!}
-                                                           @endif
 
+                                                       <td>
+                                                           @if ($packages_enquiry_data != null && $packages_enquiry_data->subservice_id != null)
+                                                               {!! Helper::subservicename(strval($packages_enquiry_data->subservice_id)) !!}
+                                                           @else
+                                                               {{ '-' }}
+                                                           @endif
                                                        </td>
+
+
+
 
                                                    </tr>
                                                    @php

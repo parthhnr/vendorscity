@@ -234,11 +234,6 @@
                                                            ->orderBy('id', 'desc')
                                                            ->get();
 
-                                                       //    echo '<pre>';
-                                                       //    print_r($packages_enquiry);
-                                                       //    echo '</pre>';
-                                                       //    exit();
-
                                                    @endphp
 
                                                    @php
@@ -317,114 +312,178 @@
 
        </div>
 
+   @stop
+
+   @if ($packages_enquiry != '')
 
 
-       @if ($packages_enquiry != '')
+       @foreach ($packages_enquiry as $packages_enquirys)
+           <div class="modal custom-modal fade" id="delete_model_{{ $packages_enquirys->id }}" role="dialog">
+
+               <div class="modal-dialog modal-dialog-centered">
+
+                   <div class="modal-content">
+
+                       <div class="modal-body">
 
 
-           @foreach ($packages_enquiry as $packages_enquirys)
-               <div class="modal custom-modal fade" id="delete_model_{{ $packages_enquirys->id }}" role="dialog">
+                           <div class="modal-text text-center">
 
-                   <div class="modal-dialog modal-dialog-centered">
+                               <!-- <h3>Delete Expense Category</h3> -->
 
-                       <div class="modal-content">
+                               @php
 
-                           <div class="modal-body">
+                                   $result = DB::table('more_formfields_details')
+                                       ->select('*')
+                                       ->where('package_inquiry_id', '=', $packages_enquirys->id)
+                                       ->get();
 
+                                   //    echo '<pre>';
+                                   //    print_r($result);
+                                   //    echo '</pre>';
+                                   //
 
-                               <div class="modal-text text-center">
+                                   //$servicename = Helper::servicename($result->service_id);
 
-                                   <!-- <h3>Delete Expense Category</h3> -->
-
-                                   @php
-
-                                       $result = DB::table('more_formfields_details')
-                                           ->select('*')
-                                           ->where('package_inquiry_id', '=', $packages_enquirys->id)
-                                           ->get();
-
-                                       //    echo '<pre>';
-                                       //    print_r($result);
-                                       //    echo '</pre>';
-                                       //
-
-                                       //$servicename = Helper::servicename($result->service_id);
-
-                                   @endphp
-                                   @if ($result != '' && count($result) > 0)
-                                       <div class="row">
-                                           <div class="col-md-12">
-                                               <div class="table-responsive">
-                                                   <table class="invoice-table table table-bordered">
-                                                       <thead>
-                                                           @foreach ($result as $result_data)
-                                                               <tr>
-                                                                   <th>{!! Helper::form_fields($result_data->form_field_id) !!}</th>
-                                                               </tr>
-
-                                                       </thead>
-                                                       <tbody>
-
-
+                               @endphp
+                               @if ($result != '' && count($result) > 0)
+                                   <div class="row">
+                                       <div class="col-md-12">
+                                           <div class="table-responsive">
+                                               <table class="invoice-table table table-bordered">
+                                                   <thead>
+                                                       @foreach ($result as $result_data)
                                                            <tr>
-                                                               <td>{{ $result_data->formfield_value }}</td>
+                                                               <th>{!! Helper::form_fields($result_data->form_field_id) !!}</th>
                                                            </tr>
-                                   @endforeach
-                                   </tbody>
-                                   </table>
+
+                                                   </thead>
+                                                   <tbody>
 
 
-                               </div>
+                                                       <tr>
+                                                           <td>{{ $result_data->formfield_value }}</td>
+                                                       </tr>
+                               @endforeach
+                               </tbody>
+                               </table>
+
+
                            </div>
-
-                       </div>
-                   @else
-                       <p>No Data Found</p>
-           @endif
-
-           </div>
-           </div>
-           </div>
-
-           </div>
-
-           </div>
-       @endforeach
-       @endif
-
-
-
-       <!-- Delete  Modal -->
-
-       <div class="modal custom-modal fade" id="delete_model" role="dialog">
-
-           <div class="modal-dialog modal-dialog-centered">
-
-               <div class="modal-content">
-
-                   <div class="modal-body">
-
-                       <!--  <div class="modal-icon text-center mb-3">
-
-                                           <i class="fas fa-trash-alt text-danger"></i>
-
-                                       </div> -->
-
-                       <div class="modal-text text-center">
-
-                           <h3>Are you sure want to Accept</h3>
-
-                           <p></p>
-
                        </div>
 
                    </div>
+               @else
+                   <p>No Data Found</p>
+       @endif
 
-                   <div class="modal-footer text-center">
+       </div>
+       </div>
+       </div>
+
+       </div>
+
+       </div>
+   @endforeach
+   @endif
+
+
+
+   <!-- Delete  Modal -->
+
+   <div class="modal custom-modal fade" id="delete_model" role="dialog">
+
+       <div class="modal-dialog modal-dialog-centered">
+
+           <div class="modal-content">
+
+               <div class="modal-body">
+
+                   <!--  <div class="modal-icon text-center mb-3">
+
+                       <i class="fas fa-trash-alt text-danger"></i>
+
+                   </div> -->
+
+                   <div class="modal-text text-center">
+
+                       <h3>Are you sure want to Accept</h3>
+
+                       <p></p>
+
+                   </div>
+
+               </div>
+
+               <div class="modal-footer text-center">
+
+                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+
+                   <button type="button" class="btn btn-primary" onclick="form_sub();">Yes</button>
+
+               </div>
+
+           </div>
+
+       </div>
+
+   </div>
+
+   <!-- /Delete Modal -->
+
+
+
+   <!-- Select one record Category Modal -->
+
+   <div class="modal custom-modal fade" id="select_one_record" role="dialog">
+
+       <div class="modal-dialog modal-dialog-centered">
+
+           <div class="modal-content">
+
+               <div class="modal-body">
+
+                   <div class="modal-text text-center">
+
+                       <h3>Please select at least one record to delete</h3>
+
+                       <!-- <p>Are you sure want to delete?</p> -->
+
+                   </div>
+
+               </div>
+
+           </div>
+
+       </div>
+
+   </div>
+
+   <!-- /Select one record Category Modal -->
+
+
+
+   <!-- set order Modal -->
+
+   <div class="modal custom-modal fade" id="set_order_model" role="dialog">
+
+       <div class="modal-dialog modal-dialog-centered">
+
+           <div class="modal-content">
+
+               <div class="modal-body">
+
+                   <div class="modal-text text-center">
+
+                       <h3>Are you sure you want to Set order of Groups</h3>
+
+                       <input type="hidden" name="set_order_val" id="set_order_val" value="">
+
+                       <input type="hidden" name="set_order_id" id="set_order_id" value="">
 
                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
 
-                       <button type="button" class="btn btn-primary" onclick="form_sub();">Yes</button>
+                       <button type="button" class="btn btn-primary" onclick="updateorder();">Yes</button>
 
                    </div>
 
@@ -434,80 +493,16 @@
 
        </div>
 
-       <!-- /Delete Modal -->
+   </div>
+
+   <!-- /set orderModal -->
+   <form id="form_new" action="{{ route('accept_vendor_inquiry') }}" enctype="multipart/form-data">
+       @csrf
+       <input type="hidden" name="inquiry_id" id="inquiry_id" value="">
+       <input type="hidden" name="vendor_id" id="vendor_id" value="">
+   </form>
 
 
-
-       <!-- Select one record Category Modal -->
-
-       <div class="modal custom-modal fade" id="select_one_record" role="dialog">
-
-           <div class="modal-dialog modal-dialog-centered">
-
-               <div class="modal-content">
-
-                   <div class="modal-body">
-
-                       <div class="modal-text text-center">
-
-                           <h3>Please select at least one record to delete</h3>
-
-                           <!-- <p>Are you sure want to delete?</p> -->
-
-                       </div>
-
-                   </div>
-
-               </div>
-
-           </div>
-
-       </div>
-
-       <!-- /Select one record Category Modal -->
-
-
-
-       <!-- set order Modal -->
-
-       <div class="modal custom-modal fade" id="set_order_model" role="dialog">
-
-           <div class="modal-dialog modal-dialog-centered">
-
-               <div class="modal-content">
-
-                   <div class="modal-body">
-
-                       <div class="modal-text text-center">
-
-                           <h3>Are you sure you want to Set order of Groups</h3>
-
-                           <input type="hidden" name="set_order_val" id="set_order_val" value="">
-
-                           <input type="hidden" name="set_order_id" id="set_order_id" value="">
-
-                           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-
-                           <button type="button" class="btn btn-primary" onclick="updateorder();">Yes</button>
-
-                       </div>
-
-                   </div>
-
-               </div>
-
-           </div>
-
-       </div>
-
-       <!-- /set orderModal -->
-       <form id="form_new" action="{{ route('accept_vendor_inquiry') }}" enctype="multipart/form-data">
-           @csrf
-           <input type="hidden" name="inquiry_id" id="inquiry_id" value="">
-           <input type="hidden" name="vendor_id" id="vendor_id" value="">
-       </form>
-
-   @stop
    <script>
        function delete_category(id, vendor_id) {
            $('#inquiry_id').val(id);

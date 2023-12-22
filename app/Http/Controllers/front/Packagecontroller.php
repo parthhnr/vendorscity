@@ -115,132 +115,9 @@ class Packagecontroller extends Controller
 
     }
     public function package_inquiry(Request $request){
-
-        $currentDate = now();
-        $subscription_vendor_data= DB::table('subscription')->where('services',$request->service_id)
-                                             ->whereRaw('FIND_IN_SET(?, sub_service)', [$request->subservice_id])
-                                             ->where('enddate', '>=', $currentDate)
-                                             ->get();
- 
-         //echo "<pre>";print_r($subscription_vendor_data);echo "</pre>";exit;
- 
-         $vendor_id_array = array();
-         
-         if($subscription_vendor_data != '' && !empty($subscription_vendor_data)){
-             
-             foreach($subscription_vendor_data as $subscription_vendor_val){
-                 $vendor_id_array[] = $subscription_vendor_val->vendor_id;
-                 
-             }
-         }
- 
-         foreach($vendor_id_array as $vendor_id_array_data){
- 
-             $vendor_data= DB::table('users')->where('id',$vendor_id_array_data)->first();
- 
-            //   echo "<pre>";print_r($vendor_data);echo "</pre>";exit;
-              
-             if($vendor_data && $vendor_data->is_active == 0){
-                // echo "<pre>";print_r($vendor_data->email);echo "</pre>";exit;
-                 $data = '<!doctype html> 
-                 <html>
-                 <head>
-                     <meta charset="utf-8">
-                     <title>Enquiry Details</title>
-                     <style>
-                         .logo {
-                             text-align: center;
-                             width: 100%;
-                         }
-                         .wrapper {
-                             width: 100%;
-                             max-width:500px;
-                             margin:auto;
-                             font-size:14px;
-                             line-height:24px;
-                             font-family:Helvetica Neue, Helvetica, Helvetica, Arial, sans-serif;
-                             color:#555;
-                         }
-                         .wrapper div {
-                             height: auto;
-                             float: left;
-                             margin-bottom: 15px;
-                             width:100%;
-                         }
-                         .text-center {
-                             text-align: center;
-                         }
-                         .email-wrapper {
-                             padding:5px;
-                             border:1px solid #ccc;
-                             width:100%;
-                         }
-             
-                         .big {
-                             text-align: center;
-                             font-size: 26px;
-                             color: #e31e24;
-                             font-weight: bold;
-                             margin-bottom: 0 !important;
-                             text-transform: uppercase;
-                             line-height: 34px;
-                         }
-             
-                         .welcome {
-                             font-size: 17px;
-                             font-weight: bold;
-                         }
-                         .footer {
-                             text-align: center;
-                             color: #999;
-                             font-size: 13px;
-                         }
-             
-                     </style>
-                 </head>
-                 <body>
-                     <div class="wrapper" >
-                         <div class="logo" style="float: inherit;">
-                         <img src="'.asset("public/site/images/VC-LONG-COLOR.png").'" style="width: 30%;float: inherit;" >
-                         </div>
-                         <div class="email-wrapper" >
-                             <table style="border-collapse:collapse;" width="100%" border="0" cellspacing="0" cellpadding="10">          
-                                 <tr>
-                                     <td>
-                                         <table width="100%" border="2" cellspacing="0" cellpadding="5">   
-                                             <tr>
-                                                 <td ><br>Dear '.$vendor_data->name.',</td>
-                                             </tr>
-                                             <tr>
-                                                 <td > 
-                                                 You recently requested a password reset. To change your password,<br>
-                                                 click <a href="">here</a> or paste the following link into your browser:
-                                                The link will expire in 24 hours, so be sure to use it right away.
-                                                 </td> 
-                                             </tr>
-                                             <tr>
-                                                 <td><br><br>Regards,<br>VendorsCity Team </td>
-                                             </tr>
-                                         </table>
-                                     </td>
-                                 </tr>
-                             </table>
-                         </div>
-                     </div>
-                 </body>
-             </html>';
-             $subject = "Enquiry Details";
-             $to = $vendor_data->email;
-             Mail::send([], [], function($message) use($data, $to, $subject) {
-                 $message->to($to,'VendorsCity');
-                 $message->subject($subject);
-                 $message->from('mayudin.hnrtechnologies@gmail.com','VendorsCity');
-                 $message->html($data);
-             });
-         }
-         
- }
         
+        // echo "<pre>";print_r($request->post());echo "</pre>";
+
         $data['name']=$request->name;
         $data['pakage_id']=$request->pakage_id;
         $data['service_id']=$request->service_id;
@@ -249,6 +126,8 @@ class Packagecontroller extends Controller
         $data['email']=$request->email;
         $data['mobile']=$request->mobile;
         $data['added_date'] = date('Y-m-d');
+        
+
 
 
         $package_inquiry=DB::table('packages_enquiry',)->insertGetId($data);
@@ -353,6 +232,207 @@ class Packagecontroller extends Controller
                     }
                 }    
             }
+
+            $currentDate = now();
+            $subscription_vendor_data= DB::table('subscription')->where('services',$request->service_id)
+                                                 ->whereRaw('FIND_IN_SET(?, sub_service)', [$request->subservice_id])
+                                                 ->where('enddate', '>=', $currentDate)
+                                                 ->get();
+     
+             
+     
+             $vendor_id_array = array();
+             
+             if($subscription_vendor_data != '' && !empty($subscription_vendor_data)){
+                 
+                 foreach($subscription_vendor_data as $subscription_vendor_val){
+                     $vendor_id_array[] = $subscription_vendor_val->vendor_id;
+                     
+                 }
+
+             }
+         
+     
+             foreach($vendor_id_array as $vendor_id_array_data){
+
+                // echo "<pre>";print_r($vendor_id_array_data);echo "</pre>";exit;
+                 $vendor_data= DB::table('users')->where('id',$vendor_id_array_data)->first();               
+                  
+                 if($vendor_data && $vendor_data->is_active == 0){
+                    
+                    $field_array = array();
+                    foreach($request->form_field_id as $key => $values) {
+
+                       $formfield_value_array = $request->formfield_value[$key];
+
+                       
+                        $form_fields = DB::table('form_fileds')
+                        ->select('*')
+                        ->where('id', '=',$values)
+                        ->first();
+                        
+
+                        $field_array[] = array('name' =>$form_fields->lable_name, 'value' => $formfield_value_array );
+                                               
+                                              
+                    } 
+                    $mul_field_array = array();
+                     foreach($request->form_field_mul_dropdown_id as $key => $value) {
+                         
+                            $mul_drop_fields = DB::table('form_fileds')
+                            ->select('*')
+                            ->where('id', '=',$value)
+                            ->first();
+
+                            $formfield_mul_dropdown = implode(',', $request['formfield_mul_dropdown_'.$value]);
+                           
+                            $mul_field_array[] = array('name' =>$mul_drop_fields->lable_name, 'value' => $formfield_mul_dropdown );
+
+                            // echo "<pre>";print_r($formfield_mul_dropdown);echo "</pre>";
+                     }
+
+
+                    //  exit;
+                     
+
+                    // echo "<pre>";print_r($mul_field_array);echo "</pre>";exit;
+
+                    
+
+                     $html = '<!doctype html> 
+                     <html>
+                     <head>
+                         <meta charset="utf-8">
+                         <title>Enquiry Details</title>
+                         <style>
+                             .logo {
+                                 text-align: center;
+                                 width: 100%;
+                             }
+                             .wrapper {
+                                 width: 100%;
+                                 max-width:500px;
+                                 margin:auto;
+                                 font-size:14px;
+                                 line-height:24px;
+                                 font-family:Helvetica Neue, Helvetica, Helvetica, Arial, sans-serif;
+                                 color:#555;
+                             }
+                             .wrapper div {
+                                 height: auto;
+                                 float: left;
+                                 margin-bottom: 15px;
+                                 width:100%;
+                             }
+                             .text-center {
+                                 text-align: center;
+                             }
+                             .email-wrapper {
+                                 padding:5px;
+                                 border:1px solid #ccc;
+                                 width:100%;
+                             }
+                 
+                             .big {
+                                 text-align: center;
+                                 font-size: 26px;
+                                 color: #e31e24;
+                                 font-weight: bold;
+                                 margin-bottom: 0 !important;
+                                 text-transform: uppercase;
+                                 line-height: 34px;
+                             }
+                 
+                             .welcome {
+                                 font-size: 17px;
+                                 font-weight: bold;
+                             }
+                             .footer {
+                                 text-align: center;
+                                 color: #999;
+                                 font-size: 13px;
+                             }
+                 
+                         </style>
+                     </head>
+                     <body>
+                         <div class="wrapper" >
+                             <div class="logo" style="float: inherit;">
+                             <img src="'.asset("public/site/images/VC-LONG-COLOR.png").'" style="width: 30%;float: inherit;" >
+                             </div>
+                             <div class="email-wrapper" >
+                                 <table style="border-collapse:collapse;" width="100%" border="0" cellspacing="0" cellpadding="10">          
+                                     <tr>
+                                         <td>
+                                             <table width="100%" border="2" cellspacing="0" cellpadding="5">   
+                                                 
+                                                     <th colspan="2">Dear '.$vendor_data->name.'</th>                                    
+                                        
+                                                    <tr>
+                                                        <th>Name</th>
+                                                        <td >'.$data['name'].'</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Service</th>
+                                                        <td>'.\Helper::servicename($data['service_id']).'</td>
+                                                    </tr> 
+                                                    
+                                                    <tr>
+                                                        <th>Subservice</th>
+                                                        <td>'.\Helper::subservicename($data['subservice_id']).'</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Package Category</th>
+                                                        <td>'.\Helper::packagescategory($data['packagecategory_id']).'</td>
+                                                    </tr>
+                                                    <tr>
+                                                         <th>Pakage</th>
+                                                         <td>'.\Helper::packages_enquiry($data['pakage_id']).'</td>
+                                                    </tr>';
+                                                   
+                                                    
+
+                                                 foreach($field_array as $form_fields_data){
+
+                                                    
+                                                    $html .= '<tr>
+                                                    <th>'. $form_fields_data['name'].'</th>    
+                                                    <td >'.$form_fields_data['value'].'</td>                                               
+                                                    </tr>';
+                                                }
+
+                                                foreach($mul_field_array as $mul_field_array_data){                                                    
+                                                    $html .= '<tr>
+                                                    <th>'. $mul_field_array_data['name'].'</th>    
+                                                    <td >'.$mul_field_array_data['value'].'</td>                                               
+                                                    </tr>';
+                                                }
+                                                $html .=' </table>
+                                         </td>
+                                     </tr>';
+                                     $html .='<tr>
+                                                     <td><br><br>Regards,<br>VendorsCity Team </td>
+                                                 </tr>
+                                 </table>
+                             </div>
+                         </div>
+                     </body>
+                 </html>';
+
+                 
+                //  echo $vendor_data->email;
+                //  echo $html;exit;
+                 $subject = "Enquiry Details";
+                 $to = $vendor_data->email;
+                 Mail::send([], [], function($message) use($html, $to, $subject) {
+                     $message->to($to,'VendorsCity');
+                     $message->subject($subject);
+                     $message->from('mayudin.hnrtechnologies@gmail.com','VendorsCity');
+                     $message->html($html);
+                 });
+             }
+             
+     }
 
             
 
