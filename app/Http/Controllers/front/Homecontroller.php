@@ -16,7 +16,6 @@ class Homecontroller extends Controller
     public function index(){
 
         $data['service']=DB::table('services')->orderBy('set_order','ASC')->get();
-
      // $data['service']=DB::table('services')->orderBy('set_order')->get();
         $data['faq']=DB::table('faqs')->orderBy('id','DESC')->get();   
 
@@ -24,35 +23,8 @@ class Homecontroller extends Controller
         $data['meta_keyword'] = "";
         $data['meta_description'] = "";
 
-        // echo "<pre>";print_r($data['service']);echo "</pre>";exit;
+        // echo "<pre>";print_r($data);echo "</pre>";exit;
     	return view('front.index',$data);
-    }
-    public function search(Request $request){
-
-        // $search=$request->search;
-        $output="";
-        $services=DB::table('services')->where('servicename','LIKE','%'.$request->search."%")->get();
-
-        
-        // echo"<pre>";
-        // print_r($services);
-        // echo"</pre>";exit;
-
-        if($services !='' && count($services)>0){
-            foreach ($services as $key => $product) {
-                $output.='<tr>'.
-                '<td>'.$product->id.'</td>'.
-                '<td>'.$product->servicename.'</td>'.
-                '<td>'.$product->page_url.'</td>'.
-                '<td>'.$product->title1.'</td>'.
-                '</tr>';
-                }
-
-                 echo $output;
-
-        }
-
-
     }
 
     public function book_services(){

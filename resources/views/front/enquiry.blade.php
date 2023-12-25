@@ -49,9 +49,26 @@
                             </p>
                         </div>
 
+                        <div <?php if(count($result2) == 0) { ?> style="display:none;" <?php } ?>>
+                            <input id="localorint" name="localorint" type="radio" checked='checked'
+                                onclick="hideshow('local');">
+                            <label class="form-label fw500 dark-color">Local</label>
 
-
-                        <div class="row">
+                            <input id="localorint" name="localorint" type="radio" onclick="hideshow('int');">
+                            <label class="form-label fw500 dark-color">International</label>
+                        </div>
+                        <script>
+                            function hideshow(val) {
+                                if (val == 'local') {
+                                    $("#localform").show();
+                                    $("#intform").hide();
+                                } else {
+                                    $("#localform").hide();
+                                    $("#intform").show();
+                                }
+                            }
+                        </script>
+                        <div class="row" id="localform">
                             @for ($i = 0; $i < count($result1); $i++)
                                 @for ($k = 0; $k < count($formFields); $k++)
                                     @php
@@ -103,9 +120,9 @@
                                                 id="form_field_id[]" value="{{ $formFields[$k]->id }}">
 
                                             @foreach ($form_additionalData as $form_additional)
-                                                <input name="formfield_radio_{{ $formFields[$k]->id }}" type="radio"
-                                                    class="m-0" id="formfield_value[]" placeholder=""
-                                                    value="{{ $form_additional->form_option }}">
+                                                <input name="formfield_radio_{{ $formFields[$k]->id }}"
+                                                    type="radio" class="m-0" id="formfield_value[]"
+                                                    placeholder="" value="{{ $form_additional->form_option }}">
                                                 <label></label>
                                                 <label>{{ $form_additional->form_option }}</label>
                                             @endforeach
@@ -183,6 +200,138 @@
                             @endfor
                         </div>
 
+                        <div class="row" id="intform" style="display:none;">
+                            @for ($i = 0; $i < count($result2); $i++)
+                                @for ($k = 0; $k < count($formFields); $k++)
+                                    @php
+
+                                        $form_additionalData = DB::table('form_attributes')
+                                            ->select('*')
+                                            ->where('form_id', '=', $result2[$i]->id)
+                                            ->get()
+                                            ->toArray();
+                                        // echo '<pre>';
+                                        // print_r($form_additionalData);
+                                        // echo '</pre>';
+                                        // exit();
+                                    @endphp
+                                    @if ($result2[$i]->lable_name == $formFields[$k]->lable_name)
+                                        @if ($result2[$i]->type == '1')
+                                            <div class="mb15">
+                                                <label
+                                                    class="form-label fw500 dark-color">{{ $formFields[$k]->lable_name }}</label>
+                                                <input name="form_field_id[]" type="hidden" class="m-0"
+                                                    id="form_field_id[]" value=" {{ $formFields[$k]->id }}">
+                                                <input name="formfield_value[]" type="text" class="form-control"
+                                                    id="formfield_value[]"
+                                                    placeholder="{{ $formFields[$k]->lable_name }}" class="">
+                                            </div>
+                                        @endif
+                                        @if ($result2[$i]->type == '2' && $result2[$i]->lable_name != 'Do you require any additional service?')
+                                            <div class="form-group mb-3">
+                                                <label class="form-label fw500 dark-color"
+                                                    for="country">{{ $formFields[$k]->lable_name }}</label>
+                                                <input name="form_field_id[]" type="hidden" class="m-0"
+                                                    id="form_field_id[]" value="{{ $formFields[$k]->id }}">
+                                                <select class="form-control" id="formfield_value[]"
+                                                    name="formfield_value[]">
+                                                    <option value="">Select {{ $formFields[$k]->lable_name }}
+                                                    </option>
+                                                    @foreach ($form_additionalData as $form_additional)
+                                                        <option value="{{ $form_additional->form_option }}">
+                                                            {{ $form_additional->form_option }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        @endif
+                                        @if ($result2[$i]->type == '3')
+                                            <label
+                                                class="form-label fw500 dark-color">{{ $formFields[$k]->lable_name }}</label>
+
+                                            <input name="form_field_radio_id[]" type="hidden" class="m-0"
+                                                id="form_field_id[]" value="{{ $formFields[$k]->id }}">
+
+                                            @foreach ($form_additionalData as $form_additional)
+                                                <input name="formfield_radio_{{ $formFields[$k]->id }}"
+                                                    type="radio" class="m-0" id="formfield_value[]"
+                                                    placeholder="" value="{{ $form_additional->form_option }}">
+                                                <label></label>
+                                                <label>{{ $form_additional->form_option }}</label>
+                                            @endforeach
+                                        @endif
+
+                                        @if ($result2[$i]->type == '4')
+                                            <br>
+                                            <input name="form_field_checkbox_id[]" type="hidden" class="m-0"
+                                                id="form_field_id[]" value="{{ $formFields[$k]->id }}">
+                                            <label
+                                                class="form-label fw500 dark-color">{{ $formFields[$k]->lable_name }}</label>
+                                            @foreach ($form_additionalData as $form_additional)
+                                                <input name="formfield_checkbox_{{ $formFields[$k]->id }}[]"
+                                                    type="checkbox" class="m-0" id="formfield_value[]"
+                                                    placeholder="" value="{{ $form_additional->form_option }}">
+
+                                                <label>{{ $form_additional->form_option }}</label>
+                                            @endforeach
+                                        @endif
+                                        @if ($result2[$i]->type == '5')
+                                            <input name="form_field_id[]" type="hidden" class="m-0"
+                                                id="form_field_id[]" value="{{ $formFields[$k]->id }}">
+                                            <label
+                                                class="form-label fw500 dark-color">{{ $formFields[$k]->lable_name }}</label>
+                                            <textarea name="formfield_value[]" type="checkbox" class="m-0" id="formfield_value[]"
+                                                placeholder="{{ $formFields[$k]->lable_name }}" value=""></textarea>
+                                            <label></label>&nbsp;
+                                        @endif
+                                        @if ($result2[$i]->type == '6')
+                                            <div class="mb15">
+                                                <label
+                                                    class="form-label fw500 dark-color">{{ $formFields[$k]->lable_name }}</label>
+                                                <input name="form_field_id[]" type="hidden" class="m-0"
+                                                    id="form_field_id[]" value=" {{ $formFields[$k]->id }}">
+                                                <input name="formfield_value[]" type="date" class="form-control"
+                                                    id="formfield_value[]"
+                                                    placeholder="{{ $formFields[$k]->lable_name }}" class="">
+                                            </div>
+                                        @endif
+
+                                        @if ($result2[$i]->type == '2' && $result2[$i]->lable_name == 'Do you require any additional service?')
+                                            <div class="form-group mb-3">
+                                                <label class="form-label fw500 dark-color"
+                                                    for="country">{{ $formFields[$k]->lable_name }}</label>
+
+
+                                                <input name="form_field_mul_dropdown_id[]" type="hidden"
+                                                    class="m-0" id="form_field_id[]"
+                                                    value="{{ $formFields[$k]->id }}">
+                                                <select class="form-control multiple" id="formfield_value[]"
+                                                    name="formfield_mul_dropdown_{{ $formFields[$k]->id }}[]"
+                                                    multiple="multiple">
+                                                    <option value="">Select {{ $formFields[$k]->lable_name }}
+                                                    </option>
+                                                    @foreach ($form_additionalData as $form_additional)
+                                                        <option value="{{ $form_additional->form_option }}">
+                                                            {{ $form_additional->form_option }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        @endif
+                                        @if ($result2[$i]->type == '7')
+                                            <div class="mb15">
+                                                <label
+                                                    class="form-label fw500 dark-color">{{ $formFields[$k]->lable_name }}</label>
+                                                <input name="form_field_id[]" type="hidden" class="m-0"
+                                                    id="form_field_id[]" value=" {{ $formFields[$k]->id }}">
+                                                <input name="formfield_value[]" type="text" class="form-control"
+                                                    id="formfield_value[]"
+                                                    placeholder="{{ $formFields[$k]->lable_name }}" class="">
+                                            </div>
+                                        @endif
+                                    @endif
+                                @endfor
+                            @endfor
+                        </div>
+
                         <div class="d-grid mb20">
                             <button class="btn btn-primary mb-1" type="button" disabled id="spinner_button"
                                 style="display: none;">
@@ -237,17 +386,29 @@
             return false;
 
         }
-        var filter = /^\d{10}$/;
-        if (!filter.test(mobile)) {
+        // var filter = /^\d{10}$/;
+        // if (!filter.test(mobile)) {
 
-            jQuery('#mobile_error').html("Please Enter Valid Phone Number");
-            jQuery('#mobile_error').show().delay(0).fadeIn('show');
-            jQuery('#mobile_error').show().delay(2000).fadeOut('show');
-            $('html, body').animate({
-                scrollTop: $('#mobile').offset().top - 150
-            }, 1000);
-            return false;
+        //     jQuery('#mobile_error').html("Please Enter Valid Phone Number");
+        //     jQuery('#mobile_error').show().delay(0).fadeIn('show');
+        //     jQuery('#mobile_error').show().delay(2000).fadeOut('show');
+        //     $('html, body').animate({
+        //         scrollTop: $('#mobile').offset().top - 150
+        //     }, 1000);
+        //     return false;
 
+        // }
+        if (mobile != '') {
+            // var filter = /^\d{7}$/;
+            if (mobile.length < 7) {
+                jQuery('#mobile_error').html("Please Enter Valid Phone Number");
+                jQuery('#mobile_error').show().delay(0).fadeIn('show');
+                jQuery('#mobile_error').show().delay(2000).fadeOut('show');
+                $('html, body').animate({
+                    scrollTop: $('#mobile').offset().top - 150
+                }, 1000);
+                return false;
+            }
         }
 
         var email = jQuery("#email").val();

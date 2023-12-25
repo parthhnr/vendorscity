@@ -16,12 +16,16 @@ class checkoutcontroller extends Controller
         $data['meta_title'] = "";
         $data['meta_keyword'] = "";
         $data['meta_description'] = "";
+        $data['country']= DB::table('countries')->orderBy('id', 'DESC')->get();
+
+        //echo "<pre>";print_r($data);echo"</pre>";exit;
         return view('front.checkout',$data);
     }
 
     function order_place(){
         $userdata = Session::get('user');
-        // echo "<pre>";print_r($_POST);echo"</pre>";
+        
+        //echo "<pre>";print_r($_POST);echo"</pre>";exit;
 
         $cart = \Cart::content();
         // echo "<pre>";print_r($cart);echo"</pre>";
@@ -365,6 +369,56 @@ class checkoutcontroller extends Controller
 
        return view('front.thank_you',$data);
    }
+
+    function bill_state_change(){
+
+        $country_id=$_POST['country_id'];
+
+        $result=DB::table('states')
+                    ->select('*')
+                    ->where('country_id','=',$country_id)
+                    ->get();
+
+            $result_new=$result->toArray();
+            // echo"<pre>";print_r($result_new);echo"</pre>";exit;
+            $html  ="<select name='state_name' id='state_name' class='form-control' onchange='ship_state_change(this.value);'>";
+            $html .="<option value=''>Select a state</option>";
+            if($result !='' &&  count($result)>0){
+    
+                for($i=0; $i<count($result); $i++){
+                    
+                    $html .="<option value='".$result[$i]->id."'>".$result[$i]->state."</option>";
+                }
+            }
+            $html  .="<select>";
+            echo $html;
+    }
+
+    function ship_state_change(){
+
+        $country_id=$_POST['country'];
+        $state_id=$_POST['state_id'];
+
+        $result=DB::table('cities')
+                    ->select('*')
+                    ->where('country','=',$country_id)
+                    ->where('state','=',$state_id)
+                    ->get();
+
+            $result_new=$result->toArray();
+            // echo"<pre>";print_r($result_new);echo"</pre>";exit;
+            $html  ="<select name='city' id='city' class='form-control'>";
+            $html .="<option value=''>Select a state</option>";
+            if($result !='' &&  count($result)>0){
+    
+                for($i=0; $i<count($result); $i++){
+                    
+                    $html .="<option value='".$result[$i]->id."'>".$result[$i]->name."</option>";
+                }
+            }
+            $html  .="<select>";
+            echo $html;
+    }
 
     
 

@@ -144,7 +144,6 @@
                             <i class="fa fa-file"></i><span>Packages Enquiry</span></a>
                     </li>
                 @endif
-
                 @if (in_array('18', $permission1))
                     <li class="{{ request()->segment(2) == 'form_field' ? 'active' : '' }}"><a
                             href="{{ route('form_field.index') }}"
@@ -152,7 +151,6 @@
                             <i class="fa fa-file"></i><span>Form Field</span></a>
                     </li>
                 @endif
-
 
                 @if (in_array('19', $permission1))
                     <li class="{{ request()->segment(2) == 'order' ? 'active' : '' }}">

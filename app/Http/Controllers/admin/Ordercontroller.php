@@ -173,5 +173,75 @@ class Ordercontroller extends Controller
 
     }
 
+    function assign_vendor(){
+        
+
+
+        $order_id = $_POST['order_id'];
+
+        $ci_order_item_data = DB::table('ci_order_item')
+            ->where('order_id', $order_id)
+            ->first();
+
+
+        
+        $currentDate = now();
+
+        $vendor_subscription = DB::table('subscription')
+                                       ->select('*')
+                                       ->where('services', '=', $ci_order_item_data->service_id)
+                                       ->whereRaw("FIND_IN_SET(?, sub_service)", [$ci_order_item_data->subservice_id])
+                                       ->where('enddate', '>=', $currentDate)
+                                        ->groupBy('vendor_id')
+                                       ->orderBy('id', 'desc')
+                                       ->get();
+
+//echo "<pre>";print_r($vendor_subscription);echo"</pre>";
+
+        $html = '<select id="vendor_id" name="vendor_id"  class="form-control">';
+                
+                $html .= "<option value=''>Select Vendor</option>";
+
+                if ($vendor_subscription != '') {
+                    for ($i = 0; $i < count($vendor_subscription); $i++) {
+
+                        $vendor_data = DB::table('users')
+                                        ->where('id', $vendor_subscription[$i]->vendor_id)
+                                        ->where('vendor', 1)
+                                        ->where('is_active', 0)
+                                        ->first();
+
+                                        //echo "<pre>";print_r($vendor_data);echo"</pre>";
+                        if($vendor_data != ''){
+                            $html .= "<option value='" . $vendor_data->id . "'>" . $vendor_data->name . "</option>";
+                        }
+                        
+
+                        //echo "<pre>";print_r($vendor_subscription[$i]->vendor_id);echo"</pre>";
+                    }
+                }
+
+                //exit;
+
+        $html .= "</select>";
+        $html .= "<input type='hidden' name='order_id' id='order_id' value='" . $order_id . "'/>";
+        echo $html;
+        
+    }
+
+
+    function order_vendor_form(){
+
+        //echo "<pre>";print_r($_POST);echo"</pre>";exit;
+
+        $vendor_id = $_POST['vendor_id'];
+        $order_id = $_POST['order_id'];
+
+        DB::table('ci_orders')
+            ->where('order_id', $order_id)
+            ->update(['vendor_id' => $vendor_id]);
+
+        return redirect()->route('order.index')->with('success','Vendor Assign successfully');
+    }
 
 }

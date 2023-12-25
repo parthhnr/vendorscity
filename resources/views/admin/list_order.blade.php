@@ -66,7 +66,7 @@
 
                 @if (in_array('18', $edit_perm))
 
-                    <div class="col-auto">
+                    <!-- <div class="col-auto">
 
 
 
@@ -80,7 +80,7 @@
 
 
 
-                    </div>
+                    </div> -->
 
                 @endif
 
@@ -217,6 +217,7 @@
                                             <th>Schedule Pickup </th>
                                             <th>Label</th>
                                             <th>Track Order</th> --}}
+                                            <th>Assign Vendor</th>
                                             <th>Action</th>
 
                                            
@@ -285,6 +286,15 @@
                                                 <td></td>
                                                 <td></td>
                                                 <td></td> --}}
+                                                <td>
+                                                    <p>
+                                                    @if($orders->vendor_id != 0 && $orders->vendor_id != '')
+                                                        {!! Helper::vendorsname($orders->vendor_id) !!}
+                                                    @endif
+                                                    </p>
+                                                    
+                                                    <a class="btn btn-primary" href="javascript:void(0)" onclick="assign_vendor('{{$orders->order_id}}');">Assign Vendor</a>
+                                                </td>
                                                 <td class="text-right">
                                                     <a class="btn btn-primary" href="{{ route('detail', [$orders->order_id]) }}"><i class="far fa-eye me-2"></i>Details</a>
                                                 </td>
@@ -403,6 +413,56 @@
 <!-- /Select one record Category Modal -->
 
 
+<!-- Assign Vendor  Modal -->
+
+<div class="modal custom-modal fade" id="assign_vendor_model" role="dialog">
+
+    <div class="modal-dialog modal-dialog-centered">
+
+        <div class="modal-content">
+
+            <form id="order_vendor_form" action="{{ url('order_vendor_form') }}" method="POST" enctype="multipart/form-data">
+
+                @csrf
+
+            <div class="modal-body">
+
+                
+
+                <div class="modal-text text-center">
+
+                    <!-- <h3>Delete Expense Category</h3> -->
+
+                    <!-- <p>Select Vendor</p> -->
+
+                </div>
+
+                <div class="modal-text text-center" id="dropdownreplace">
+                </div>
+
+                <p class="form-error-text" id="vendor_id_error" style="color: red; margin-top: 10px;"></p>
+
+            </div>
+
+            <div class="modal-footer text-center">
+
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+
+                <button type="button" class="btn btn-primary" onclick="form_sub_vendor();">Submit</button>
+
+            </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- /Assign Vendor Modal -->
+
+
 
 <script>
 
@@ -430,6 +490,41 @@
 
         $('#form').submit();
 
+    }
+
+    function form_sub_vendor() {
+
+        var vendor_id = jQuery("#vendor_id").val();
+
+            if (vendor_id == '') {
+                jQuery('#vendor_id_error').html("Please Select Vendor");
+                jQuery('#vendor_id_error').show().delay(0).fadeIn('show');
+                jQuery('#vendor_id_error').show().delay(2000).fadeOut('show');
+                
+                return false;
+            }
+
+        $('#order_vendor_form').submit();
+
+    }
+
+    function assign_vendor(order_id){
+
+        var url = '{{ url('assign_vendor') }}';
+
+        $.ajax({
+                url: url,
+                type: 'post',
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                    "order_id": order_id
+                },
+                success: function(msg) {
+                    document.getElementById('dropdownreplace').innerHTML = msg;
+                    $('#assign_vendor_model').modal('show');
+                    
+                }
+        });
     }
 
     

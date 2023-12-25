@@ -222,6 +222,9 @@
                                            @if ($vendor_subscription != '')
 
 
+                                               @php
+                                                   $i = 1;
+                                               @endphp
 
                                                @foreach ($resultArray as $resultArray_data)
                                                    @php
@@ -241,9 +244,6 @@
 
                                                    @endphp
 
-                                                   @php
-                                                       $i = 1;
-                                                   @endphp
 
 
                                                    @foreach ($packages_enquiry as $packages_enquiry_data)
@@ -256,6 +256,7 @@
                                                            //    echo '<pre>';
                                                            //    print_r($vendors_data);
                                                            //    echo '</pre>';
+                                                           //    exit();
                                                        @endphp
                                                        @if ($vendors_data == '')
                                                            <tr>
@@ -286,11 +287,10 @@
                                                                    </a></td>
 
                                                            </tr>
-
-                                                           @php
-                                                               $i++;
-                                                           @endphp
                                                        @endif
+                                                       @php
+                                                           $i++;
+                                                       @endphp
                                                    @endforeach
                                                @endforeach
                                            @else
@@ -317,7 +317,12 @@
 
        </div>
 
-
+       {{-- @php
+           echo '<pre>';
+           print_r($packages_enquiry);
+           echo '</pre>';
+           exit();
+       @endphp --}}
 
        @if ($packages_enquiry != '')
 
@@ -406,9 +411,9 @@
 
                        <!--  <div class="modal-icon text-center mb-3">
 
-                                           <i class="fas fa-trash-alt text-danger"></i>
+                                                                                                                                                                                                                                                                                                                                                                                                                   <i class="fas fa-trash-alt text-danger"></i>
 
-                                       </div> -->
+                                                                                                                                                                                                                                                                                                                                                                                                               </div> -->
 
                        <div class="modal-text text-center">
 
@@ -529,7 +534,7 @@
    <script>
        function Enquiry(id) {
 
-           // alert(id);
+           //    alert(id);
 
            $('#delete_model_' + id).modal('show');
 
