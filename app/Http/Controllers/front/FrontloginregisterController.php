@@ -89,7 +89,7 @@ class FrontloginregisterController extends Controller
         if (!empty($redirectUrl)) {
             return redirect()->to($redirectUrl)->with('L_strsucessMessage','Registration Successfully.');
             }else{
-            return redirect()->to('/')->with('L_strsucessMessage','Registration Successfully.');
+            return redirect()->to('/')->with('L_strsucessMessage','Registration  Successfully.');
             }      
 
        

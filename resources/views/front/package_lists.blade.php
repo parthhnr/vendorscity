@@ -458,7 +458,7 @@
 
                                                 @if (in_array('1', explode(',', $subservice->is_bookable)))
                                                     <a class="ud-btn btn-thm add-joining"
-                                                        href="{{ route('enquiry', ['id' => $package_data_new->id]) }}">Get
+                                                        href="{{ route('enquiry', ['id' => $package_data_new->id, 'service_id' => 0]) }}">Get
                                                         Multiple Quote</a>
                                                 @endif
 

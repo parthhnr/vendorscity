@@ -161,8 +161,22 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="city">Form Fields</label>
+                                    <label for="city">Local Fields</label>
                                     <select class="form-control" id="form_fields" name="form_fields[]"
+                                        multiple="multiple">
+                                        <option value="">Select Form Fields</option>
+                                        @foreach ($form_field_data as $form_field)
+                                            <option value="{{ $form_field->id }}">{{ $form_field->lable_name }}</option>
+                                        @endforeach
+                                    </select>
+                                    <p class="form-error-text" id="form_fields_error"
+                                        style="color: red; margin-top: 10px;">
+                                    </p>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="city">International Fields</label>
+                                    <select class="form-control" id="form_fields_two" name="form_fields_two[]"
                                         multiple="multiple">
                                         <option value="">Select Form Fields</option>
                                         @foreach ($form_field_data as $form_field)
@@ -253,6 +267,9 @@
         });
 
         $("#form_fields").select2({
+            placeholder: "Select a Form Fields" // Replace with your desired placeholder text
+        });
+        $("#form_fields_two").select2({
             placeholder: "Select a Form Fields" // Replace with your desired placeholder text
         });
 

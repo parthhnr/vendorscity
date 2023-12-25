@@ -64,9 +64,6 @@
                                             Text area</option>
                                         <option value="6" @if ($form_filed->type == 6) {{ 'selected' }} @endif>
                                             Date</option>
-                                        <option value="7"
-                                            @if ($form_filed->type == 7) {{ 'selected' }} @endif>
-                                            Set Order</option>
                                     </select>
                                     <p class="form-error-text" id="type_error" style="color: red; margin-top: 10px;">
                                     </p>

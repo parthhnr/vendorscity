@@ -66,6 +66,9 @@ class ServiceController extends Controller
         if(isset($request->form_fields)){
             $service->form_fields = implode(",",$request->form_fields);
         }
+        if(isset($request->form_fields_two)){
+            $service->form_fields_two = implode(",",$request->form_fields_two);
+        }
 
         $service->set_order = 0;
 
@@ -141,6 +144,9 @@ class ServiceController extends Controller
         $service->banner_url=$request->banner_url;
         if(isset($request->form_fields)){
             $service->form_fields = implode(",",$request->form_fields);
+        }
+        if(isset($request->form_fields_two)){
+            $service->form_fields_two = implode(",",$request->form_fields_two);
         }
 
         //$service->banner_description=$request->banner_description;

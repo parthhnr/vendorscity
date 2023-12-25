@@ -87,25 +87,51 @@ class Packagecontroller extends Controller
         return view('front.package_detail',$data);
     }
 
-    public function enquiry(Request $request,$id){
+    public function enquiry(Request $request,$id,$service_id){
+
+        //echo $id;exit;
         
         $service= DB::table('packages')->where('id',$id)->first();
         
+
+        if($service_id != 0){
+            $service_id = $service_id;
+            $subservice_id = 0;
+            $packagecategory_id = 0;
+        }else{
+            $service_id = $service->service_id;
+            $subservice_id = $service->subservice_id; 
+            $packagecategory_id = $service->packagecategory_id; 
+        }
+
         
-        $form_field_data= DB::table('services')->where('id',$service->service_id)->first();        
+        
+    //    echo "<pre>";print_r($service);echo "</pre>";exit;   
+        
+        $form_field_data= DB::table('services')->where('id',$service_id)->first(); 
+        
+        //echo "<pre>";print_r($form_field_data);echo "</pre>";exit;
+
         $tags = explode(',', $form_field_data->form_fields);
         $data['result1'] = DB::table('form_fileds')->whereIn('id',$tags)->orderBy('set_order')->get()->toArray();
         $data['formFields'] = DB::table('form_fileds')->get()->toArray();
 
-       
+        $tags = explode(',', $form_field_data->form_fields_two);
+        //$tags_two = explode(',', $form_field_data->form_fields_two);
         
+        $data['result2'] = DB::table('form_fileds')
+                                ->whereIn('id', $tags)
+                                ->orderBy('set_order')
+                                ->get()
+                                ->toArray();
+
+        //$data['result2'] = DB::table('form_fileds')->whereIn('id',$tags)->orderBy('set_order')->get()->toArray();
+        //$data['formFields1'] = DB::table('form_fileds')->get()->toArray();
+
         $data['package_id'] =$id;
-        $data['service_id'] = $service->service_id;
-        $data['subservice_id'] = $service->subservice_id; 
-        $data['packagecategory_id'] = $service->packagecategory_id; 
-        
-        
-        
+        $data['service_id'] = $service_id;
+        $data['subservice_id'] = $subservice_id;
+        $data['packagecategory_id'] =$packagecategory_id; 
 
         // echo "<pre>";print_r($data['form_fields_data']);echo "</pre>";exit;
 
@@ -116,7 +142,7 @@ class Packagecontroller extends Controller
     }
     public function package_inquiry(Request $request){
         
-        // echo "<pre>";print_r($request->post());echo "</pre>";
+        //echo "<pre>";print_r($request->post());echo "</pre>";
 
         $data['name']=$request->name;
         $data['pakage_id']=$request->pakage_id;
@@ -223,8 +249,7 @@ class Packagecontroller extends Controller
                        }else{
                         $data4['formfield_value'] = null;
                        }
-                        
-
+                         
 
                         // echo "<pre>";print_r($data123);echo "</pre>";exit;
 
@@ -234,12 +259,25 @@ class Packagecontroller extends Controller
             }
 
             $currentDate = now();
-            $subscription_vendor_data= DB::table('subscription')->where('services',$request->service_id)
-                                                 ->whereRaw('FIND_IN_SET(?, sub_service)', [$request->subservice_id])
-                                                 ->where('enddate', '>=', $currentDate)
-                                                 ->get();
+            //echo $request->service_id;
+            if($request->subservice_id != 0){
+
+               // echo "fff";
+                $subscription_vendor_data= DB::table('subscription')->where('services',$request->service_id)
+                ->whereRaw('FIND_IN_SET(?, sub_service)', [$request->subservice_id])
+                ->where('enddate', '>=', $currentDate)
+                ->get();
+            }else{
+
+                //echo "fff77777777";
+                $subscription_vendor_data= DB::table('subscription')->where('services',$request->service_id)                
+                ->where('enddate', '>=', $currentDate)
+                ->get();
+            }
+            
+
      
-             
+            // echo "<pre>";print_r($subscription_vendor_data);echo "</pre>";exit;
      
              $vendor_id_array = array();
              
@@ -251,14 +289,16 @@ class Packagecontroller extends Controller
                  }
 
              }
-         
+             
      
              foreach($vendor_id_array as $vendor_id_array_data){
 
                 // echo "<pre>";print_r($vendor_id_array_data);echo "</pre>";exit;
                  $vendor_data= DB::table('users')->where('id',$vendor_id_array_data)->first();               
                   
-                 if($vendor_data && $vendor_data->is_active == 0){
+                 if($vendor_data && $vendor_data->is_active == 0){ 
+                    
+                    if(isset($request->form_field_id)){
                     
                     $field_array = array();
                     foreach($request->form_field_id as $key => $values) {
@@ -273,27 +313,66 @@ class Packagecontroller extends Controller
                         
 
                         $field_array[] = array('name' =>$form_fields->lable_name, 'value' => $formfield_value_array );
+
+                        // echo "<pre>";print_r($field_array);echo "</pre>";exit;
                                                
                                               
-                    } 
-                    $mul_field_array = array();
-                     foreach($request->form_field_mul_dropdown_id as $key => $value) {
-                         
+                    }
+                    }
+                    if (isset($request->form_field_mul_dropdown_id)) {
+                        $mul_field_array = array();
+                        foreach ($request->form_field_mul_dropdown_id as $key => $value) {
                             $mul_drop_fields = DB::table('form_fileds')
-                            ->select('*')
-                            ->where('id', '=',$value)
-                            ->first();
+                                ->select('*')
+                                ->where('id', '=', $value)
+                                ->first();
+                    
+                            // Check if the formfield_mul_dropdown exists in the request
+                            if (isset($request['formfield_mul_dropdown_' . $value])) {
+                                // Assuming $request['formfield_mul_dropdown_' . $value] is an array
+                                $formfield_mul_dropdown = implode(',', $request['formfield_mul_dropdown_' . $value]);
+                    
+                                $mul_field_array[] = array('name' => $mul_drop_fields->lable_name, 'value' => $formfield_mul_dropdown);
+                            }
+                        }
+                    }
+                    
 
-                            $formfield_mul_dropdown = implode(',', $request['formfield_mul_dropdown_'.$value]);
-                           
-                            $mul_field_array[] = array('name' =>$mul_drop_fields->lable_name, 'value' => $formfield_mul_dropdown );
+                    if(isset($request->form_field_checkbox_id)){ 
+                        $mul_field_array = array();
+                         foreach($request->form_field_checkbox_id as $key => $valuess) {
+                             
+                                $checkbox_fields = DB::table('form_fileds')
+                                ->select('*')
+                                ->where('id', '=',$valuess)
+                                ->first();
+                                if (isset($request['formfield_checkbox_'.$valuess])) {
+                                $formfield_checkbox = implode(',', $request['formfield_checkbox_'.$valuess]);
+                               
+                                $checkbox_field_array[] = array('name' =>$checkbox_fields->lable_name, 'value' => $formfield_checkbox );
+    
+                                // echo "<pre>";print_r($checkbox_field_array);echo "</pre>";
+                         }  }                    
+                        }
 
-                            // echo "<pre>";print_r($formfield_mul_dropdown);echo "</pre>";
-                     }
+                        if(isset($request->form_field_radio_id)){ 
+                            $radio_field_array = array();
+                             foreach($request->form_field_radio_id as $key => $values) {
+                                 
+                                    $radio_fields = DB::table('form_fileds')
+                                    ->select('*')
+                                    ->where('id', '=',$values)
+                                    ->first();
+                                    if (isset($request['formfield_radio_'.$values])) {
+                                    $formfield_radio = $request['formfield_radio_'.$values];
+                                   
+                                    $radio_field_array[] = array('name' =>$radio_fields->lable_name, 'value' => $formfield_radio);
+        
+                                    // echo "<pre>";print_r($radio_field_array);echo "</pre>";
+                             }                     
+                             }                     
+                            }
 
-
-                    //  exit;
-                     
 
                     // echo "<pre>";print_r($mul_field_array);echo "</pre>";exit;
 
@@ -366,8 +445,8 @@ class Packagecontroller extends Controller
                                          <td>
                                              <table width="100%" border="2" cellspacing="0" cellpadding="5">   
                                                  
-                                                     <th colspan="2">Dear '.$vendor_data->name.'</th>                                    
-                                        
+                                                     <th colspan="2">Dear '.ucfirst($vendor_data->name).'</th>
+                                                     
                                                     <tr>
                                                         <th>Name</th>
                                                         <td >'.$data['name'].'</td>
@@ -391,25 +470,49 @@ class Packagecontroller extends Controller
                                                     </tr>';
                                                    
                                                     
-
-                                                 foreach($field_array as $form_fields_data){
-
-                                                    
+                                                if(isset($field_array) && $field_array !=''){
+                                                 foreach($field_array as $form_fields_data){     
+                                                    if($form_fields_data['value'] != '') {                                               
                                                     $html .= '<tr>
                                                     <th>'. $form_fields_data['name'].'</th>    
                                                     <td >'.$form_fields_data['value'].'</td>                                               
                                                     </tr>';
+                                                } }
                                                 }
-
+                                                
+                                                if(isset($mul_field_array) && $mul_field_array !=''){
                                                 foreach($mul_field_array as $mul_field_array_data){                                                    
                                                     $html .= '<tr>
                                                     <th>'. $mul_field_array_data['name'].'</th>    
                                                     <td >'.$mul_field_array_data['value'].'</td>                                               
                                                     </tr>';
                                                 }
+                                                }
+
+                                                if(isset($checkbox_field_array) && $checkbox_field_array !=''){
+                                                    foreach($checkbox_field_array as $checkbox_field_array_data){                                                    
+                                                        $html .= '<tr>
+                                                        <th>'. $checkbox_field_array_data['name'].'</th>    
+                                                        <td >'.$checkbox_field_array_data['value'].'</td>                                               
+                                                        </tr>';
+                                                    }
+                                                    }
+                                                if(isset($radio_field_array) && $radio_field_array !=''){
+                                                    foreach($radio_field_array as $radio_field_array_data){                                                    
+                                                        $html .= '<tr>
+                                                        <th>'. $radio_field_array_data['name'].'</th>    
+                                                        <td >'.$radio_field_array_data['value'].'</td>                                               
+                                                        </tr>';
+                                                    }
+                                                    }
+
+                                                
+
                                                 $html .=' </table>
                                          </td>
-                                     </tr>';
+                                     </tr>
+                                   
+                                     ';
                                      $html .='<tr>
                                                      <td><br><br>Regards,<br>VendorsCity Team </td>
                                                  </tr>
@@ -424,21 +527,23 @@ class Packagecontroller extends Controller
                 //  echo $html;exit;
                  $subject = "Enquiry Details";
                  $to = $vendor_data->email;
-                 Mail::send([], [], function($message) use($html, $to, $subject) {
+                 $bccEmails = ["patelnikul321@gmail.com", "asmit@digitalsadhus.com"];
+                 Mail::send([], [], function($message) use($html, $to, $bccEmails, $subject) {
                      $message->to($to,'VendorsCity');
+                     $message->bcc($bccEmails);
                      $message->subject($subject);
                      $message->from('mayudin.hnrtechnologies@gmail.com','VendorsCity');
                      $message->html($html);
                  });
              }
              
-     }
-
-            
+     }       
 
 
-
-        return redirect()->route('enquiry', ['id' => $data['pakage_id']])->with('L_strsucessMessage', 'Enquiry Form Submitted Successfully');
+     return redirect()
+    ->route('enquiry', ['id' => $data['pakage_id'], 'service_id' => $data['service_id']])
+    ->with('L_strsucessMessage', 'Enquiry Form Submitted Successfully');
+ 
 
     }
     

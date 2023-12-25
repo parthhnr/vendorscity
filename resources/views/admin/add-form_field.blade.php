@@ -50,7 +50,6 @@
                                         <option value="4">Checkbox</option>
                                         <option value="5">Text area</option>
                                         <option value="6">Date</option>
-                                        <option value="7">Set Order</option>
                                     </select>
                                     <p class="form-error-text" id="type_error" style="color: red; margin-top: 10px;">
                                     </p>
