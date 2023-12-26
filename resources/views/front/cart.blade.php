@@ -32,6 +32,9 @@
                                 <tbody class="table_body">
                                     @php
                                         $subtotal = 0;
+                                        // echo '<pre>';
+                                        // print_r(Cart::content());
+                                        // echo '</pre>';
                                     @endphp
                                     @foreach (Cart::content() as $items)
                                         <tr>
@@ -138,10 +141,15 @@
                                             }
 
                                         @endphp
+                                        @if ($items->options->subservice_description != '')
+                                            <td class="desc" style="border-bottom: none;">
+                                                {!! html_entity_decode($items->options->subservice_description) !!}</td>
+                                        @endif
                                     @endforeach
 
                                 </tbody>
                             </table>
+
 
                         </div>
                     </div>

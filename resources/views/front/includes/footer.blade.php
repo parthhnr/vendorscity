@@ -124,11 +124,6 @@
 </section>
 <a class="scrollToHome" href="#"><i class="fas fa-angle-up"></i></a>
 
-
-
-
-
-
 </div>
 </div>
 <!-- Wrapper End -->
@@ -139,16 +134,14 @@
             $(document).on('ready', function() {
                 document.getElementById('message_succsess').innerHTML =
                     "{{ Session::get('L_strsucessMessage') }}";
-                setTimeout(function() {
-                    $("#message_succsess").show('blind', {}, 500)
-                }, 5000);
-                setTimeout(function() {
-                    $("#message_succsess").hide('blind', {}, 900)
-                }, 9000);
+                $('#message_succsess').show().delay(0).fadeIn('show');
+                $('#message_succsess').show().delay(3000).fadeOut('show');
+
             });
         })(window.jQuery);
     </script>
 @endif
+
 
 
 <script src="{{ asset('public/site/js/jquery-migrate-3.0.0.min.js') }}"></script>
@@ -224,8 +217,12 @@
                     $("#message_succsess").html("Package Added To Cart");
                     $('#message_succsess').show().delay(0).fadeIn('show');
                     $('#message_succsess').show().delay(2000).fadeOut('show');
+                    $(".addtocart-btn_" + package_id).hide();
+                    $(".loader-test_" + package_id).show();
                     setTimeout(function() {
                         window.location.href = "{{ route('cart') }}";
+                        $(".addtocart-btn_" + package_id).show();
+                        $(".loader-test_" + package_id).hide();
                     }, 2000);
                     return false;
                 }
@@ -234,6 +231,8 @@
 
     }
 </script>
+
+
 
 </body>
 

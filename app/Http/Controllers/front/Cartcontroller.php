@@ -39,6 +39,7 @@ class Cartcontroller extends Controller
 
             $service_data = DB::table('services')->where('id',$package_data->service_id)->first();
             $subservices_data = DB::table('subservices')->where('id',$package_data->subservice_id)->first();
+        //    echo "<pre>";print_r($subservices_data);echo "</pre>";exit;
             $packagecategory_data = DB::table('package_categories')->where('id',$package_data->packagecategory_id)->first();
 
             if($subservices_data->servicepercentage > 0 && $subservices_data->servicepercentage != '') {
@@ -83,6 +84,7 @@ class Cartcontroller extends Controller
                 'service_name' => $service_data->servicename,
                 'subservice_id' => $package_data->subservice_id,
                 'subservice_name' => $subservices_data->subservicename,
+                'subservice_description' => $subservices_data->description,
                 'packagecategory_id' => $package_data->service_id,
                 'packagecategory_name' => $packagecategory_data->name,
                 'page_url' => $package_data->page_url,

@@ -20,7 +20,13 @@ class Packagecontroller extends Controller
         $data['meta_description'] = "";
 
         $subservices_data = DB::table('subservices')->where('page_url', $page_url)->first();
+        //  echo"<pre>";
+        // print_r($subservices_data);
+        // echo"</pre>";
+        // exit;
+
         $query = DB::table('packages');
+       
         if($subservices_data != ''){
 
             if($subservices_data !=''){
@@ -51,7 +57,7 @@ class Packagecontroller extends Controller
             $pagination = $query->orderBy('id', 'DESC')->get();             
             $data['package_data'] = $pagination;
             $data['package_pagination'] = $pagination;
-            // $data['package_count'] = $pagination->total();
+            $data['package_count'] = $pagination->count();
             $data['subservice_data'] = DB::table('subservices')->get();
  
             $data['max_price'] = DB::table('packages')->max('price'); 
@@ -527,10 +533,10 @@ class Packagecontroller extends Controller
                 //  echo $html;exit;
                  $subject = "Enquiry Details";
                  $to = $vendor_data->email;
-                 $bccEmails = ["patelnikul321@gmail.com", "asmit@digitalsadhus.com"];
-                 Mail::send([], [], function($message) use($html, $to, $bccEmails, $subject) {
+                //  $bccEmails = ["patelnikul321@gmail.com", "asmit@digitalsadhus.com"];
+                 Mail::send([], [], function($message) use($html, $to,  $subject) {
                      $message->to($to,'VendorsCity');
-                     $message->bcc($bccEmails);
+                    //  $message->bcc($bccEmails);
                      $message->subject($subject);
                      $message->from('mayudin.hnrtechnologies@gmail.com','VendorsCity');
                      $message->html($html);

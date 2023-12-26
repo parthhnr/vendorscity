@@ -128,10 +128,14 @@
                                 <div class="card-body card-body px-0 pt-0">
                                     @foreach ($package_catgory as $package_catgory_data)
                                         <div class="checkbox-style1">
-                                            <a href="">
+                                            <div class="checkbox-style1 mb15">
                                                 <label class="custom_checkbox">{{ $package_catgory_data->name }}
+                                                    <input type="checkbox">
+                                                    <span class="checkmark"></span>
+
                                                 </label>
-                                            </a>
+                                            </div>
+
                                         </div>
                                     @endforeach
 
@@ -207,26 +211,6 @@
                                             <input type="checkbox">
                                             <span class="checkmark"></span>
                                             <!-- <span class="right-tags">(1,945)</span> -->
-                                        </label>
-                                        <label class="custom_checkbox">Sharjah
-                                            <input type="checkbox" checked="checked">
-                                            <span class="checkmark"></span>
-                                            <!-- <span class="right-tags">(8,136)</span> -->
-                                        </label>
-                                        <label class="custom_checkbox">Qatar
-                                            <input type="checkbox">
-                                            <span class="checkmark"></span>
-                                            <!-- <span class="right-tags">(917)</span> -->
-                                        </label>
-                                        <label class="custom_checkbox">Saudi Arabia
-                                            <input type="checkbox">
-                                            <span class="checkmark"></span>
-                                            <!-- <span class="right-tags">(240)</span> -->
-                                        </label>
-                                        <label class="custom_checkbox">Jordan
-                                            <input type="checkbox">
-                                            <span class="checkmark"></span>
-                                            <!-- <span class="right-tags">((2,460)</span> -->
                                         </label>
                                     </div>
                                     <a class="text-thm" href="">+Show more</a>
@@ -350,7 +334,7 @@
                 <div class="row align-items-center mb20">
                     <div class="col-md-6">
                         <div class="text-center text-md-start">
-                            <p class="text mb-0 mb10-sm"><span class="fw500">{{-- $package_count --}}</span> services
+                            <p class="text mb-0 mb10-sm"><span class="fw500">{{ $package_count }}</span> services
                                 available</p>
                         </div>
                     </div>
@@ -367,13 +351,13 @@
                                     </li>
                                 </ul>
                             </div>
-                            <div class="pcs_dropdown dark-color pr10 text-center text-md-end"><span>Sort by</span>
+                            {{-- <div class="pcs_dropdown dark-color pr10 text-center text-md-end"><span>Sort by</span>
                                 <select class="selectpicker show-tick">
                                     <option>Best Selling</option>
                                     <option>Recommended</option>
                                     <option>New Arrivals</option>
                                 </select>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                 </div>
@@ -449,10 +433,16 @@
 
                                             <div class="budget">
                                                 @if (in_array('0', explode(',', $subservice->is_bookable)))
-                                                    <a class="ud-btn btn-thm add-joining" href="{{ route('cart') }}"
+                                                    <a class="ud-btn btn-thm add-joining addtocart-btn_{{ $package_data_new->id }}"
+                                                        href="{{ route('cart') }}"
                                                         onclick="add_to_cart('{{ $package_data_new->id }}'); return false;">
                                                         Instant
                                                         Booking
+                                                    </a>
+
+                                                    <a class="ud-btn btn-thm add-joining loader-test_{{ $package_data_new->id }}"
+                                                        href="javascript:void(0);" style="display: none;">
+                                                        Please Wait...
                                                     </a>
                                                 @endif
 
