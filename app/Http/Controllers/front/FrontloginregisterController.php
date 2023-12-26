@@ -70,8 +70,9 @@ class FrontloginregisterController extends Controller
         $frontloginregister->name=$request->name;
         $frontloginregister->email=$request->email;
         $frontloginregister->password= Hash::make($request->password);
+        $plainPassword = $request->password;
         $frontloginregister->mobile=$request->mobile;  
-        $frontloginregister->status=0;    
+        $frontloginregister->status=1;    
       
 
         $frontloginregister->save();
@@ -84,6 +85,139 @@ class FrontloginregisterController extends Controller
             'logged_in' => true
         );
         $check = Session::put('user', $newuserdata);
+        $html = '<!doctype html> <html>        
+            <head>
+                <meta charset="utf-8">
+                <title>Registration Email</title>
+                <style>
+                    .logo {
+                        text-align: center;
+                        width: 100%;
+                          }
+        
+                    .wrapper {
+                        width: 100%;
+                        max-width:500px;
+                        margin:auto;               
+                        font-size:14px;
+                        line-height:24px;
+                        font-family:Helvetica Neue, Helvetica, Helvetica, Arial, sans-serif;
+                        color:#555;
+                    }
+        
+                    .wrapper div {                
+                        height: auto;
+                        float: left;
+                        margin-bottom: 15px;
+                        width:100%;
+                    }
+                    .text-center {
+                        text-align: center;                
+                    }
+        
+                    .email-wrapper {
+                        padding:5px;
+                        border:1px solid #ccc;
+                        width:100%;
+                    }
+        
+                    .big {
+        
+                        text-align: center;
+        
+                        font-size: 26px;
+        
+                        color: #e31e24;
+        
+                        font-weight: bold;
+        
+                        margin-bottom: 0 !important;
+        
+                        text-transform: uppercase;
+        
+                        line-height: 34px;
+                    }
+        
+                    .welcome {                
+        
+                        font-size: 17px;                
+        
+                        font-weight: bold;
+                    }
+        
+                    .footer {
+        
+                        text-align: center;
+        
+                        color: #999;
+        
+                        font-size: 13px;
+                    }
+        
+                </style>
+            </head>     
+            <body>
+                <div class="wrapper" >
+                
+                    <div class="logo">
+                    <img src="'.asset("public/site/images/VC-LONG-COLOR.png").'" style="width: 30%;float: inherit;" >
+                    </div>
+                    <div class="email-wrapper" >
+                        <table style="border-collapse:collapse;" width="100%" border="0" cellspacing="0" cellpadding="10">          
+                            <tr>
+                                <td>
+                                    <table width="100%" border="0" cellspacing="0" cellpadding="5">   
+                                        <tr>
+                                            <td style="font-size:18px;">Hello ,</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="line-height:20px;">
+                                               Please find the below Registration details
+                                            </td> 
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <table style="border-top:3px solid #333;" bgcolor="#f7f7f7" width="100%" border="0" cellspacing="0" cellpadding="5">   
+                                        <tr>
+                                            <td width="50%">        
+                                                <table width="100%" border="0" cellspacing="0" cellpadding="5">   
+                                                    <tr><td width="100px">Name: </td><td>'.$request->name.'</td></tr>
+                                                    <tr><td width="100px">Email: </td><td>'.$request->email.'</td></tr>
+                                                    <tr><td width="100px">Mobile: </td><td>'.$request->mobile.'</td></tr>
+                                                    <tr><td width="100px">Password: </td><td>'.$plainPassword.'</td></tr>
+                                                </table>
+                                            </td>   
+                                        </tr>   
+                                    </table>
+                                </td>   
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </body>
+        </html>';
+        $subject = "Thank you for Registration - VendorsCity";
+        $to =$request->email;
+        // $to = $request->email;
+        Mail::send([], [], function($message) use($html, $to, $subject) {
+            $message->to($to);
+            $message->subject($subject);
+            $message->from('devang.hnrtechnologies@gmail.com', 'VendorsCity');
+            $message->html($html);
+        });
+
+        $admin = "mayudin.hnrtechnologies@gmail.com";
+        // $to = $request->email;
+        Mail::send([], [], function($message) use($html, $admin, $subject) {
+            $message->to($admin);
+            $message->subject($subject);
+            $message->from('devang.hnrtechnologies@gmail.com', 'VendorsCity');
+            $message->html($html);
+        });
+
         $redirectUrl = Session::get('redirect_url');
 
         if (!empty($redirectUrl)) {
@@ -91,8 +225,6 @@ class FrontloginregisterController extends Controller
             }else{
             return redirect()->to('/')->with('L_strsucessMessage','Registration  Successfully.');
             }      
-
-       
 
     }
 
