@@ -148,7 +148,7 @@ class Packagecontroller extends Controller
     }
     public function package_inquiry(Request $request){
         
-        //echo "<pre>";print_r($request->post());echo "</pre>";
+        // echo "<pre>";print_r($request->post());echo "</pre>";
 
         $data['name']=$request->name;
         $data['pakage_id']=$request->pakage_id;
@@ -456,25 +456,32 @@ class Packagecontroller extends Controller
                                                     <tr>
                                                         <th>Name</th>
                                                         <td >'.$data['name'].'</td>
-                                                    </tr>
-                                                    <tr>
+                                                    </tr>';
+                                                    if($data['service_id'] !=''){ 
+                                                        $html .='<tr>
                                                         <th>Service</th>
                                                         <td>'.\Helper::servicename($data['service_id']).'</td>
-                                                    </tr> 
-                                                    
-                                                    <tr>
-                                                        <th>Subservice</th>
+                                                    </tr>';
+                                                    }
+                                                    if($data['subservice_id'] !=''){ 
+                                                        $html .='<tr>
+                                                        <th>Sub Service</th>
                                                         <td>'.\Helper::subservicename($data['subservice_id']).'</td>
-                                                    </tr>
-                                                    <tr>
+                                                    </tr>';
+                                                    }
+                                                    if($data['packagecategory_id'] !=''){ 
+                                                        $html .='<tr>
                                                         <th>Package Category</th>
                                                         <td>'.\Helper::packagescategory($data['packagecategory_id']).'</td>
-                                                    </tr>
-                                                    <tr>
-                                                         <th>Pakage</th>
-                                                         <td>'.\Helper::packages_enquiry($data['pakage_id']).'</td>
                                                     </tr>';
-                                                   
+                                                    }
+                                                    if($data['pakage_id'] !=''){ 
+                                                        $html .='<tr>
+                                                        <th>Package</th>
+                                                        <td>'.\Helper::packages_enquiry($data['pakage_id']).'</td>
+                                                    </tr>';
+                                                    }                                        
+                
                                                     
                                                 if(isset($field_array) && $field_array !=''){
                                                  foreach($field_array as $form_fields_data){     
@@ -511,14 +518,21 @@ class Packagecontroller extends Controller
                                                         </tr>';
                                                     }
                                                     }
-
-                                                
+                                                    
 
                                                 $html .=' </table>
                                          </td>
-                                     </tr>
-                                   
-                                     ';
+                                     </tr>';
+                                     $html .='<tr>
+                                     <td style="
+                                     text-align: center;"> <button class="btn btn-primary" type="button"
+                                     style="background-color: #1F6EEC;
+                                     border-color: #1F6EEC;
+                                     color: #fff;
+                                     padding: 10px 18px;
+                                     border-radius: 11px;
+                                 ">Accept</button> </td>
+                                 </tr>';
                                      $html .='<tr>
                                                      <td><br><br>Regards,<br>VendorsCity Team </td>
                                                  </tr>

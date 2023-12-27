@@ -199,17 +199,21 @@
                                                    <tr>
 
                                                        <td>{{ $i }}</td>
-                                                       <td>{{ $packages_enquiry_data->name }}</td>
-                                                       <td>{{ $packages_enquiry_data->email }}</td>
-                                                       <td>{{ $packages_enquiry_data->mobile }}</td>
+                                                       <td>{{ $packages_enquiry_data->name ?? '' }}</td>
+                                                       <td>{{ $packages_enquiry_data->email ?? '' }}</td>
+                                                       <td>{{ $packages_enquiry_data->mobile ?? '' }}</td>
+
+                                                       {{-- <td>{{ $packages_enquiry_data->name }}</td> --}}
+                                                       {{-- <td>{{ $packages_enquiry_data->email }}</td> --}}
+                                                       {{-- <td>{{ $packages_enquiry_data->mobile }}</td> --}}
 
                                                        <td>
-                                                           @if ($packages_enquiry_data->service_id != '')
+                                                           @if ($packages_enquiry_data->service_id ?? '')
                                                                {!! Helper::servicename(strval($packages_enquiry_data->service_id)) !!}
                                                            @endif
                                                        </td>
                                                        <td>
-                                                           @if ($packages_enquiry_data->subservice_id != '')
+                                                           @if ($packages_enquiry_data->subservice_id ?? '')
                                                                {!! Helper::subservicename(strval($packages_enquiry_data->subservice_id)) !!}
                                                            @endif
 

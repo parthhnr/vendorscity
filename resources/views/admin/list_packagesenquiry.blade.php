@@ -160,9 +160,15 @@
                                                     {!! Helper::packages_enquiry($data->pakage_id) !!}
                                                 </td>
 
-                                                <td><a class="btn btn-primary" href="javascript:void('0');"
+                                                <td>
+                                                    {{-- <a class="btn btn-primary" href="javascript:void('0');"
                                                         onclick="delete_category('{{ $data->id }}');">View
-                                                        Package Enquiry</a></td>
+                                                        Package Enquiry</a> --}}
+
+                                                    <a class="btn btn-primary"
+                                                        href="{{ url('enquiry_page', $data->id) }}">View
+                                                        Package Enquiry</a>
+                                                </td>
                                             </tr>
 
                                             @php
@@ -235,8 +241,6 @@
 
                                                     </thead>
                                                     <tbody>
-
-
                                                         <tr>
                                                             @if ($result_data->formfield_value != '')
                                                                 <td>{{ $result_data->formfield_value }}</td>

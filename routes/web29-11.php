@@ -31,29 +31,12 @@ use App\Http\Controllers\admin\SubscriptionController;
 use App\Http\Controllers\admin\Subscriptiondetails_controller;
 use App\Http\Controllers\admin\Leadscontroller;
 use App\Http\Controllers\admin\AcceptLeadscontroller;
-use App\Http\Controllers\admin\Vendorinquirycontroller;
 use App\Http\Controllers\admin\CmsController;
 use App\Http\Controllers\admin\PackageCategoryController;
 use App\Http\Controllers\admin\PackagesController;
 use App\Http\Controllers\admin\WalletController;
 use App\Http\Controllers\admin\AdminWalletController;
 use App\Http\Controllers\admin\FaqController;
-use App\Http\Controllers\admin\FrontuserController;
-use App\Http\Controllers\admin\EnquiryController;
-
-use App\Http\Controllers\admin\Form_fieldController;
-use App\Http\Controllers\admin\Ordercontroller;
-
-
-
-
-
-use App\Http\Controllers\front\FrontloginregisterController;
-use App\Http\Controllers\front\FrontvendorController;
-use App\Http\Controllers\front\checkoutcontroller;
-use App\Http\Controllers\front\Packagecontroller;
-
-
 
 
 // Route::get('/', function () {
@@ -86,68 +69,10 @@ Route::get('/config-cache', function() {
 /*------Front routes start ------*/
 
 Route::get('/', '\App\Http\Controllers\front\Homecontroller@index');
-Route::post('search', '\App\Http\Controllers\front\Homecontroller@search')->name('search');
-
 Route::get('/book-services', '\App\Http\Controllers\front\Homecontroller@book_services');
 Route::get('/become-vendor', '\App\Http\Controllers\front\Homecontroller@become_vendor');
-Route::resource('Sign-Up', '\App\Http\Controllers\front\FrontloginregisterController');
-Route::get('Sign-in', '\App\Http\Controllers\front\FrontloginregisterController@Sign_in')->name('Sign-in');
-Route::get('user_signout', 'App\Http\Controllers\front\FrontloginregisterController@user_signout')->name('user_signout');
-Route::post('check_login', 'App\Http\Controllers\front\FrontloginregisterController@check_login');
-
-Route::post('user_login','App\Http\Controllers\front\FrontloginregisterController@user_login')->name('user_login');
-
-Route::post('registration_mail_check', '\App\Http\Controllers\front\FrontloginregisterController@registration_mail_check');
-
-
-Route::get('forget-password','\App\Http\Controllers\front\FrontloginregisterController@lost_password'); 
-Route::post('email-check-login','\App\Http\Controllers\front\FrontloginregisterController@emailCheck'); 
-Route::post('resetpassword','\App\Http\Controllers\front\FrontloginregisterController@get_password')->name('reset-password');
-Route::get('reset-password/{uid}','\App\Http\Controllers\front\FrontloginregisterController@reset_password')->name('reset_password');
-
-
-
-
-Route::post('set_password/{uid}','\App\Http\Controllers\front\FrontloginregisterController@set_password')->name('set_password');
-
-        
-
-Route::match(['get', 'post'], 'vendor-database', [FrontvendorController::class, 'vendor_database'])->name('vendor_database');
-
-Route::get('/package-lists/{page_url}', '\App\Http\Controllers\front\Packagecontroller@package_lists')->name('package-lists');
+Route::get('/package-lists/{page_url}', '\App\Http\Controllers\front\Packagecontroller@package_lists');
 Route::get('/package-detail/{page_url}', '\App\Http\Controllers\front\Packagecontroller@package_detail');
-Route::get('enquiry/{id}/', '\App\Http\Controllers\front\Packagecontroller@enquiry')->name('enquiry');
-Route::get('enquiry/{id}/{service_id}/', '\App\Http\Controllers\front\Packagecontroller@enquiry')->name('enquiry');
-
-
-
-
-Route::post('package_inquiry', '\App\Http\Controllers\front\Packagecontroller@package_inquiry')->name('package_inquiry');
-
-
-
-
-Route::post('vendors_check_mail', '\App\Http\Controllers\front\Homecontroller@vendors_check_mail'); 
-Route::post('/vendors_data', '\App\Http\Controllers\front\Homecontroller@vendors_data');
-
-Route::get('/cart', '\App\Http\Controllers\front\Cartcontroller@cart')->name('cart');
-Route::post('add_to_cart','\App\Http\Controllers\front\Cartcontroller@add_to_cart');
-Route::post('cart_remove', '\App\Http\Controllers\front\Cartcontroller@cart_remove');
-Route::get('/checkout', '\App\Http\Controllers\front\checkoutcontroller@checkout');
-Route::post('/order_place', '\App\Http\Controllers\front\checkoutcontroller@order_place')->name('order_place');
-Route::get('thankyou', [checkoutcontroller::class, 'thankyou'])->name("thankyou");
-
-Route::post('/bill_state_change', '\App\Http\Controllers\front\checkoutcontroller@bill_state_change');
-Route::post('/ship_state_change', '\App\Http\Controllers\front\checkoutcontroller@ship_state_change');
-
-
-// Route::get('/checkout', '\App\Http\Controllers\front\checkoutcontroller@checkout');
-// Route::post('/order_place', '\App\Http\Controllers\front\checkoutcontroller@order_place')->name('order_place');
-// Route::get('thankyou', [checkoutcontroller::class, 'thankyou'])->name("thankyou");
-
-
-
-// Route::match(['get', 'post'], 'vendor-database', [FrontvendorController::class, 'vendor_database'])->name('vendor_database');
 
 
 /*------End Front routes  ------*/
@@ -282,14 +207,6 @@ Route::get('/admin', function () {
 
     Route::resource('admin/leads','App\Http\Controllers\admin\Leadscontroller'); 
     Route::resource('admin/acceptleads','App\Http\Controllers\admin\AcceptLeadscontroller'); 
-    Route::resource('admin/vendorinquiry','App\Http\Controllers\admin\Vendorinquirycontroller');
-    Route::get('accept_vendor_inquiry', 'App\Http\Controllers\admin\Vendorinquirycontroller@accept_vendor_inquiry')->name('accept_vendor_inquiry');
-
-
-    Route::get('enquiry_detail/{enquiry_id}', [Vendorinquirycontroller::class, 'enquiry_details'])->name('enquiry_detail');
-
-
-    
 
 
     Route::resource('admin/cms','App\Http\Controllers\admin\CmsController'); 
@@ -304,9 +221,6 @@ Route::get('/admin', function () {
     Route::post('subservice_show', 'App\Http\Controllers\admin\PackagesController@subservice_show');
     Route::post('packagecategory_show', 'App\Http\Controllers\admin\PackagesController@packagecategory_show');
     Route::get('delete_packages',[PackagesController::class,'destroy'])->name('delete_packages');
-    Route::get('editimage/{id}', [PackagesController::class, 'editimage'])->name('editimage');
-    Route::post('editimage_store', [PackagesController::class, 'editimage_store'])->name('editimage_store');
-    Route::get('packages_removeimage/{pid}/{id}', [PackagesController::class, 'packages_removeimage'])->name('packages_removeimage');
 
     Route::resource('wallet', '\App\Http\Controllers\admin\WalletController');
 
@@ -315,35 +229,6 @@ Route::get('/admin', function () {
 
     Route::resource('admin/faq', '\App\Http\Controllers\admin\FaqController');
     Route::get('delete_faq',[FaqController::class,'destroy'])->name('delete_faq');
-
-    Route::resource('/admin/frontuser', '\App\Http\Controllers\admin\FrontuserController');
-    Route::post('change_status_frontuser','App\Http\Controllers\admin\FrontuserController@change_status_frontuser');
-
-    Route::get('export-all', [App\Http\Controllers\admin\FrontuserController::class, 'downloadXls'])->name('export-excel');
-    
-    Route::resource('/enquiry', '\App\Http\Controllers\admin\EnquiryController');
-    Route::get('enquiry_page/{enquiry_id}', [EnquiryController::class, 'enquiry_details'])->name('enquiry_page');
-
-    
-
-
-    Route::resource('/admin/form_field', '\App\Http\Controllers\admin\Form_fieldController');
-    Route::get('/admin/delete_form_field', [Form_fieldController::class, 'delete_form_field'])->name('delete_form_field');
-    Route::get('remove_attribute/{form_id}/{id}', [Form_fieldController::class, 'remove_attribute'])->name('remove_attribute');
-    Route::post('set_order_form_fields', '\App\Http\Controllers\admin\Form_fieldController@set_order_form_fields');
-    
-    Route::resource('admin/order','App\Http\Controllers\admin\Ordercontroller');  
-    Route::get('delete_order',[Ordercontroller::class,'destroy'])->name('delete_order');
-    Route::get('admin/order/detail/{order_id}', [Ordercontroller::class, 'detail'])->name('detail');
-
-    Route::resource('admin/order','App\Http\Controllers\admin\Ordercontroller');  
-    Route::get('delete_order',[Ordercontroller::class,'destroy'])->name('delete_order');
-    Route::get('admin/order/detail/{order_id}', [Ordercontroller::class, 'detail'])->name('detail');
-
-    Route::post('assign_vendor', '\App\Http\Controllers\admin\Ordercontroller@assign_vendor');
-    Route::post('order_vendor_form', '\App\Http\Controllers\admin\Ordercontroller@order_vendor_form');
-
-   
 
 
 });

@@ -169,9 +169,9 @@
                                                     for="country">{{ $formFields[$k]->lable_name }}</label>
 
 
-                                                <input name="form_field_mul_dropdown_id[]" type="hidden"
+                                                {{-- <input name="form_field_mul_dropdown_id[]" type="hidden"
                                                     class="m-0" id="form_field_id[]"
-                                                    value="{{ $formFields[$k]->id }}">
+                                                    value="{{ $formFields[$k]->id }}"> --}}
                                                 <select class="form-control multiple" id="formfield_value[]"
                                                     name="formfield_mul_dropdown_{{ $formFields[$k]->id }}[]"
                                                     multiple="multiple">
@@ -304,7 +304,8 @@
                                                 <input name="form_field_mul_dropdown_id[]" type="hidden"
                                                     class="m-0" id="form_field_id[]"
                                                     value="{{ $formFields[$k]->id }}">
-                                                <select class="form-control multiple" id="formfield_value[]"
+                                                <select class="form-control multiple"
+                                                    id="formfield_value_{{ $formFields[$k]->id }}"
                                                     name="formfield_mul_dropdown_{{ $formFields[$k]->id }}[]"
                                                     multiple="multiple">
                                                     <option value="">Select {{ $formFields[$k]->lable_name }}
@@ -499,3 +500,12 @@
         placeholder: "Select a Form Fields" // Replace with your desired placeholder text
     });
 </script>
+
+@if (isset($formFields[$k]) && isset($formFields[$k]->id))
+    <script>
+        $("#formfield_value_{{ $formFields[$k]->id }}").select2({
+            placeholder: "Select "
+            // Add any other Select2 options you need
+        });
+    </script>
+@endif

@@ -283,11 +283,8 @@ Route::get('/admin', function () {
     Route::resource('admin/leads','App\Http\Controllers\admin\Leadscontroller'); 
     Route::resource('admin/acceptleads','App\Http\Controllers\admin\AcceptLeadscontroller'); 
     Route::resource('admin/vendorinquiry','App\Http\Controllers\admin\Vendorinquirycontroller');
+
     Route::get('accept_vendor_inquiry', 'App\Http\Controllers\admin\Vendorinquirycontroller@accept_vendor_inquiry')->name('accept_vendor_inquiry');
-
-
-    Route::get('enquiry_detail/{enquiry_id}', [Vendorinquirycontroller::class, 'enquiry_details'])->name('enquiry_detail');
-
 
     
 
@@ -322,10 +319,6 @@ Route::get('/admin', function () {
     Route::get('export-all', [App\Http\Controllers\admin\FrontuserController::class, 'downloadXls'])->name('export-excel');
     
     Route::resource('/enquiry', '\App\Http\Controllers\admin\EnquiryController');
-    Route::get('enquiry_page/{enquiry_id}', [EnquiryController::class, 'enquiry_details'])->name('enquiry_page');
-
-    
-
 
     Route::resource('/admin/form_field', '\App\Http\Controllers\admin\Form_fieldController');
     Route::get('/admin/delete_form_field', [Form_fieldController::class, 'delete_form_field'])->name('delete_form_field');

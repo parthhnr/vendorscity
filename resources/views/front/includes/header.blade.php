@@ -227,11 +227,11 @@
                                                             </a>
 
 
-                                                            <a href="">
+                                                            {{-- <a href="">
                                                                 <div class="h6 cat-title">
                                                                     Top 10 Vendors
                                                                 </div>
-                                                            </a>
+                                                            </a> --}}
 
 
 

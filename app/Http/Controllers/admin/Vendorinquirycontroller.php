@@ -65,5 +65,20 @@ class Vendorinquirycontroller extends Controller
     return redirect()->route('vendorinquiry.index')->with('success', 'Inquiry Accept Successfully');
     }
 
+    public function enquiry_details($enquiry_id)
+    {
+        // echo $enquiry_id;exit;
+
+        $data['packages_enquiry']=DB::table('more_formfields_details')->where('package_inquiry_id',$enquiry_id)->get();
+
+        // echo"<pre>";
+        //     print_r($data['packages_enquiry']);
+        // echo"</pre>";exit;
+
+       
+
+        return view('admin.list_enquiry_accpet_reject',$data);
+    }
+
     
 }
