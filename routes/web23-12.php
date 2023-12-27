@@ -51,7 +51,6 @@ use App\Http\Controllers\admin\Ordercontroller;
 use App\Http\Controllers\front\FrontloginregisterController;
 use App\Http\Controllers\front\FrontvendorController;
 use App\Http\Controllers\front\checkoutcontroller;
-use App\Http\Controllers\front\Packagecontroller;
 
 
 
@@ -86,8 +85,6 @@ Route::get('/config-cache', function() {
 /*------Front routes start ------*/
 
 Route::get('/', '\App\Http\Controllers\front\Homecontroller@index');
-Route::post('search', '\App\Http\Controllers\front\Homecontroller@search')->name('search');
-
 Route::get('/book-services', '\App\Http\Controllers\front\Homecontroller@book_services');
 Route::get('/become-vendor', '\App\Http\Controllers\front\Homecontroller@become_vendor');
 Route::resource('Sign-Up', '\App\Http\Controllers\front\FrontloginregisterController');
@@ -116,11 +113,7 @@ Route::match(['get', 'post'], 'vendor-database', [FrontvendorController::class, 
 
 Route::get('/package-lists/{page_url}', '\App\Http\Controllers\front\Packagecontroller@package_lists')->name('package-lists');
 Route::get('/package-detail/{page_url}', '\App\Http\Controllers\front\Packagecontroller@package_detail');
-Route::get('enquiry/{id}/', '\App\Http\Controllers\front\Packagecontroller@enquiry')->name('enquiry');
-Route::get('enquiry/{id}/{service_id}/', '\App\Http\Controllers\front\Packagecontroller@enquiry')->name('enquiry');
-
-
-
+Route::get('enquiry/{id}', '\App\Http\Controllers\front\Packagecontroller@enquiry')->name('enquiry');
 
 Route::post('package_inquiry', '\App\Http\Controllers\front\Packagecontroller@package_inquiry')->name('package_inquiry');
 
@@ -136,9 +129,6 @@ Route::post('cart_remove', '\App\Http\Controllers\front\Cartcontroller@cart_remo
 Route::get('/checkout', '\App\Http\Controllers\front\checkoutcontroller@checkout');
 Route::post('/order_place', '\App\Http\Controllers\front\checkoutcontroller@order_place')->name('order_place');
 Route::get('thankyou', [checkoutcontroller::class, 'thankyou'])->name("thankyou");
-
-Route::post('/bill_state_change', '\App\Http\Controllers\front\checkoutcontroller@bill_state_change');
-Route::post('/ship_state_change', '\App\Http\Controllers\front\checkoutcontroller@ship_state_change');
 
 
 // Route::get('/checkout', '\App\Http\Controllers\front\checkoutcontroller@checkout');
@@ -283,11 +273,8 @@ Route::get('/admin', function () {
     Route::resource('admin/leads','App\Http\Controllers\admin\Leadscontroller'); 
     Route::resource('admin/acceptleads','App\Http\Controllers\admin\AcceptLeadscontroller'); 
     Route::resource('admin/vendorinquiry','App\Http\Controllers\admin\Vendorinquirycontroller');
+
     Route::get('accept_vendor_inquiry', 'App\Http\Controllers\admin\Vendorinquirycontroller@accept_vendor_inquiry')->name('accept_vendor_inquiry');
-
-
-    Route::get('enquiry_detail/{enquiry_id}', [Vendorinquirycontroller::class, 'enquiry_details'])->name('enquiry_detail');
-
 
     
 
@@ -322,10 +309,6 @@ Route::get('/admin', function () {
     Route::get('export-all', [App\Http\Controllers\admin\FrontuserController::class, 'downloadXls'])->name('export-excel');
     
     Route::resource('/enquiry', '\App\Http\Controllers\admin\EnquiryController');
-    Route::get('enquiry_page/{enquiry_id}', [EnquiryController::class, 'enquiry_details'])->name('enquiry_page');
-
-    
-
 
     Route::resource('/admin/form_field', '\App\Http\Controllers\admin\Form_fieldController');
     Route::get('/admin/delete_form_field', [Form_fieldController::class, 'delete_form_field'])->name('delete_form_field');
@@ -339,9 +322,6 @@ Route::get('/admin', function () {
     Route::resource('admin/order','App\Http\Controllers\admin\Ordercontroller');  
     Route::get('delete_order',[Ordercontroller::class,'destroy'])->name('delete_order');
     Route::get('admin/order/detail/{order_id}', [Ordercontroller::class, 'detail'])->name('detail');
-
-    Route::post('assign_vendor', '\App\Http\Controllers\admin\Ordercontroller@assign_vendor');
-    Route::post('order_vendor_form', '\App\Http\Controllers\admin\Ordercontroller@order_vendor_form');
 
    
 
