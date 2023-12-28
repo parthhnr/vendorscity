@@ -224,19 +224,25 @@
                                     <table class="invoice-table table table-bordered">
 
                                         <tbody>
-                                            <form id="reason_form">
+                                            <form id="reject_form" method="post"
+                                                action="{{ route('reason_reject_form') }}">
+                                                @csrf
                                                 <div class="row">
 
                                                     <div class="form-group">
                                                         <label for="name">Reason</label>
-                                                        <textarea name="reject" id="reject" cols="30" rows="10"class="form-control"></textarea>
+                                                        <textarea name="reject_reason" id="reject_reason" cols="30" rows="10"class="form-control"></textarea>
+                                                        <input type="hidden" name="inquiry_id" id="inquiry_id"
+                                                            value="">
+                                                        <input type="hidden" name="vendor_id" id="vendor_id"
+                                                            value="">
                                                     </div>
 
                                                 </div>
                                                 <p class="form-error-text" id="reject_error"
                                                     style="color: red; margin-top: 10px;">
                                                 </p>
-                                                <button class="btn btn-danger" style="float: inline-end;" type="button"
+                                                <button class="btn btn-primary" style="float: inline-end;" type="button"
                                                     onclick="javascript:reject_validation()">Add</button>
                                             </form>
 
@@ -264,23 +270,20 @@
 
     <form id="form_new" action="{{ route('accept_vendor_inquiry') }}" enctype="multipart/form-data">
         @csrf
-        <input type="hidden" name="inquiry_id" id="inquiry_id" value="">
-        <input type="hidden" name="vendor_id" id="vendor_id" value="">
+        <input type="hidden" name="inquiry_id" id="inquiry1_id" value="">
+        <input type="hidden" name="vendor_id" id="vendor1_id" value="">
     </form>
 @stop
 
 <script>
     function delete_category(id, vendor_id) {
 
+        $('#inquiry1_id').val(id);
 
-        $('#inquiry_id').val(id);
-
-        $('#vendor_id').val(vendor_id);
+        $('#vendor1_id').val(vendor_id);
 
         $('#delete_model').modal('show');
     }
-
-
 
     function form_sub() {
 
@@ -292,10 +295,10 @@
 <script>
     function Enquiry(id, userId) {
 
-        // alert(userId);
+
         $('#inquiry_id').val(id);
 
-        $('#vendor_id').val(vendor_id);
+        $('#vendor_id').val(userId);
 
         $('#reject_model').modal('show');
 
@@ -306,18 +309,18 @@
 <script>
     function reject_validation() {
 
-        var reject = jQuery("#reject").val();
-        if (reject == '') {
+        var reject_reason = jQuery("#reject_reason").val();
+        if (reject_reason == '') {
             jQuery('#reject_error').html("Please Enter Reason");
             jQuery('#reject_error').show().delay(0).fadeIn('show');
             jQuery('#reject_error').show().delay(2000).fadeOut('show');
             $('html, body').animate({
-                scrollTop: $('#reject').offset().top - 150
+                scrollTop: $('#reject_reason').offset().top - 150
             }, 1000);
             return false;
         }
 
-        $('#reason_form').submit();
+        $('#reject_form').submit();
 
 
     }

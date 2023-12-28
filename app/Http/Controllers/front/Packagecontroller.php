@@ -46,6 +46,17 @@ class Packagecontroller extends Controller
                      
                  }
              }
+			 
+			 $package_cat_ids  =  $request->get('package_cat');
+			   if($package_cat_ids !== null && $request->get('package_cat') !== null){
+
+					$query = $query->whereIn('packagecategory_id', $package_cat_ids);
+					$data['package_cat_ids'] = implode(",",$package_cat_ids);
+				   
+			   }else {
+					 $data['package_cat_ids'] = $package_cat_ids = "";
+				}
+		
             //   $pagination = $query->orderBy('id', 'DESC')->paginate(2)->withQueryString();
              
             // $data['package_data'] = $pagination;
@@ -59,6 +70,7 @@ class Packagecontroller extends Controller
             $data['package_pagination'] = $pagination;
             $data['package_count'] = $pagination->count();
             $data['subservice_data'] = DB::table('subservices')->get();
+			$data['package_category'] = DB::table('package_categories')->get();
  
             $data['max_price'] = DB::table('packages')->max('price'); 
             $data['filter_price_start'] = $request->get('filter_price_start');
@@ -70,6 +82,8 @@ class Packagecontroller extends Controller
             $data['package_data'] = '';
             $data['package_count'] = 0;        
         } 
+		
+		//echo"<pre>";print_r($data);echo"</pre>";exit;
        
         return view('front.package_lists',$data);
     }

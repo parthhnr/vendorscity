@@ -178,6 +178,10 @@ class Ordercontroller extends Controller
 
 
         $order_id = $_POST['order_id'];
+		
+		$ci_order_data = DB::table('ci_orders')
+            ->where('order_id', $order_id)
+            ->first();
 
         $ci_order_item_data = DB::table('ci_order_item')
             ->where('order_id', $order_id)
@@ -196,7 +200,7 @@ class Ordercontroller extends Controller
                                        ->orderBy('id', 'desc')
                                        ->get();
 
-//echo "<pre>";print_r($vendor_subscription);echo"</pre>";
+			//echo "<pre>";print_r($vendor_subscription);echo"</pre>";exit;
 
         $html = '<select id="vendor_id" name="vendor_id"  class="form-control">';
                 
@@ -213,7 +217,15 @@ class Ordercontroller extends Controller
 
                                         //echo "<pre>";print_r($vendor_data);echo"</pre>";
                         if($vendor_data != ''){
-                            $html .= "<option value='" . $vendor_data->id . "'>" . $vendor_data->name . "</option>";
+							
+							 if ($ci_order_data->vendor_id == $vendor_data->id) {
+								$selected = "selected";
+							} else {
+								$selected = "";
+							}
+				
+				
+                            $html .= "<option value='" . $vendor_data->id . "'" . $selected . ">" . $vendor_data->name . "</option>";
                         }
                         
 
@@ -242,6 +254,24 @@ class Ordercontroller extends Controller
             ->update(['vendor_id' => $vendor_id]);
 
         return redirect()->route('order.index')->with('success','Vendor Assign successfully');
+    }
+	
+	public function set_booking_percentage()
+
+    {
+
+        $order_id = $_POST['order_id'];
+
+        $percentage = $_POST['percentage'];
+
+        // echo $id."-".$val;exit;
+
+        DB::table('ci_order_item')->where('id', $order_id)->update(array('subservice_booking_percentage' => $percentage));
+
+        echo "1";
+
+        // return redirect()->route('product.index')->with('success','Set Order has been Updated successfully');
+
     }
 
 }

@@ -36,7 +36,7 @@
 
                    <div class="col">
 
-                       <h3 class="page-title">Accepted Leads</h3>
+                       <h3 class="page-title">Rejected Leads</h3>
 
                        <ul class="breadcrumb">
 
@@ -44,7 +44,7 @@
 
                            </li>
 
-                           <li class="breadcrumb-item active">Accepted Leads</li>
+                           <li class="breadcrumb-item active">Rejected Leads</li>
 
                        </ul>
 
@@ -151,7 +151,7 @@
                                    $package_inquiry_accepted = DB::table('package_inquiry_accepted')
                                        ->select('*')
                                        ->where('vendor_id', '=', $userId)
-                                       ->where('accept_reject', 0)
+                                       ->where('accept_reject', 1)
                                        ->orderBy('id', 'desc')
                                        ->get();
 
