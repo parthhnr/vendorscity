@@ -109,12 +109,9 @@
                                 </div>
                             </div>
                         </div>
-                        @php
-                            $package_catgory = DB::table('package_categories')
-                                ->where('subservice_id', $subservices->id)
-                                ->get();
-
-                        @endphp
+						
+						 <form id="search_mini_form" name="search_mini_form" method="get">
+                        
                         <div class="card mb20 pb5">
                             <div class="card-header active" id="heading2">
                                 <h4>
@@ -126,11 +123,20 @@
                             <div id="collapse2" class="collapse show" aria-labelledby="heading2"
                                 data-parent="#accordionExample">
                                 <div class="card-body card-body px-0 pt-0">
-                                    @foreach ($package_catgory as $package_catgory_data)
+								
+									@php
+										 if($package_cat_ids !=''){ 
+										$package_cat_array=explode(",",$package_cat_ids); 
+									}else{ 
+										$package_cat_array=array(); 
+									} 
+									@endphp
+								
+                                    @foreach ($package_category as $package_catgory_data)
                                         <div class="checkbox-style1">
                                             <div class="checkbox-style1 mb15">
                                                 <label class="custom_checkbox">{{ $package_catgory_data->name }}
-                                                    <input type="checkbox">
+                                                    <input type="checkbox" onclick="allfilter1()" value="{{ $package_catgory_data->id }}" name="package_cat[]" @php if(in_array($package_catgory_data->id,$package_cat_array)){ echo "checked"; } @endphp>
                                                     <span class="checkmark"></span>
 
                                                 </label>
@@ -142,7 +148,7 @@
                                 </div>
                             </div>
                         </div>
-                        <form id="search_mini_form" name="search_mini_form" method="get">
+                       
                             <div class="card mb20 pb0">
                                 <div class="card-header active" id="heading1">
                                     <h4>
@@ -420,7 +426,7 @@
                                             }
 
                                         @endphp
-                                        <div class="list-meta d-flex justify-content-between align-items-center mt15">
+                                        <div class="list-meta justify-content-between align-items-center mt15">
                                             <a href="{{ url('package-detail/' . $package_data_new->page_url) }}">
                                                 @if ($package_data_new->discount_type != '2')
                                                     <span class="fz14">AED {{ $disc_price }}
@@ -746,4 +752,10 @@
         // $("#categoryFilter").submit();
         document.search_mini_form.submit();
     });
+	
+	function allfilter1() {
+        //alert('test');
+        document.search_mini_form.submit();
+	}
+	
 </script>

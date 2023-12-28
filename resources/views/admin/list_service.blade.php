@@ -174,7 +174,7 @@
 
                                <div class="table-responsive">
 
-                                   <table class="table table-center table-hover datatable">
+                                   <table class="table table-center table-hover datatable" id="example">
 
                                        <thead class="thead-light">
 
@@ -259,65 +259,39 @@
 
 
 
-   <!-- Delete service Modal -->
+   @section('footer_js')
 
-   <div class="modal custom-modal fade" id="delete_service" role="dialog">
+       <!-- Delete service Modal -->
 
-       <div class="modal-dialog modal-dialog-centered">
+       <div class="modal custom-modal fade" id="delete_service" role="dialog">
 
-           <div class="modal-content">
+           <div class="modal-dialog modal-dialog-centered">
 
-               <div class="modal-body">
+               <div class="modal-content">
 
-                   <div class="modal-icon text-center mb-3">
+                   <div class="modal-body">
 
-                       <i class="fas fa-trash-alt text-danger"></i>
+                       <div class="modal-icon text-center mb-3">
+
+                           <i class="fas fa-trash-alt text-danger"></i>
+
+                       </div>
+
+                       <div class="modal-text text-center">
+
+                           <!-- <h3>Delete Expense service</h3> -->
+
+                           <p>Are you sure want to delete?</p>
+
+                       </div>
 
                    </div>
 
-                   <div class="modal-text text-center">
+                   <div class="modal-footer text-center">
 
-                       <!-- <h3>Delete Expense service</h3> -->
+                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
 
-                       <p>Are you sure want to delete?</p>
-
-                   </div>
-
-               </div>
-
-               <div class="modal-footer text-center">
-
-                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-
-                   <button type="button" class="btn btn-primary" onclick="form_sub();">Delete</button>
-
-               </div>
-
-           </div>
-
-       </div>
-
-   </div>
-
-   <!-- /Delete service Modal -->
-
-
-
-   <!-- Select one record service Modal -->
-
-   <div class="modal custom-modal fade" id="select_one_record" role="dialog">
-
-       <div class="modal-dialog modal-dialog-centered">
-
-           <div class="modal-content">
-
-               <div class="modal-body">
-
-                   <div class="modal-text text-center">
-
-                       <h3>Please select at least one record to delete</h3>
-
-                       <!-- <p>Are you sure want to delete?</p> -->
+                       <button type="button" class="btn btn-primary" onclick="form_sub();">Delete</button>
 
                    </div>
 
@@ -327,33 +301,27 @@
 
        </div>
 
-   </div>
-
-   <!-- /Select one record service Modal -->
+       <!-- /Delete service Modal -->
 
 
 
-   <!-- set order Modal -->
+       <!-- Select one record service Modal -->
 
-   <div class="modal custom-modal fade" id="set_order_model" role="dialog">
+       <div class="modal custom-modal fade" id="select_one_record" role="dialog">
 
-       <div class="modal-dialog modal-dialog-centered">
+           <div class="modal-dialog modal-dialog-centered">
 
-           <div class="modal-content">
+               <div class="modal-content">
 
-               <div class="modal-body">
+                   <div class="modal-body">
 
-                   <div class="modal-text text-center">
+                       <div class="modal-text text-center">
 
-                       <h3>Are you sure you want to Set order of Service</h3>
+                           <h3>Please select at least one record to delete</h3>
 
-                       <input type="hidden" name="set_order_val" id="set_order_val" value="">
+                           <!-- <p>Are you sure want to delete?</p> -->
 
-                       <input type="hidden" name="set_order_id" id="set_order_id" value="">
-
-                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-
-                       <button type="button" class="btn btn-primary" onclick="updateorder();">Yes</button>
+                       </div>
 
                    </div>
 
@@ -363,100 +331,144 @@
 
        </div>
 
-   </div>
-
-   <!-- /set orderModal -->
-
-   <script>
-       function delete_service() {
-
-           // alert('test');
-
-           var checked = $("#form input:checked").length > 0;
-
-           if (!checked) {
-
-               $('#select_one_record').modal('show');
-
-           } else {
-
-               $('#delete_service').modal('show');
-
-           }
-
-       }
+       <!-- /Select one record service Modal -->
 
 
 
-       function form_sub() {
+       <!-- set order Modal -->
 
-           $('#form').submit();
+       <div class="modal custom-modal fade" id="set_order_model" role="dialog">
 
-       }
+           <div class="modal-dialog modal-dialog-centered">
 
+               <div class="modal-content">
 
+                   <div class="modal-body">
 
-       function updateorder_popup(val, id) {
+                       <div class="modal-text text-center">
 
-           $('#set_order_val').val(val);
+                           <h3>Are you sure you want to Set order of Service</h3>
 
-           $('#set_order_id').val(id);
+                           <input type="hidden" name="set_order_val" id="set_order_val" value="">
 
-           $('#set_order_model').modal('show');
+                           <input type="hidden" name="set_order_id" id="set_order_id" value="">
 
-       }
+                           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
 
+                           <button type="button" class="btn btn-primary" onclick="updateorder();">Yes</button>
 
+                       </div>
 
-       function updateorder() {
+                   </div>
 
-           var id = $('#set_order_id').val();
+               </div>
 
-           var val = $('#set_order_val').val();
+           </div>
 
-           $.ajax({
+       </div>
 
-               type: "POST",
+       <!-- /set orderModal -->
 
-               url: "{{ url('set_order_service') }}",
+       <script>
+           function delete_service() {
 
-               data: {
+               // alert('test');
 
-                   "_token": "{{ csrf_token() }}",
+               var checked = $("#form input:checked").length > 0;
 
-                   "id": id,
+               if (!checked) {
 
-                   "val": val
+                   $('#select_one_record').modal('show');
 
-               },
+               } else {
 
-               success: function(returnedData) {
-
-                   // alert(returnedData);
-
-                   if (returnedData == 1) {
-
-                       //alert('yes');
-
-                       $('#success_message').text("Set Order has been Updated successfully");
-
-                       //$('.success_show').show();
-
-                       $('.success_show').show().delay(0).fadeIn('show');
-
-                       $('.success_show').show().delay(5000).fadeOut('show');
-
-
-
-                       $('#set_order_model').modal('hide');
-
-                   }
+                   $('#delete_service').modal('show');
 
                }
 
-           });
+           }
 
 
 
-       }
-   </script>
+           function form_sub() {
+
+               $('#form').submit();
+
+           }
+
+
+
+           function updateorder_popup(val, id) {
+
+               $('#set_order_val').val(val);
+
+               $('#set_order_id').val(id);
+
+               $('#set_order_model').modal('show');
+
+           }
+
+
+
+           function updateorder() {
+
+               var id = $('#set_order_id').val();
+
+               var val = $('#set_order_val').val();
+
+               $.ajax({
+
+                   type: "POST",
+
+                   url: "{{ url('set_order_service') }}",
+
+                   data: {
+
+                       "_token": "{{ csrf_token() }}",
+
+                       "id": id,
+
+                       "val": val
+
+                   },
+
+                   success: function(returnedData) {
+
+                       // alert(returnedData);
+
+                       if (returnedData == 1) {
+
+                           //alert('yes');
+
+                           $('#success_message').text("Set Order has been Updated successfully");
+
+                           //$('.success_show').show();
+
+                           $('.success_show').show().delay(0).fadeIn('show');
+
+                           $('.success_show').show().delay(5000).fadeOut('show');
+
+
+
+                           $('#set_order_model').modal('hide');
+
+                       }
+
+                   }
+
+               });
+
+
+
+           }
+
+           //    $('#example').dataTable({
+           //        "searching": true
+           //    });
+           $(document).ready(function() {
+               $('#example').dataTable({
+                   //put all your datatable config and setting and filter here.
+               });
+           })
+       </script>
+   @stop

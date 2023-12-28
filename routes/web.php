@@ -31,6 +31,7 @@ use App\Http\Controllers\admin\SubscriptionController;
 use App\Http\Controllers\admin\Subscriptiondetails_controller;
 use App\Http\Controllers\admin\Leadscontroller;
 use App\Http\Controllers\admin\AcceptLeadscontroller;
+use App\Http\Controllers\admin\RejectLeadscontroller;
 use App\Http\Controllers\admin\Vendorinquirycontroller;
 use App\Http\Controllers\admin\CmsController;
 use App\Http\Controllers\admin\PackageCategoryController;
@@ -43,6 +44,7 @@ use App\Http\Controllers\admin\EnquiryController;
 
 use App\Http\Controllers\admin\Form_fieldController;
 use App\Http\Controllers\admin\Ordercontroller;
+use App\Http\Controllers\admin\VendorOrderController;
 
 
 
@@ -282,11 +284,13 @@ Route::get('/admin', function () {
 
     Route::resource('admin/leads','App\Http\Controllers\admin\Leadscontroller'); 
     Route::resource('admin/acceptleads','App\Http\Controllers\admin\AcceptLeadscontroller'); 
+    Route::resource('admin/rejectleads','App\Http\Controllers\admin\RejectLeadscontroller'); 
     Route::resource('admin/vendorinquiry','App\Http\Controllers\admin\Vendorinquirycontroller');
     Route::get('accept_vendor_inquiry', 'App\Http\Controllers\admin\Vendorinquirycontroller@accept_vendor_inquiry')->name('accept_vendor_inquiry');
 
 
     Route::get('enquiry_detail/{enquiry_id}', [Vendorinquirycontroller::class, 'enquiry_details'])->name('enquiry_detail');
+    Route::post('reason_reject_form', 'App\Http\Controllers\admin\Vendorinquirycontroller@add_reject_reason')->name('reason_reject_form');
 
 
     
@@ -342,6 +346,11 @@ Route::get('/admin', function () {
 
     Route::post('assign_vendor', '\App\Http\Controllers\admin\Ordercontroller@assign_vendor');
     Route::post('order_vendor_form', '\App\Http\Controllers\admin\Ordercontroller@order_vendor_form');
+    Route::post('set_booking_percentage', '\App\Http\Controllers\admin\Ordercontroller@set_booking_percentage');
+
+    Route::resource('admin/vendororder','App\Http\Controllers\admin\VendorOrderController');
+    Route::get('admin/order/vendororderdetail/{vendororder_id}', [VendorOrderController::class, 'vendordetail'])->name('vendordetail');
+
 
    
 

@@ -32,7 +32,7 @@ class Vendorinquirycontroller extends Controller
     function accept_vendor_inquiry(Request $request){
         //echo "here";exit;
         // echo"<pre>";
-        // print_r($request->input());
+        // print_r($request->all());
         // echo"</pre>";exit;
 
         $inquiryId = $request->input('inquiry_id');
@@ -50,6 +50,7 @@ class Vendorinquirycontroller extends Controller
 
         $data['packages_inquiry_id']=$inquiryId;
         $data['vendor_id'] = $vendorId;
+        $data['accept_reject'] = 0;
         $data['added_date'] = date('Y-m-d');
 
         DB::table('package_inquiry_accepted')->insert($data);
@@ -78,6 +79,22 @@ class Vendorinquirycontroller extends Controller
        
 
         return view('admin.list_enquiry_accpet_reject',$data);
+    }
+
+    public function add_reject_reason(Request $request) {
+    //    echo"<pre>";
+    //    print_r($request->post());
+    //    echo"</pre>";exit;
+
+    $data['reject_reason']=$request->reject_reason;
+    $data['packages_inquiry_id']=$request->inquiry_id;
+    $data['vendor_id']=$request->vendor_id;
+    $data['accept_reject'] = 1;
+    $data['added_date'] = date('Y-m-d');
+        
+    DB::table('package_inquiry_accepted')->insert($data);
+    return redirect()->route('vendorinquiry.index')->with('success', 'Form Submited Successfully');
+
     }
 
     

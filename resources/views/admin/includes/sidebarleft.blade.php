@@ -230,11 +230,21 @@
                         class="{{ request()->segment(1) == 'acceptleads' ? 'active' : '' }}">
                         <i class="fa fa-file"></i><span>Accepted Leads</span></a>
                 </li>
+                <li class="{{ request()->segment(2) == 'rejectleads' ? 'active' : '' }}"><a
+                        href="{{ route('rejectleads.index') }}"
+                        class="{{ request()->segment(1) == 'rejectleads' ? 'active' : '' }}">
+                        <i class="fa fa-file"></i><span>Rejected Leads</span></a>
+                </li>
 
                 <li class="{{ request()->segment(1) == 'wallet' ? 'active' : '' }}"><a
                         href="{{ route('wallet.index') }}"
                         class="{{ request()->segment(1) == 'wallet' ? 'active' : '' }}">
                         <i class="fa fa-file"></i><span>Wallet</span></a>
+                </li>
+                <li class="{{ request()->segment(2) == 'vendororder' ? 'active' : '' }}"><a
+                        href="{{ route('vendororder.index') }}"
+                        class="{{ request()->segment(2) == 'vendororder' ? 'active' : '' }}">
+                        <i class="fa fa-file"></i><span>Order Details</span></a>
                 </li>
             @endif
 

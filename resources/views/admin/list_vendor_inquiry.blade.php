@@ -211,8 +211,8 @@
                                             <th>Name</th>
                                             <th>Service</th>
                                             <th>Sub Service</th>
-                                            <th>Packages Enquiry</th>
-                                            <th>Action</th>
+                                            <th>Package Enquiry Details</th>
+                                            {{-- <th>Action</th> --}}
                                         </tr>
 
                                     </thead>
@@ -282,17 +282,17 @@
                                                             <td>
                                                                 <a class="btn btn-primary"
                                                                     href="{{ url('enquiry_detail', $packages_enquiry_data->id) }}">View
-                                                                    Package Enquiry</a>
+                                                                    Package Enquiry Details</a>
 
                                                                 {{-- <a class="btn btn-primary" href="javascript:void('0');"
                                                                     onclick="Enquiry('{{ $packages_enquiry_data->id }}');">View
                                                                     Details
                                                                 </a> --}}
                                                             </td>
-                                                            <td><a class="btn btn-primary" href="javascript:void('0');"
+                                                            {{-- <td><a class="btn btn-primary" href="javascript:void('0');"
                                                                     onclick="delete_category('{{ $packages_enquiry_data->id }}','{{ $userId }}');">
                                                                     Accept
-                                                                </a></td>
+                                                                </a></td> --}}
 
                                                         </tr>
                                                     @endif
@@ -409,7 +409,7 @@
 
     <!-- Delete  Modal -->
 
-    <div class="modal custom-modal fade" id="delete_model" role="dialog">
+    {{-- <div class="modal custom-modal fade" id="delete_model" role="dialog">
 
         <div class="modal-dialog modal-dialog-centered">
 
@@ -440,7 +440,7 @@
 
         </div>
 
-    </div>
+    </div> --}}
 
     <!-- /Delete Modal -->
 
@@ -509,14 +509,14 @@
     </div>
 
     <!-- /set orderModal -->
-    <form id="form_new" action="{{ route('accept_vendor_inquiry') }}" enctype="multipart/form-data">
+    {{-- <form id="form_new" action="{{ route('accept_vendor_inquiry') }}" enctype="multipart/form-data">
         @csrf
         <input type="hidden" name="inquiry_id" id="inquiry_id" value="">
         <input type="hidden" name="vendor_id" id="vendor_id" value="">
-    </form>
+    </form> --}}
 
 @stop
-<script>
+{{-- <script>
     function delete_category(id, vendor_id) {
 
         $('#inquiry_id').val(id);
@@ -533,7 +533,7 @@
         $('#form_new').submit();
 
     }
-</script>
+</script> --}}
 
 <script>
     function Enquiry(id) {

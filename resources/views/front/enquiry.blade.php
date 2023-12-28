@@ -401,7 +401,7 @@
         // }
         if (mobile != '') {
             // var filter = /^\d{7}$/;
-            if (mobile.length < 7) {
+            if (mobile.length < 7 || mobile.length > 15) {
                 jQuery('#mobile_error').html("Please Enter Valid Phone Number");
                 jQuery('#mobile_error').show().delay(0).fadeIn('show');
                 jQuery('#mobile_error').show().delay(2000).fadeOut('show');
