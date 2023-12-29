@@ -54,7 +54,6 @@ use App\Http\Controllers\front\FrontloginregisterController;
 use App\Http\Controllers\front\FrontvendorController;
 use App\Http\Controllers\front\checkoutcontroller;
 use App\Http\Controllers\front\Packagecontroller;
-use App\Http\Controllers\front\MyaccountController;
 
 
 
@@ -143,14 +142,6 @@ Route::get('thankyou', [checkoutcontroller::class, 'thankyou'])->name("thankyou"
 Route::post('/bill_state_change', '\App\Http\Controllers\front\checkoutcontroller@bill_state_change');
 Route::post('/ship_state_change', '\App\Http\Controllers\front\checkoutcontroller@ship_state_change');
 
-
-Route::get('/my-account', '\App\Http\Controllers\front\MyaccountController@my_account');
-Route::get('/my-order', '\App\Http\Controllers\front\MyaccountController@my_order');
-Route::get('/my-profile', '\App\Http\Controllers\front\MyaccountController@my_profile');
-
-Route::match(['get', 'post'], 'edit-profile', [MyaccountController::class, 'edit_profile'])->name('edit_profile');
-
-//Route::get('/edit-profile', '\App\Http\Controllers\front\MyaccountController@edit_profile');
 
 // Route::get('/checkout', '\App\Http\Controllers\front\checkoutcontroller@checkout');
 // Route::post('/order_place', '\App\Http\Controllers\front\checkoutcontroller@order_place')->name('order_place');

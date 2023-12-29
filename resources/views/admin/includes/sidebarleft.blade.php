@@ -127,7 +127,7 @@
                     <li class="{{ request()->segment(2) == 'frontuser' ? 'active' : '' }}"><a
                             href="{{ route('frontuser.index') }}"
                             class="{{ request()->segment(2) == 'frontuser' ? 'active' : '' }}">
-                            <i class="fa fa-file"></i><span>Register Users</span></a>
+                            <i class="fa fa-user"></i><span>Register Users</span></a>
                     </li>
                 @endif
                 @if (in_array('14', $permission1))
