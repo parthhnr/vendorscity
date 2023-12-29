@@ -66,11 +66,11 @@
                     ->where('add_deduct', 1)
                     ->sum('price');
 
-                    $total_amount = $approve_amount - $deduct_amount;
+                $total_amount = $approve_amount - $deduct_amount;
 
             @endphp
 
-           
+
             <div class="col-xl-4 col-sm-6 col-12 mt-2">
                 <div class="card">
                     <div class="card-body">
@@ -95,7 +95,7 @@
                             <INPUT TYPE="hidden" NAME="hidPgRefRan" VALUE="<?php echo rand(); ?>">
                             @csrf
                             <div class="table-responsive">
-                                <table class="table table-center table-hover datatable">
+                                <table class="table table-center table-hover datatable" id="example">
                                     <thead class="thead-light">
                                         <tr>
                                             <th></th>
@@ -132,19 +132,18 @@
                                                     @endif
                                                 </td>
                                                 <td>
-                                                    @if($data->add_deduct == 0)
-                                                    @if ($data->status === 0)
-                                                        <span
-                                                            class="badge badge-pill bg-danger-light">{{ 'Not Approved' }}</span>
-                                                    @elseif ($data->status === 1)
-                                                        <span class="badge badge-pill bg-success-light">
-                                                            {{ 'Approved' }}</span>
+                                                    @if ($data->add_deduct == 0)
+                                                        @if ($data->status === 0)
+                                                            <span
+                                                                class="badge badge-pill bg-danger-light">{{ 'Not Approved' }}</span>
+                                                        @elseif ($data->status === 1)
+                                                            <span class="badge badge-pill bg-success-light">
+                                                                {{ 'Approved' }}</span>
+                                                        @else
+                                                            {{ '-' }}
+                                                        @endif
                                                     @else
                                                         {{ '-' }}
-                                                    @endif
-                                                    @else
-                                                        {{ '-' }}
-
                                                     @endif
                                                 </td>
                                                 <td>
@@ -162,4 +161,18 @@
             </div>
         </div>
     </div>
+@stop
+@section('footer_js')
+
+    <script>
+        if ($.fn.DataTable.isDataTable('#example')) {
+            $('#example').DataTable().destroy();
+        }
+
+        $(document).ready(function() {
+            $('#example').dataTable({
+                "searching": true
+            });
+        })
+    </script>
 @stop

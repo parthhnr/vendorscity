@@ -462,13 +462,21 @@
 
            }
 
-           //    $('#example').dataTable({
-           //        "searching": true
-           //    });
+           if ($.fn.DataTable.isDataTable('#example')) {
+               $('#example').DataTable().destroy();
+           }
+
            $(document).ready(function() {
                $('#example').dataTable({
-                   //put all your datatable config and setting and filter here.
+                   "searching": true
                });
            })
+
+           //    $(document).ready(function() {
+
+           //        $('.datatable').dataTable({
+           //            "searching": true
+           //        });
+           //    })
        </script>
    @stop

@@ -161,7 +161,7 @@
 
                                <div class="table-responsive">
 
-                                   <table class="table table-center table-hover datatable">
+                                   <table class="table table-center table-hover datatable" id="example">
 
                                        <thead class="thead-light">
 
@@ -249,67 +249,41 @@
 
    @stop
 
+   @section('footer_js')
 
 
-   <!-- Delete  Modal -->
 
-   <div class="modal custom-modal fade" id="delete_model" role="dialog">
+       <!-- Delete  Modal -->
 
-       <div class="modal-dialog modal-dialog-centered">
+       <div class="modal custom-modal fade" id="delete_model" role="dialog">
 
-           <div class="modal-content">
+           <div class="modal-dialog modal-dialog-centered">
 
-               <div class="modal-body">
+               <div class="modal-content">
 
-                   <div class="modal-icon text-center mb-3">
+                   <div class="modal-body">
 
-                       <i class="fas fa-trash-alt text-danger"></i>
+                       <div class="modal-icon text-center mb-3">
+
+                           <i class="fas fa-trash-alt text-danger"></i>
+
+                       </div>
+
+                       <div class="modal-text text-center">
+
+                           <!-- <h3>Delete Expense Category</h3> -->
+
+                           <p>Are you sure want to delete?</p>
+
+                       </div>
 
                    </div>
 
-                   <div class="modal-text text-center">
+                   <div class="modal-footer text-center">
 
-                       <!-- <h3>Delete Expense Category</h3> -->
+                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
 
-                       <p>Are you sure want to delete?</p>
-
-                   </div>
-
-               </div>
-
-               <div class="modal-footer text-center">
-
-                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-
-                   <button type="button" class="btn btn-primary" onclick="form_sub();">Delete</button>
-
-               </div>
-
-           </div>
-
-       </div>
-
-   </div>
-
-   <!-- /Delete Modal -->
-
-
-
-   <!-- Select one record Category Modal -->
-
-   <div class="modal custom-modal fade" id="select_one_record" role="dialog">
-
-       <div class="modal-dialog modal-dialog-centered">
-
-           <div class="modal-content">
-
-               <div class="modal-body">
-
-                   <div class="modal-text text-center">
-
-                       <h3>Please select at least one record to delete</h3>
-
-                       <!-- <p>Are you sure want to delete?</p> -->
+                       <button type="button" class="btn btn-primary" onclick="form_sub();">Delete</button>
 
                    </div>
 
@@ -319,33 +293,27 @@
 
        </div>
 
-   </div>
-
-   <!-- /Select one record Category Modal -->
+       <!-- /Delete Modal -->
 
 
 
-   <!-- set order Modal -->
+       <!-- Select one record Category Modal -->
 
-   <div class="modal custom-modal fade" id="set_order_model" role="dialog">
+       <div class="modal custom-modal fade" id="select_one_record" role="dialog">
 
-       <div class="modal-dialog modal-dialog-centered">
+           <div class="modal-dialog modal-dialog-centered">
 
-           <div class="modal-content">
+               <div class="modal-content">
 
-               <div class="modal-body">
+                   <div class="modal-body">
 
-                   <div class="modal-text text-center">
+                       <div class="modal-text text-center">
 
-                       <h3>Are you sure you want to Set order of Groups</h3>
+                           <h3>Please select at least one record to delete</h3>
 
-                       <input type="hidden" name="set_order_val" id="set_order_val" value="">
+                           <!-- <p>Are you sure want to delete?</p> -->
 
-                       <input type="hidden" name="set_order_id" id="set_order_id" value="">
-
-                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-
-                       <button type="button" class="btn btn-primary" onclick="updateorder();">Yes</button>
+                       </div>
 
                    </div>
 
@@ -355,36 +323,83 @@
 
        </div>
 
-   </div>
-
-   <!-- /set orderModal -->
+       <!-- /Select one record Category Modal -->
 
 
 
-   <script>
-       function delete_category() {
+       <!-- set order Modal -->
 
-           // alert('test');
+       <div class="modal custom-modal fade" id="set_order_model" role="dialog">
 
-           var checked = $("#form input:checked").length > 0;
+           <div class="modal-dialog modal-dialog-centered">
 
-           if (!checked) {
+               <div class="modal-content">
 
-               $('#select_one_record').modal('show');
+                   <div class="modal-body">
 
-           } else {
+                       <div class="modal-text text-center">
 
-               $('#delete_model').modal('show');
+                           <h3>Are you sure you want to Set order of Groups</h3>
+
+                           <input type="hidden" name="set_order_val" id="set_order_val" value="">
+
+                           <input type="hidden" name="set_order_id" id="set_order_id" value="">
+
+                           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+
+                           <button type="button" class="btn btn-primary" onclick="updateorder();">Yes</button>
+
+                       </div>
+
+                   </div>
+
+               </div>
+
+           </div>
+
+       </div>
+
+       <!-- /set orderModal -->
+
+
+
+       <script>
+           function delete_category() {
+
+               // alert('test');
+
+               var checked = $("#form input:checked").length > 0;
+
+               if (!checked) {
+
+                   $('#select_one_record').modal('show');
+
+               } else {
+
+                   $('#delete_model').modal('show');
+
+               }
 
            }
 
-       }
 
 
+           function form_sub() {
 
-       function form_sub() {
+               $('#form').submit();
 
-           $('#form').submit();
+           }
+       </script>
 
-       }
-   </script>
+       <script>
+           if ($.fn.DataTable.isDataTable('#example')) {
+               $('#example').DataTable().destroy();
+           }
+
+           $(document).ready(function() {
+               $('#example').dataTable({
+                   "searching": true
+               });
+           })
+       </script>
+   @stop

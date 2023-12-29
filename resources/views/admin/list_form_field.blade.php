@@ -125,7 +125,7 @@
                                <INPUT TYPE="hidden" NAME="hidPgRefRan" VALUE="<?php echo rand(); ?>">
                                @csrf
                                <div class="table-responsive">
-                                   <table class="table table-center table-hover datatable">
+                                   <table class="table table-center table-hover datatable" id="example">
                                        <thead class="thead-light">
                                            <tr>
                                                <th>Select</th>
@@ -199,6 +199,8 @@
                </div>
            </div>
        </div>
+   @stop
+   @section('footer_js')
 
        <!-- Delete  Modal -->
 
@@ -303,93 +305,109 @@
 
        <!-- /set orderModal -->
 
-   @stop
-   <script>
-       function delete_form_field() {
 
-           // alert('test');
+       <script>
+           function delete_form_field() {
 
-           var checked = $("#form input:checked").length > 0;
+               // alert('test');
 
-           if (!checked) {
+               var checked = $("#form input:checked").length > 0;
 
-               $('#select_one_record').modal('show');
+               if (!checked) {
 
-           } else {
+                   $('#select_one_record').modal('show');
 
-               $('#delete_model').modal('show');
+               } else {
 
-           }
-
-       }
-
-
-
-       function form_sub() {
-
-           $('#form').submit();
-
-       }
-
-       function updateorder_popup(val, id) {
-
-           $('#set_order_val').val(val);
-
-           $('#set_order_id').val(id);
-
-           $('#set_order_model').modal('show');
-
-       }
-
-       function updateorder() {
-
-           var id = $('#set_order_id').val();
-
-           var val = $('#set_order_val').val();
-
-           $.ajax({
-
-               type: "POST",
-
-               url: "{{ url('set_order_form_fields') }}",
-
-               data: {
-
-                   "_token": "{{ csrf_token() }}",
-
-                   "id": id,
-
-                   "val": val
-
-               },
-
-               success: function(returnedData) {
-
-                   // alert(returnedData);
-
-                   if (returnedData == 1) {
-
-                       //alert('yes');
-
-                       $('#success_message').text("Set Order has been Updated successfully");
-
-                       //$('.success_show').show();
-
-                       $('.success_show').show().delay(0).fadeIn('show');
-
-                       $('.success_show').show().delay(5000).fadeOut('show');
-
-
-
-                       $('#set_order_model').modal('hide');
-
-                   }
+                   $('#delete_model').modal('show');
 
                }
 
+           }
+
+
+
+           function form_sub() {
+
+               $('#form').submit();
+
+           }
+
+           function updateorder_popup(val, id) {
+
+               $('#set_order_val').val(val);
+
+               $('#set_order_id').val(id);
+
+               $('#set_order_model').modal('show');
+
+           }
+
+           function updateorder() {
+
+               var id = $('#set_order_id').val();
+
+               var val = $('#set_order_val').val();
+
+               $.ajax({
+
+                   type: "POST",
+
+                   url: "{{ url('set_order_form_fields') }}",
+
+                   data: {
+
+                       "_token": "{{ csrf_token() }}",
+
+                       "id": id,
+
+                       "val": val
+
+                   },
+
+                   success: function(returnedData) {
+
+                       // alert(returnedData);
+
+                       if (returnedData == 1) {
+
+                           //alert('yes');
+
+                           $('#success_message').text("Set Order has been Updated successfully");
+
+                           //$('.success_show').show();
+
+                           $('.success_show').show().delay(0).fadeIn('show');
+
+                           $('.success_show').show().delay(5000).fadeOut('show');
+
+
+
+                           $('#set_order_model').modal('hide');
+
+                       }
+
+                   }
+
+               });
+
+
+
+           }
+       </script>
+       <script>
+           $(document).ready(function() {
+               // Check if the DataTable instance already exists
+               if ($.fn.DataTable.isDataTable('#example')) {
+                   // Destroy the existing DataTable before reinitializing
+                   $('#example').DataTable().destroy();
+               }
+
+               // Initialize DataTable with the new options
+               $('#example').dataTable({
+                   "searching": true
+               });
            });
+       </script>
 
-
-
-       }
-   </script>
+   @stop

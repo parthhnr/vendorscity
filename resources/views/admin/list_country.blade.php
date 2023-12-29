@@ -39,9 +39,9 @@
                         <a class="btn btn-danger me-1" href="javascript:void('0');" onclick="delete_country();">
                             <i class="fas fa-trash"></i> Delete
                         </a>
-                        <a class="btn btn-primary filter-btn" href="javascript:void(0);" id="filter_search">
+                        {{-- <a class="btn btn-primary filter-btn" href="javascript:void(0);" id="filter_search">
                             <i class="fas fa-filter"></i> Filter
-                        </a>
+                        </a> --}}
                     </div>
                 @endif
             </div>
@@ -92,7 +92,7 @@
                             <INPUT TYPE="hidden" NAME="hidPgRefRan" VALUE="<?php echo rand(); ?>">
                             @csrf
                             <div class="table-responsive">
-                                <table class="table table-center table-hover datatable">
+                                <table class="table table-center table-hover datatable" id="example">
                                     <thead class="thead-light">
                                         <tr>
                                             <th>Select</th>
@@ -134,6 +134,7 @@
 
 
 @stop
+@section('footer_js')
 
 
 
@@ -141,36 +142,36 @@
 
 
 
-<!-- Delete country Modal -->
+    <!-- Delete country Modal -->
 
 
 
-<div class="modal custom-modal fade" id="delete_country" role="dialog">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-body">
-                <div class="modal-icon text-center mb-3">
-                    <i class="fas fa-trash-alt text-danger"></i>
+    <div class="modal custom-modal fade" id="delete_country" role="dialog">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="modal-icon text-center mb-3">
+                        <i class="fas fa-trash-alt text-danger"></i>
+                    </div>
+                    <div class="modal-text text-center">
+                        <!-- <h3>Delete Expense country</h3> -->
+                        <p>Are you sure want to delete?</p>
+                    </div>
                 </div>
-                <div class="modal-text text-center">
-                    <!-- <h3>Delete Expense country</h3> -->
-                    <p>Are you sure want to delete?</p>
+                <div class="modal-footer text-center">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" onclick="form_sub();">Delete</button>
                 </div>
-            </div>
-            <div class="modal-footer text-center">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary" onclick="form_sub();">Delete</button>
             </div>
         </div>
+
+
+
     </div>
 
 
 
-</div>
-
-
-
-<!-- /Delete country Modal -->
+    <!-- /Delete country Modal -->
 
 
 
@@ -178,29 +179,29 @@
 
 
 
-<!-- Select one record country Modal -->
+    <!-- Select one record country Modal -->
 
 
 
-<div class="modal custom-modal fade" id="select_one_record" role="dialog">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-body">
-                <div class="modal-text text-center">
-                    <h3>Please select at least one record to delete</h3>
-                    <!-- <p>Are you sure want to delete?</p> -->
+    <div class="modal custom-modal fade" id="select_one_record" role="dialog">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="modal-text text-center">
+                        <h3>Please select at least one record to delete</h3>
+                        <!-- <p>Are you sure want to delete?</p> -->
+                    </div>
                 </div>
             </div>
         </div>
+
+
+
     </div>
 
 
 
-</div>
-
-
-
-<!-- /Select one record country Modal -->
+    <!-- /Select one record country Modal -->
 
 
 
@@ -208,11 +209,11 @@
 
 
 
-<!-- set order Modal -->
+    <!-- set order Modal -->
 
 
 
-{{-- <div class="modal custom-modal fade" id="set_order_model" role="dialog">
+    {{-- <div class="modal custom-modal fade" id="set_order_model" role="dialog">
  <div class="modal-dialog modal-dialog-centered">
      <div class="modal-content">
          <div class="modal-body">
@@ -233,65 +234,76 @@
 
 
 
-<!-- /set orderModal -->
+    <!-- /set orderModal -->
 
 
 
-<script>
-    function delete_country() {
-        // alert('test');
-        var checked = $("#form input:checked").length > 0;
-        if (!checked) {
-            $('#select_one_record').modal('show');
-        } else {
-            $('#delete_country').modal('show');
+    <script>
+        function delete_country() {
+            // alert('test');
+            var checked = $("#form input:checked").length > 0;
+            if (!checked) {
+                $('#select_one_record').modal('show');
+            } else {
+                $('#delete_country').modal('show');
+            }
         }
-    }
 
 
 
-    function form_sub() {
-        $('#form').submit();
-    }
+        function form_sub() {
+            $('#form').submit();
+        }
 
 
 
-    // function updateorder_popup(val, id) {
-    //     $('#set_order_val').val(val);
-    //     $('#set_order_id').val(id);
-    //     $('#set_order_model').modal('show');
-    // }
+        // function updateorder_popup(val, id) {
+        //     $('#set_order_val').val(val);
+        //     $('#set_order_id').val(id);
+        //     $('#set_order_model').modal('show');
+        // }
 
 
 
-    // function updateorder() {
-    //     var id = $('#set_order_id').val();
-    //     var val = $('#set_order_val').val();
-    //     $.ajax({
-    //         type: "POST",
-    //         url: "{{ url('set_order_country') }}",
-    //         data: {
-    //             "_token": "{{ csrf_token() }}",
-    //             "id": id,
-    //             "val": val
-    //         },
-    //         success: function(returnedData) {
-    //             // alert(returnedData);
-    //             if (returnedData == 1) {
-    //                 //alert('yes');
-    //                 $('#success_message').text("Set Order has been Updated successfully");
-    //                 //$('.success_show').show();
-    //                 $('.success_show').show().delay(0).fadeIn('show');
-    //                 $('.success_show').show().delay(5000).fadeOut('show');
+        // function updateorder() {
+        //     var id = $('#set_order_id').val();
+        //     var val = $('#set_order_val').val();
+        //     $.ajax({
+        //         type: "POST",
+        //         url: "{{ url('set_order_country') }}",
+        //         data: {
+        //             "_token": "{{ csrf_token() }}",
+        //             "id": id,
+        //             "val": val
+        //         },
+        //         success: function(returnedData) {
+        //             // alert(returnedData);
+        //             if (returnedData == 1) {
+        //                 //alert('yes');
+        //                 $('#success_message').text("Set Order has been Updated successfully");
+        //                 //$('.success_show').show();
+        //                 $('.success_show').show().delay(0).fadeIn('show');
+        //                 $('.success_show').show().delay(5000).fadeOut('show');
 
 
 
-    //                 $('#set_order_model').modal('hide');
-    //             }
-    //         }
-    //     });
+        //                 $('#set_order_model').modal('hide');
+        //             }
+        //         }
+        //     });
 
 
 
-    // }
-</script>
+        // }
+
+        if ($.fn.DataTable.isDataTable('#example')) {
+            $('#example').DataTable().destroy();
+        }
+
+        $(document).ready(function() {
+            $('#example').dataTable({
+                "searching": true
+            });
+        })
+    </script>
+@stop

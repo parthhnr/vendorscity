@@ -32,13 +32,13 @@
                    </div>
                    @if (in_array('3', $edit_perm))
                        <div class="col-auto">
-                            <!-- <a class="btn btn-primary me-1" href="{{ asset('public/upload/city_upload.xlsx') }}">
-                               Download Bulk Upload City Format
-                            </a>
+                           <!-- <a class="btn btn-primary me-1" href="{{ asset('public/upload/city_upload.xlsx') }}">
+                                   Download Bulk Upload City Format
+                                </a>
 
-                            <a class="btn btn-primary me-1" href="{{ route('bulk_upload_city') }}">
-                               <i class="fas fa-plus"></i> Bulk Upload City
-                            </a> -->
+                                <a class="btn btn-primary me-1" href="{{ route('bulk_upload_city') }}">
+                                   <i class="fas fa-plus"></i> Bulk Upload City
+                                </a> -->
 
                            <a class="btn btn-primary me-1" href="{{ route('city.create') }}">
                                <i class="fas fa-plus"></i> Add City
@@ -47,9 +47,7 @@
                                onclick="delete_city();return false;">
                                <i class="fas fa-trash"></i> Delete
                            </a>
-                           <!-- <a class="btn btn-primary filter-btn" href="javascript:void(0);" id="filter_search">
-                                                                 <i class="fas fa-filter"></i>
-                                                                </a> -->
+
                        </div>
                    @endif
                </div>
@@ -63,32 +61,7 @@
                </div>
            @endif
 
-           <!-- Search Filter -->
-           <!-- <div id="filter_inputs" class="card filter-card">
-                                                              <div class="card-body pb-0">
-                                                               <div class="row">
-                                                                <div class="col-sm-6 col-md-3">
-                                                                 <div class="form-group">
-                                                                  <label>Name</label>
-                                                                  <input type="text" class="form-control">
-                                                                 </div>
-                                                                </div>
-                                                                <div class="col-sm-6 col-md-3">
-                                                                 <div class="form-group">
-                                                                  <label>Email</label>
-                                                                  <input type="text" class="form-control">
-                                                                 </div>
-                                                                </div>
-                                                                <div class="col-sm-6 col-md-3">
-                                                                 <div class="form-group">
-                                                                  <label>Phone</label>
-                                                                  <input type="text" class="form-control">
-                                                                 </div>
-                                                                </div>
-                                                               </div>
-                                                              </div>
-                                                             </div> -->
-           <!-- /Search Filter -->
+
 
 
 
@@ -101,7 +74,7 @@
                                <INPUT TYPE="hidden" NAME="hidPgRefRan" VALUE="<?php echo rand(); ?>">
                                @csrf
                                <div class="table-responsive">
-                                   <table class="table table-center table-hover datatable">
+                                   <table class="table table-center table-hover datatable" id="example">
                                        <thead class="thead-light">
                                            <tr>
                                                <th>Select</th>
@@ -151,41 +124,42 @@
 
        <!-- /Page Wrapper -->
    @stop
-   <!-- Delete Category Modal -->
-   <div class="modal custom-modal fade" id="delete_city" role="dialog">
-       <div class="modal-dialog modal-dialog-centered">
-           <div class="modal-content">
-               <div class="modal-body">
-                   <div class="modal-icon text-center mb-3">
-                       <i class="fas fa-trash-alt text-danger"></i>
+   @section('footer_js')
+       <!-- Delete Category Modal -->
+       <div class="modal custom-modal fade" id="delete_city" role="dialog">
+           <div class="modal-dialog modal-dialog-centered">
+               <div class="modal-content">
+                   <div class="modal-body">
+                       <div class="modal-icon text-center mb-3">
+                           <i class="fas fa-trash-alt text-danger"></i>
+                       </div>
+                       <div class="modal-text text-center">
+                           <!-- <h3>Delete Expense Category</h3> -->
+                           <p>Are you sure want to delete?</p>
+                       </div>
                    </div>
-                   <div class="modal-text text-center">
-                       <!-- <h3>Delete Expense Category</h3> -->
-                       <p>Are you sure want to delete?</p>
+                   <div class="modal-footer text-center">
+                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                       <button type="button" class="btn btn-primary" onclick="form_sub();">Delete</button>
                    </div>
-               </div>
-               <div class="modal-footer text-center">
-                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                   <button type="button" class="btn btn-primary" onclick="form_sub();">Delete</button>
                </div>
            </div>
        </div>
-   </div>
-   <!-- /Delete Category Modal -->
+       <!-- /Delete Category Modal -->
 
-   <!-- Select one record Category Modal -->
-   <div class="modal custom-modal fade" id="select_one_record" role="dialog">
-       <div class="modal-dialog modal-dialog-centered">
-           <div class="modal-content">
-               <div class="modal-body">
-                   <div class="modal-text text-center">
-                       <h3>Please select at least one record to delete</h3>
-                       <!-- <p>Are you sure want to delete?</p> -->
+       <!-- Select one record Category Modal -->
+       <div class="modal custom-modal fade" id="select_one_record" role="dialog">
+           <div class="modal-dialog modal-dialog-centered">
+               <div class="modal-content">
+                   <div class="modal-body">
+                       <div class="modal-text text-center">
+                           <h3>Please select at least one record to delete</h3>
+                           <!-- <p>Are you sure want to delete?</p> -->
+                       </div>
                    </div>
                </div>
            </div>
        </div>
-   </div>
    @section('footer_js')
 
        <script>
@@ -225,6 +199,17 @@
            function form_sub() {
                $('#form').submit();
            }
+       </script>
+       <script>
+           if ($.fn.DataTable.isDataTable('#example')) {
+               $('#example').DataTable().destroy();
+           }
+
+           $(document).ready(function() {
+               $('#example').dataTable({
+                   "searching": true
+               });
+           })
        </script>
 
    @stop

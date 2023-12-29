@@ -219,7 +219,7 @@
 
                             <div class="table-responsive">
 
-                                <table class="table table-center table-hover datatable">
+                                <table class="table table-center table-hover datatable" id="example">
 
                                     <thead class="thead-light">
 
@@ -352,65 +352,40 @@
 
 @stop
 
-<!-- Delete Category Modal -->
+@section('footer_js')
 
-<div class="modal custom-modal fade" id="delete_category" role="dialog">
 
-    <div class="modal-dialog modal-dialog-centered">
+    <!-- Delete Category Modal -->
 
-        <div class="modal-content">
+    <div class="modal custom-modal fade" id="delete_category" role="dialog">
 
-            <div class="modal-body">
+        <div class="modal-dialog modal-dialog-centered">
 
-                <div class="modal-icon text-center mb-3">
+            <div class="modal-content">
 
-                    <i class="fas fa-trash-alt text-danger"></i>
+                <div class="modal-body">
+
+                    <div class="modal-icon text-center mb-3">
+
+                        <i class="fas fa-trash-alt text-danger"></i>
+
+                    </div>
+
+                    <div class="modal-text text-center">
+
+                        <!-- <h3>Delete Expense Category</h3> -->
+
+                        <p>Are you sure want to delete?</p>
+
+                    </div>
 
                 </div>
 
-                <div class="modal-text text-center">
+                <div class="modal-footer text-center">
 
-                    <!-- <h3>Delete Expense Category</h3> -->
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
 
-                    <p>Are you sure want to delete?</p>
-
-                </div>
-
-            </div>
-
-            <div class="modal-footer text-center">
-
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-
-                <button type="button" class="btn btn-primary" onclick="form_sub();">Delete</button>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</div>
-
-<!-- /Delete Category Modal -->
-
-
-
-<!-- Select one record Category Modal -->
-
-<div class="modal custom-modal fade" id="select_one_record" role="dialog">
-
-    <div class="modal-dialog modal-dialog-centered">
-
-        <div class="modal-content">
-
-            <div class="modal-body">
-
-                <div class="modal-text text-center">
-
-                    <h3>Please select at least one record to delete</h3>
-
-                    <!-- <p>Are you sure want to delete?</p> -->
+                    <button type="button" class="btn btn-primary" onclick="form_sub();">Delete</button>
 
                 </div>
 
@@ -420,29 +395,27 @@
 
     </div>
 
-</div>
+    <!-- /Delete Category Modal -->
 
-<!-- set order Modal -->
 
-<div class="modal custom-modal fade" id="status_modell" role="dialog">
 
-    <div class="modal-dialog modal-dialog-centered">
+    <!-- Select one record Category Modal -->
 
-        <div class="modal-content">
+    <div class="modal custom-modal fade" id="select_one_record" role="dialog">
 
-            <div class="modal-body">
+        <div class="modal-dialog modal-dialog-centered">
 
-                <div class="modal-text text-center">
+            <div class="modal-content">
 
-                    <h3>Are you sure you want to change the status </h3>
+                <div class="modal-body">
 
-                    <input type="hidden" name="is_active_id" id="is_active_id" value="">
+                    <div class="modal-text text-center">
 
-                    <input type="hidden" name="is_active_val" id="is_active_val" value="">
+                        <h3>Please select at least one record to delete</h3>
 
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                        <!-- <p>Are you sure want to delete?</p> -->
 
-                    <button type="button" class="btn btn-primary" onclick="fun_review_status();">Yes</button>
+                    </div>
 
                 </div>
 
@@ -452,88 +425,134 @@
 
     </div>
 
-</div>
+    <!-- set order Modal -->
 
-<!-- /set orderModal -->
+    <div class="modal custom-modal fade" id="status_modell" role="dialog">
 
-<script>
-    function delete_category() {
+        <div class="modal-dialog modal-dialog-centered">
 
-        // alert('test');
+            <div class="modal-content">
 
-        var checked = $("#form input:checked").length > 0;
+                <div class="modal-body">
 
-        if (!checked) {
+                    <div class="modal-text text-center">
 
-            $('#select_one_record').modal('show');
+                        <h3>Are you sure you want to change the status </h3>
 
-        } else {
+                        <input type="hidden" name="is_active_id" id="is_active_id" value="">
 
-            $('#delete_category').modal('show');
+                        <input type="hidden" name="is_active_val" id="is_active_val" value="">
 
-        }
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
 
-    }
+                        <button type="button" class="btn btn-primary" onclick="fun_review_status();">Yes</button>
 
+                    </div>
 
+                </div>
 
-    function form_sub() {
+            </div>
 
-        $('#form').submit();
+        </div>
 
-    }
-</script>
+    </div>
 
-<script>
-    function fun_status(id, value) {
+    <!-- /set orderModal -->
 
-        // alert(value);
+    <script>
+        function delete_category() {
 
-        $('#is_active_id').val(id);
+            // alert('test');
 
-        $('#is_active_val').val(value);
+            var checked = $("#form input:checked").length > 0;
 
-        $('#status_modell').modal('show');
+            if (!checked) {
 
-    }
+                $('#select_one_record').modal('show');
 
-    function fun_review_status() {
+            } else {
 
-        var id = $('#is_active_id').val();
-
-        var value = $('#is_active_val').val();
-
-        $.ajax({
-
-            type: "post",
-
-            url: "{{ url('change_status_vendors') }}",
-
-            data: {
-
-                "_token": "{{ csrf_token() }}",
-
-                "id": id,
-
-                "value": value,
-
-            },
-
-            success: function(returndata) {
-
-                if (returndata == 1)
-
-                    $('#success_message').text('Status has been Updated successfully');
-
-                $('.success_show').show().delay(0).fadeIn('show');
-
-                $('.success_show').show().delay(5000).fadeOut('show');
-
-                $('#status_modell').modal('hide');
+                $('#delete_category').modal('show');
 
             }
 
-        });
+        }
 
-    }
-</script>
+
+
+        function form_sub() {
+
+            $('#form').submit();
+
+        }
+    </script>
+
+    <script>
+        function fun_status(id, value) {
+
+            // alert(value);
+
+            $('#is_active_id').val(id);
+
+            $('#is_active_val').val(value);
+
+            $('#status_modell').modal('show');
+
+        }
+
+        function fun_review_status() {
+
+            var id = $('#is_active_id').val();
+
+            var value = $('#is_active_val').val();
+
+            $.ajax({
+
+                type: "post",
+
+                url: "{{ url('change_status_vendors') }}",
+
+                data: {
+
+                    "_token": "{{ csrf_token() }}",
+
+                    "id": id,
+
+                    "value": value,
+
+                },
+
+                success: function(returndata) {
+
+                    if (returndata == 1)
+
+                        $('#success_message').text('Status has been Updated successfully');
+
+                    $('.success_show').show().delay(0).fadeIn('show');
+
+                    $('.success_show').show().delay(5000).fadeOut('show');
+
+                    $('#status_modell').modal('hide');
+
+                }
+
+            });
+
+        }
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            // Check if the DataTable instance already exists
+            if ($.fn.DataTable.isDataTable('#example')) {
+                // Destroy the existing DataTable before reinitializing
+                $('#example').DataTable().destroy();
+            }
+
+            // Initialize DataTable with the new options
+            $('#example').dataTable({
+                "searching": true
+            });
+        });
+    </script>
+@stop

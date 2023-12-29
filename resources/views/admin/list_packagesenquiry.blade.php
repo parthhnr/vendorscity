@@ -87,7 +87,7 @@
 
                             <div class="table-responsive">
 
-                                <table class="table table-center table-hover datatable">
+                                <table class="table table-center table-hover datatable" id="example">
 
                                     <thead class="thead-light">
 
@@ -196,6 +196,8 @@
         </div>
 
     </div>
+@stop
+@section('footer_js')
 
     <!-- Delete  Modal -->
     @if ($packages_data != '')
@@ -271,16 +273,29 @@
     @endforeach
     @endif
 
+
+
+
+    <script>
+        function delete_category(id) {
+
+            // alert(id);
+
+            $('#delete_model_' + id).modal('show');
+
+
+        }
+    </script>
+    <script>
+        if ($.fn.DataTable.isDataTable('#example')) {
+            $('#example').DataTable().destroy();
+        }
+
+        $(document).ready(function() {
+            $('#example').dataTable({
+                "searching": true
+            });
+        })
+    </script>
+
 @stop
-
-
-<script>
-    function delete_category(id) {
-
-        // alert(id);
-
-        $('#delete_model_' + id).modal('show');
-
-
-    }
-</script>

@@ -85,10 +85,6 @@
 
     <div class="content container-fluid">
 
-
-
-
-
         <!-- Page Header -->
 
         <div class="page-header">
@@ -212,7 +208,7 @@
 
                             <div class="table-responsive">
 
-                                <table class="table table-center table-hover ">
+                                <table class="table table-center table-hover datatable" id="example">
 
                                     <thead class="thead-light">
 
@@ -271,8 +267,6 @@
                                             </tr>
                                         @endforeach
 
-
-
                                     </tbody>
 
                                 </table>
@@ -290,6 +284,9 @@
         </div>
 
     </div>
+@stop
+
+@section('footer_js')
 
 
     <!-- set order Modal -->
@@ -327,60 +324,76 @@
 
     <!-- /set orderModal -->
 
-@stop
 
 
 
 
-<script>
-    function fun_status(id, value) {
 
-        $('#is_active_id').val(id);
+    <script>
+        function fun_status(id, value) {
+
+            $('#is_active_id').val(id);
 
 
-        $('#is_active_val').val(value);
+            $('#is_active_val').val(value);
 
-        $('#status_modell').modal('show');
+            $('#status_modell').modal('show');
 
-    }
+        }
 
-    function fun_review_status() {
+        function fun_review_status() {
 
-        var id = $('#is_active_id').val();
+            var id = $('#is_active_id').val();
 
-        var value = $('#is_active_val').val();
+            var value = $('#is_active_val').val();
 
-        $.ajax({
+            $.ajax({
 
-            type: "post",
+                type: "post",
 
-            url: "{{ url('change_status_frontuser') }}",
+                url: "{{ url('change_status_frontuser') }}",
 
-            data: {
+                data: {
 
-                "_token": "{{ csrf_token() }}",
+                    "_token": "{{ csrf_token() }}",
 
-                "id": id,
+                    "id": id,
 
-                "value": value,
+                    "value": value,
 
-            },
+                },
 
-            success: function(returndata) {
+                success: function(returndata) {
 
-                if (returndata == 1)
+                    if (returndata == 1)
 
-                    $('#success_message').text('Status has been Updated successfully');
+                        $('#success_message').text('Status has been Updated successfully');
 
-                $('.success_show').show().delay(0).fadeIn('show');
+                    $('.success_show').show().delay(0).fadeIn('show');
 
-                $('.success_show').show().delay(5000).fadeOut('show');
+                    $('.success_show').show().delay(5000).fadeOut('show');
 
-                $('#status_modell').modal('hide');
+                    $('#status_modell').modal('hide');
 
+                }
+
+            });
+
+        }
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            // Check if the DataTable instance already exists
+            if ($.fn.DataTable.isDataTable('#example')) {
+                // Destroy the existing DataTable before reinitializing
+                $('#example').DataTable().destroy();
             }
 
+            // Initialize DataTable with the new options
+            $('#example').dataTable({
+                "searching": true
+            });
         });
-
-    }
-</script>
+    </script>
+@stop
