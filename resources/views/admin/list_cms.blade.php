@@ -120,7 +120,7 @@
 
                             <div class="table-responsive">
 
-                                <table class="table table-center table-hover">
+                                <table class="table table-center table-hover datatable" id="example">
 
                                     <thead class="thead-light">
 
@@ -211,68 +211,41 @@
     </div>
 
 @stop
+@section('footer_js')
 
 
 
-<!-- Delete  Modal -->
+    <!-- Delete  Modal -->
 
-<div class="modal custom-modal fade" id="delete_model" role="dialog">
+    <div class="modal custom-modal fade" id="delete_model" role="dialog">
 
-    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-dialog modal-dialog-centered">
 
-        <div class="modal-content">
+            <div class="modal-content">
 
-            <div class="modal-body">
+                <div class="modal-body">
 
-                <div class="modal-icon text-center mb-3">
+                    <div class="modal-icon text-center mb-3">
 
-                    <i class="fas fa-trash-alt text-danger"></i>
+                        <i class="fas fa-trash-alt text-danger"></i>
+
+                    </div>
+
+                    <div class="modal-text text-center">
+
+                        <!-- <h3>Delete Expense Category</h3> -->
+
+                        <p>Are you sure want to delete?</p>
+
+                    </div>
 
                 </div>
 
-                <div class="modal-text text-center">
+                <div class="modal-footer text-center">
 
-                    <!-- <h3>Delete Expense Category</h3> -->
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
 
-                    <p>Are you sure want to delete?</p>
-
-                </div>
-
-            </div>
-
-            <div class="modal-footer text-center">
-
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-
-                <button type="button" class="btn btn-primary" onclick="form_sub();">Delete</button>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</div>
-
-<!-- /Delete Modal -->
-
-
-
-<!-- Select one record Category Modal -->
-
-<div class="modal custom-modal fade" id="select_one_record" role="dialog">
-
-    <div class="modal-dialog modal-dialog-centered">
-
-        <div class="modal-content">
-
-            <div class="modal-body">
-
-                <div class="modal-text text-center">
-
-                    <h3>Please select at least one record to delete</h3>
-
-                    <!-- <p>Are you sure want to delete?</p> -->
+                    <button type="button" class="btn btn-primary" onclick="form_sub();">Delete</button>
 
                 </div>
 
@@ -282,42 +255,86 @@
 
     </div>
 
-</div>
-
-<!-- /Select one record Category Modal -->
+    <!-- /Delete Modal -->
 
 
 
+    <!-- Select one record Category Modal -->
+
+    <div class="modal custom-modal fade" id="select_one_record" role="dialog">
+
+        <div class="modal-dialog modal-dialog-centered">
+
+            <div class="modal-content">
+
+                <div class="modal-body">
+
+                    <div class="modal-text text-center">
+
+                        <h3>Please select at least one record to delete</h3>
+
+                        <!-- <p>Are you sure want to delete?</p> -->
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- /Select one record Category Modal -->
 
 
 
 
-<script>
-    function delete_cms() {
-
-        // alert('test');
 
 
 
-        var checked = $("#form input:checked").length > 0;
+    <script>
+        function delete_cms() {
 
-        if (!checked) {
+            // alert('test');
 
-            $('#select_one_record').modal('show');
 
-        } else {
 
-            $('#delete_model').modal('show');
+            var checked = $("#form input:checked").length > 0;
+
+            if (!checked) {
+
+                $('#select_one_record').modal('show');
+
+            } else {
+
+                $('#delete_model').modal('show');
+
+            }
 
         }
 
-    }
 
 
+        function form_sub() {
 
-    function form_sub() {
+            $('#form').submit();
 
-        $('#form').submit();
+        }
+    </script>
 
-    }
-</script>
+    <script>
+        $(document).ready(function() {
+            // Check if the DataTable instance already exists
+            if ($.fn.DataTable.isDataTable('#example')) {
+                // Destroy the existing DataTable before reinitializing
+                $('#example').DataTable().destroy();
+            }
+
+            // Initialize DataTable with the new options
+            $('#example').dataTable({
+                "searching": true
+            });
+        });
+    </script>
+@stop

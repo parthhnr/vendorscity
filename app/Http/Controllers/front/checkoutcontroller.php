@@ -22,10 +22,14 @@ class checkoutcontroller extends Controller
         return view('front.checkout',$data);
     }
 
-    function order_place(){
+    function order_place(Request $request){
+       
         $userdata = Session::get('user');
         
-        //echo "<pre>";print_r($_POST);echo"</pre>";exit;
+        // echo "<pre>";print_r($userdata);echo"</pre>";
+        //echo "<pre>";print_r($request->post());echo"</pre>";
+
+        
 
         $cart = \Cart::content();
         // echo "<pre>";print_r($cart);echo"</pre>";
@@ -51,6 +55,8 @@ class checkoutcontroller extends Controller
                 ->select(DB::raw('MAX(order_id) as lastOrderNumber'))
                 ->first();
         
+                //echo "<pre>";print_r($intOrderNumber);echo"</pre>";
+
         if ($intOrderNumber) {
             $intOrderNumber = $intOrderNumber->lastOrderNumber + 1;
 
@@ -63,9 +69,11 @@ class checkoutcontroller extends Controller
         Session::put('order_number', $intOrderNumber_new);
         $order_number = Session::get('order_number');
 
-        
+        //echo "<pre>";print_r($order_number);echo"</pre>";
+
 
         $userid = $userdata['userid'];
+        // echo "<pre>";print_r($userid);echo"</pre>";exit;
 
         if(session('coupan_data.coupancode') != ''){
             $coupancode=session('coupan_data.coupancode');
@@ -97,6 +105,8 @@ class checkoutcontroller extends Controller
         );
 
         $arrOrderId = DB::table('ci_orders')->insertGetId($content);
+        //echo "<pre>";print_r($arrOrderId);echo"</pre>";
+        
 
         if ($arrOrderId) {
             $arrOrderId;
@@ -133,6 +143,22 @@ class checkoutcontroller extends Controller
             //     ->where('id', $arrRowDeailts->options->attribute_id)
             //     ->decrement('qty', $arrRowDeailts->qty);
         }
+        if($request->fname !=''){
+            $data['first_name']=$request->fname;
+            $data['last_name']=$request->lname;
+            $data['country']=$request->country;
+            $data['address1']=$request->address1;
+            $data['zipcode']=$request->zipcode;
+            $data['phone_number']=$request->phone;
+            $data['email_address']=$request->email_ship;
+            $data['additional_message']=$request->additional_message;
+            $data['payment_method']=$request->payment_method;
+            $data['order_id']=$arrOrderId;
+            $data['user_id']=$userid;           
+            
+            DB::table('ci_shipping_address')->insert($data);
+        }
+        
 
         if($id == 1){
             $success = $this->success_mail();
@@ -149,7 +175,9 @@ class checkoutcontroller extends Controller
             } 
         }
 
-        //echo "<pre>";print_r($content);echo"</pre>";exit;
+       
+
+        // echo "<pre>";print_r($content);echo"</pre>";exit;
         
     }
 

@@ -202,7 +202,7 @@
 
                             <div class="table-responsive">
 
-                                <table class="table table-center table-hover datatable">
+                                <table class="table table-center table-hover datatable" id="example">
 
                                     <thead class="thead-light">
 
@@ -324,6 +324,8 @@
         </div>
 
     </div>
+@stop
+@section('footer_js')
 
     {{-- @php
         echo '<pre>';
@@ -515,8 +517,8 @@
         <input type="hidden" name="vendor_id" id="vendor_id" value="">
     </form> --}}
 
-@stop
-{{-- <script>
+
+    {{-- <script>
     function delete_category(id, vendor_id) {
 
         $('#inquiry_id').val(id);
@@ -535,13 +537,27 @@
     }
 </script> --}}
 
-<script>
-    function Enquiry(id) {
+    <script>
+        function Enquiry(id) {
 
-        //    alert(id);
+            //    alert(id);
 
-        $('#delete_model_' + id).modal('show');
+            $('#delete_model_' + id).modal('show');
 
 
-    }
-</script>
+        }
+    </script>
+
+    <script>
+        if ($.fn.DataTable.isDataTable('#example')) {
+            $('#example').DataTable().destroy();
+        }
+
+        $(document).ready(function() {
+            $('#example').dataTable({
+                "searching": true
+            });
+        })
+    </script>
+
+@stop

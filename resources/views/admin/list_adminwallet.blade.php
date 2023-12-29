@@ -151,7 +151,7 @@
                             <INPUT TYPE="hidden" NAME="hidPgRefRan" VALUE="<?php echo rand(); ?>">
                             @csrf
                             <div class="table-responsive">
-                                <table class="table table-center table-hover datatable">
+                                <table class="table table-center table-hover datatable" id="example">
                                     <thead class="thead-light">
                                         <tr>
                                             <th>Sr No</th>
@@ -167,7 +167,7 @@
 
                                         @php
 
-                                        $i=1;
+                                            $i = 1;
                                         @endphp
 
                                         @foreach ($wallet_data as $data)
@@ -194,23 +194,23 @@
                                                 </td>
                                                 <td>
 
-                                                        @if ($data->add_deduct === 0)
-                                                            {{ 'Add' }}
-                                                        @elseif ($data->add_deduct === 1)
-                                                            {{ 'Deduct' }}
-                                                        @else
-                                                            {{ '-' }}
-                                                        @endif
+                                                    @if ($data->add_deduct === 0)
+                                                        {{ 'Add' }}
+                                                    @elseif ($data->add_deduct === 1)
+                                                        {{ 'Deduct' }}
+                                                    @else
+                                                        {{ '-' }}
+                                                    @endif
                                                 </td>
                                                 <td>
                                                     <div class="form-group">
-                                                        @if($data->add_deduct == 0)
-                                                        <label class="toggle">
-                                                            <input type="checkbox" id="is_active_toggle"
-                                                                {{ $data->status == 1 ? 'checked' : '' }}
-                                                                onchange="fun_status('{{ $data->id }}','{{ $data->vendors_id }}', this.checked ? 1 : 0); return false;">
-                                                            <span class="slider"></span>
-                                                        </label>
+                                                        @if ($data->add_deduct == 0)
+                                                            <label class="toggle">
+                                                                <input type="checkbox" id="is_active_toggle"
+                                                                    {{ $data->status == 1 ? 'checked' : '' }}
+                                                                    onchange="fun_status('{{ $data->id }}','{{ $data->vendors_id }}', this.checked ? 1 : 0); return false;">
+                                                                <span class="slider"></span>
+                                                            </label>
                                                         @else
                                                             {{ '-' }}
                                                         @endif
@@ -225,8 +225,8 @@
                                             </tr>
                                             @php
 
-                                        $i++;
-                                        @endphp
+                                                $i++;
+                                            @endphp
                                         @endforeach
                                     </tbody>
                                 </table>
@@ -239,30 +239,34 @@
     </div>
 @stop
 
+@section('footer_js')
 
-<!-- set order Modal -->
 
-<div class="modal custom-modal fade" id="status_modell" role="dialog">
+    <!-- set order Modal -->
 
-    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal custom-modal fade" id="status_modell" role="dialog">
 
-        <div class="modal-content">
+        <div class="modal-dialog modal-dialog-centered">
 
-            <div class="modal-body">
+            <div class="modal-content">
 
-                <div class="modal-text text-center">
+                <div class="modal-body">
 
-                    <h3>Are you sure you want to change the status </h3>
+                    <div class="modal-text text-center">
 
-                    <input type="hidden" name="is_active_id" id="is_active_id" value="">
+                        <h3>Are you sure you want to change the status </h3>
 
-                    <input type="hidden" name="is_active_vendorid" id="is_active_vendorid" value="">
+                        <input type="hidden" name="is_active_id" id="is_active_id" value="">
 
-                    <input type="hidden" name="is_active_val" id="is_active_val" value="">
+                        <input type="hidden" name="is_active_vendorid" id="is_active_vendorid" value="">
 
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                        <input type="hidden" name="is_active_val" id="is_active_val" value="">
 
-                    <button type="button" class="btn btn-primary" onclick="fun_review_status();">Yes</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+
+                        <button type="button" class="btn btn-primary" onclick="fun_review_status();">Yes</button>
+
+                    </div>
 
                 </div>
 
@@ -272,59 +276,70 @@
 
     </div>
 
-</div>
+    <!-- /set orderModal -->
 
-<!-- /set orderModal -->
+    <script>
+        function fun_status(id, vendor_id, value) {
 
-<script>
-    function fun_status(id, vendor_id, value) {
+            $('#is_active_id').val(id);
+            $('#is_active_vendorid').val(vendor_id);
 
-        $('#is_active_id').val(id);
-        $('#is_active_vendorid').val(vendor_id);
+            $('#is_active_val').val(value);
 
-        $('#is_active_val').val(value);
+            $('#status_modell').modal('show');
 
-        $('#status_modell').modal('show');
+        }
 
-    }
+        function fun_review_status() {
 
-    function fun_review_status() {
+            var id = $('#is_active_id').val();
+            var vendorid = $('#is_active_vendorid').val();
+            var value = $('#is_active_val').val();
 
-        var id = $('#is_active_id').val();
-        var vendorid = $('#is_active_vendorid').val();
-        var value = $('#is_active_val').val();
+            $.ajax({
 
-        $.ajax({
+                type: "post",
 
-            type: "post",
+                url: "{{ url('change_status_wallet') }}",
 
-            url: "{{ url('change_status_wallet') }}",
+                data: {
 
-            data: {
+                    "_token": "{{ csrf_token() }}",
 
-                "_token": "{{ csrf_token() }}",
+                    "id": id,
+                    "vendorid": vendorid,
+                    "value": value,
 
-                "id": id,
-                "vendorid": vendorid,
-                "value": value,
+                },
 
-            },
+                success: function(returndata) {
 
-            success: function(returndata) {
+                    if (returndata == 1)
 
-                if (returndata == 1)
+                        $('#success_message').text('Status has been Updated successfully');
 
-                    $('#success_message').text('Status has been Updated successfully');
+                    $('.success_show').show().delay(0).fadeIn('show');
 
-                $('.success_show').show().delay(0).fadeIn('show');
+                    $('.success_show').show().delay(5000).fadeOut('show');
 
-                $('.success_show').show().delay(5000).fadeOut('show');
+                    $('#status_modell').modal('hide');
 
-                $('#status_modell').modal('hide');
+                }
 
-            }
+            });
 
-        });
+        }
+    </script>
 
-    }
-</script>
+    <script>
+        if ($.fn.DataTable.isDataTable('#example')) {
+            $('#example').DataTable().destroy();
+        }
+
+        $(document).ready(function() {
+            $('#example').dataTable({
+                "searching": true
+            });
+        })
+    </script>
+@stop

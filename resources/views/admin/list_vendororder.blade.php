@@ -198,7 +198,7 @@
 
                             <div class="table-responsive">
 
-                                <table class="table table-center table-hover datatable">
+                                <table class="table table-center table-hover datatable" id="example">
 
                                     <thead class="thead-light">
 
@@ -306,6 +306,8 @@
         </div>
 
     </div>
+    @stop
+    @section('footer_js')
 
 
 
@@ -500,6 +502,18 @@
 
     
 
+</script>
+
+<script>
+    if ($.fn.DataTable.isDataTable('#example')) {
+        $('#example').DataTable().destroy();
+    }
+
+    $(document).ready(function() {
+        $('#example').dataTable({
+            "searching": true
+        });
+    })
 </script>
 
 @stop
