@@ -103,9 +103,12 @@ class MyaccountController extends Controller
     {
       $userData = Session::get('user');
 
-      $userid = $userdata['userid'];
+      $userid = $userData['userid'];
 
       $data['user_data'] =  DB::table('frontloginregisters')->where('id', $userid)->first();
+
+      //echo "<pre>";print_r($data);echo"</pre>";exit;
+
        return view('front.my_profile',$data);
     }
 
@@ -130,7 +133,14 @@ class MyaccountController extends Controller
 
          //echo "<pre>";print_r($data);echo"</pre>";exit;
       }
-       return view('front.edit_profile');
+
+      $userData = Session::get('user');
+
+      $userid = $userData['userid'];
+
+      $data['user_data'] =  DB::table('frontloginregisters')->where('id', $userid)->first();
+
+       return view('front.edit_profile',$data);
     }
     
 }

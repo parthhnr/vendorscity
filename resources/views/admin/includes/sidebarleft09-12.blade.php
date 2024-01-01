@@ -86,16 +86,16 @@
                     <li class="{{ request()->segment(2) == 'price' ? 'active' : '' }}"><a
                             href="{{ route('price.edit', 1) }}"
                             class="{{ request()->segment(2) == 'price' ? 'active' : '' }}">
-                            <i data-feather="credit-card"></i><span>Vendor Listing Price</span></a>
+                            <i data-feather="credit-card"></i><span>Price</span></a>
                     </li>
                 @endif
-                {{-- @if (in_array('15', $permission1))
+                @if (in_array('15', $permission1))
                     <li class="{{ request()->segment(2) == 'faq' ? 'active' : '' }}"><a
                             href="{{ route('faq.index') }}"
                             class="{{ request()->segment(2) == 'faq' ? 'active' : '' }}">
                             <i class="fa fa-file"></i><span>FAQ</span></a>
                     </li>
-                @endif --}}
+                @endif
                 @if (in_array('10', $permission1))
                     <li class="{{ request()->segment(2) == 'cms' ? 'active' : '' }}"><a
                             href="{{ route('cms.index') }}"
@@ -104,11 +104,11 @@
                     </li>
                 @endif
 
-                {{-- <li class="{{ request()->segment(2) == 'leads' ? 'active' : '' }}"><a
+                <li class="{{ request()->segment(2) == 'leads' ? 'active' : '' }}"><a
                         href="{{ route('leads.index') }}"
                         class="{{ request()->segment(1) == 'leads' ? 'active' : '' }}">
                         <i class="fa fa-file"></i><span>Leads</span></a>
-                </li> --}}
+                </li>
                 @if (in_array('11', $permission1))
                     <li class="{{ request()->segment(2) == 'packagecategory' ? 'active' : '' }}"><a
                             href="{{ route('packagecategory.index') }}"
@@ -127,7 +127,7 @@
                     <li class="{{ request()->segment(2) == 'frontuser' ? 'active' : '' }}"><a
                             href="{{ route('frontuser.index') }}"
                             class="{{ request()->segment(2) == 'frontuser' ? 'active' : '' }}">
-                            <i class="fa fa-file"></i><span>Register Users</span></a>
+                            <i class="fa fa-file"></i><span>Front User</span></a>
                     </li>
                 @endif
                 @if (in_array('14', $permission1))
@@ -138,29 +138,12 @@
                     </li>
                 @endif
                 @if (in_array('17', $permission1))
-                    <li class="{{ request()->segment(1) == 'enquiry' ? 'active' : '' }}"><a
+                    <li class="{{ request()->segment(2) == 'enquiry' ? 'active' : '' }}"><a
                             href="{{ route('enquiry.index') }}"
-                            class="{{ request()->segment(1) == 'enquiry' ? 'active' : '' }}">
+                            class="{{ request()->segment(2) == 'enquiry' ? 'active' : '' }}">
                             <i class="fa fa-file"></i><span>Packages Enquiry</span></a>
                     </li>
                 @endif
-                @if (in_array('18', $permission1))
-                    <li class="{{ request()->segment(2) == 'form_field' ? 'active' : '' }}"><a
-                            href="{{ route('form_field.index') }}"
-                            class="{{ request()->segment(2) == 'form_field' ? 'active' : '' }}">
-                            <i class="fa fa-file"></i><span>Form Field</span></a>
-                    </li>
-                @endif
-
-                @if (in_array('19', $permission1))
-                    <li class="{{ request()->segment(2) == 'order' ? 'active' : '' }}">
-                        <a href="{{ route('order.index') }}"><i data-feather="clipboard"></i><span>Order</span></a>
-
-                    </li>
-                @endif
-
-
-
                 <!--
                 @if (in_array('13', $permission1))
 <li
@@ -219,32 +202,18 @@
 
                 </li>
 
-                <li class="{{ request()->segment(2) == 'vendorinquiry' ? 'active' : '' }}"><a
-                        href="{{ route('vendorinquiry.index') }}"
-                        class="{{ request()->segment(1) == 'vendorinquiry' ? 'active' : '' }}">
-                        <i class="fa fa-file"></i><span>Inquiry</span></a>
-                </li>
+
 
                 <li class="{{ request()->segment(2) == 'acceptleads' ? 'active' : '' }}"><a
                         href="{{ route('acceptleads.index') }}"
                         class="{{ request()->segment(1) == 'acceptleads' ? 'active' : '' }}">
                         <i class="fa fa-file"></i><span>Accepted Leads</span></a>
                 </li>
-                <li class="{{ request()->segment(2) == 'rejectleads' ? 'active' : '' }}"><a
-                        href="{{ route('rejectleads.index') }}"
-                        class="{{ request()->segment(1) == 'rejectleads' ? 'active' : '' }}">
-                        <i class="fa fa-file"></i><span>Rejected Leads</span></a>
-                </li>
 
                 <li class="{{ request()->segment(1) == 'wallet' ? 'active' : '' }}"><a
                         href="{{ route('wallet.index') }}"
                         class="{{ request()->segment(1) == 'wallet' ? 'active' : '' }}">
                         <i class="fa fa-file"></i><span>Wallet</span></a>
-                </li>
-                <li class="{{ request()->segment(2) == 'vendororder' ? 'active' : '' }}"><a
-                        href="{{ route('vendororder.index') }}"
-                        class="{{ request()->segment(2) == 'vendororder' ? 'active' : '' }}">
-                        <i class="fa fa-file"></i><span>Order Details</span></a>
                 </li>
             @endif
 

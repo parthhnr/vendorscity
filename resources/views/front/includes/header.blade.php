@@ -138,7 +138,10 @@
             top: 4%;
         }
 
-        a:hover, .btn:hover{color: #0a58ca}
+        a:hover,
+        .btn:hover {
+            color: #0a58ca
+        }
     </style>
 
 
@@ -192,7 +195,8 @@
                                             <ul class="menu ps-0">
                                                 @foreach ($service_data as $service)
                                                     <li>
-                                                        <a class="dropdown" href="#">
+                                                        <a class="dropdown"
+                                                            href="{{ url('service/' . $service->page_url) }}">
                                                             {{-- <span
                                                                 class="menu-icn flaticon-developer"></span> --}}
                                                             <span class="menu-title">{{ $service->servicename }}</span>
@@ -286,13 +290,14 @@
                                     <a class="login-info mr10-lg mr30" href="{{ route('Sign-in') }}">Log
                                         in</a>
                                 @else
-                                    {{--<a class="login-info mr10-lg mr30" href="{{ route('user_signout') }}">Log out</a> --}}
+                                    {{-- <a class="login-info mr10-lg mr30" href="{{ route('user_signout') }}">Log out</a> --}}
 
-                                    <a class="login-info mr10-lg mr30" href="{{ url('my-account') }}"> <i class="fas fa-user text-thm2 pe-2 vam"></i></a>
+                                    <a class="login-info mr10-lg mr30" href="{{ url('my-account') }}"> <i
+                                            class="fas fa-user text-thm2 pe-2 vam"></i></a>
                                 @endif
 
 
-                                <a class="ud-btn btn-thm2 add-joining" href="#">Book Now</a>
+                                <a class="ud-btn btn-thm2 add-joining" href="{{ route('cart') }}">Book Now</a>
                             </div>
                         </div>
                     </div>

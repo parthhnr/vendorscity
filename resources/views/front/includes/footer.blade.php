@@ -124,6 +124,11 @@
 </section>
 <a class="scrollToHome" href="#"><i class="fas fa-angle-up"></i></a>
 
+
+
+
+
+
 </div>
 </div>
 <!-- Wrapper End -->
@@ -134,14 +139,16 @@
             $(document).on('ready', function() {
                 document.getElementById('message_succsess').innerHTML =
                     "{{ Session::get('L_strsucessMessage') }}";
-                $('#message_succsess').show().delay(0).fadeIn('show');
-                $('#message_succsess').show().delay(3000).fadeOut('show');
-
+                setTimeout(function() {
+                    $("#message_succsess").show('blind', {}, 500)
+                }, 5000);
+                setTimeout(function() {
+                    $("#message_succsess").hide('blind', {}, 900)
+                }, 9000);
             });
         })(window.jQuery);
     </script>
 @endif
-
 
 
 <script src="{{ asset('public/site/js/jquery-migrate-3.0.0.min.js') }}"></script>
@@ -214,9 +221,9 @@
                 if (msg != 0) {
                     // $("#header_cart").load(location.href + " #header_cart");
                     // $("#header_cart_count").load(location.href + " #header_cart_count");
-                    $("#message_succsess").html("Package Added To Cart");
-                    $('#message_succsess').show().delay(0).fadeIn('show');
-                    $('#message_succsess').show().delay(2000).fadeOut('show');
+                    // $("#message_succsess").html("Package Added To Cart");
+                    // $('#message_succsess').show().delay(0).fadeIn('show');
+                    // $('#message_succsess').show().delay(2000).fadeOut('show');
                     $(".addtocart-btn_" + package_id).hide();
                     $(".loader-test_" + package_id).show();
                     setTimeout(function() {
@@ -231,8 +238,6 @@
 
     }
 </script>
-
-
 
 </body>
 

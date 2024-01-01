@@ -27,7 +27,7 @@ class checkoutcontroller extends Controller
         $userdata = Session::get('user');
         
         // echo "<pre>";print_r($userdata);echo"</pre>";
-        //echo "<pre>";print_r($request->post());echo"</pre>";
+        // echo "<pre>";print_r($request->post());echo"</pre>";exit;
 
         
 
@@ -148,7 +148,10 @@ class checkoutcontroller extends Controller
             $data['last_name']=$request->lname;
             $data['country']=$request->country;
             $data['address1']=$request->address1;
+            $data['state']=$request->state_name;
+            $data['city']=$request->city;
             $data['zipcode']=$request->zipcode;
+            $data['address2']=$request->optional;
             $data['phone_number']=$request->phone;
             $data['email_address']=$request->email_ship;
             $data['additional_message']=$request->additional_message;

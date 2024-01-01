@@ -251,7 +251,7 @@
                 <div class="row align-items-center mb20">
                     <div class="col-md-6">
                         <div class="text-center text-md-start">
-                            <p class="text mb-0 mb10-sm"><span class="fw500">{{ $service_count }}</span> services
+                            <p class="text mb-0 mb10-sm"><span class="fw500">{{ $subservice_count }}</span> services
                                 available</p>
                         </div>
                     </div>
@@ -280,14 +280,14 @@
                     </div>
                 </div>
                 <div class="row">
-                    @foreach ($service_data as $service)
+                    @foreach ($subservice_data as $subservice)
                         <div class="col-sm-6 col-xl-4">
                             <div class="listing-style1">
 
                                 <div class="list-thumb">
-                                    @if ($service->image != '')
+                                    @if ($subservice->image != '')
                                         <img class="w-100"
-                                            src="{{ asset('public/upload/service/large/' . $service->image) }}"
+                                            src="{{ asset('public/upload/subservice/large/' . $subservice->image) }}"
                                             alt="">
                                     @else
                                         <img class="w-100"
@@ -299,11 +299,11 @@
 
                                 <div class="list-content">
                                     <h5 class="list-title"><a
-                                            href="{{ url('service/' . $service->page_url) }}">{{ $service->servicename }}
+                                            href="{{ url('package-lists/' . $subservice->page_url) }}">{{ $subservice->subservicename }}
                                         </a></h5>
-                                    @if ($service->sort_description != '')
+                                    @if ($subservice->sort_description != '')
                                         <div class="review-meta d-flex align-items-center">
-                                            <p>{!! html_entity_decode($service->sort_description) !!}</p>
+                                            <p>{!! html_entity_decode($subservice->description) !!}</p>
 
                                         </div>
                                     @endif

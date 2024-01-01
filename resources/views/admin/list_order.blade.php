@@ -297,19 +297,10 @@
                                                     <a class="btn btn-primary" href="javascript:void(0)" onclick="assign_vendor('{{$orders->order_id}}');">Assign Vendor</a>
                                                 </td>
 												
-											{{-- 	
+												
 												<td class="left"><input type="text" value="{{$orders->items[0]->subservice_booking_percentage}}"
                                                            onchange="updateorder_booking_percentage(this.value, '{{ $orders->items[0]->id }}');"
-                                                           class="form-control" /></td> --}}
-                                                    
-                                                @if ($orders && $orders->items->isNotEmpty())
-                                                    <td class="left">
-                                                        <input type="text" value="{{ $orders->items->first()->subservice_booking_percentage }}"
-                                                            onchange="updateorder_booking_percentage(this.value, '{{ $orders->items->first()->id }}');"
-                                                            class="form-control" />
-                                                    </td>
-                                                 @endif
-
+                                                           class="form-control" /></td>
 														   
 														   
                                                 <td class="text-right">

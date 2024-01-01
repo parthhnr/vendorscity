@@ -148,7 +148,8 @@
                                     <div class="col-sm-12">
                                         <div class="mb25">
                                             <h6 class="mb15">Apartment, suite, unit, etc. (optional)</h6>
-                                            <input class="form-control" type="text" placeholder="Ali">
+                                            <input class="form-control" name="optional" id="optional"
+                                                type="text" placeholder="">
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
@@ -498,16 +499,16 @@
             return false;
         }
 
-        var state_name = $("#state_name").val();
-        if (state_name == '') {
-            $("#state_name_error").html("Please Select State.");
-            $('#state_name_error').show().delay(0).fadeIn('show');
-            $('#state_name_error').show().delay(2000).fadeOut('show');
-            $('html, body').animate({
-                scrollTop: $('#state_name').offset().top - 150
-            }, 1000);
-            return false;
-        }
+        // var state_name = $("#state_name").val();
+        // if (state_name == '') {
+        //     $("#state_name_error").html("Please Select State.");
+        //     $('#state_name_error').show().delay(0).fadeIn('show');
+        //     $('#state_name_error').show().delay(2000).fadeOut('show');
+        //     $('html, body').animate({
+        //         scrollTop: $('#state_name').offset().top - 150
+        //     }, 1000);
+        //     return false;
+        // }
 
         var city = $("#city").val();
         if (city == '') {
@@ -520,16 +521,16 @@
             return false;
         }
 
-        var zipcode = $("#zipcode").val();
-        if (zipcode == '') {
-            $("#zipcode_error").html("Please Enter Zipcode.");
-            $('#zipcode_error').show().delay(0).fadeIn('show');
-            $('#zipcode_error').show().delay(2000).fadeOut('show');
-            $('html, body').animate({
-                scrollTop: $('#zipcode').offset().top - 150
-            }, 1000);
-            return false;
-        }
+        // var zipcode = $("#zipcode").val();
+        // if (zipcode == '') {
+        //     $("#zipcode_error").html("Please Enter Zipcode.");
+        //     $('#zipcode_error').show().delay(0).fadeIn('show');
+        //     $('#zipcode_error').show().delay(2000).fadeOut('show');
+        //     $('html, body').animate({
+        //         scrollTop: $('#zipcode').offset().top - 150
+        //     }, 1000);
+        //     return false;
+        // }
 
         var phone = $("#phone").val();
         if (phone == '') {
