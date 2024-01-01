@@ -334,7 +334,7 @@
         exit();
     @endphp --}}
 
-    @if ($packages_enquiry != '')
+    @if (isset($packages_enquiry) && $packages_enquiry != '')
 
 
         @foreach ($packages_enquiry as $packages_enquirys)

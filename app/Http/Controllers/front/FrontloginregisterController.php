@@ -334,6 +334,7 @@ class FrontloginregisterController extends Controller
                 'userid' => $checklogin->id,
                 'name' => $checklogin->name,
                 'email' => $checklogin->email,
+                'mobile' => $checklogin->mobile,
                 'logged_in' => true,
             ];
     

@@ -137,8 +137,6 @@
             right: 12px;
             top: 4%;
         }
-
-        a:hover, .btn:hover{color: #0a58ca}
     </style>
 
 
@@ -286,9 +284,7 @@
                                     <a class="login-info mr10-lg mr30" href="{{ route('Sign-in') }}">Log
                                         in</a>
                                 @else
-                                    {{--<a class="login-info mr10-lg mr30" href="{{ route('user_signout') }}">Log out</a> --}}
-
-                                    <a class="login-info mr10-lg mr30" href="{{ url('my-account') }}"> <i class="fas fa-user text-thm2 pe-2 vam"></i></a>
+                                    <a class="login-info mr10-lg mr30" href="{{ route('user_signout') }}">Log out</a>
                                 @endif
 
 
