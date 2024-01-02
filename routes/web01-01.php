@@ -123,9 +123,6 @@ Route::get('enquiry/{id}/', '\App\Http\Controllers\front\Packagecontroller@enqui
 Route::get('enquiry/{id}/{service_id}/', '\App\Http\Controllers\front\Packagecontroller@enquiry')->name('enquiry');
 
 
-Route::get('service/{page_url}', '\App\Http\Controllers\front\Homecontroller@subservices')->name('subservices');
-
-
 
 
 Route::post('package_inquiry', '\App\Http\Controllers\front\Packagecontroller@package_inquiry')->name('package_inquiry');
@@ -150,7 +147,6 @@ Route::post('/ship_state_change', '\App\Http\Controllers\front\checkoutcontrolle
 Route::get('/my-account', '\App\Http\Controllers\front\MyaccountController@my_account');
 Route::get('/my-order', '\App\Http\Controllers\front\MyaccountController@my_order');
 Route::get('/my-profile', '\App\Http\Controllers\front\MyaccountController@my_profile');
-Route::get('/order-detail', '\App\Http\Controllers\front\MyaccountController@order_detail');
 
 Route::match(['get', 'post'], 'edit-profile', [MyaccountController::class, 'edit_profile'])->name('edit_profile');
 

@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Symfony\Component\Mime\Email;
 use App\Models\Admin\City;
+use App\Models\Admin\Service;
+use App\Models\Admin\Subservice;
 use App\Models\Admin\UserPermission;
 use Illuminate\Support\Facades\Hash;
 use DB;
@@ -34,8 +36,29 @@ class Homecontroller extends Controller
         $data['meta_keyword'] = "";
         $data['meta_description'] = "";
 
-        // echo "<pre>";print_r($data);echo "</pre>";exit;
+        $data['service_data'] = Service::orderBy('set_order')->get();
+
+        $data['service_count'] = $data['service_data']->count();
+
         return view('front.book_services',$data);
+    }
+
+    public function subservices($service_url=''){
+
+        // echo $page_url;exit;
+        $data['meta_title'] = "";
+        $data['meta_keyword'] = "";
+        $data['meta_description'] = "";
+
+        $service_data = Service::where('page_url',$service_url)->first();
+        $data['subservice_data'] = Subservice::where('serviceid',$service_data->id)->get();
+       
+
+        // echo "<pre>";print_r($data['subservice_data']);echo "</pre>";exit;
+
+        $data['subservice_count'] = $data['subservice_data']->count();
+
+        return view('front.book_subservices',$data);
     }
 
     public function become_vendor(){

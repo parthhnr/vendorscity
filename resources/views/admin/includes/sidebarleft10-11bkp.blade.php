@@ -86,90 +86,16 @@
                     <li class="{{ request()->segment(2) == 'price' ? 'active' : '' }}"><a
                             href="{{ route('price.edit', 1) }}"
                             class="{{ request()->segment(2) == 'price' ? 'active' : '' }}">
-                            <i data-feather="credit-card"></i><span>Vendor Listing Price</span></a>
+                            <i data-feather="credit-card"></i><span>Price</span></a>
                     </li>
                 @endif
-                {{-- @if (in_array('15', $permission1))
-                    <li class="{{ request()->segment(2) == 'faq' ? 'active' : '' }}"><a
-                            href="{{ route('faq.index') }}"
-                            class="{{ request()->segment(2) == 'faq' ? 'active' : '' }}">
-                            <i class="fa fa-file"></i><span>FAQ</span></a>
-                    </li>
-                @endif --}}
                 @if (in_array('10', $permission1))
                     <li class="{{ request()->segment(2) == 'cms' ? 'active' : '' }}"><a
                             href="{{ route('cms.index') }}"
                             class="{{ request()->segment(2) == 'cms' ? 'active' : '' }}">
-                            <i class="fa fa-file"></i><span>CMS</span></a>
+                            <i class="fa fa-user"></i><span>CMS</span></a>
                     </li>
                 @endif
-
-                {{-- <li class="{{ request()->segment(2) == 'leads' ? 'active' : '' }}"><a
-                        href="{{ route('leads.index') }}"
-                        class="{{ request()->segment(1) == 'leads' ? 'active' : '' }}">
-                        <i class="fa fa-file"></i><span>Leads</span></a>
-                </li> --}}
-                @if (in_array('11', $permission1))
-                    <li class="{{ request()->segment(2) == 'packagecategory' ? 'active' : '' }}"><a
-                            href="{{ route('packagecategory.index') }}"
-                            class="{{ request()->segment(2) == 'packagecategory' ? 'active' : '' }}">
-                            <i class="fa fa-file"></i><span>Package Category</span></a>
-                    </li>
-                @endif
-                @if (in_array('12', $permission1))
-                    <li class="{{ request()->segment(2) == 'packages' ? 'active' : '' }}"><a
-                            href="{{ route('packages.index') }}"
-                            class="{{ request()->segment(2) == 'packages' ? 'active' : '' }}">
-                            <i class="fa fa-file"></i><span>Packages</span></a>
-                    </li>
-                @endif
-                @if (in_array('16', $permission1))
-                    <li class="{{ request()->segment(2) == 'frontuser' ? 'active' : '' }}"><a
-                            href="{{ route('frontuser.index') }}"
-                            class="{{ request()->segment(2) == 'frontuser' ? 'active' : '' }}">
-                            <i class="fa fa-file"></i><span>Register Users</span></a>
-                    </li>
-                @endif
-                @if (in_array('14', $permission1))
-                    <li class="{{ request()->segment(2) == 'adminwallet' ? 'active' : '' }}"><a
-                            href="{{ route('adminwallet.index') }}"
-                            class="{{ request()->segment(2) == 'adminwallet' ? 'active' : '' }}">
-                            <i class="fa fa-file"></i><span>Admin Wallet</span></a>
-                    </li>
-                @endif
-                @if (in_array('17', $permission1))
-                    <li class="{{ request()->segment(1) == 'enquiry' ? 'active' : '' }}"><a
-                            href="{{ route('enquiry.index') }}"
-                            class="{{ request()->segment(1) == 'enquiry' ? 'active' : '' }}">
-                            <i class="fa fa-file"></i><span>Packages Enquiry</span></a>
-                    </li>
-                @endif
-                @if (in_array('18', $permission1))
-                    <li class="{{ request()->segment(2) == 'form_field' ? 'active' : '' }}"><a
-                            href="{{ route('form_field.index') }}"
-                            class="{{ request()->segment(2) == 'form_field' ? 'active' : '' }}">
-                            <i class="fa fa-file"></i><span>Form Field</span></a>
-                    </li>
-                @endif
-
-                @if (in_array('19', $permission1))
-                    <li class="{{ request()->segment(2) == 'order' ? 'active' : '' }}">
-                        <a href="{{ route('order.index') }}"><i data-feather="clipboard"></i><span>Order</span></a>
-
-                    </li>
-                @endif
-
-
-
-                <!--
-                @if (in_array('13', $permission1))
-<li
-                    class="{{ request()->segment(2) == 'subscription' || request()->segment(1) == 'base_on_service_lead' || request()->segment(1) == 'based_on_booking_services' || request()->segment(1) == 'based_on_listing_criteria' ? 'active' : '' }}">
-                    <a href="{{ route('subscription.index') }}"
-                        class="{{ request()->segment(2) == 'subscription' ? 'active' : '' }}">
-                        <i class="fa fa-file"></i><span>Subscription</span></a>
-                </li>
-@endif -->
 
                 @if (in_array('6', $permission1) || in_array('7', $permission1))
                     <li class="submenu">
@@ -197,6 +123,7 @@
 
 
 
+
             @endif
 
             @if (Auth::user()->vendor == 1)
@@ -206,7 +133,12 @@
                         <i class="fa fa-user-plus"></i><span>Profile</span></a>
                 </li>
 
-
+                <li
+                    class="{{ request()->segment(2) == 'subscription' || request()->segment(1) == 'base_on_service_lead' || request()->segment(1) == 'based_on_booking_services' || request()->segment(1) == 'based_on_listing_criteria' ? 'active' : '' }}">
+                    <a href="{{ route('subscription.index') }}"
+                        class="{{ request()->segment(2) == 'subscription' ? 'active' : '' }}">
+                        <i class="fa fa-file"></i><span>Subscription</span></a>
+                </li>
 
 
 
@@ -219,10 +151,10 @@
 
                 </li>
 
-                <li class="{{ request()->segment(2) == 'vendorinquiry' ? 'active' : '' }}"><a
-                        href="{{ route('vendorinquiry.index') }}"
-                        class="{{ request()->segment(1) == 'vendorinquiry' ? 'active' : '' }}">
-                        <i class="fa fa-file"></i><span>Inquiry</span></a>
+                <li class="{{ request()->segment(2) == 'leads' ? 'active' : '' }}"><a
+                        href="{{ route('leads.index') }}"
+                        class="{{ request()->segment(1) == 'leads' ? 'active' : '' }}">
+                        <i class="fa fa-file"></i><span>Leads</span></a>
                 </li>
 
                 <li class="{{ request()->segment(2) == 'acceptleads' ? 'active' : '' }}"><a
@@ -230,24 +162,7 @@
                         class="{{ request()->segment(1) == 'acceptleads' ? 'active' : '' }}">
                         <i class="fa fa-file"></i><span>Accepted Leads</span></a>
                 </li>
-                <li class="{{ request()->segment(2) == 'rejectleads' ? 'active' : '' }}"><a
-                        href="{{ route('rejectleads.index') }}"
-                        class="{{ request()->segment(1) == 'rejectleads' ? 'active' : '' }}">
-                        <i class="fa fa-file"></i><span>Rejected Leads</span></a>
-                </li>
-
-                <li class="{{ request()->segment(1) == 'wallet' ? 'active' : '' }}"><a
-                        href="{{ route('wallet.index') }}"
-                        class="{{ request()->segment(1) == 'wallet' ? 'active' : '' }}">
-                        <i class="fa fa-file"></i><span>Wallet</span></a>
-                </li>
-                <li class="{{ request()->segment(2) == 'vendororder' ? 'active' : '' }}"><a
-                        href="{{ route('vendororder.index') }}"
-                        class="{{ request()->segment(2) == 'vendororder' ? 'active' : '' }}">
-                        <i class="fa fa-file"></i><span>Order Details</span></a>
-                </li>
             @endif
-
 
         </ul>
     </div>

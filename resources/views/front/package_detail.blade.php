@@ -414,17 +414,17 @@
                                                 @if (in_array('0', explode(',', $subservices->is_bookable)))
                                                     <a class="ud-btn btn-thm mb-2" href="{{ route('cart') }}"
                                                         onclick="add_to_cart('{{ $package_detail->id }}'); return false;">
-                                                        <i class="fal fa-arrow-right-long"></i>Instant
-                                                        Booking</a>
-                                                @endif
-                                                @if (in_array('1', explode(',', $subservices->is_bookable)))
-                                                    <a class="ud-btn btn-thm mb-2"
-                                                        href="{{ route('enquiry', ['id' => $package_detail->id]) }}">
-                                                        <i class="fal fa-arrow-right-long"></i>Get
-                                                        Multiple Quote</a>
+                                                        <i class="fal fa-arrow-right-long"></i>Instant Booking</a>
                                                 @endif
 
+                                                @if (in_array('1', explode(',', $subservices->is_bookable)))
+                                                    <a class="ud-btn btn-thm mb-2"
+                                                        href="{{ route('enquiry', ['id' => $package_detail->id, 'service_id' => $package_detail->service_id]) }}">
+                                                        <!-- Replace $your_service_id with the actual service_id value -->
+                                                        <i class="fal fa-arrow-right-long"></i>Get Multiple Quote</a>
+                                                @endif
                                             </div>
+
                                         </div>
                                     </div>
 

@@ -63,7 +63,7 @@
 
                             <div class="row">
 
-                                <div class="col-lg-12">
+                                <div class="col-lg-6">
                                     <div class="form-group">
                                         <label for="country">Country</label>
                                         <select class="form-control" id="country" name="country">
@@ -150,7 +150,7 @@
                                 <div class="col-lg-6">
                                     <div class="form-group">
 
-                                        <label for="name">Banner (443 x 305)</label>
+                                        <label for="name">Banner (343 x 265)</label>
 
                                         <input id="image" name="image" type="file" class="form-control"
                                             value="" />
@@ -159,33 +159,49 @@
 
                                     </div>
                                 </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
 
-                                <div class="form-group">
-                                    <label for="city">Local Fields</label>
-                                    <select class="form-control" id="form_fields" name="form_fields[]"
-                                        multiple="multiple">
-                                        <option value="">Select Form Fields</option>
-                                        @foreach ($form_field_data as $form_field)
-                                            <option value="{{ $form_field->id }}">{{ $form_field->lable_name }}</option>
-                                        @endforeach
-                                    </select>
-                                    <p class="form-error-text" id="form_fields_error"
-                                        style="color: red; margin-top: 10px;">
-                                    </p>
+                                        <label for="banner_url">Sort Discription</label>
+                                        <textarea class="form-control" name="sort_description" id="sort_description" placeholder="Enter Sort Discription"></textarea>
+
+                                        <p class="form-error-text" id="banner_url_error"
+                                            style="color: red; margin-top: 10px;"></p>
+
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="city">Local Fields</label>
+                                        <select class="form-control" id="form_fields" name="form_fields[]"
+                                            multiple="multiple">
+                                            <option value="">Select Form Fields</option>
+                                            @foreach ($form_field_data as $form_field)
+                                                <option value="{{ $form_field->id }}">{{ $form_field->lable_name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        <p class="form-error-text" id="form_fields_error"
+                                            style="color: red; margin-top: 10px;">
+                                        </p>
+                                    </div>
                                 </div>
 
-                                <div class="form-group">
-                                    <label for="city">International Fields</label>
-                                    <select class="form-control" id="form_fields_two" name="form_fields_two[]"
-                                        multiple="multiple">
-                                        <option value="">Select Form Fields</option>
-                                        @foreach ($form_field_data as $form_field)
-                                            <option value="{{ $form_field->id }}">{{ $form_field->lable_name }}</option>
-                                        @endforeach
-                                    </select>
-                                    <p class="form-error-text" id="form_fields_error"
-                                        style="color: red; margin-top: 10px;">
-                                    </p>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="city">International Fields</label>
+                                        <select class="form-control" id="form_fields_two" name="form_fields_two[]"
+                                            multiple="multiple">
+                                            <option value="">Select Form Fields</option>
+                                            @foreach ($form_field_data as $form_field)
+                                                <option value="{{ $form_field->id }}">{{ $form_field->lable_name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        <p class="form-error-text" id="form_fields_error"
+                                            style="color: red; margin-top: 10px;">
+                                        </p>
+                                    </div>
                                 </div>
 
                             </div>
@@ -267,10 +283,10 @@
         });
 
         $("#form_fields").select2({
-            placeholder: "Select a Form Fields" // Replace with your desired placeholder text
+            placeholder: "Select a Local Fields" // Replace with your desired placeholder text
         });
         $("#form_fields_two").select2({
-            placeholder: "Select a Form Fields" // Replace with your desired placeholder text
+            placeholder: "Select a International Fields" // Replace with your desired placeholder text
         });
 
 

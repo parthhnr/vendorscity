@@ -62,6 +62,7 @@ class ServiceController extends Controller
         $service->title1=$request->title1;
         $service->title2=$request->title2;
         $service->banner_url=$request->banner_url;
+        $service->sort_description=$request->sort_description;
         
         if(isset($request->form_fields)){
             $service->form_fields = implode(",",$request->form_fields);
@@ -79,8 +80,8 @@ class ServiceController extends Controller
             $data['image'] = time() . $remove_space;
             $destinationPath = public_path('upload/service/large/');
             $img = Image::make($image->path());
-            $width= 443;
-            $height= 305;
+            $width=332;
+            $height=256;
             $img->resize($width,$height,function($constraint){
             })->save($destinationPath.'/'.$data['image']);
               
@@ -142,6 +143,7 @@ class ServiceController extends Controller
         $service->title1=$request->title1;
         $service->title2=$request->title2;
         $service->banner_url=$request->banner_url;
+        $service->sort_description=$request->sort_description;
         if(isset($request->form_fields)){
             $service->form_fields = implode(",",$request->form_fields);
         }
@@ -157,8 +159,8 @@ class ServiceController extends Controller
             $data['image'] = time() . $remove_space;
             $destinationPath = public_path('upload/service/large/');
             $img = Image::make($image->path());
-            $width= 443;
-            $height= 305;
+            $width=332;
+            $height=256;
             $img->resize($width,$height,function($constraint){
             })->save($destinationPath.'/'.$data['image']);
               
