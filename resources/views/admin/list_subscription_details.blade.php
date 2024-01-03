@@ -349,11 +349,11 @@
 
                            <!-- <div class="modal-footer text-center">
 
-                               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
 
-                               <button type="button" class="btn btn-primary" onclick="form_sub();">Delete</button>
+                                       <button type="button" class="btn btn-primary" onclick="form_sub();">Delete</button>
 
-                           </div> -->
+                                   </div> -->
 
                        </div>
 

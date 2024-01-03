@@ -1,6 +1,7 @@
 @extends('admin.includes.Template')
 @section('content')
     @php
+    
         $userId = Auth::id();
         
         $get_user_data = Helper::get_user_data($userId);

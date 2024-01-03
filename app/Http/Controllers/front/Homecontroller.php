@@ -29,6 +29,8 @@ class Homecontroller extends Controller
     	return view('front.index',$data);
     }
 
+    
+
     public function book_services(){
 
         
@@ -51,7 +53,7 @@ class Homecontroller extends Controller
         $data['meta_description'] = "";
 
         $service_data = Service::where('page_url',$service_url)->first();
-        $data['subservice_data'] = Subservice::where('serviceid',$service_data->id)->get();
+        $data['subservice_data'] = Subservice::where('serviceid',$service_data->id)->orderBy('set_order')->get();
        
 
         // echo "<pre>";print_r($data['subservice_data']);echo "</pre>";exit;

@@ -6,61 +6,145 @@
     }
 </style>
 <style type="text/css">
-    
     .home11-hero-img .iconbox-small1 {
         padding: 10px;
-    bottom: 90px;
-    left: -90px;
+        bottom: 90px;
+        left: -90px;
     }
 
-    .home_slider_padding{padding-bottom: 80px}
-    .home_slider_padding .home11-hero-content .title{line-height: 49px;}
-    .home_slider_padding p{margin-bottom: 0 !important}
-    .iconbox-small1{background-color: #eee;}
-    .home11-hero-img .iconbox-small2{padding: 0 15px 0 0;right: 0;}
-    .iconbox-small2{background-color: #eee;}
-    .subservice_image_sec .list-thumb{padding: 10px;}
-    .subservice_image_sec .list-thumb img{    border-radius: 20px;}
-    .services_banner_image img{width: 100%}
-    .services_banner_text h2{font-size: 54px;width: 80%;}
+    .home_slider_padding {
+        padding-bottom: 80px
+    }
 
-    a:hover{color: #0040E6}
+    .home_slider_padding .home11-hero-content .title {
+        line-height: 49px;
+    }
+
+    .home_slider_padding p {
+        margin-bottom: 0 !important
+    }
+
+    .iconbox-small1 {
+        background-color: #eee;
+    }
+
+    .home11-hero-img .iconbox-small2 {
+        padding: 0 15px 0 0;
+        right: 0;
+    }
+
+    .iconbox-small2 {
+        background-color: #eee;
+    }
+
+    .subservice_image_sec .list-thumb {
+        padding: 10px;
+    }
+
+    .subservice_image_sec .list-thumb img {
+        border-radius: 20px;
+    }
+
+    .services_banner_image img {
+        width: 100%
+    }
+
+    .services_banner_text h2 {
+        font-size: 54px;
+        width: 80%;
+    }
+
+    a:hover {
+        color: #0040E6
+    }
 
     @media only screen and (max-width: 600px) {
 
-        .home_slider_padding .home11-hero-content .title{line-height: normal;}
-        .home11-hero-content .title {font-size: 27px;}
-        .hero-home11{padding-top: 20px !important;}
-        .home_slider_padding{padding-bottom: 0px;}
-        .home11-hero-img .iconbox-small2{top: 56%;}
-        .home11-hero-img .iconbox-small1{bottom: 7px;left: 0;}
-        .home_slider_padding{padding-bottom: 0}
-        .home11-hero-img img{width: 100%}
-        .section2{padding-top: 20px !important}
-        .section3 .heading2{font-size: 35px;line-height: normal;padding-top: 20px;}
-        .funfact_one_borderleft{border-left:inherit;margin-bottom: 13px !important;}
-        .sectionmarque1{margin: 16px 0 !important;}
-        .services_banner_text h2 {font-size: 40px;width: 100%;line-height: normal;margin-bottom: 10px !important;}
+        .home_slider_padding .home11-hero-content .title {
+            line-height: normal;
+        }
+
+        .home11-hero-content .title {
+            font-size: 27px;
+        }
+
+        .hero-home11 {
+            padding-top: 20px !important;
+        }
+
+        .home_slider_padding {
+            padding-bottom: 0px;
+        }
+
+        .home11-hero-img .iconbox-small2 {
+            top: 56%;
+        }
+
+        .home11-hero-img .iconbox-small1 {
+            bottom: 7px;
+            left: 0;
+        }
+
+        .home_slider_padding {
+            padding-bottom: 0
+        }
+
+        .home11-hero-img img {
+            width: 100%
+        }
+
+        .section2 {
+            padding-top: 20px !important
+        }
+
+        .section3 .heading2 {
+            font-size: 35px;
+            line-height: normal;
+            padding-top: 20px;
+        }
+
+        .funfact_one_borderleft {
+            border-left: inherit;
+            margin-bottom: 13px !important;
+        }
+
+        .sectionmarque1 {
+            margin: 16px 0 !important;
+        }
+
+        .services_banner_text h2 {
+            font-size: 40px;
+            width: 100%;
+            line-height: normal;
+            margin-bottom: 10px !important;
+        }
+
         .mm-navbar {
             position: relative;
         }
+
         .section2 .custom_box {
             height: auto;
         }
+
         .custom_slider_width .owl-item {
             width: auto !important;
             text-align: center;
         }
+
         .our-about .mb30-lg {
             margin-bottom: 0px !important;
         }
+
         .our-about {
             padding-top: 20px !important;
         }
+
         .we_do_heading {
             font-size: 47px;
             line-height: 53px;
         }
+
         .bgc-thm3 {
             padding: 30px 0;
         }
@@ -87,7 +171,9 @@
                     <div class="row">
                         <div class="col-md-5 col-lg-6 col-xl-6">
                             <div class="advance-search-field mb10-sm">
-                                <form class="form-search position-relative">
+                                <form action="{{ url('search-package') }}" method="get" id="search_banner"
+                                    class="form-search position-relative">
+                                    @csrf
                                     <div class="box-search">
                                         <span class="icon far fa-magnifying-glass"></span>
                                         <input class="form-control" type="text" name="search"
@@ -134,6 +220,7 @@
                             </div>
                         </div>
                         <div class="col-md-4 col-lg-4 col-xl-3">
+
                             <div class="bselect-style1 bdrl1 bdrn-sm">
                                 <select class="selectpicker" data-width="100%">
                                     <option>Choose Services</option>
@@ -146,10 +233,12 @@
                                     @endif
                                 </select>
                             </div>
+
                         </div>
                         <div class="col-md-3 col-lg-2 col-xl-3">
                             <div class="text-center text-xl-start">
-                                <button class="ud-btn btn-thm w-100 bdrs60" type="button">Search</button>
+                                <button class="ud-btn btn-thm w-100 bdrs60" type="button"
+                                    onclick="search_banner()">Search</button>
                             </div>
                         </div>
                     </div>
@@ -228,7 +317,8 @@
             </div>
             <div class="col-sm-6 col-lg-3">
                 <div class="iconbox-style1 at-home5 p-23 custom_box">
-                    <div class="icon before-none section_2_icon"><span class="flaticon-secure section_2flaticon"></span>
+                    <div class="icon before-none section_2_icon"><span
+                            class="flaticon-secure section_2flaticon"></span>
                     </div>
                     <div class="details">
                         <h4 class="title mt10 mb-3">Top-Rated Professionals</h4>
@@ -677,7 +767,8 @@
                 <div class="position-relative mb30-lg">
 
                     <div class="about-img wow fadeInRight" data-wow-delay="300ms">
-                        <img class="w100" src="{{ asset('public/site/images/HomepageStep2.png') }}" alt="">
+                        <img class="w100" src="{{ asset('public/site/images/HomepageStep2.png') }}"
+                            alt="">
                     </div>
 
                 </div>
@@ -710,7 +801,8 @@
                 <div class="position-relative mb30-lg">
 
                     <div class="about-img wow fadeInRight" data-wow-delay="300ms">
-                        <img class="w100" src="{{ asset('public/site/images/HomepageStep3.png') }}" alt="">
+                        <img class="w100" src="{{ asset('public/site/images/HomepageStep3.png') }}"
+                            alt="">
                     </div>
 
                 </div>
@@ -966,3 +1058,8 @@
 </section>
 
 @include('front.includes.footer')
+<script>
+    function search_banner() {
+        $('#search_banner').submit();
+    }
+</script>
