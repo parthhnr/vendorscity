@@ -121,6 +121,8 @@
                         </div>
 
                         <form id="search_mini_form" name="search_mini_form" method="get">
+                            @csrf
+                            <input type="hidden" name="search" value="{{ $serach_var }}">
 
                             <div class="card mb20 pb5">
                                 <div class="card-header active" id="heading2">

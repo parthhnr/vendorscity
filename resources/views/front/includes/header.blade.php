@@ -206,7 +206,7 @@
 
                                                             $subservice_data = DB::table('subservices')
                                                                 ->where('serviceid', $service->id)
-                                                                ->orderBy('id', 'DESC')
+                                                                ->orderBy('set_order')
                                                                 ->get();
 
                                                         @endphp

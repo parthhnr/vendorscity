@@ -266,27 +266,7 @@
                                                     @endif
                                                 </td>
                                                 <td>{{$orders->payment_status}}</td>
-                                                {{--<td>
-                                                    @if ($orders->order_status === 'P')
-                                                        Pending
-                                                    @elseif ($orders->order_status === 'K')
-                                                        Packed
-                                                    @elseif ($orders->order_status === 'R')
-                                                        Processing
-                                                    @elseif ($orders->order_status === 'S')
-                                                        Shipped
-                                                    @elseif ($orders->order_status === 'O')
-                                                        Out For Delivery
-                                                    @elseif ($orders->order_status === 'D')
-                                                        Delivered
-                                                    @else
-                                                        Canceled
-                                                    @endif
-                                                </td>
-                                                 <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td> --}}
+                                                
                                                 <td>
                                                     <p>
                                                     @if($orders->vendor_id != 0 && $orders->vendor_id != '')
@@ -318,9 +298,7 @@
                                                 $i++;
                                             } }
 
-                                            @endphp
-
-                                        
+                                            @endphp                                
 
 
 

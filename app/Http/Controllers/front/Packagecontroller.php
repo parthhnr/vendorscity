@@ -82,6 +82,8 @@ class Packagecontroller extends Controller
             $data['package_data'] = '';
             $data['package_count'] = 0;        
         } 
+
+        $data['serach_var'] ="";
 		
 		//echo"<pre>";print_r($data);echo"</pre>";exit;
        

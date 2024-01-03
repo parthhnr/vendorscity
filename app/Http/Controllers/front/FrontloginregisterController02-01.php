@@ -43,56 +43,7 @@ class FrontloginregisterController extends Controller
         // return view('front.front_login');
     }
 
-    function search_package(Request $request){ 
-        
-
-       $data['serach_var'] =  $search = $request->search;
-        
-        $query = DB::table('packages');
-
-        $query = $query->where('name', 'like', '%' . $search . '%');
-
-        if($request->get('filter_price_start') !== null && $request->get('filter_price_end') !== null)
-             {
-                 $filter_price_start = $request->get('filter_price_start');
-                 $filter_price_end = $request->get('filter_price_end');         
-      
-                 if ($filter_price_start > 0 && $filter_price_end > 0) 
-                 {
-                  
-                      $query = $query->whereBetween('price',[$filter_price_start,$filter_price_end]);
-                     
-                 }
-             }		 
-
-            $package_cat_ids  =  $request->get('package_cat');
-        if($package_cat_ids !== null && $request->get('package_cat') !== null){
-
-            $query = $query->whereIn('packagecategory_id', $package_cat_ids);
-            $data['package_cat_ids'] = implode(",",$package_cat_ids);
-            
-        }else {
-                $data['package_cat_ids'] = $package_cat_ids = "";
-        }
-
-        $pagination = $query->orderBy('id', 'DESC')->get();             
-        $data['package_data'] = $pagination;
-        $data['package_pagination'] = $pagination;
-        $data['package_count'] = $pagination->count();
-        $data['subservice_data'] = DB::table('subservices')->get();
-        $data['package_category'] = DB::table('package_categories')->get();
-
-        $data['max_price'] = DB::table('packages')->max('price'); 
-        $data['filter_price_start'] = $request->get('filter_price_start');
-        $data['filter_price_end'] = $request->get('filter_price_end');
-
-        $data['meta_title'] = "";
-        $data['meta_keyword'] = "";
-        $data['meta_description'] = "";
-        //echo"<pre>";print_r($data);echo"</pre>";exit;
-        return view('front.package_lists',$data);
-        
-    }
+    
     public function Sign_in(Request $request)
     {
         $lastReferringUrl = $request->server('HTTP_REFERER');
@@ -323,7 +274,7 @@ class FrontloginregisterController extends Controller
      */
     public function destroy($id)
     {
-        // echo"test";exit;
+        echo"test";exit;
     }
     function registration_mail_check(){
 
@@ -555,161 +506,6 @@ class FrontloginregisterController extends Controller
         
         DB::table('frontloginregisters')->where('id','=',$user_id)->update(['password' => $password]);
         return redirect()->route('Sign-Up.create')->with('L_strsucessMessage','Password Changed Successfully');
-    }
-
-    public function check_email(Request $request){
-
-        $email = $request->email;
-        $result = DB::table('subscribes')->where('email',$email)->first();
-        
-        if($result !=''){
-            echo 0;
-        }else{
-
-            // echo "test";exit;
-            echo 1;
-        }
-    }
-
-    public function news_letter_email(Request $request){
-        // echo "test";exit;
-        $data['email'] = $request->subs_email;
-        $data['created_at'] = date('Y-m-d');
-
-        //echo "<pre>";print_r($data);echo "</pre>";exit;
-        DB::table('subscribes')->insert($data);
-
-        $html = '<!doctype html> <html>
-        
-            <head>
-                <meta charset="utf-8">
-                <title>Subscribes Email</title>
-                <style>
-                    .logo {
-                        text-align: center;
-                        width: 100%;
-                          }
-        
-                    .wrapper {
-                        width: 100%;
-                        max-width:500px;
-                        margin:auto;               
-                        font-size:14px;
-                        line-height:24px;
-                        font-family:Helvetica Neue, Helvetica, Helvetica, Arial, sans-serif;
-                        color:#555;
-                    }
-        
-                    .wrapper div {                
-                        height: auto;
-                        
-                        margin-bottom: 15px;
-                        width:100%;
-                    }
-                    .text-center {
-                        text-align: center;                
-                    }
-        
-                    .email-wrapper {
-                        padding:5px;
-                        border:1px solid #ccc;
-                        width:100%;
-                    }
-        
-                    .big {
-        
-                        text-align: center;
-        
-                        font-size: 26px;
-        
-                        color: #e31e24;
-        
-                        font-weight: bold;
-        
-                        margin-bottom: 0 !important;
-        
-                        text-transform: uppercase;
-        
-                        line-height: 34px;
-                    }
-        
-                    .welcome {                
-        
-                        font-size: 17px;                
-        
-                        font-weight: bold;
-                    }
-        
-                    .footer {
-        
-                        text-align: center;
-        
-                        color: #999;
-        
-                        font-size: 13px;
-                    }
-        
-                </style>
-            </head>     
-            <body>
-                <div class="wrapper" >
-                
-                    <div class="logo">
-                        <img src="'.asset("public/site/images/VC-LONG-COLOR.png").'" style="width: 30%;float: inherit;" >
-                    </div>
-                    <div class="email-wrapper" >
-                        <table style="border-collapse:collapse;" width="100%" border="0" cellspacing="0" cellpadding="10">          
-                            <tr>
-                                <td>
-                                    <table width="100%" border="0" cellspacing="0" cellpadding="5">   
-                                        <tr>
-                                            <td style="font-size:18px;">Hello ,</td>
-                                        </tr>
-                                        <tr>
-                                            <td style="line-height:20px;">
-                                               Please find the below Subscribe details
-                                            </td> 
-                                        </tr>
-                                    </table>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <table style="border-top:3px solid #333;" bgcolor="#f7f7f7" width="100%" border="0" cellspacing="0" cellpadding="5">   
-                                        <tr>
-                                            <td width="50%">        
-                                                <table width="100%" border="0" cellspacing="0" cellpadding="5">   
-                                                    
-                                                    <tr><td width="100px">Email: </td><td>'.$data['email'].'</td></tr>
-                                                   
-                                                </table>
-                                            </td>   
-                                        </tr>   
-                                    </table>
-                                </td>   
-                            </tr>
-                        </table>
-                    </div>
-                    
-                </div>
-            </body>
-        </html>';
-
-        //echo $html;exit;
-        $subject = "Thank you for Subscribe - Sagar store";
-        //$to = $data['email'];
-         $to = 'devang.hnrtechnologies@gmail.com';
-        // $to = $request->email;
-        Mail::send([], [], function($message) use($html, $to, $subject) {
-            $message->to($to);
-            $message->subject($subject);
-            $message->from('devang.hnrtechnologies@gmail.com', 'Sagar store');
-            $message->html($html);
-        });
-
-
-        // return redirect()->route('/')->with('L_strsucessMessage','News Letter Email Added successfully');
-        return redirect()->to('/')->with('L_strsucessMessage','News Letter Email Added successfully');
     }
     
     

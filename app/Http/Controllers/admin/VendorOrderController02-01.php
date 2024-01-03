@@ -114,8 +114,8 @@ class VendorOrderController extends Controller
 
         $query = DB::table('ci_orders')
         ->leftJoin('frontloginregisters', 'ci_orders.user_id', '=', 'frontloginregisters.id')
-        ->leftJoin('ci_shipping_address', 'ci_orders.order_id', '=', 'ci_shipping_address.order_id')
-        ->select('frontloginregisters.email as user_email', 'frontloginregisters.name as user_name', 'frontloginregisters.mobile as user_mobile',  'ci_orders.*',  'ci_shipping_address.*');
+       // ->leftJoin('ci_shipping_address', 'ci_orders.order_id', '=', 'ci_shipping_address.order_id')
+        ->select('frontloginregisters.email as user_email', 'frontloginregisters.name as user_name', 'frontloginregisters.mobile as user_mobile',  'ci_orders.*');
 
     if (!empty($order_id)) {
         $query->where('ci_orders.order_id', $order_id);

@@ -14,6 +14,7 @@ use App\Models\admin\Subscribe;
 
 
 
+
 class SubscribeController extends Controller
 
 {

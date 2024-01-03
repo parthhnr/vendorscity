@@ -45,7 +45,6 @@ use App\Http\Controllers\admin\EnquiryController;
 use App\Http\Controllers\admin\Form_fieldController;
 use App\Http\Controllers\admin\Ordercontroller;
 use App\Http\Controllers\admin\VendorOrderController;
-use App\Http\Controllers\admin\SubscribeController;
 
 
 
@@ -56,7 +55,6 @@ use App\Http\Controllers\front\FrontvendorController;
 use App\Http\Controllers\front\checkoutcontroller;
 use App\Http\Controllers\front\Packagecontroller;
 use App\Http\Controllers\front\MyaccountController;
-
 
 
 
@@ -100,11 +98,6 @@ Route::get('Sign-in', '\App\Http\Controllers\front\FrontloginregisterController@
 Route::get('user_signout', 'App\Http\Controllers\front\FrontloginregisterController@user_signout')->name('user_signout');
 Route::post('check_login', 'App\Http\Controllers\front\FrontloginregisterController@check_login');
 
-Route::get('search-package', 'App\Http\Controllers\front\FrontloginregisterController@search_package')->name('search_package');
-// Route::post('search-package', 'App\Http\Controllers\front\Homecontroller@search_package');
-
-// Route::match(['get', 'post'], 'search-package', [FrontloginregisterController::class, 'search_package'])->name('search_package');
-
 Route::post('user_login','App\Http\Controllers\front\FrontloginregisterController@user_login')->name('user_login');
 
 Route::post('registration_mail_check', '\App\Http\Controllers\front\FrontloginregisterController@registration_mail_check');
@@ -116,8 +109,6 @@ Route::post('resetpassword','\App\Http\Controllers\front\FrontloginregisterContr
 Route::get('reset-password/{uid}','\App\Http\Controllers\front\FrontloginregisterController@reset_password')->name('reset_password');
 
 
-Route::post('check_email','\App\Http\Controllers\front\FrontloginregisterController@check_email');
-Route::post('news_letter_email','\App\Http\Controllers\front\FrontloginregisterController@news_letter_email');
 
 
 Route::post('set_password/{uid}','\App\Http\Controllers\front\FrontloginregisterController@set_password')->name('set_password');
@@ -373,9 +364,6 @@ Route::get('/admin', function () {
     Route::resource('admin/vendororder','App\Http\Controllers\admin\VendorOrderController');
     Route::get('admin/order/vendororderdetail/{vendororder_id}', [VendorOrderController::class, 'vendordetail'])->name('vendordetail');
 
-
-    Route::resource('admin/subscribe','App\Http\Controllers\admin\SubscribeController');   
-    Route::get('delete_subscribe',[SubscribeController::class,'destroy'])->name('delete_subscribe');
 
    
 

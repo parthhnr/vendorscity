@@ -2,7 +2,11 @@
 
    @section('content')
 
-
+       <style type="text/css">
+           .modal-dialog {
+               max-width: 50%
+           }
+       </style>
 
        <div class="content container-fluid">
 
@@ -204,7 +208,10 @@
                            <th>Amount</th>
                            <th>Start Date</th>
                            <th>End Date</th>
+
                            <th>Status</th>
+                           <th>Details</th>
+
                            <th class="text-right">Action</th>
                        </tr>
                    </thead>
@@ -215,7 +222,7 @@
                                <td>{{ $subscription->total }}</td>
                                <td>{{ date('d-m-Y', strtotime($subscription->startdate)) }}</td>
                                <td>{{ date('d-m-Y', strtotime($subscription->enddate)) }}</td>
-                               {{-- <td><span class="badge bg-success-light">Paid</span></td> --}}
+
                                <td>
                                    @if ($subscription->status == 'inactive')
                                        <span class="badge badge-pill bg-danger-light">Inactive</span>
@@ -225,16 +232,27 @@
                                    @endif
 
                                </td>
+                               <td>
+                                   <a class="btn btn-primary" href="javascript:void('0');"
+                                       onclick="delete_category('{{ $subscription->id }}');">View
+                                       Services
+                                   </a>
+                               </td>
 
                                <td class="text-right">
                                    <div class="dropdown dropdown-action">
                                        <a href="#" class="action-icon dropdown-toggle" data-bs-toggle="dropdown"
                                            aria-expanded="false"><i class="fas fa-ellipsis-h"></i></a>
                                        <div class="dropdown-menu dropdown-menu-right">
-                                           <a class="dropdown-item" href="javascript:void(0);"><i
-                                                   class="far fa-eye me-2"></i>View</a>
-                                           <a class="dropdown-item" href="javascript:void(0);"><i
-                                                   class="far fa-paper-plane me-2"></i>Invoice</a>
+                                           <a class="dropdown-item"
+                                               href="{{ route('subscription-details.show', $subscription->id) }}"><i
+                                                   class="far fa-eye me-2"></i>View Detail
+                                           </a>
+
+                                           <a class="dropdown-item"
+                                               href="{{ route('vendor-invoice', ['id' => $subscription->id]) }}"><i
+                                                   data-feather="clipboard" class="me-2"></i>Invoice
+                                           </a>
                                        </div>
                                    </div>
                                </td>
@@ -246,5 +264,120 @@
            </div>
 
        </div>
+
+   @stop
+   @section('footer_js')
+
+       <!-- Delete  Modal -->
+       @if ($result != '')
+           @foreach ($result as $data)
+               <div class="modal custom-modal fade" id="delete_model_{{ $data->id }}" role="dialog">
+
+                   <div class="modal-dialog modal-dialog-centered">
+
+                       <div class="modal-content">
+
+                           <div class="modal-body">
+
+
+                               <div class="modal-text text-center">
+
+                                   <!-- <h3>Delete Expense Category</h3> -->
+
+                                   @php
+
+                                       $result = DB::table('subscription_subservice_attribute')
+                                           ->select('*')
+                                           ->where('subscription_id', '=', $data->id)
+                                           ->get();
+
+                                       //$servicename = Helper::servicename($result->service_id);
+
+                                       //echo"<pre>";print_r($servicename);echo"</pre>";
+
+                                   @endphp
+                                   @if ($result != '')
+                                       <div class="row">
+                                           <div class="col-md-12">
+                                               <div class="table-responsive">
+                                                   <table class="invoice-table table table-bordered">
+                                                       <thead>
+                                                           <tr>
+                                                               <th>Services</th>
+                                                               <th>Sub Services</th>
+                                                               <th class="text-end">Price</th>
+                                                           </tr>
+                                                       </thead>
+                                                       <tbody>
+                                                           @php
+                                                               $total = 0;
+                                                           @endphp
+                                                           @foreach ($result as $result_data)
+                                                               <tr>
+                                                                   <td>{!! Helper::servicename($result_data->service_id) !!}</td>
+                                                                   <td>{!! Helper::subservicename($result_data->subservice_id) !!}</td>
+                                                                   <td>{{ $result_data->charge }}</td>
+                                                               </tr>
+                                                               @php
+                                                                   $total += $result_data->charge;
+                                                               @endphp
+                                                           @endforeach
+                                                       </tbody>
+                                                   </table>
+
+                                                   <div class="col-md-6 col-xl-4 ms-auto">
+                                                       <div class="table-responsive">
+                                                           <table class="invoice-table-two table">
+                                                               <tbody>
+                                                                   <tr>
+                                                                       <th>Total :</th>
+                                                                       <td><span>{{ $total }}</span></td>
+                                                                   </tr>
+                                                               </tbody>
+                                                           </table>
+                                                       </div>
+                                                   </div>
+                                               </div>
+                                           </div>
+
+                                       </div>
+                                   @else
+                                       <p>No Data Found</p>
+                                   @endif
+
+                               </div>
+
+                           </div>
+                       </div>
+
+                   </div>
+
+               </div>
+           @endforeach
+       @endif
+
+       <!-- /Delete Modal -->
+
+
+
+
+       <script>
+           function delete_category(id) {
+
+               //    alert(id);
+
+               $('#delete_model_' + id).modal('show');
+
+
+           }
+
+
+
+           function form_sub() {
+
+               $('#form').submit();
+
+           }
+       </script>
 
    @stop

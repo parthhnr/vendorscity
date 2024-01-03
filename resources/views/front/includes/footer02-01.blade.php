@@ -64,12 +64,8 @@
                         <div class="mailchimp-widget">
                             <h5 class="title mb20">Subscribe</h5>
                             <div class="mailchimp-style1 at-home7">
-                                <form action="{{ url('news_letter_email') }}" id="news_letter" method="post">
-                                    @csrf
-                                    <input type="email" name="subs_email" id="subs_email" class="form-control bg-white" placeholder="Your email address">
-                                    <span id="validation_error" class="error alert-message valierror" style="display: none;"></span>
-                                    <button type="button" onclick="javascript:validation_subs()">Send</button>
-                                </form>
+                                <input type="email" class="form-control bg-white" placeholder="Your email address">
+                                <button type="submit">Send</button>
                             </div>
                         </div>
                     </div>
@@ -240,48 +236,6 @@
             }
         });
 
-    }
-
-    function validation_subs(){
-
-        var email = $("#subs_email").val();
-        if(email == ''){
-            $("#validation_error").html("Please Enter Email Address");
-            $('#validation_error').show().delay(0).fadeIn('show');
-            $('#validation_error').show().delay(2000).fadeOut('show');
-            return false;
-        }
-
-        var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-        if (!filter.test(email)) {
-            jQuery('#validation_error').html("Please Enter Valid E-mail.");
-            jQuery('#validation_error').show().delay(0).fadeIn('show');
-            jQuery('#validation_error').show().delay(2000).fadeOut('show');
-            return false;
-        }
-
-        var url = "{{ url('check_email') }}";
-
-        $.ajax({
-            url : url,
-            type : 'post',
-            data : {
-                '_token' : '{{ csrf_token() }}',
-                'email' : email
-            },
-            success:function(returndata){
-                    //alert(returndata);
-                    if(returndata == 0){
-                        $("#validation_error").html("Email Address Already Exists");
-                        $('#validation_error').show().delay(0).fadeIn('show');
-                        $('#validation_error').show().delay(2000).fadeOut('show');
-                        return false;
-                    }else{
-
-                       $('#news_letter').submit();
-                    }
-            }
-        });
     }
 </script>
 
