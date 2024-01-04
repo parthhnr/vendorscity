@@ -28,9 +28,15 @@ class FrontloginregisterController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request,  $id = null)
     {
+    //    echo $id;exit;
+       
        return view('front.frontloginregister');
+    }
+
+    function test($id = null){
+        echo "here";exit;
     }
 
     /**
@@ -47,7 +53,7 @@ class FrontloginregisterController extends Controller
         
 
        $data['serach_var'] =  $search = $request->search;
-        
+         
         $query = DB::table('packages');
 
         $query = $query->where('name', 'like', '%' . $search . '%');
@@ -115,6 +121,9 @@ class FrontloginregisterController extends Controller
      */
     public function store(Request $request)
     {
+
+        echo"<pre>";print_r($request->post());echo"</pre>";exit;
+
 
         $frontloginregister= new Frontloginregister;
 

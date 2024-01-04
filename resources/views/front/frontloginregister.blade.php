@@ -11,6 +11,9 @@
         </div>
         <form id="category_form" action="{{ route('Sign-Up.store') }}" method="POST">
             @csrf
+            @if (isset($decryptedId) && $decryptedId != '')
+                <input type="hidden" name="refre_id" value="{{ $decryptedId }}">
+            @endif
 
             <div class="row wow fadeInRight" data-wow-delay="300ms">
                 <div class="col-xl-6 mx-auto">
@@ -208,17 +211,17 @@
                         return false;
 
                     }
-                    var filter = /^\d{10}$/;
-                    if (!filter.test(mobile)) {
-
-                        jQuery('#mobile_error').html("Please Enter Valid Mobile");
-                        jQuery('#mobile_error').show().delay(0).fadeIn('show');
-                        jQuery('#mobile_error').show().delay(2000).fadeOut('show');
-                        $('html, body').animate({
-                            scrollTop: $('#mobile').offset().top - 150
-                        }, 1000);
-                        return false;
-
+                    if (mobile != '') {
+                        // var filter = /^\d{7}$/;
+                        if (mobile.length < 7 || mobile.length > 15) {
+                            jQuery('#mobile_error').html("Please Enter Valid Mobile Number");
+                            jQuery('#mobile_error').show().delay(0).fadeIn('show');
+                            jQuery('#mobile_error').show().delay(2000).fadeOut('show');
+                            $('html, body').animate({
+                                scrollTop: $('#mobile').offset().top - 150
+                            }, 1000);
+                            return false;
+                        }
                     }
 
                     $('#spinner_button').show();

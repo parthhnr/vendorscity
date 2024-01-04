@@ -9,6 +9,7 @@ use Hash;
 use DB;
 use Session;
 
+
 use Carbon\Carbon;
 
 use Symfony\Component\Mime\Email;
@@ -97,6 +98,20 @@ class MyaccountController extends Controller
     public function my_account()
     {
        return view('front.my_account');
+    }
+    public function refer_earn()
+    {
+       return view('front.refer_earn');
+    }
+    public function refer_earn_frend($userId)
+    {
+        //echo $userId;exit;
+        $decryptedId = base64_decode($userId);
+
+        // echo $decryptedId;exit;
+        
+        return view('front.frontloginregister',['decryptedId' => $decryptedId]);
+      
     }
 
     public function my_profile()

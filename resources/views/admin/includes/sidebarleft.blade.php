@@ -160,15 +160,13 @@
                 @endif
 
                 @if (in_array('20', $permission1))
+                    <li class="{{ request()->segment(2) == 'subscribe' ? 'active' : '' }}">
 
-                <li class="{{ request()->segment(2) == 'subscribe' ? 'active' : '' }}">
+                        <a href="{{ route('subscribe.index') }}"><i class="fa fa-bell" aria-hidden="true"></i>
 
-                    <a href="{{ route('subscribe.index') }}"><i class="fa fa-bell" aria-hidden="true"></i>
+                            <span>Subscribe</span></a>
 
-                        <span>Subscribe</span></a>
-
-                </li>
-
+                    </li>
                 @endif
 
 
@@ -253,10 +251,19 @@
                         class="{{ request()->segment(1) == 'wallet' ? 'active' : '' }}">
                         <i class="fa fa-file"></i><span>Wallet</span></a>
                 </li>
-                <li class="{{ request()->segment(2) == 'vendororder' ? 'active' : '' }}"><a
-                        href="{{ route('vendororder.index') }}"
+                {{-- <li
+                    class="{{ request()->segment(2) == 'vendororder' || request()->segment(2) == 'order/vendororderdetail/' ? 'active' : '' }}">
+                    <a href="{{ route('vendororder.index') }}"
                         class="{{ request()->segment(2) == 'vendororder' ? 'active' : '' }}">
                         <i class="fa fa-file"></i><span>Order Details</span></a>
+                </li> --}}
+
+                <li
+                    class="{{ request()->segment(2) == 'vendororder' || request()->segment(3) == 'vendororderdetail' ? 'active' : '' }}">
+                    <a href="{{ route('vendororder.index') }}"
+                        class="{{ request()->segment(2) == 'vendororder' || request()->segment(3) == 'vendororderdetail' ? 'active' : '' }}">
+                        <i class="fa fa-file"></i><span>Order Details</span>
+                    </a>
                 </li>
             @endif
 
