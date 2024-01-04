@@ -142,6 +142,56 @@
         .btn:hover {
             color: #0a58ca
         }
+
+        #get_button {
+            background-color: #0040E6;
+            border-radius: 30px;
+            margin-top: 10px;
+
+        }
+
+        #get_button {
+            font-size: 13px;
+            font-family: var(--title-font-family);
+            font-weight: 500;
+            height: 40px;
+            padding: 1px 13px !important;
+        }
+
+        #mega-menu {
+            cursor: pointer;
+            height: 40px !important;
+            line-height: 40px !important;
+            max-width: 150px;
+        }
+
+        .mega-menu-custom {
+            margin-top: 6px;
+        }
+
+        #mega-menu .drop-menu {
+            height: auto;
+            width: 500px !important;
+        }
+
+        .hover_effect_add {
+            padding-left: 2px !important;
+            padding-top: 0 !important;
+        }
+
+        .hover_effect_add a {
+            padding: 20px 20px !important;
+            margin-right: 13px !important;
+        }
+
+        .hover_effect_add a:hover {
+            border-left: 2px solid #0040E6 !important;
+            background: #F0EFEC;
+        }
+
+        .hover_effect_add .cat-title {
+            margin-bottom: 0 !important;
+        }
     </style>
 
 
@@ -211,9 +261,10 @@
 
                                                         @endphp
 
-                                                        <div class="drop-menu d-flex justify-content-between">
+                                                        <div
+                                                            class="drop-menu d-flex justify-content-between hover_effect_add">
                                                             @if ($subservice_data != '' && count($subservice_data) > 0)
-                                                                <div class="one-third">
+                                                                <div class="one-third ">
                                                                     @foreach ($subservice_data as $subservice)
                                                                         <a
                                                                             href="{{ url('package-lists/' . $subservice->page_url) }}">
@@ -225,11 +276,12 @@
                                                                 </div>
                                                             @endif
 
-                                                            <a
-                                                                href="{{ route('enquiry', ['id' => 0, 'service_id' => $service->id]) }}">
-                                                                <div class="h6 cat-title">
-                                                                    Get Free Quotes
-                                                                </div>
+                                                            <a id="get_button"
+                                                                href="{{ route('enquiry', ['id' => 0, 'service_id' => $service->id]) }}"
+                                                                class="ud-btn btn-thm2 add-joining">
+
+                                                                Get Free Quotes
+
                                                             </a>
 
 

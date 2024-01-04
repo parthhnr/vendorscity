@@ -30,13 +30,17 @@ class FrontloginregisterController extends Controller
      */
     public function index(Request $request,  $id = null)
     {
-    //    echo $id;exit;
+       echo $id;
        
        return view('front.frontloginregister');
     }
 
     function test($id = null){
-        echo "here";exit;
+
+        $decryptedId = base64_decode($id);
+        // echo $decryptedId;exit;
+        
+        return view('front.frontloginregister',['decryptedId' => $decryptedId]);
     }
 
     /**
@@ -122,11 +126,13 @@ class FrontloginregisterController extends Controller
     public function store(Request $request)
     {
 
-        echo"<pre>";print_r($request->post());echo"</pre>";exit;
+        // echo"<pre>";print_r($request->post());echo"</pre>";exit;
 
 
         $frontloginregister= new Frontloginregister;
-
+        if($request->refer_id !=''){
+            $frontloginregister->refer_id=$request->refer_id;
+        }        
         $frontloginregister->name=$request->name;
         $frontloginregister->email=$request->email;
         $frontloginregister->password= Hash::make($request->password);
@@ -139,6 +145,7 @@ class FrontloginregisterController extends Controller
 
         $newuserdata = array(
             'userid'  => $frontloginregister->id,
+            'refer_id'  => $frontloginregister->refer_id,
             'name'  => $frontloginregister->name,            
             'email'  => $frontloginregister->email,       
             'mobile'  => $frontloginregister->mobile,       
@@ -392,6 +399,7 @@ class FrontloginregisterController extends Controller
             // Login successful
             $newuserdata = [
                 'userid' => $checklogin->id,
+                'refer_id'  => $checklogin->refer_id,
                 'name' => $checklogin->name,
                 'email' => $checklogin->email,
                 'mobile' => $checklogin->mobile,
