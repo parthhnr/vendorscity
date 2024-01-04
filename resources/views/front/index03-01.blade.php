@@ -17,8 +17,7 @@
     }
 
     .home_slider_padding .home11-hero-content .title {
-        line-height: 54px;
-        margin-bottom: 20px;
+        line-height: 49px;
     }
 
     .home_slider_padding p {
@@ -153,7 +152,7 @@
 </style>
 
 
-<section class="hero-home11 pt70 pb0">
+<section class="hero-home11 pt60 pb0">
     <div class="container">
         <div class="row align-items-center justify-content-between">
             <div class="col-lg-6 col-xl-6 mb30-md home_slider_padding">
@@ -168,7 +167,7 @@
                     </p>
                 </div>
                 <div
-                    class="advance-search-tab bgc-white p10 bdrs4-sm bdrs60 banner-btn position-relative zi1 animate-up-3 mt20 mb20">
+                    class="advance-search-tab bgc-white p10 bdrs4-sm bdrs60 banner-btn position-relative zi1 animate-up-3 mt10">
                     <div class="row">
                         <div class="col-md-5 col-lg-6 col-xl-6">
                             <div class="advance-search-field mb10-sm">
