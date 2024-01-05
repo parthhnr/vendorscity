@@ -90,12 +90,13 @@ Route::get('/config-cache', function() {
 
 /*------Front routes start ------*/
 
+
 Route::get('/', '\App\Http\Controllers\front\Homecontroller@index');
 Route::post('search', '\App\Http\Controllers\front\Homecontroller@search')->name('search');
 
 Route::get('/book-services', '\App\Http\Controllers\front\Homecontroller@book_services');
 Route::get('/become-vendor', '\App\Http\Controllers\front\Homecontroller@become_vendor');
-Route::post('Sign-Up/{id?}', '\App\Http\Controllers\front\FrontloginregisterController@index');
+Route::get('Sign-Up/{id?}', '\App\Http\Controllers\front\FrontloginregisterController@test');
 Route::resource('Sign-Up', '\App\Http\Controllers\front\FrontloginregisterController');
 Route::get('Sign-in', '\App\Http\Controllers\front\FrontloginregisterController@Sign_in')->name('Sign-in');
 Route::get('user_signout', 'App\Http\Controllers\front\FrontloginregisterController@user_signout')->name('user_signout');
@@ -165,6 +166,7 @@ Route::get('refer&earn', '\App\Http\Controllers\front\MyaccountController@refer_
 Route::get('refer_and_earn/{userid}', '\App\Http\Controllers\front\MyaccountController@refer_earn_frend');
 
 Route::match(['get', 'post'], 'edit-profile', [MyaccountController::class, 'edit_profile'])->name('edit_profile');
+Route::get('my-wallet', '\App\Http\Controllers\front\MyaccountController@my_wallet');
 
 //Route::get('/edit-profile', '\App\Http\Controllers\front\MyaccountController@edit_profile');
 

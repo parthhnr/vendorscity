@@ -87,6 +87,23 @@
         padding-top: 30px;
     }
 </style>
+@php
+    $userData = Session::get('user');
+
+    $wallet_amount_data = DB::table('front_user_wallet')
+        ->where('refer_id', $userData['refer_id'])
+        ->get();
+
+    $total_wallet_amount = 0;
+
+    foreach ($wallet_amount_data as $wallet) {
+        $total_wallet_amount += $wallet->wallet_amount;
+    }
+
+    // Now $total_wallet_amount contains the sum of all wallet_amount values
+    // echo 'Total Wallet Amount: ' . $total_wallet_amount;
+
+@endphp
 
 
 <div class="body_content">
@@ -102,35 +119,33 @@
 
                 <div class="col-lg-8">
 
-                    @php
-                        $userid = Session::get('user')['userid'];
-
-                        $encryptedId = base64_encode($userid);
-
-                    @endphp
-
                     <div class="tab-content">
 
-                        <!-- Single Tab Content Start -->
-                        <div class="tab-pane fade show active">
-                            <div class="myaccount-content dashboad">
+                        <div class="your_rewards">
+                            <div class="">
 
-                                <div class="myaccount-tab-list nav">
-                                    {{-- <a href="{{ url('refer_and_earn/' . $userData) }}">
-                                        {{ url('refer_and_earn/' . $userData) }} <i class="far fa-copy"></i></a> --}}
+                                <div class="col-md-12">
+                                    <div class="xin_wallet_total">
 
-                                    {{-- <a href="{{ url('Sign-Up/' . $encryptedId) }}"> --}}
-                                    <span
-                                        style="padding: 20px;display: inline-block;width: 100%;">{{ url('Sign-Up/' . $encryptedId) }}
-                                        <i class="far fa-copy" style="float: right;cursor: pointer;"
-                                            id="copyLink"></i></span>
-                                    {{-- </a> --}}
+                                        <div class="xin_wallet_box">
+
+
+                                            <div class="fixed_amt_text">
+                                                <h3 style="color: #e5097f;">AED.{{ $total_wallet_amount }}</h3>
+                                                <p style="font-weight: bold; font-size:20px; line-height: 30px; ">
+                                                    Current wallet Balance</p>
+                                            </div>
+                                        </div>
+
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        <!-- Single Tab Content End -->
-                    </div>
 
+                            </div>
+
+                            <!-- Single Tab Content End -->
+
+                        </div>
+                    </div> <!-- My Account Tab Content End -->
                 </div>
             </div>
 
@@ -140,24 +155,3 @@
 
 
 @include('front.includes.footer')
-
-<script>
-    document.getElementById('copyLink').addEventListener('click', function(event) {
-        event.preventDefault();
-
-        // Create a temporary input element
-        var tempInput = document.createElement('input');
-        tempInput.value = "{{ url('Sign-Up/' . $encryptedId) }}";
-        document.body.appendChild(tempInput);
-
-        // Select and copy the text in the input element
-        tempInput.select();
-        document.execCommand('copy');
-
-        // Remove the temporary input element
-        document.body.removeChild(tempInput);
-
-        // Optionally provide user feedback (e.g., alert or tooltip)
-        // alert('URL copied to clipboard!');
-    });
-</script>

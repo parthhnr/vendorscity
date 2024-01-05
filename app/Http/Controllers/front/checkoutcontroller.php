@@ -27,7 +27,7 @@ class checkoutcontroller extends Controller
         $userdata = Session::get('user');
         
         // echo "<pre>";print_r($userdata);echo"</pre>";
-        // echo "<pre>";print_r($request->post());echo"</pre>";exit;
+        // echo "<pre>";print_r($request->post());echo"</pre>";
 
         
 
@@ -189,6 +189,8 @@ class checkoutcontroller extends Controller
         $order_number = Session::get('order_number');
  
          $orderdata = DB::table('ci_orders')->where('order_number',$order_number)->first();
+        
+
          if($orderdata->paymentmode == 1){
              $payment_mode = "Cash On Delivery";
          }else{
@@ -197,7 +199,7 @@ class checkoutcontroller extends Controller
  
          $order_item_data = DB::table('ci_order_item')->where('order_id',$order_number)->get();
        //  $shiaddress = DB::table('ci_shipping_address')->where('order_id',$order_number)->first();
- 
+    //    echo "<pre>";print_r($order_item_data);echo"</pre>";
          // echo "<pre>";print_r($orderdata);echo "</pre>";
        
          $i=1;
@@ -256,9 +258,13 @@ class checkoutcontroller extends Controller
                  $pvalue = '0';
  
                  $userdata = Session::get('user');
- 
+                 
+               
                  $userid = $userdata['userid'];
- 
+                 
+
+                
+                
                  foreach($order_item_data as $arrRowDeailts )  
  
                  {
@@ -366,10 +372,32 @@ class checkoutcontroller extends Controller
      </body>
  
  </html>';
- $subject = "Thank you for shopping with Vendors City";
-         //$user_mail = $userdata['email'];
-         
-         //$to = [$user_mail];
+
+                    
+            $subject = "Thank you for shopping with Vendors City";
+            $refer_id = $userdata['refer_id'];
+            $system_percentage = DB::table('system')->first();
+            $total = ($orderdata->order_total * $system_percentage->percentage /100);
+           
+            
+        if(isset($userdata['refer_id']) && $userdata['refer_id'] !='')
+        {
+            $data['userid']=$userdata['userid'];
+            $data['refer_id']=$userdata['refer_id'];
+            $data['order_currency']=$orderdata->order_currency;
+            $data['wallet_amount']=$total;
+            $data['system_percentage']=$system_percentage->percentage;
+            $data['order_total']=$orderdata->order_total;
+            $data['added_date']=date('Y-m-d');
+           
+            DB::table('front_user_wallet')->insert($data);
+        }
+            
+
+           
+
+              
+        
          $to = 'devang.hnrtechnologies@gmail.com';
          Mail::send([], [], function($message) use($message_body, $to, $subject) {
              $message->to($to);

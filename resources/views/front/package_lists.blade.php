@@ -34,6 +34,16 @@
         padding: 25px 20px;
         position: relative;
     }
+
+    .ui-slider-range.ui-corner-all.ui-widget-header {
+        background-color: #0040E6;
+        height: 4px;
+    }
+
+    span.ui-slider-handle.ui-corner-all.ui-state-default {
+        border: 2px solid #0040E6;
+
+    }
 </style>
 <!-- <section class="breadcumb-section pt-0 container">
     <div
@@ -192,7 +202,8 @@
                                         <!-- Range Slider Desktop Version -->
                                         <div class="range-slider-style1">
                                             <div class="range-wrapper">
-                                                <div class="slider-range mb10 mt15"></div>
+                                                <div class="slider-range mb10 mt15">
+                                                </div>
                                                 <div class="text-center">
                                                     <input type="text" class="amount" id="amount"
                                                         placeholder="AED {{ $startPrice }}">

@@ -12,7 +12,7 @@
         <form id="category_form" action="{{ route('Sign-Up.store') }}" method="POST">
             @csrf
             @if (isset($decryptedId) && $decryptedId != '')
-                <input type="hidden" name="refre_id" value="{{ $decryptedId }}">
+                <input type="hidden" name="refer_id" value="{{ $decryptedId }}">
             @endif
 
             <div class="row wow fadeInRight" data-wow-delay="300ms">

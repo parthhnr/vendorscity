@@ -103,6 +103,7 @@ class MyaccountController extends Controller
     {
        return view('front.refer_earn');
     }
+    
     public function refer_earn_frend($userId)
     {
         //echo $userId;exit;
@@ -156,6 +157,10 @@ class MyaccountController extends Controller
       $data['user_data'] =  DB::table('frontloginregisters')->where('id', $userid)->first();
 
        return view('front.edit_profile',$data);
+    }
+    public function my_wallet()
+    {
+       return view('front.my_wallet');
     }
     
 }
