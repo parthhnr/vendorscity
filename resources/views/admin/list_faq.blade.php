@@ -194,6 +194,8 @@
 
                                             <th>Select</th>
 
+                                            <th>Packages</th>
+
                                             <th>Question</th>
 
                                             <th>Answer</th>
@@ -217,6 +219,23 @@
                                                         type="checkbox" class="minimal-red"
                                                         style="height: 20px;width: 20px;border-radius: 0px;color: red;">
                                                 </td>
+                                                <td>
+                                                    @if($data->packages != '')
+
+                                                        @php
+                                                            $package_array = explode(',',$data->packages);
+                                                        @endphp
+                                                            
+                                                        @foreach($package_array as $package_id)
+                                                                {!! Helper::packages_enquiry($package_id) !!} @php echo "<br>"; @endphp
+                                                         @endforeach
+                                                        
+                                                    @else
+                                                        {{'-'}}
+                                                    @endif
+                                                    
+                                                </td>
+
                                                 <td>
                                                     {{ $data->question }}
                                                 </td>

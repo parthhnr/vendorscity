@@ -64,6 +64,21 @@
                             @method('PUT')
 
                             <div class="row">
+                                @php
+                                    $package_array = explode(',',$faq->packages);
+                                 @endphp
+
+                                <div class="form-group">
+                                       <label for="packages">Packages</label>
+                                       <select class="form-control" id="packages" name="packages[]" multiple="multiple">
+                                           <option value="">Select Packages</option>
+                                           @foreach ($allpackage as $allpackage_data)
+                                               <option value="{{ $allpackage_data->id }}" @php  if(in_array($allpackage_data->id, $package_array)) {echo "selected";} @endphp>{{ $allpackage_data->name }}</option>
+                                           @endforeach
+                                       </select>
+                                       <p class="form-error-text" id="packages_error" style="color: red; margin-top: 10px;">
+                                       </p>
+                                   </div>
 
                                 <div class="form-group">
 
@@ -134,6 +149,17 @@
     <script>
         function faq_validation() {
 
+            var selectedValues = $("#packages").val();
+               if (selectedValues == '') {
+                   jQuery('#packages_error').html("Please Select Packages");
+                   jQuery('#packages_error').show().delay(0).fadeIn('show');
+                   jQuery('#packages_error').show().delay(2000).fadeOut('show');
+                   $('html, body').animate({
+                       scrollTop: $('#packages').offset().top - 150
+                   }, 1000);
+                   return false;
+               }
+
 
             var question = jQuery("#question").val();
 
@@ -156,6 +182,11 @@
             $('#category_form').submit();
 
         }
+
+        $("#packages").select2({
+               placeholder: "Select a packages" // Replace with your desired placeholder text
+           });
+
     </script>
 
     <script src="https://cdn.ckeditor.com/ckeditor5/35.4.0/classic/ckeditor.js"></script>

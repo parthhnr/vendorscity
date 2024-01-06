@@ -96,7 +96,8 @@
                                         <label for="page_url">Page Url</label>
                                         <input id="page_url" name="page_url" type="text" class="form-control"
                                             placeholder="Enter  Page Url" value="" />
-                                        <p class="form-error-text" id="page_url_error" style="color: red; margin-top: 10px;">
+                                        <p class="form-error-text" id="page_url_error"
+                                            style="color: red; margin-top: 10px;">
                                         </p>
                                     </div>
                                 </div>
@@ -116,7 +117,8 @@
                                         <label for="name">Image (332px x 256px)</label>
                                         <input id="image" name="image" type="file" class="form-control"
                                             placeholder="Enter" value="" />
-                                        <p class="form-error-text" id="image_error" style="color: red; margin-top: 10px;">
+                                        <p class="form-error-text" id="image_error"
+                                            style="color: red; margin-top: 10px;">
                                         </p>
                                     </div>
                                 </div>
@@ -146,9 +148,53 @@
                                     </div>
                                 </div>
 
+                                {{-- Incluser add more start --}}
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group"> <label for="poc">Incluser Name</label>
+                                            <input type="text" id="incluser_name" name="incluser_name[]"
+                                                class="form-control" placeholder="Enter Incluser Name">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="input_fields_wrap12"></div>
+                                <div class="form-group">
+                                    <div class="col-sm-12">
+                                        <button
+                                            style="border: medium none;margin-right: 50px;line-height: 25px;margin-top: -62px;"
+                                            class="submit btn bg-purple pull-right" type="button"
+                                            id="add_field_button12">Add</button>
+                                    </div>
+                                </div>
+
+                                {{-- Incluseradd more End --}}
+
+                                {{-- Excluser add more start --}}
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group"> <label for="poc">Excluser Name</label>
+                                            <input type="text" id="excluser_name" name="excluser_name[]"
+                                                class="form-control" placeholder="Enter Excluser Name">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="input_fields_wrap123"></div>
+                                <div class="form-group">
+                                    <div class="col-sm-12">
+                                        <button
+                                            style="border: medium none;margin-right: 50px;line-height: 25px;margin-top: -62px;"
+                                            class="submit btn bg-purple pull-right" type="button"
+                                            id="add_field_button123">Add</button>
+                                    </div>
+                                </div>
+
+                                {{-- Excluser add more End --}}
+
                                 <div class="form-group">
                                     <label for="name"> Short Description</label>
-                                    <textarea class="form-control" name="short_description" id="short_description" ></textarea>
+                                    <textarea class="form-control" name="short_description" id="short_description"></textarea>
                                 </div>
 
                                 <div class="form-group">
@@ -216,7 +262,6 @@
     </script>
 
     <script>
-
         $(function() {
 
             $("#name").keyup(function() {
@@ -349,5 +394,91 @@
                 console.error(error);
 
             });
+    </script>
+
+    <script type="text/javascript" language="javascript">
+        $(document).ready(function() {
+
+            var max_fields = 50;
+
+            var wrapper = $(".input_fields_wrap12");
+
+            var add_button = $("#add_field_button12");
+
+
+
+            var b = 0;
+
+            $(add_button).click(function(e) { //alert('ok');
+
+                e.preventDefault();
+
+                if (b < max_fields) {
+
+                    b++;
+
+                    $(wrapper).append(
+
+                        '<div class="row"><div class="col-md-6"><div class="form-group"><label for="poc">Incluser Name</label><input type="text" id="incluser_name" name="incluser_name[]" class="form-control"placeholder="Enter Name"></div></div><a href="#" class="btn btn-danger pull-right remove_field1" style="margin-right: 0;margin-top: 23px;width: 10%;float: right;height: 38px;margin-left: 127px;">Remove</a></div>'
+                    );
+
+                }
+
+            });
+
+            $(wrapper).on("click", ".remove_field1", function(e) {
+
+                e.preventDefault();
+
+                $(this).parent('div').remove();
+
+                b--;
+
+            })
+
+        });
+    </script>
+
+    <script type="text/javascript" language="javascript">
+        $(document).ready(function() {
+
+            var max_fields = 50;
+
+            var wrapper = $(".input_fields_wrap123");
+
+            var add_button = $("#add_field_button123");
+
+
+
+            var b = 0;
+
+            $(add_button).click(function(e) { //alert('ok');
+
+                e.preventDefault();
+
+                if (b < max_fields) {
+
+                    b++;
+
+                    $(wrapper).append(
+
+                        '<div class="row"><div class="col-md-6"><div class="form-group"><label for="poc">Excluser Name</label><input type="text" id="excluser_name" name="excluser_name[]" class="form-control"placeholder="Enter Excluser Name"></div></div><a href="#" class="btn btn-danger pull-right remove_field123" style="margin-right: 0;margin-top: 23px;width: 10%;float: right;height: 38px;margin-left: 127px;">Remove</a></div>'
+                    );
+
+                }
+
+            });
+
+            $(wrapper).on("click", ".remove_field123", function(e) {
+
+                e.preventDefault();
+
+                $(this).parent('div').remove();
+
+                b--;
+
+            })
+
+        });
     </script>
 @stop

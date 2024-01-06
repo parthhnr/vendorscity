@@ -5,7 +5,6 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\admin\Faq;
-use DB;
 
 class FaqController extends Controller
 {
@@ -26,9 +25,8 @@ class FaqController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {   
-        $data['allpackage'] = DB::table('packages')->orderBy('id','desc')->get();
-        return view('admin.add_faq',$data);
+    {
+        return view('admin.add_faq');
     }
 
     /**
@@ -41,7 +39,6 @@ class FaqController extends Controller
     {
         $faq= new Faq;
         $faq->question=$request->question;
-        $faq->packages=implode(',', $request->packages);
         $faq->answer=$request->answer;
 
         $faq->save();
@@ -70,8 +67,7 @@ class FaqController extends Controller
      */
     public function edit(FAQ $faq)
     {
-        $data['allpackage'] = DB::table('packages')->orderBy('id','desc')->get();
-        return view('admin.edit_faq',compact('faq'),$data);
+        return view('admin.edit_faq',compact('faq'));
     }
 
     /**
@@ -86,10 +82,6 @@ class FaqController extends Controller
         $faq= FAQ::find($id);
         
         $faq->question=$request->question;
-        if($request->packages != ''){
-            $faq->packages=implode(',', $request->packages);
-        }
-        
         $faq->answer=$request->answer;
 
         $faq->update();

@@ -106,7 +106,8 @@
                                         <label for="page_url">Page Url</label>
                                         <input id="page_url" name="page_url" type="text" class="form-control"
                                             placeholder="Enter  Page Url" value="{{ $packages->page_url }}" />
-                                        <p class="form-error-text" id="page_url_error" style="color: red; margin-top: 10px;">
+                                        <p class="form-error-text" id="page_url_error"
+                                            style="color: red; margin-top: 10px;">
                                         </p>
                                     </div>
                                 </div>
@@ -158,10 +159,148 @@
                                         </div>
                                     </div>
                                 </div>
+                                {{-- Incluser add more start --}}
+
+                                @if ($attribute_data != '')
+                                    <input type="hidden" name="incluser_name1[]" value="">
+
+
+                                    @for ($i = 0; $i < count($attribute_data); $i++)
+                                        <div class="row">
+                                            <div class="col-md-8">
+                                                <input type="hidden" name="updateid1xxx[]"
+                                                    id="updateid1xxx{{ $i + 1 }}"
+                                                    value="{{ $attribute_data[$i]->id }}">
+
+
+                                                <div class="form-group"> <label for="poc">Incluser Name</label>
+                                                    <input type="text" id="incluser_nameu" name="incluser_nameu[]"
+                                                        class="form-control" placeholder="Enter Incluser Name"
+                                                        value="{{ $attribute_data[$i]->incluser_name }}">
+                                                </div>
+
+                                            </div>
+
+
+
+                                            <a href="#"
+                                                onclick="singledelete('{{ route('remove_packages_att', ['pid' => $attribute_data[$i]->pid, 'id' => $attribute_data[$i]->id]) }}')"
+                                                class="btn btn-danger pull-right remove_field1"
+                                                style="margin-right: 0;margin-top: 22px;width: 9%;float: right;height: 40px;margin-left: 166px;">Remove</a>
+
+                                        </div>
+                                    @endfor
+                                @endif
+
+                                @php
+
+                                    $test = count($attribute_data);
+                                    if ($test > 0) {
+                                        $style = 'display:none';
+                                    } else {
+                                        $style = 'display:block';
+                                    }
+                                    // echo '<pre>';
+                                    // print_r($attribute_data);
+                                    // echo '</pre>';
+                                @endphp
+                                <span style="@php echo $style; @endphp">
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <div class="form-group"> <label for="poc">Incluser Name</label>
+                                                <input type="text" id="incluser_name" name="incluser_name1[]"
+                                                    class="form-control" placeholder="Enter Incluser Name">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </span>
+
+                                <div class="input_fields_wrap12"> </div>
+                                <div class="form-group">
+
+                                    <div class="col-sm-12">
+                                        <button
+                                            style="border: medium none;margin-right: 50px;line-height: 26px;margin-top: -62px; "
+                                            class="submit btn bg-purple pull-right" type="button"
+                                            id="add_field_button12">Add</button>
+                                    </div>
+                                </div>
+
+                                {{-- Incluseradd more End --}}
+
+                                {{-- Excluser add more start --}}
+
+                                @if ($attributes_data != '')
+                                    <input type="hidden" name="excluser_name1[]" value="">
+
+
+                                    @for ($i = 0; $i < count($attributes_data); $i++)
+                                        <div class="row">
+                                            <div class="col-md-8">
+                                                <input type="hidden" name="exupdateid1xxx[]"
+                                                    id="exupdateid1xxx{{ $i + 1 }}"
+                                                    value="{{ $attributes_data[$i]->id }}">
+
+
+                                                <div class="form-group"> <label for="poc">Excluser Name</label>
+                                                    <input type="text" id="excluser_nameu" name="excluser_nameu[]"
+                                                        class="form-control" placeholder="Enter Excluser Name"
+                                                        value="{{ $attributes_data[$i]->excluser_name }}">
+                                                </div>
+
+                                            </div>
+
+                                            <a href="#"
+                                                onclick="singledelete('{{ route('remove_package_att', ['pid' => $attributes_data[$i]->pid, 'id' => $attributes_data[$i]->id]) }}')"
+                                                class="btn btn-danger pull-right remove_field123"
+                                                style="margin-right: 0;margin-top: 22px;width: 9%;float: right;height: 40px;margin-left: 166px;">Remove</a>
+
+                                        </div>
+                                    @endfor
+                                @endif
+
+                                @php
+
+                                    $test123 = count($attributes_data);
+                                    if ($test123 > 0) {
+                                        $stylee = 'display:none';
+                                    } else {
+                                        $stylee = 'display:block';
+                                    }
+                                    // echo '<pre>';
+                                    // print_r($attributes_data);
+                                    // echo '</pre>';
+                                @endphp
+                                <span style="{{ $stylee }}">
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <div class="form-group"> <label for="poc">Excluser Name</label>
+                                                <input type="text" id="excluser_name" name="excluser_name1[]"
+                                                    class="form-control" placeholder="Enter Excluser Name">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </span>
+
+                                <div class="input_fields_wrap123"> </div>
+                                <div class="form-group">
+
+                                    <div class="col-sm-12">
+                                        <button
+                                            style="border: medium none;margin-right: 50px;line-height: 26px;margin-top: -62px; "
+                                            class="submit btn bg-purple pull-right" type="button"
+                                            id="add_field_button123">Add</button>
+                                    </div>
+                                </div>
+
+                                {{-- Excluser add more End --}}
+
+
+
 
                                 <div class="form-group">
                                     <label for="name"> Short Description</label>
-                                    <textarea class="form-control" name="short_description" id="short_description" >{{ $packages->short_description }}</textarea>
+                                    <textarea class="form-control" name="short_description" id="short_description">{{ $packages->short_description }}</textarea>
                                 </div>
 
                                 <div class="form-group">
@@ -275,7 +414,6 @@
     </script>
 
     <script>
-
         $(function() {
 
             $("#name").keyup(function() {
@@ -363,4 +501,130 @@
             $('#category_form').submit();
         }
     </script>
+
+    <script>
+        function singledelete(url) {
+
+            var t = confirm('Are You Sure To Delete The Attribute ?');
+
+            if (t) {
+
+                window.location.href = url;
+
+            } else {
+
+                return false;
+
+            }
+
+        }
+
+
+
+        $(document).ready(function() {
+
+            var max_fields = 50;
+
+            var wrapper = $(".input_fields_wrap12");
+
+            var add_button = $("#add_field_button12");
+
+
+
+            var b = 0;
+
+            $(add_button).click(function(e) { //alert('ok');
+
+                e.preventDefault();
+
+                if (b < max_fields) {
+
+                    b++;
+
+                    $(wrapper).append(
+
+                        '<div class="row"><div class="col-md-8"><div class="form-group"> <label for="poc">Incluser Name</label><input type="text" id="incluser_name" name="incluser_name1[]"class="form-control" placeholder="Enter Incluser Name"></div></div><a href="#" class="btn btn-danger pull-right remove_field1" style="margin-right: 0;margin-top: 22px;width: 9%;float: right;height: 40px;margin-left: 150px;">Remove</a></div>'
+
+                    );
+
+                }
+
+            });
+
+            $(wrapper).on("click", ".remove_field1", function(e) {
+
+                e.preventDefault();
+
+                $(this).parent('div').remove();
+
+                b--;
+
+            })
+
+        });
+    </script>
+
+    <script>
+        function singledelete(url) {
+
+            var t = confirm('Are You Sure To Delete The Attribute ?');
+
+            if (t) {
+
+                window.location.href = url;
+
+            } else {
+
+                return false;
+
+            }
+
+        }
+
+
+
+        $(document).ready(function() {
+
+            var max_field = 50;
+
+            var wrapperr = $(".input_fields_wrap123");
+
+            var add_buttonn = $("#add_field_button123");
+
+
+
+            var c = 0;
+
+            $(add_buttonn).click(function(e) { //alert('ok');
+
+                e.preventDefault();
+
+                if (c < max_field) {
+
+                    c++;
+
+                    $(wrapperr).append(
+
+                        '<div class="row"><div class="col-md-8"><div class="form-group"><label for="poc">Excluser Name</label><input type="text" id="excluser_name" name="excluser_name1[]"class="form-control" placeholder="Enter Excluser Name"></div></div><a href="#" class="btn btn-danger pull-right remove_field123" style="margin-right: 0;margin-top: 22px;width: 9%;float: right;height: 40px;margin-left: 150px;">Remove</a></div>'
+
+                    );
+
+                }
+
+            });
+
+            $(wrapperr).on("click", ".remove_field123", function(e) {
+
+                e.preventDefault();
+
+                $(this).parent('div').remove();
+
+                b--;
+
+            })
+
+        });
+    </script>
+
+
 @stop
