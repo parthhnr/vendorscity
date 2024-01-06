@@ -42,10 +42,8 @@ class PackagesController extends Controller
      */
     public function store(Request $request)
     {
-        // echo "<pre>";
-        // print_r($request->post());
-        // echo "</pre>";exit;
-        
+        // echo "<pre>";print_r($request->post());echo "</pre>";exit;
+      
         $data['service_id']=$request->service_id;
         $data['subservice_id']=$request->subservice_id;
         $data['packagecategory_id']=$request->packagecategory_id;
@@ -76,9 +74,68 @@ class PackagesController extends Controller
             $image = "";
         }
             $data['image']= $image;
+
+           
             
-            DB::table('packages')->insert($data);
+            $package_id = DB::table('packages')->insertGetId($data);  
+
+            
+            
+            
+            if (count($_POST['incluser_name']) > 0 && $_POST['incluser_name'] != '') {
+
+                for ($i = 0; $i < count($_POST['incluser_name']); $i++) {
+        
+                    if($_POST['incluser_name'][$i] != '')
+                    {
+        
+                        $content['pid'] = $package_id;
+        
+                        $content['incluser_name'] = $_POST['incluser_name'][$i];
+        
+                        $this->insert_attribute($content);
+        
+                    }        
+                }        
+            }
+
+            if (count($_POST['excluser_name']) > 0 && $_POST['excluser_name'] != '') {
+
+                for ($i = 0; $i < count($_POST['excluser_name']); $i++) {
+        
+                    if($_POST['excluser_name'][$i] != '')
+                    {
+        
+                        $content['pid'] = $package_id;
+        
+                        $content['excluser_name'] = $_POST['excluser_name'][$i];
+        
+                        $this->insertt_attribute($content);
+        
+                    }        
+                }        
+            }
+            
+            
             return redirect()->route('packages.index')->with('success','Packages Data Added Successfully');
+    }
+    function insert_attribute($content)
+    {
+
+        $data['pid'] = $content['pid'];
+        $data['incluser_name'] = $content['incluser_name'];
+       
+        DB::table('packages_incluser')->insertGetId($data);
+
+    }
+    function insertt_attribute($content)
+    {
+
+        $data['pid'] = $content['pid'];
+        $data['excluser_name'] = $content['excluser_name'];
+       
+        DB::table('packages_excluser')->insertGetId($data);
+
     }
 
     /**
@@ -103,11 +160,44 @@ class PackagesController extends Controller
     {
         // echo "<pre>";print_r($id);echo "</pre>";exit;
         $data['packages'] = DB::table('packages')->where('id', $id)->first();
+        $data['attribute_data'] = DB::table('packages_incluser')
+                                    ->select('*')
+                                    ->where('pid', '=',$data['packages']->id)
+                                    ->get()
+                                    ->toArray();
+        $data['attributes_data'] = DB::table('packages_excluser')
+                                    ->select('*')
+                                    ->where('pid', '=',$data['packages']->id)
+                                    ->get()
+                                    ->toArray();
+        
         
         $data['service_data'] = DB::table('services')->select('*')->orderBy('id','DESC')->get();       
         $data['subservice_data'] = DB::table('subservices')->select('*')->where('serviceid', $data['packages']->service_id)->orderBy('id','DESC')->get();        
         $data['packagecat_data'] = DB::table('package_categories')->select('*')->where('subservice_id', $data['packages']->subservice_id)->orderBy('id','DESC')->get();
         return view('admin.edit_packages',$data);
+    }
+    public function remove_packages_att (Request $request){
+
+        $packages_id = $request->pid;
+
+        $id = $request->id;
+
+        $result = DB::table('packages_incluser')->where('pid', '=',$packages_id)->where('id', '=',$id)->delete();
+
+        return redirect()->route('packages.edit',$packages_id)->with('success','deleted successfully');
+
+    }
+    public function remove_package_att (Request $request){
+
+        $packages_id = $request->pid;
+
+        $id = $request->id;
+
+        $result = DB::table('packages_excluser')->where('pid', '=',$packages_id)->where('id', '=',$id)->delete();
+
+        return redirect()->route('packages.edit',$packages_id)->with('success','deleted successfully');
+
     }
 
     /**
@@ -119,7 +209,7 @@ class PackagesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
+        // echo "<pre>";print_r($request->post());echo "</pre>";exit;
         $data['service_id']=$request->service_id;
         $data['subservice_id']=$request->subservice_id;
         $data['packagecategory_id']=$request->packagecategory_id;
@@ -153,8 +243,130 @@ class PackagesController extends Controller
            
            
             DB::table('packages')->where('id', $id)->update($data);
+
+            if (count($_POST['incluser_name1']) > 0 && $_POST['incluser_name1'] != '') {
+
+                for ($i = 0; $i < count($_POST['incluser_name1']); $i++) {
+        
+        
+        
+                    if($_POST['incluser_name1'][$i] != ''){        
+        
+        
+                        $content['pid'] = $id;
+        
+                        $content['incluser_name'] = $_POST['incluser_name1'][$i];       
+                       
+        
+                        $this->insert_attribute($content);
+        
+                    }
+        
+                }
+        
+            }
+        
+            if ($request->incluser_nameu != '' && count($request->incluser_nameu) > 0 ) {
+        
+                for ($i = 0; $i < count($_POST['incluser_nameu']); $i++) {
+        
+        
+        
+                    if($_POST['incluser_nameu'][$i] != ''){        
+        
+        
+                        $content['pid'] = $id;
+        
+                        $content['incluser_name'] = $_POST['incluser_nameu'][$i];       
+                        
+        
+                        $content['updateid1xxx'] = $_POST['updateid1xxx'][$i];
+        
+                        $this->update_attribute($content);
+        
+                    }
+        
+                }
+        
+            }
+
+            if (count($_POST['excluser_name1']) > 0 && $_POST['excluser_name1'] != '') {
+
+                for ($i = 0; $i < count($_POST['excluser_name1']); $i++) {
+        
+        
+        
+                    if($_POST['excluser_name1'][$i] != ''){        
+        
+        
+                        $content['pid'] = $id;
+        
+                        $content['excluser_name'] = $_POST['excluser_name1'][$i];       
+                       
+        
+                        $this->insertt_attribute($content);
+        
+                    }
+        
+                }
+        
+            }
+        
+            if ($request->excluser_nameu != '' && count($request->excluser_nameu) > 0 ) {
+        
+                for ($i = 0; $i < count($_POST['excluser_nameu']); $i++) {
+        
+        
+        
+                    if($_POST['excluser_nameu'][$i] != ''){        
+        
+        
+                        $content['pid'] = $id;
+        
+                        $content['excluser_name'] = $_POST['excluser_nameu'][$i];       
+                        
+        
+                        $content['exupdateid1xxx'] = $_POST['exupdateid1xxx'][$i];
+        
+                        $this->updated_attribute($content);
+        
+                    }
+        
+                }
+        
+            }
+
+  
+
             return redirect()->route('packages.index')->with('success','Packages Data Updated Successfully');
     }
+
+    
+    
+    function update_attribute($content){
+
+
+
+        $data['pid'] = $content['pid'];
+
+        $data['incluser_name'] = $content['incluser_name'];
+
+        DB::table('packages_incluser')->where('id', $content['updateid1xxx'])->update($data);
+
+    }
+
+    function updated_attribute($content){
+
+
+
+        $data['pid'] = $content['pid'];
+
+        $data['excluser_name'] = $content['excluser_name'];
+
+        DB::table('packages_excluser')->where('id', $content['exupdateid1xxx'])->update($data);
+
+    }
+    
 
     /**
      * Remove the specified resource from storage.

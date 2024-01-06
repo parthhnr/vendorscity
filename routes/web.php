@@ -382,6 +382,9 @@ Route::get('/admin', function () {
     Route::resource('admin/subscribe','App\Http\Controllers\admin\SubscribeController');   
     Route::get('delete_subscribe',[SubscribeController::class,'destroy'])->name('delete_subscribe');
 
+    Route::get('remove_packages_att/{pid}/{id}', [PackagesController::class, 'remove_packages_att'])->name('remove_packages_att'); 
+    Route::get('remove_package_att/{pid}/{id}', [PackagesController::class, 'remove_package_att'])->name('remove_package_att'); 
+
    
 
 
