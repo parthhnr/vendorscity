@@ -98,7 +98,7 @@ class Packagecontroller extends Controller
 
         $packages_data = DB::table('packages')->where('page_url', $page_url)->first();
 
-        echo "<pre>";print_r($packages_data);echo "</pre>";exit; 
+        // echo "<pre>";print_r($packages_data);echo "</pre>";exit; 
 
         if($packages_data != ''){
             $data['package_detail'] =$packages_data;
