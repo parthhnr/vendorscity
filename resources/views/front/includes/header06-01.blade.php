@@ -5,9 +5,10 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="keywords"content="">
+    <meta name="keywords"
+        content="bidding, fiverr, freelance marketplace, freelancers, freelancing, gigs, hiring, job board, job portal, job posting, jobs marketplace, peopleperhour, proposals, sell services, upwork">
     <meta name="description" content="">
-    <!-- <meta name="CreativeLayers" content="ATFN"> -->
+    <meta name="CreativeLayers" content="ATFN">
     <!-- css file -->
     <link rel="stylesheet" href="{{ asset('public/site/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('public/site/css/jquery-ui.min.css') }}">
@@ -26,20 +27,14 @@
     <!-- Title -->
     <title>Vendors City</title>
     <!-- Favicon -->
-    <meta property="og:site_name" content="Vendors City">
-    <meta property="og:title" content="Vendors City" />
-    <meta property="og:description" content="" />
-    <meta property="og:image" itemprop="image" content="{{ asset('public/site/images/vcfaviconwap.png') }}">
-    <meta property="og:type" content="website" />
-
-    <link href="{{ asset('public/site/images/vcfavicon.png') }}" sizes="128x128" rel="shortcut icon"
+    <link href="{{ asset('public/site/images/VC-SHORT-COLOR-FINAL.png') }}" sizes="128x128" rel="shortcut icon"
         type="image/x-icon" />
-    <link href="{{ asset('public/site/images/vcfavicon.png') }}" sizes="128x128" rel="shortcut icon" />
+    <link href="{{ asset('public/site/images/VC-SHORT-COLOR-FINAL.png') }}" sizes="128x128" rel="shortcut icon" />
     <!-- Apple Touch Icon -->
-    <link href="{{ asset('public/site/images/vcfavicon.png') }}" sizes="60x60" rel="apple-touch-icon">
-    <link href="{{ asset('public/site/images/vcfavicon.png') }}" sizes="72x72" rel="apple-touch-icon">
-    <link href="{{ asset('public/site/images/vcfavicon.png') }}" sizes="114x114" rel="apple-touch-icon">
-    <link href="{{ asset('public/site/images/vcfavicon.png') }}" sizes="180x180" rel="apple-touch-icon">
+    <link href="{{ asset('public/site/images/apple-touch-icon-60x60.png') }}" sizes="60x60" rel="apple-touch-icon">
+    <link href="{{ asset('public/site/images/apple-touch-icon-72x72.png') }}" sizes="72x72" rel="apple-touch-icon">
+    <link href="{{ asset('public/site/images/apple-touch-icon-114x114.png') }}" sizes="114x114" rel="apple-touch-icon">
+    <link href="{{ asset('public/site/images/apple-touch-icon-180x180.png') }}" sizes="180x180" rel="apple-touch-icon">
 
 
     <!-- Select2 CSS -->
@@ -176,7 +171,7 @@
 
         #mega-menu .drop-menu {
             height: auto;
-            width: 600px !important;
+            width: 500px !important;
         }
 
         .hover_effect_add {

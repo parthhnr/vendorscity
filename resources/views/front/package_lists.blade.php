@@ -460,51 +460,51 @@
                                                             <span class="fz15"
                                                                 style="color:red;">{{ $package_data_new->discount }}%
                                                                 OFF</span>
+                                                        @endif
                                                     </span>
+                                                @else
+                                                    <span class="fz18">AED {{ $package_data_new->price }}</span>
                                                 @endif
-                                            @else
-                                                <span class="fz18">AED {{ $package_data_new->price }}</span>
-                        @endif
 
-                        </a>
+                                            </a>
 
-                        <div class="budget">
-                            @if (in_array('0', explode(',', $subservice->is_bookable)))
-                                <a class="ud-btn btn-thm add-joining addtocart-btn_{{ $package_data_new->id }}"
-                                    href="{{ route('cart') }}"
-                                    onclick="add_to_cart('{{ $package_data_new->id }}'); return false;">
-                                    Instant
-                                    Booking
-                                </a>
+                                            <div class="budget">
+                                                @if (in_array('0', explode(',', $subservice->is_bookable)))
+                                                    <a class="ud-btn btn-thm add-joining addtocart-btn_{{ $package_data_new->id }}"
+                                                        href="{{ route('cart') }}"
+                                                        onclick="add_to_cart('{{ $package_data_new->id }}'); return false;">
+                                                        Instant
+                                                        Booking
+                                                    </a>
 
-                                <a class="ud-btn btn-thm add-joining loader-test_{{ $package_data_new->id }}"
-                                    href="javascript:void(0);" style="display: none;">
-                                    Please Wait...
-                                </a>
-                            @endif
+                                                    <a class="ud-btn btn-thm add-joining loader-test_{{ $package_data_new->id }}"
+                                                        href="javascript:void(0);" style="display: none;">
+                                                        Please Wait...
+                                                    </a>
+                                                @endif
 
-                            @if (in_array('1', explode(',', $subservice->is_bookable)))
-                                <a class="ud-btn btn-thm add-joining"
-                                    href="{{ route('enquiry', ['id' => $package_data_new->id, 'service_id' => 0]) }}">Get
-                                    Multiple Quote</a>
-                            @endif
+                                                @if (in_array('1', explode(',', $subservice->is_bookable)))
+                                                    <a class="ud-btn btn-thm add-joining"
+                                                        href="{{ route('enquiry', ['id' => $package_data_new->id, 'service_id' => 0]) }}">Get
+                                                        Multiple Quote</a>
+                                                @endif
 
-                        </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    @else
+                        No Package Available
+
+                    @endif
+
 
                 </div>
-            </div>
-        </div>
-    </div>
-    @endforeach
-@else
-    No Package Available
-
-    @endif
-
-
-    </div>
-    {{-- {!! $package_pagination->appends($_GET)->render('pagination::bootstrap-4') !!} --}}
-    <!--  <div class="row">
+                {{-- {!! $package_pagination->appends($_GET)->render('pagination::bootstrap-4') !!} --}}
+                <!--  <div class="row">
               <div class="mbp_pagination mt30 text-center">
                 <ul class="page_navigation">
                   <li class="page-item">
@@ -527,8 +527,8 @@
                 <p class="mt10 mb-0 pagination_page_count text-center">1 – 20 of 300+ property available</p>
               </div>
             </div> -->
-    </div>
-    </div>
+            </div>
+        </div>
     </div>
 </section>
 

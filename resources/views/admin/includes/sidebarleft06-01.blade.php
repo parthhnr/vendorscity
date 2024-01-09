@@ -89,13 +89,13 @@
                             <i data-feather="credit-card"></i><span>Vendor Listing Price</span></a>
                     </li>
                 @endif
-                @if (in_array('15', $permission1))
+                {{-- @if (in_array('15', $permission1))
                     <li class="{{ request()->segment(2) == 'faq' ? 'active' : '' }}"><a
                             href="{{ route('faq.index') }}"
                             class="{{ request()->segment(2) == 'faq' ? 'active' : '' }}">
                             <i class="fa fa-file"></i><span>FAQ</span></a>
                     </li>
-                @endif
+                @endif --}}
                 @if (in_array('10', $permission1))
                     <li class="{{ request()->segment(2) == 'cms' ? 'active' : '' }}"><a
                             href="{{ route('cms.index') }}"
