@@ -168,10 +168,10 @@
                                            <tr>
                                                <th>Sr No</th>
                                                <th>Name</th>
-                                               <th>Email</th>
+                                               {{-- <th>Email</th>
                                                <th>Mobile</th>
                                                <th>Service</th>
-                                               <th>Sub Service</th>
+                                               <th>Sub Service</th> --}}
 
                                            </tr>
 
@@ -201,14 +201,14 @@
 
                                                        <td>{{ $i }}</td>
                                                        <td>{{ $packages_enquiry_data->name ?? '' }}</td>
-                                                       <td>{{ $packages_enquiry_data->email ?? '' }}</td>
-                                                       <td>{{ $packages_enquiry_data->mobile ?? '' }}</td>
+                                                       {{-- <td>{{ $packages_enquiry_data->email ?? '' }}</td>
+                                                       <td>{{ $packages_enquiry_data->mobile ?? '' }}</td> --}}
 
                                                        {{-- <td>{{ $packages_enquiry_data->name }}</td> --}}
                                                        {{-- <td>{{ $packages_enquiry_data->email }}</td> --}}
                                                        {{-- <td>{{ $packages_enquiry_data->mobile }}</td> --}}
 
-                                                       <td>
+                                                       {{-- <td>
                                                            @if ($packages_enquiry_data->service_id ?? '')
                                                                {!! Helper::servicename(strval($packages_enquiry_data->service_id)) !!}
                                                            @endif
@@ -218,7 +218,7 @@
                                                                {!! Helper::subservicename(strval($packages_enquiry_data->subservice_id)) !!}
                                                            @endif
 
-                                                       </td>
+                                                       </td> --}}
 
                                                    </tr>
                                                    @php

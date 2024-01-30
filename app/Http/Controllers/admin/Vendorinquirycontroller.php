@@ -86,7 +86,14 @@ class Vendorinquirycontroller extends Controller
     //    print_r($request->post());
     //    echo"</pre>";exit;
 
-    $data['reject_reason']=$request->reject_reason;
+    if($request->reject_reason != "Other" && $request->reject_reason_text ==""){
+        $data['reject_reason'] = $request->reject_reason;
+    }
+    
+    if($request->reject_reason == "Other" && $request->reject_reason_text !=""){
+        $data['reject_reason']=$request->reject_reason_text;
+    }
+    
     $data['packages_inquiry_id']=$request->inquiry_id;
     $data['vendor_id']=$request->vendor_id;
     $data['accept_reject'] = 1;

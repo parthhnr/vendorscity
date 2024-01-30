@@ -57,7 +57,7 @@
 
                     <span class="position-relative mr10">
 
-                      <img class="rounded-circle" src="{{ asset('public/site/images/team/fl-d-1.png') }}" alt="Freelancer Photo">
+                      <img class="rounded-circle" src="{{-- asset('public/site/images/team/fl-d-1.png') --}}" alt="Freelancer Photo">
 
                       <span class="online-badge"></span>
 
@@ -745,14 +745,14 @@
 
 
 
-                                                @if (in_array('1', explode(',', $subservices->is_bookable)))
+                                                {{-- @if (in_array('1', explode(',', $subservices->is_bookable)))
                                                     <a class="ud-btn btn-thm mb-2"
                                                         href="{{ route('enquiry', ['id' => $package_detail->id, 'service_id' => $package_detail->service_id]) }}">
 
                                                         <!-- Replace $your_service_id with the actual service_id value -->
 
                                                         <i class="fal fa-arrow-right-long"></i>Get Multiple Quote</a>
-                                                @endif
+                                                @endif --}}
 
                                             </div>
 

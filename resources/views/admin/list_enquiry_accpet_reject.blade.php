@@ -141,12 +141,7 @@
             </div>
 
         </div>
-        {{-- @php
-            echo '<pre>';
-            print_r($packages_enquiry_data);
-            echo '</pre>';
-            exit();
-        @endphp --}}
+
 
         <div class="col-auto" style="float: inline-end;">
 
@@ -228,14 +223,37 @@
                                                 action="{{ route('reason_reject_form') }}">
                                                 @csrf
                                                 <div class="row">
-
                                                     <div class="form-group">
-                                                        <label for="name">Reason</label>
-                                                        <textarea name="reject_reason" id="reject_reason" cols="30" rows="10"class="form-control"></textarea>
+
+                                                        <label for="name">Reason</label><br><br><br>
                                                         <input type="hidden" name="inquiry_id" id="inquiry_id"
                                                             value="">
                                                         <input type="hidden" name="vendor_id" id="vendor_id"
                                                             value="">
+
+                                                        <input type="radio" class="reject_reason" name="reject_reason"
+                                                            id="reason1" value="I do not serve this city"><span> do not
+                                                            serve this city</span><br>
+                                                        <input type="radio" class="reject_reason" name="reject_reason"
+                                                            id="reason2" value="I do not provide this service"><span> do
+                                                            not provide this
+                                                            service</span><br>
+                                                        <input type="radio" class="reject_reason" name="reject_reason"
+                                                            id="reason3"
+                                                            value="I do not have availailty on this date"><span> do not have
+                                                            availailty on this date</span><br>
+                                                        <input type="radio" class="reject_reason" name="reject_reason"
+                                                            id="reason4"
+                                                            value="Request includes goods that require special handling"><span>
+                                                            Request
+                                                            includes goods that require special handling </span><br>
+
+                                                        <input type="radio" class="reject_reason" name="reject_reason"
+                                                            id="reject_reason" value="Other"><span> Other</span><br>
+
+                                                        <textarea name="reject_reason_text" id="reject_reason_textarea" cols="30" rows="10" class="form-control"
+                                                            style="display: none;"></textarea>
+
                                                     </div>
 
                                                 </div>
@@ -245,19 +263,11 @@
                                                 <button class="btn btn-primary" style="float: inline-end;" type="button"
                                                     onclick="javascript:reject_validation()">Add</button>
                                             </form>
-
-
-
                                         </tbody>
                                     </table>
-
-
                                 </div>
                             </div>
-
                         </div>
-
-
                     </div>
                 </div>
             </div>
@@ -275,53 +285,94 @@
     </form>
 @stop
 
-<script>
-    function delete_category(id, vendor_id) {
-
-        $('#inquiry1_id').val(id);
-
-        $('#vendor1_id').val(vendor_id);
-
-        $('#delete_model').modal('show');
-    }
-
-    function form_sub() {
-
-        $('#form_new').submit();
-
-    }
-</script>
-
-<script>
-    function Enquiry(id, userId) {
+@section('footer_js')
 
 
-        $('#inquiry_id').val(id);
-
-        $('#vendor_id').val(userId);
-
-        $('#reject_model').modal('show');
 
 
-    }
-</script>
+    <script>
+        function delete_category(id, vendor_id) {
 
-<script>
-    function reject_validation() {
+            $('#inquiry1_id').val(id);
 
-        var reject_reason = jQuery("#reject_reason").val();
-        if (reject_reason == '') {
-            jQuery('#reject_error').html("Please Enter Reason");
-            jQuery('#reject_error').show().delay(0).fadeIn('show');
-            jQuery('#reject_error').show().delay(2000).fadeOut('show');
-            $('html, body').animate({
-                scrollTop: $('#reject_reason').offset().top - 150
-            }, 1000);
-            return false;
+            $('#vendor1_id').val(vendor_id);
+
+            $('#delete_model').modal('show');
         }
 
-        $('#reject_form').submit();
+        function form_sub() {
+
+            $('#form_new').submit();
+
+        }
+    </script>
+
+    <script>
+        function Enquiry(id, userId) {
 
 
-    }
-</script>
+            $('#inquiry_id').val(id);
+
+            $('#vendor_id').val(userId);
+
+            $('#reject_model').modal('show');
+
+
+        }
+    </script>
+
+    <script>
+        function reject_validation() {
+
+            if ($('input[name="reject_reason"]:checked').length === 0) {
+
+                jQuery('#reject_error').html("Please Enter Reason");
+                jQuery('#reject_error').show().delay(0).fadeIn('show');
+                jQuery('#reject_error').show().delay(2000).fadeOut('show');
+                $('html, body').animate({
+                    scrollTop: $('#reject_reason_textarea').offset().top - 150
+                }, 1000);
+                return false;
+            }
+
+            if ($('#reject_reason').is(':checked') && $('#reject_reason').val() === 'Other') {
+
+                var textareaField = $('#reject_reason_textarea').val();
+                if (textareaField == "") {
+                    jQuery('#reject_error').html("Please Enter Reason");
+                    jQuery('#reject_error').show().delay(0).fadeIn('show');
+                    jQuery('#reject_error').show().delay(2000).fadeOut('show');
+                    $('html, body').animate({
+                        scrollTop: $('#reject_reason_textarea').offset().top - 150
+                    }, 1000);
+                    return false;
+                }
+
+            }
+
+            $('#reject_form').submit();
+
+
+        }
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            // Add change event listener to the radio button
+            $('.reject_reason').change(function() {
+                // alert(this);
+                // Check if the "Other" option is selected
+                if ($(this).is(':checked') && $(this).val() === 'Other') {
+                    // Show the textarea
+                    $('#reject_reason_textarea').show();
+                } else {
+                    // Hide the textarea
+                    $('#reject_reason_textarea').hide();
+                }
+
+
+            });
+        });
+    </script>
+
+@stop

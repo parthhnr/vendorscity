@@ -334,7 +334,8 @@
         exit();
     @endphp --}}
 
-    @if ($packages_enquiry != '')
+    @isset($packages_enquiry)
+        {{-- @if ($packages_enquiry != '') --}}
 
 
         @foreach ($packages_enquiry as $packages_enquirys)
@@ -404,8 +405,8 @@
         </div>
 
         </div>
-    @endforeach
-    @endif
+        @endforeach
+    @endisset
 
 
 
