@@ -392,7 +392,6 @@ class checkoutcontroller extends Controller
            
             DB::table('front_user_wallet')->insert($data);
         }
-            
 
            
 
@@ -441,7 +440,7 @@ class checkoutcontroller extends Controller
             $result_new=$result->toArray();
             // echo"<pre>";print_r($result_new);echo"</pre>";exit;
             $html  ="<select name='state_name' id='state_name' class='form-control' onchange='ship_state_change(this.value);'>";
-            $html .="<option value=''>Select a state</option>";
+            $html .="<option value=''>Select State</option>";
             if($result !='' &&  count($result)>0){
     
                 for($i=0; $i<count($result); $i++){
@@ -467,7 +466,7 @@ class checkoutcontroller extends Controller
             $result_new=$result->toArray();
             // echo"<pre>";print_r($result_new);echo"</pre>";exit;
             $html  ="<select name='city' id='city' class='form-control'>";
-            $html .="<option value=''>Select a state</option>";
+            $html .="<option value=''>Select Town / City</option>";
             if($result !='' &&  count($result)>0){
     
                 for($i=0; $i<count($result); $i++){

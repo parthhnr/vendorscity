@@ -501,11 +501,24 @@
     });
 </script>
 
-@if (isset($formFields[$k]) && isset($formFields[$k]->id))
+{{-- @if (isset($formFields[$k]) && isset($formFields[$k]->id))
     <script>
         $("#formfield_value_{{ $formFields[$k]->id }}").select2({
             placeholder: "Select "
             // Add any other Select2 options you need
         });
     </script>
+@endif --}}
+
+@if (isset($formFields) && is_array($formFields))
+    @foreach ($formFields as $k => $formField)
+        @if (isset($formField->id))
+            <script>
+                $("#formfield_value_{{ $formField->id }}").select2({
+                    placeholder: "Select "
+                    // Add any other Select2 options you need
+                });
+            </script>
+        @endif
+    @endforeach
 @endif

@@ -79,7 +79,6 @@
 
                         </div>
 
-
                     </div>
                 </div>
             </div>
@@ -89,48 +88,51 @@
 
 <section class="shop-checkout pt-0" style="{{ $form_sec }}">
     <div class="container">
+        @php
+            $userData = Session::get('user');
+        @endphp
         @if (Cart::count() > 0)
             <form class="checkout-form" id="addressForm" name="addressForm" method="POST"
                 action="{{ route('order_place') }}">
                 @csrf
                 <div class="row wow fadeInUp" data-wow-delay="300ms">
-
                     <div class="col-md-7 col-lg-8">
                         <div class="checkout_form">
-                            <h4 class="title mb30">Billing details</h4>
+                            <h4 class="title mb30">Service Details</h4>
                             <div class="checkout_coupon">
 
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <div class="mb25">
                                             <h6 class="mb15">First Name</h6>
-                                            <input class="form-control" type="text" name="fname" id="fname">
+                                            <input class="form-control" type="text" name="fname" id="fname"
+                                                placeholder="Enter First Name"
+                                                @if ($userData['name'] != '') value="{{ $userData['name'] }}" @endif>
                                             <p class="form-error-text" id="fname_error" style="color: red;"></p>
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="mb25">
                                             <h6 class="mb15">Last Name</h6>
-                                            <input class="form-control" type="text" name="lname" id="lname">
+                                            <input class="form-control" type="text" name="lname" id="lname"
+                                                placeholder="Enter Last Name">
                                             <p class="form-error-text" id="lname_error" style="color: red;"></p>
                                         </div>
                                     </div>
 
                                     <div class="col-lg-12">
                                         <div class="mb25">
-                                            <h6 class="mb15">Country / Region *</h6>
+                                            <h6 class="mb15">Country / Region <span style="color: red">*</span></h6>
                                             <div class="">
                                                 <select class="form-control" name="country" id="country"
                                                     onchange="ship_country_change(this.value);">
-                                                    <option value="">Select</option>
+                                                    <option value="">Select Country / Region</option>
                                                     @if (isset($country))
                                                         @foreach ($country as $country_data)
                                                             <option value="{{ $country_data->id }}">
                                                                 {{ $country_data->country }}</option>
                                                         @endforeach
                                                     @endif
-
-
                                                 </select>
                                                 <p class="form-error-text" id="country_error" style="color: red;">
                                                 </p>
@@ -139,26 +141,31 @@
                                     </div>
                                     <div class="col-sm-12">
                                         <div class="mb25">
-                                            <h6 class="mb15">House number and street name</h6>
-                                            <input class="form-control" type="text" placeholder=""
-                                                name="address1" id="address1">
+                                            <h6 class="mb15">House number and street name <span
+                                                    style="color: red">*</span></h6>
+                                            <input class="form-control" type="text"
+                                                placeholder="Enter House number and street name" name="address1"
+                                                id="address1">
                                             <p class="form-error-text" id="address1_error" style="color: red;"></p>
                                         </div>
                                     </div>
                                     <div class="col-sm-12">
                                         <div class="mb25">
-                                            <h6 class="mb15">Apartment, suite, unit, etc. (optional)</h6>
+                                            <h6 class="mb15">Apartment, suite, unit, etc. <span
+                                                    style="color: red">*</span></h6>
                                             <input class="form-control" name="optional" id="optional"
-                                                type="text" placeholder="">
+                                                type="text" placeholder="Enter Apartment, suite, unit, etc.">
+                                            <p class="form-error-text" id="optional_error" style="color: red;"></p>
+
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="mb25">
-                                            <h6 class="mb15">State *</h6>
+                                            <h6 class="mb15">State</h6>
                                             <div class="">
                                                 <span id="state_data">
                                                     <select class="form-control" name="state_name" id="state_name">
-                                                        <option value="">Select</option>
+                                                        <option value="">Select State</option>
 
                                                     </select>
                                                 </span>
@@ -170,11 +177,11 @@
 
                                     <div class="col-lg-12">
                                         <div class="mb25">
-                                            <h6 class="mb15">Town / City *</h6>
+                                            <h6 class="mb15">Town / City<span style="color: red">*</span></h6>
                                             <div class="">
                                                 <span id="city_data">
                                                     <select class="form-control" name="city" id="city">
-                                                        <option value="">Select</option>
+                                                        <option value="">Select Town / City</option>
 
                                                     </select>
                                                 </span>
@@ -187,25 +194,27 @@
 
                                     <div class="col-sm-12">
                                         <div class="mb25">
-                                            <h6 class="mb15">ZIP *</h6>
-                                            <input class="form-control" type="text" placeholder="" name="zipcode"
-                                                id="zipcode">
-                                            <p class="form-error-text" id="zipcode_error" style="color: red;"></p>
+                                            <h6 class="mb15">ZIP <span style="color: red">*</span></h6>
+                                            <input class="form-control" type="text" placeholder="Enter ZIP"
+                                                name="zipcode" id="zipcode">
+                                            {{-- <p class="form-error-text" id="zipcode_error" style="color: red;"></p> --}}
                                         </div>
                                     </div>
                                     <div class="col-sm-12">
                                         <div class="mb25">
-                                            <h6 class="mb15">Phone *</h6>
-                                            <input class="form-control" type="number" placeholder="" name="phone"
-                                                id="phone">
+                                            <h6 class="mb15">Phone <span style="color: red">*</span></h6>
+                                            <input class="form-control" type="number" placeholder="Enter Phone"
+                                                name="phone" id="phone"
+                                                @if ($userData['mobile'] != '') value="{{ $userData['mobile'] }}" @endif>
                                             <p class="form-error-text" id="phone_error" style="color: red;"></p>
                                         </div>
                                     </div>
                                     <div class="col-sm-12">
                                         <div class="mb25">
-                                            <h6 class="mb15">Email Address</h6>
-                                            <input class="form-control" type="email_ship" placeholder=""
-                                                name="email_ship" id="email_ship">
+                                            <h6 class="mb15">Email Address <span style="color: red">*</span></h6>
+                                            <input class="form-control" type="email_ship"
+                                                placeholder="Enter Email Address" name="email_ship" id="email_ship"
+                                                @if ($userData['email'] != '') value="{{ $userData['email'] }}" @endif>
                                             <p class="form-error-text" id="email_ship_error" style="color: red;"></p>
                                         </div>
                                     </div>
@@ -268,7 +277,8 @@
                                             @endphp
                                             <li class="mb20">
                                                 <p class="body-color">{{ $items->name }} x{{ $items->qty }} <span
-                                                        class="float-end">AED {{ $price_tot * $items->qty }}</span></p>
+                                                        class="float-end">AED {{ $price_tot * $items->qty }}</span>
+                                                </p>
                                             </li>
 
 
@@ -488,38 +498,39 @@
             return false;
         }
 
-        var address1 = $("#address1").val();
-        if (address1 == '') {
-            $("#address1_error").html("Please Enter House number and street name.");
-            $('#address1_error').show().delay(0).fadeIn('show');
-            $('#address1_error').show().delay(2000).fadeOut('show');
-            $('html, body').animate({
-                scrollTop: $('#address1').offset().top - 150
-            }, 1000);
-            return false;
-        }
-
-        // var state_name = $("#state_name").val();
-        // if (state_name == '') {
-        //     $("#state_name_error").html("Please Select State.");
-        //     $('#state_name_error').show().delay(0).fadeIn('show');
-        //     $('#state_name_error').show().delay(2000).fadeOut('show');
+        // var address1 = $("#address1").val();
+        // if (address1 == '') {
+        //     $("#address1_error").html("Please Enter House number and street name.");
+        //     $('#address1_error').show().delay(0).fadeIn('show');
+        //     $('#address1_error').show().delay(2000).fadeOut('show');
         //     $('html, body').animate({
-        //         scrollTop: $('#state_name').offset().top - 150
+        //         scrollTop: $('#address1').offset().top - 150
         //     }, 1000);
         //     return false;
         // }
 
-        var city = $("#city").val();
-        if (city == '') {
-            $("#city_error").html("Please Select City.");
-            $('#city_error').show().delay(0).fadeIn('show');
-            $('#city_error').show().delay(2000).fadeOut('show');
-            $('html, body').animate({
-                scrollTop: $('#city').offset().top - 150
-            }, 1000);
-            return false;
-        }
+        // var optional = $("#optional").val();
+        // if (optional == '') {
+        //     $("#optional_error").html("Please Enter Apartment, suite, unit, etc.");
+        //     $('#optional_error').show().delay(0).fadeIn('show');
+        //     $('#optional_error').show().delay(2000).fadeOut('show');
+        //     $('html, body').animate({
+        //         scrollTop: $('#optional').offset().top - 150
+        //     }, 1000);
+        //     return false;
+
+        // }
+
+        // var city = $("#city").val();
+        // if (city == '') {
+        //     $("#city_error").html("Please Select Town / City.");
+        //     $('#city_error').show().delay(0).fadeIn('show');
+        //     $('#city_error').show().delay(2000).fadeOut('show');
+        //     $('html, body').animate({
+        //         scrollTop: $('#city').offset().top - 150
+        //     }, 1000);
+        //     return false;
+        // }
 
         // var zipcode = $("#zipcode").val();
         // if (zipcode == '') {
